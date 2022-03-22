@@ -8,7 +8,17 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import './instructorsignup.css'
 import {Link} from "react-router-dom";
-import { Select } from '@mui/material';
+import { Autocomplete, InputLabel } from '@mui/material';
+import unis from '../assets/universities.js';
+
+// parse university list for sign in
+// remove state from name
+var universitiesPreSlice = unis.split(/\r\n|\r|\n/);
+var universitiesArray = [];
+universitiesPreSlice.map((university) => {
+  universitiesArray.push(university.slice(0,-4));
+})
+
 
 export default function InstructorSignUp() {
     const handleSubmit = (event) => {
@@ -108,18 +118,19 @@ export default function InstructorSignUp() {
                 id="passwordConfirm"
                 />  
                 {/* planning on this to be typable dropdown box, with preloaded JSON of universities to select */}
-                <br></br>
-                <br></br>
-                <Select
-                margin="normal"
-                required
-                fullWidth
-                name="univeristy"
-                labelId="College or University"
-                id="university"
-                value=''
-                // onChange={handleChange}; will implement
-                />
+                {/* the p is for weird spacing with <br>, <p>'s new line works */}
+                <p></p> 
+                <Autocomplete
+                  disablePortal={true}
+                  openOnFocus = {false}
+                  margin="normal"
+                  options={universitiesArray}
+                  required
+                  fullWidth
+                  renderInput={(params) => <TextField {...params} label="University *" />}
+                  id="university"
+                  >
+                  </Autocomplete>
                 {/* inits the onSubmit function at top of file */}
                 <Link to="/instructorsignin">
                 <Button
