@@ -121,13 +121,11 @@ export default function InstructorSignUp() {
                 {/* the p is for weird spacing with <br>, <p>'s new line works */}
                 <p></p> 
                 <Autocomplete
-                  disablePortal={true}
-                  openOnFocus = {false}
-                  margin="normal"
+                  // margin="normal"
                   options={universitiesArray}
                   required
                   fullWidth
-                  renderInput={(params) => <TextField {...params} label="University *" />}
+                  renderInput={(params) => <TextField {...params} label="College or University *" variant="outlined"/>}
                   id="university"
                   >
                   </Autocomplete>
