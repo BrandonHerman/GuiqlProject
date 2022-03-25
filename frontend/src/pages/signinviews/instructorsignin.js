@@ -8,6 +8,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import './instructorsignin.css'
 import {Link} from "react-router-dom";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 
 export default function InstructorSignIn() {
     const handleSubmit = (event) => {
@@ -47,7 +50,7 @@ export default function InstructorSignIn() {
               <Typography component="h1" variant="h5">
                 Instructor Sign In
               </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1, alignItems: 'center', textAlign:'center'}}>
                 <TextField
                   margin="normal"
                   required
@@ -68,18 +71,22 @@ export default function InstructorSignIn() {
                   id="password"
                   autoComplete="current-password"
                 />
-                {/* <FormControlLabel */}
-                  {/* control={<Checkbox value="remember" color="primary" />} */}
-                  {/* label="Remember me" */}
-                {/* /> */}
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Sign In
-                </Button>
+                <FormControlLabel 
+                   id = "rememberMe"
+                   control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                /> 
+                <Link to="/classeshome">                
+                  <Button
+                   type="submit"
+                   fullWidth
+                   variant="contained"
+                   sx={{ mt: 3, mb: 2 }}
+                   >
+                     Sign In
+                     </Button>
+                </Link>
+
                 <Grid container>
                   <Grid item xs>
                     <br></br>

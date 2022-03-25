@@ -6,12 +6,14 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { createTheme } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 import './studentsignin.css'
 import {Link} from "react-router-dom";
+import { FormControlLabel } from '@mui/material';
+import { Checkbox } from '@mui/material';
 
 export default function StudentSignIn() {
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -30,7 +32,7 @@ export default function StudentSignIn() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
+              backgroundImage: 'url(https://www.smu.edu/-/media/Site/StudentAffairs/NewStudent/New-Website-Photos/AARO-TAARO-JARRO-Page/AAROTARROJARROHeroImage1optimized.jpg?h=1706&la=en&w=2563&hash=5BACD211ABBDE8EFC08ECC0E58100D81)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -70,21 +72,23 @@ export default function StudentSignIn() {
                   id="password"
                   autoComplete="current-password"
                 />
-                {/* <FormControlLabel */}
-                  {/* control={<Checkbox value="remember" color="primary" />} */}
-                  {/* label="Remember me" */}
-                {/* /> */}
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                 /> 
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
                   Sign In
                 </Button>
                 <Grid container> 
                 <Grid item xs>
-                    <Tooltip title="Student accounts are created by their instructor. Please contact your instructor for your student account.">
+                    <Tooltip 
+                    title="Student accounts are created by their instructor in each class.
+                     Please contact your instructor for your account information.">
                         <h3>
                          Where is my student account?
                         </h3>
