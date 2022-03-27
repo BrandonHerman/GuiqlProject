@@ -1,0 +1,15 @@
+h3 {
+    color: #1976d2;
+    font-size: small;
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+}
+
+.teamBox{
+    border: 1px solid #1976d2;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
