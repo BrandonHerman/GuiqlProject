@@ -7,10 +7,9 @@ a:-webkit-any-link {
     text-decoration: none;
 }
 
-h3 {
-    text-align: center;
+.teamBox{
+    border: 1px solid #1976d2;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
 }
-
-Button {
-    text-align: center;
- }

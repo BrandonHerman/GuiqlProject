@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import StudentSignIn from './pages/signinviews/studentsignin';
+import CreateTeamPage from './pages/teamcreatepage/createteampage';
 import { Link } from "react-router-dom";
 
 // React functional component
@@ -72,9 +73,9 @@ function App () {
 
   return ( //launch app at student sign in 
     <div className="App">
-      <StudentSignIn></StudentSignIn>
-     </div>
-  );
+      <CreateTeamPage></CreateTeamPage>
+    </div>
+  );  // REPLACE <CreateTeamPage></CreateTeamPage> WITH <StudentSignIn></StudentSignIn>
 }
 
 export default App;

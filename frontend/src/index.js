@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import InstructorSignIn from './pages/signinviews/instructorsignin';
 import InstructorSignUp from './pages/signinviews/instructorsignup';
 import InstructorClassHome from './pages/signinviews/instructorclasshome';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const rootElement = document.getElementById("root");
 render( //browserrouter and routes allows react router to move views based on what the URL extension is
