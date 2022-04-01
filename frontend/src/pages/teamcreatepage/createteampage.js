@@ -41,44 +41,34 @@ const MenuProps = {
   },
 };
 
-let student = {
-  name: [
-    { student: "dsa", teamNumber: 1 },
-    { student: "sads", teamNumber: 2 },
-    { student: "sadsadwe", teamNumber: 1 },
-    { student: "dsadeafda", teamNumber: 3 },
-    { student: "grant", teamNumber: 3 },
-    { student: "Brandon", teamNumber: 2 },
-    { student: "Ariyan", teamNumber: 3 },
-    { student: "Josiah", teamNumber: 1 },
-  ],
-  numStudentsArray: [0, 1, 2, 3, 4, 5, 6, 7]
-
-};
+//Load up api info and call set state 
+//SET BIG ASS ARRAY OF STUDENT NAMES INTO setTeam
 
 
 
 export default function CreateTeamPage() {
 
   const handleDeleteAccount = (index) => {
-    if(window.confirm(`Are you sure you want to delete '${student.name[index].student}'?`)){
-      student.name.splice(index, index+1);
-      //setStudent(student);
+    if(window.confirm(`Are you sure you want to delete '${teamNumber[index].student}'?`)){
+      var student = teamNumber.splice(index, index+1);
     }
   }
 
-
   const classes = useStyles();
   const theme = useTheme();
-  const [teamNumber, setTeam] = React.useState([]);
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setTeam(
-      //Make sure this selects the team as a number from the teamsArray by splicing on the comma
-      teamsArray.filter((team) => team.toString().includes(value))
-    );
+  const [teamNumber, setTeam] = React.useState([{ student: "dsa", teamNumber: null },
+                                                { student: "sads", teamNumber: 2 },
+                                                { student: "sadsadwe", teamNumber: 1 },
+                                                { student: "dsadeafda", teamNumber: 3 },
+                                                { student: "grant", teamNumber: 3 },
+                                                { student: "Brandon", teamNumber: 2 },
+                                                { student: "Ariyan", teamNumber: 3 },
+                                                { student: "Josiah", teamNumber: 1 },]
+                                                );
+  const handleChange = (index, event) => {
+    const newTeam = teamNumber.slice();
+    newTeam[index].teamNumber = event.target.value;
+    setTeam(newTeam);
   };
   //MAKE SURE TO REPLACE THIS WITH A DB CALL FOR STUDENT NAMES and NUMBER OF STUDENTS IN CLASS
   
@@ -89,13 +79,14 @@ export default function CreateTeamPage() {
     <div className={classes.root}>
       <Grid
         container
-        spacing={5}
-        direction="column"
+        padding={2}
+        spacing={8}
+        direction="row"
         justify="flex-start"
         alignItems="flex-start"
       >
-        {student.name.map((elem, index) => (
-          <Grid item xs={3} key={student.name.indexOf(elem)}>
+        {teamNumber.map((elem, index) => (
+          <Grid item xs={3} key={teamNumber.indexOf(elem)}>
             <Card>
               <CardHeader
                 title={`NAME : ${elem.student}`}
@@ -103,15 +94,21 @@ export default function CreateTeamPage() {
               />
               <CardContent>
                 <Typography variant="h5" gutterBottom>
-                  <Box sx={{ minWidth: 120 }}>
+                  <Box sx={{ minWidth: 300 }}>
                     <div>
-                      <FormControl sx={{ m: 1, width: 300 }}>
-                        <InputLabel id="demo-multiple-name-label">Team Number</InputLabel>
+                      <FormControl 
+                        sx={{ m: 1, width: 150 }}
+                        justify="center"
+                        align="center"
+                      >
+                        <InputLabel id="demo-multiple-name-label" justify="center" align="center">Team Number</InputLabel>
                         <Select
+                          justify="center"
+                          align="center"
                           labelId="demo-multiple-name-label"
                           id="demo-multiple-name"
-                          value={teamNumber}
-                          onChange={handleChange}
+                          value={elem.teamNumber}
+                          onChange={handleChange.bind(this, index)}
                           input={<OutlinedInput label="Team Number" />}
                           MenuProps={MenuProps}
                         >
