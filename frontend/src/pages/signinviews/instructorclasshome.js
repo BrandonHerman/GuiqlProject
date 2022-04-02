@@ -4,86 +4,157 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import './instructorsignin.css';
+import './instructorclasshome.css';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
+import { CardActionArea, CardActions, Button } from '@mui/material';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton, Dialog, DialogTitle } from '@mui/material';
+import TableDemo from '../components/createClassTable';
 
 export default function InstructorSignIn() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        console.log("setOpen boolean = " + open);
+        setOpen(true);
     }
 
-        const data1 = {
-          class: [
-            { number : 1, enrollment : 24, teams: 3},
-            { number : 2, enrollment: 32, teams: 5},
-            { number : 3, enrollment: 13, teams: 2},
-            { number : 4, enrollment: 28, teams: 4}
-          ],
-          id: [1, 2, 3, 4]
+    const handleClickClose = () => {
+        console.log("setOpen boolean = " + open);
+        setOpen(false);
+    }
+
+    const data1 = {
+        class: [
+            { number: 1, enrollment: 24, teams: 3, time: "Monday 6:30pm - 8:20pm" },
+            // { number: 2, enrollment: 32, teams: 5, time: "Tuesday 4:30pm - 6:20pm" },
+            // { number: 3, enrollment: 13, teams: 2, time: "Tuesday 6:30pm - 8:20pm" },
+            // { number: 4, enrollment: 28, teams: 4, time: "Thursday 6:30pm - 8:20pm" },
+            // { number: 5, enrollment: 28, teams: 4, time: "Friday 2:30pm - 4:20pm" },
+            // { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
+            // { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
+        ],
+        id: [1]
     };
-    
+
+    function addClassCard() {
+        return (
+            <Grid item xs={6} justifyContent="space-evenly" alignItems="center" key="Add class">
+                <br></br>
+                <Card id="createClassCard" raised="false" elevation="0" sx={{ maxWidth: 250, maxHeight: 239 }} >
+
+                    <CardActionArea disableTouchRipple onClick={handleClickOpen}>
+                        <CardContent>
+                            <br></br>
+                            <Typography variant="h1" >
+                                +
+                            </Typography>
+                        </CardContent>
+
+                    </CardActionArea>
+
+
+                </Card >
+            </Grid>
+        );
+    }
+
+
 
     return (
         <Grid container component="main" sx={{ height: '100vh' }}>
-          <CssBaseline />
-          
-          <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
-            <Box
-              sx={{
-                my: 2,
-                mx: 4,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-                <img src="https://i.imgur.com/uMa2apF.png" alt="Guiql Logo"/>    
+            <CssBaseline />
+
+            <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
+                <Box
+                    sx={{
+                        my: 2,
+                        mx: 4,
+                        display: 'center',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <img src="https://i.imgur.com/uMa2apF.png" alt="Guiql Logo" />
+                    <br></br>
+                    <Typography id="headerName" component="h1" variant="h5">
+                        My Classes
+                    </Typography>
+                </Box>
+
+                <Dialog open={open} onClose={handleClickClose} maxWidth>
+
+                    <DialogTitle justify="center" align="center">Create Class</DialogTitle>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        align="center"
+                    >
+
+                        <TableDemo />
+                        </Grid>
+                        <br></br>
+                        <br></br>
+                </Dialog>
+                <Grid
+                    container
+                    spacing={6}
+                    direction="row"
+                    justifyContent="center"
+                    justify="center"
+                    alignItems="center"
+                    align="center"
+                    id="dynamicClass"
+                >
+                    {data1.class.map((elem) => (
+                        <Grid item xs={6} justifyContent="space-evenly" alignItems="center" key={data1.class.indexOf(elem)}>
+                            <br></br>
+                            <Card sx={{ maxWidth: 545 }}>
+                                <CardActionArea disableTouchRipple>
+                                    <CardHeader
+                                        title={`Class ${elem.number}`}
+                                        subheader={`Time: ${elem.time}`}
+                                    />
+                                    <CardContent>
+                                        <Typography>Enrollement: {elem.enrollment} </Typography>
+                                        <Typography>Teams: {elem.teams} </Typography>
+                                        <br></br>
+
+                                    </CardContent>
+
+                                    <CardActions justify="center" align="center">
+                                        <IconButton aria-label="add-reaction">
+                                            <AddReactionIcon></AddReactionIcon>
+                                        </IconButton>
+                                        <IconButton aria-label="delete">
+                                            <GroupAddIcon />
+                                        </IconButton>
+                                        <IconButton aria-label="delete">
+                                            <DeleteIcon />
+                                        </IconButton>
+
+                                    </CardActions>
+
+                                </CardActionArea>
+                            </Card>
+                            {/* TODO: conditional for last cell always being add class */}
+
+                        </Grid>
+                    ))}
+                    {addClassCard()};
+                </Grid>
                 <br></br>
-              <Typography component="h1" variant="h5">
-               My Classes 
-              </Typography>
-              {data1.id.map((elem) => (
-        <Grid
-          container
-          spacing={2}
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
-        >
-          {data1.class.map((elem) => (
-            <Grid item xs={3} key={data1.class.indexOf(elem)}>
-              <Card>
-                <CardHeader
-                  title={`class: ${elem.number}`}
-                  subheader={`enrollment: ${elem.enrollment}` + `\n` +
-                              `teams: ${elem.teams}`}
-                  
-                />
-                <CardContent>
-                  <Typography variant="h5" gutterBottom>
-                      <AddReactionIcon></AddReactionIcon>
-                      <GroupAddIcon/>
-                      <DeleteIcon/>
-                  </Typography>
-                </CardContent>
-              </Card>
+                <br></br>
+                <br></br>
+                <br></br>
             </Grid>
-          ))}
         </Grid>
-      ))}
-            </Box>
-          </Grid>
-        </Grid>
+
     );
-           
-          }
+
+}
