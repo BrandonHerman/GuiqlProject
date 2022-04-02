@@ -1,0 +1,11 @@
+#studentsTable {
+    padding-left: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+snackbar {
+    bottom: "104px";
+}

@@ -1,0 +1,26 @@
+#dynamicClass {
+/* this is the dynamic class id via material ui */
+    min-height: 5vh;
+    max-width: '100%'
+     
+
+}
+
+#headerName {
+    margin-left: 3vh;
+}
+
+#logos > * {
+   margin-left: 5%; 
+   margin-right: 5%;
+
+}
+
+#createClassCard {
+    /* background-color: rgba(173, 216, 230, 0.3); */
+    border-radius: 25%;
+    border-style: dashed;
+    border-width: 0.75vh;
+    border-color: rgba(173,216,255, 0.4);
+}
+/* gets rid of ugly click ripple */
