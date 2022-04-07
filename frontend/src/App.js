@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import StudentSignIn from './pages/signinviews/studentsignin';
+//import StudentSignIn from './pages/signinviews/studentsignin';
+import InstructorStudentsView from './pages/classviews/instructorstudentsview';
 import { Link } from "react-router-dom";
 
 // React functional component
@@ -70,10 +71,19 @@ function App () {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  /*
   return ( //launch app at student sign in 
     <div className="App">
       <StudentSignIn></StudentSignIn>
      </div>
+  );
+
+   */
+
+  return ( //launch app at instructor student view
+      <div className="App">
+        <InstructorStudentsView></InstructorStudentsView>
+      </div>
   );
 }
 
