@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import StudentSignIn from './pages/signinviews/studentsignin';
+import StudentHome from './pages/signinviews/studenthome';
 import { Link } from "react-router-dom";
 
 // React functional component
@@ -72,7 +72,7 @@ function App () {
 
   return ( //launch app at student sign in 
     <div className="App">
-      <StudentSignIn></StudentSignIn>
+      <StudentHome></StudentHome>
      </div>
   );
 }
