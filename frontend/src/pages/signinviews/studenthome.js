@@ -20,10 +20,12 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import { Card } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Column from '../components/Column'
+import { useState, useEffect } from 'react';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
+
     return (
       <div
         role="tabpanel"
@@ -40,11 +42,6 @@ function TabPanel(props) {
       </div>
     );
 }
-
-const dragReducer = (state, action) => {
-    return state;
-}
-
 
 TabPanel.propTypes = {
     children: PropTypes.node,
@@ -67,11 +64,97 @@ export default function StudentHome() {
         setValue(newValue);
     };
 
-    const onDragEnd = useCallback((result) => {}, []);
+    const initialColumns = {
+        "To Do": {
+          id: "To Do",
+          list: [
+            { id: "1", text: "text1" },
+            { id: "2", text: "text2" },
+            { id: "3", text: "text3" }
+          ]
+        },
+        "In Progress": {
+          id: "In Progress",
+          list: [
+            { id: "4", text: "text4" },
+            { id: "5", text: "text5" },
+            { id: "6", text: "text6" }
+          ]
+        },
+        "Done": {
+          id: "Done",
+          list: []
+        }
+      };
+    
+    const [columns, setColumns] = useState(initialColumns);
 
-    const [state, dispatch] = useReducer(dragReducer, {
-        items:data
-    })
+    const onDragEnd = ({ source, destination }) => {
+    // Make sure we have a valid destination
+    if (destination === undefined || destination === null) return null;
+
+    // Make sure we're actually moving the item
+    if (
+      source.droppableId === destination.droppableId &&
+      destination.index === source.index
+    )
+      return null;
+
+    // Set start and end variables
+    const start = columns[source.droppableId];
+    const end = columns[destination.droppableId];
+
+    // If start is the same as end, we're in the same column
+    if (start === end) {
+      // Move the item within the list
+      // Start by making a new list without the dragged item
+      console.log(start);
+      const newList = start.list.filter((_, idx) => idx !== source.index);
+
+      // Then insert the item at the right location
+      newList.splice(destination.index, 0, start.list[source.index]);
+
+      // Then create a new copy of the column object
+      const newCol = {
+        id: start.id,
+        list: newList
+      };
+
+      // Update the state
+      setColumns((state) => ({ ...state, [newCol.id]: newCol }));
+      return null;
+    } else {
+      // If start is different from end, we need to update multiple columns
+      // Filter the start list like before
+      const newStartList = start.list.filter((_, idx) => idx !== source.index);
+
+      // Create a new start column
+      const newStartCol = {
+        id: start.id,
+        list: newStartList
+      };
+
+      // Make a new end list array
+      const newEndList = end.list;
+
+      // Insert the item into the end list
+      newEndList.splice(destination.index, 0, start.list[source.index]);
+
+      // Create a new end column
+      const newEndCol = {
+        id: end.id,
+        list: newEndList
+      };
+
+      // Update the state
+      setColumns((state) => ({
+        ...state,
+        [newStartCol.id]: newStartCol,
+        [newEndCol.id]: newEndCol
+      }));
+      return null;
+    }
+};
 
     return (
         <Grid container component="main">
@@ -85,35 +168,18 @@ export default function StudentHome() {
 
             <Grid container>
             <TabPanel value={value} index={0}>
-                <div>
-                    <Grid container>
-                        {/* <ul className="stories">
-                            <li>Story 1</li>
-                            <li>Story 2</li>
-                            <li>Story 3</li>
-                        </ul> */}
-                        <DragDropContext onDragEnd={onDragEnd}>
-
-                        </DragDropContext>
-                        <List>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                    <ListItemText primary="Story 1"></ListItemText>
-                                </ListItemButton>
-                            </ListItem>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                    <ListItemText primary="Story 2"></ListItemText>
-                                </ListItemButton>
-                            </ListItem>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                    <ListItemText primary="Story 1"></ListItemText>
-                                </ListItemButton>
-                            </ListItem>
-                        </List>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Grid container direction={"row"} justify={"center"}>
+                        {Object.values(columns).map((column) => {
+                            console.log(column);
+                            return (
+                                <Grid item>
+                                <Column column={column} key={column.id} />
+                                </Grid>
+                        );
+                        })}
                     </Grid>
-                </div>
+                </DragDropContext>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div>
