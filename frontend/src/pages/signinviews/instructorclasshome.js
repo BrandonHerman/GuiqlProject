@@ -66,7 +66,24 @@ export default function InstructorSignIn() {
 
 
     return (
+
         <Grid container component="main" sx={{ height: '100vh' }}>
+
+            <Dialog open={open} onClose={handleClickClose} maxWidth>
+
+                <DialogTitle justify="center" align="center">Create Class</DialogTitle>
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    align="center"
+                >
+                    <TableDemo />
+                </Grid>
+                <br></br>
+                <br></br>
+            </Dialog>
+
             <CssBaseline />
 
             <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
@@ -86,21 +103,7 @@ export default function InstructorSignIn() {
                     </Typography>
                 </Box>
 
-                <Dialog open={open} onClose={handleClickClose} maxWidth>
 
-                    <DialogTitle justify="center" align="center">Create Class</DialogTitle>
-                    <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                        align="center"
-                    >
-
-                        <TableDemo />
-                        </Grid>
-                        <br></br>
-                        <br></br>
-                </Dialog>
                 <Grid
                     container
                     spacing={6}
@@ -114,8 +117,9 @@ export default function InstructorSignIn() {
                     {data1.class.map((elem) => (
                         <Grid item xs={6} justifyContent="space-evenly" alignItems="center" key={data1.class.indexOf(elem)}>
                             <br></br>
-                            <Card sx={{ maxWidth: 545 }}>
-                                <CardActionArea disableTouchRipple>
+
+                            <CardActionArea display="block" disableTouchRipple>
+                                <Card display="block" sx={{ maxWidth: 545, minHeight: 250 }}>
                                     <CardHeader
                                         title={`Class ${elem.number}`}
                                         subheader={`Time: ${elem.time}`}
@@ -140,8 +144,9 @@ export default function InstructorSignIn() {
 
                                     </CardActions>
 
-                                </CardActionArea>
-                            </Card>
+                                </Card>
+
+                            </CardActionArea>
                             {/* TODO: conditional for last cell always being add class */}
 
                         </Grid>
