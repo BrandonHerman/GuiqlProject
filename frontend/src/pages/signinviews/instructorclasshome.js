@@ -31,10 +31,10 @@ export default function InstructorSignIn() {
     const data1 = {
         class: [
             { number: 1, enrollment: 24, teams: 3, time: "Monday 6:30pm - 8:20pm" },
-            // { number: 2, enrollment: 32, teams: 5, time: "Tuesday 4:30pm - 6:20pm" },
-            // { number: 3, enrollment: 13, teams: 2, time: "Tuesday 6:30pm - 8:20pm" },
-            // { number: 4, enrollment: 28, teams: 4, time: "Thursday 6:30pm - 8:20pm" },
-            // { number: 5, enrollment: 28, teams: 4, time: "Friday 2:30pm - 4:20pm" },
+            { number: 2, enrollment: 32, teams: 5, time: "Tuesday 4:30pm - 6:20pm" },
+            { number: 3, enrollment: 13, teams: 2, time: "Tuesday 6:30pm - 8:20pm" },
+            { number: 4, enrollment: 28, teams: 4, time: "Thursday 6:30pm - 8:20pm" },
+            { number: 5, enrollment: 28, teams: 4, time: "Friday 2:30pm - 4:20pm" },
             // { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
             // { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
         ],
