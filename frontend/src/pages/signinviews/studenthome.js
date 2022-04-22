@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import './instructorsignin.css'
 import { Tabs } from '@mui/material';
@@ -22,6 +24,30 @@ import { Card } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Column from '../components/Column'
 import { useState, useEffect } from 'react';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Skeleton from '@mui/material/Skeleton';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import Stack from '@mui/material/Stack';
+
+const drawerWidth = 240;
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -57,12 +83,39 @@ function a11yProps(index) {
 }
 
 export default function StudentHome() {
+    const [meeting, setMeeting] = React.useState([{ date: "04/25/2001", meeting: "Our Zoom Link"},
+                                                  { date: "04/25/2001", meeting: "Our Zoom Link"}]
+                                                  );
+
+    const [myTeam, setStudents] = React.useState([{ first_name: "Josiah", last_name: "Castillo", comments: "fdasjlkdasnfrajkdfn"},
+                                                  { first_name: "Brandon", last_name: "Herman", comments: ""},
+                                                  { first_name: "Ariyan", last_name: "Kumaraswamy", comments: ""},
+                                                  { first_name: "Grant", last_name: "Stoehr", comments: ""},
+                                                  { first_name: "More", last_name: "People", comments: ""},
+                                                  { first_name: "ImSo", last_name: "Stupid", comments: ""},]
+    );
+
+    const handleRatingChange = (index, event) => {
+      const newTeam = myTeam.slice();
+      newTeam[index].myTeam = event.target.value;
+      setStudents(newTeam);
+    };
+
+    const handleCommentsChange = (index, event) => {
+      const newTeam = myTeam.slice();
+      newTeam[index].comments = event.target.value;
+      setStudents(newTeam);
+    };
 
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const deleteStories = () => {
+        
+    }
 
     const initialColumns = {
         "To Do": {
@@ -84,6 +137,10 @@ export default function StudentHome() {
         "Done": {
           id: "Done",
           list: []
+        },
+        "Delete": {
+            id: "Delete",
+            list: []
         }
       };
     
@@ -156,49 +213,114 @@ export default function StudentHome() {
     }
 };
 
-    return (
-        <Grid container component="main">
-            <CssBaseline></CssBaseline>
-            <Tabs value={value} onChange={handleChange} aria-label="student page tabs">
+const ratingArray = [];
+    for (let i = 1; i <= 5; i++) {
+        ratingArray.push(i);
+    }
+
+  return (
+    <Grid container component="main">
+      <CssBaseline></CssBaseline>
+      <Grid container>
+        <AppBar
+          position="fixed"
+          sx={{ width: '100%', ml: `${drawerWidth}px` }}
+        >
+          <Toolbar>
+            <Typography variant="h6" noWrap component="div">
+              <Tabs value={value} onChange={handleChange} aria-label="student page tabs">
                 <Tab label="User Stories" {...a11yProps(0)}></Tab>
                 <Tab label="Meetings" {...a11yProps(1)}></Tab>
                 <Tab label="Progress Reports" {...a11yProps(2)}></Tab>
                 <Tab label="Peer Reviews" {...a11yProps(3)}></Tab>
-            </Tabs>
+              </Tabs>
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Grid>
 
-            <Grid container>
-            <TabPanel value={value} index={0}>
-                <DragDropContext onDragEnd={onDragEnd}>
-                    <Grid container direction={"row"} justify={"center"}>
-                        {Object.values(columns).map((column) => {
-                            console.log(column);
-                            return (
-                                <Grid item>
-                                <Column column={column} key={column.id} />
-                                </Grid>
-                        );
-                        })}
-                    </Grid>
-                </DragDropContext>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <div>
-                    <Typography>Hello again!</Typography>
 
-                </div>
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <div>
-                    <Typography>Hello again again!</Typography>
-                </div>
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-                <div>
-                    <Typography>Hello again again again!</Typography>
-                </div>
-            </TabPanel>
+      <Grid container sx={{ m: 9 }}>
+        <TabPanel value={value} index={0}>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Grid container direction={"row"} justify={"center"}>
+              {Object.values(columns).map((column) => {
+                console.log(column);
+                return (
+                  <Grid item sx={{mx:2, minWidth:'21%', maxWidth:'21%'}}>
+                    <Column column={column} key={column.id} />
+                  </Grid>
+                );
+              })}
             </Grid>
-            
-        </Grid>
-    )
+          </DragDropContext>
+        </TabPanel>
+
+        <TabPanel value={value} index={1}>
+        <Box
+            component="main"
+            sx={{ width: '90%', p: 3, justifyContent: 'center' }}
+          >
+            <Stack 
+              sx={{ m: 1, width: '100%' }}
+              justify="center"
+              align="center"
+            >
+              <FormControl 
+                sx={{ m: 1, width: '100%' }}
+                justify="center"
+                align="center"
+              >
+                Meeting Form:
+                <TextField id="filled-basic" label="Date" variant="filled" sx={{ mb: 3 }}/>
+                <TextField
+                  sx={{ mb: 3 }}
+                  id="outlined-multiline-static"
+                  label="Meeting Place"
+                  multiline
+                  rows={4}
+                  defaultValue=""
+                />
+                <Button variant="contained" color="primary">
+                  Submit
+                </Button>
+              </FormControl>
+              <Table sx={{ width: '90%' }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Meeting Date</TableCell>
+                    <TableCell>Meeting Place/Link</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/*CREATE a meeting map that displays first_name*/}
+                  {meeting.map((elem) => (
+                    <TableRow>
+                      <TableCell>{elem.date}</TableCell>
+                      <TableCell>{elem.meeting}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Stack>
+          </Box>
+        </TabPanel>
+
+        <TabPanel value={value} index={2}>
+          <div>
+            <Typography>Hello again again!</Typography>
+          </div>
+        </TabPanel>
+
+        <TabPanel value={value} index={3}>
+        <Box component="main" sx={{ bgcolor: 'red', minWidth: '90%', p: 3, justifyItems: 'left' }}>
+            <h1>Peer Reviews Link</h1>
+            <p>Please click the link below to submit a peer review for your project.</p>
+          </Box>
+        </TabPanel>
+
+      </Grid>
+
+    </Grid>
+  )
 }

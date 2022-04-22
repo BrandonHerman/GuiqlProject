@@ -21,7 +21,7 @@ const ListItemCustom = ({ itemObject, index }) => {
           {...provided.dragHandleProps}
         >
           <ListItemText
-            styles={{ fontFamily: "Quicksand" }}
+            sx={{ fontFamily: "Quicksand", color: 'blue'  }}
             primary={`${itemObject.text}`}
           />
           <ListItemSecondaryAction>
@@ -29,6 +29,7 @@ const ListItemCustom = ({ itemObject, index }) => {
               edge="end"
               aria-label="comments"
               question-uid={itemObject.id}
+              sx={{ borderRadius: 0, color: 'blue' }}
             >
               {/* <DeleteIcon /> */}
             </IconButton>

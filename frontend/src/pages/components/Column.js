@@ -4,17 +4,25 @@ import RootRef from "@material-ui/core/RootRef";
 import List from "@material-ui/core/List";
 import ListItemCustom from "./ListItemCustom";
 import Typography from "@material-ui/core/Typography";
+import Card from '@mui/material/Card';
 
 const Column = ({ column }) => {
   return (
     <div
       style={{
-        backgroundColor: "gray",
-        margin: 10,
-        padding: 20,
-        color: "white"
+        backgroundColor: "LightGray",
+        margin: 30,
+        padding: 0,
+        color: "blue",
+        minWidth: '100%'
       }}
     >
+    <Card variant="outlined" 
+    sx={{ 
+        bgcolor: 'LightGray', 
+        display:'flex', 
+        flexDirection:'column',
+        justifyContent:'center'}}>
       <Typography variant={"h4"}>{column.id}</Typography>
       <Droppable droppableId={column.id}>
         {(provided) => (
@@ -28,6 +36,7 @@ const Column = ({ column }) => {
           </RootRef>
         )}
       </Droppable>
+    </Card>
     </div>
   );
 };
