@@ -35,7 +35,7 @@ const authenticate = async (username,password) => {
         // check if password is correct
         const validPassword = await findUserByPassword(username,password);
          if (validPassword.length !== 0) {;
-            const query = await knex(USER_TABLE).where({username,password: validPassword[0].password});
+            const query = await knex(STUDENT_TABLE).where({username,password: validPassword[0].password});
             return query;
         } else {
             return "Password is incorrect!";
