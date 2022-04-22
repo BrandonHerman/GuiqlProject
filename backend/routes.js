@@ -1,5 +1,31 @@
 const pool = require('./db')
 
+/*======= Routes We Need ============
+GET:
+
+get all students with class id
+get all classes with professor id
+get all teams with class id
+
+POST:
+
+post student
+post team
+post class
+post professor
+
+PUT:
+
+update student team id
+
+DELETE:
+
+delete student with id
+delete all students
+delete class with id
+
+*/
+
 module.exports = function routes(app, logger) {
   // GET /
   app.get('/', (req, res) => {
