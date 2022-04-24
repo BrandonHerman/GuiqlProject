@@ -71,5 +71,6 @@ module.exports = {
     setAsFavorite,
     unfavorite,
     setDescription,
+    setTitle,
     removeStory
 }
