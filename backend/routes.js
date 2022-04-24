@@ -22,7 +22,7 @@ DELETE:
 
 delete student with id
 delete all students
-delete class with id
+delete class with id 
 
 */
 
