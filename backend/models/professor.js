@@ -21,7 +21,7 @@ const createProfessor = async (professor_id, first_name, last_name, username, pa
         const hashedPassword = await bcrypt.hash(password,salt);
         const query = await knex(PROFESSOR_TABLE).insert({professor_id,first_name,last_name,email,username,password: hashedPassword,salt});
         const returnValue = await knex(PROFESSOR_TABLE).select('Pofessor.professor_id','Professor.first_name','Professor.last_name','Professor.email','Professor.username');
-        return returnValuel
+        return returnValue;
     }
 }
 
