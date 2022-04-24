@@ -10,7 +10,7 @@ const createTeam = async (team_id,team_name,team_num) => {
         return "Team already exists";
     } else {
         const query = await knex(TEAM_TABLE).insert({team_id,team_name,team_num});
-        const returnValue = await knex(TEAM_TABLE).select('Team.cteam_id','Team.team_name','Team.team_num');
+        const returnValue = await knex(TEAM_TABLE).select('Team.team_id','Team.team_name','Team.team_num');
         return returnValue;
     }
 }
