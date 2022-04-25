@@ -29,11 +29,11 @@ router.get('/authenticateRecruiter', async (req, res, next) => {
     next();
 })
 
-router.get('/removeRecruiter', async (req, res, next) => {
+router.delete('/removeRecruiter', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.recruiter.authenticate(body.username, body.password);
+        const result = await req.models.recruiter.deleteRecruiter(body.recruiter_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new allocation:', err);

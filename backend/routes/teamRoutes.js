@@ -43,7 +43,7 @@ router.get('/searchTeamByName', async (req, res, next) => {
     next();
 })
 
-router.update('/setTeamSize', async (req, res, next) => {
+router.put('/setTeamSize', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
@@ -72,7 +72,7 @@ router.get('/getTeamSize', async (req, res, next) => {
     next();
 })
 
-router.update('/setTeamName', async (req, res, next) => {
+router.put('/setTeamName', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);

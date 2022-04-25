@@ -43,7 +43,7 @@ router.get('/searchUserStoryByTitle', async (req, res, next) => {
     next();
 })
 
-router.update('/setUserStoryStatus', async (req, res, next) => {
+router.put('/setUserStoryStatus', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
@@ -57,7 +57,7 @@ router.update('/setUserStoryStatus', async (req, res, next) => {
     next();
 })
 
-router.update('/setUserStoryAsFavorite', async (req, res, next) => {
+router.put('/setUserStoryAsFavorite', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
@@ -71,7 +71,7 @@ router.update('/setUserStoryAsFavorite', async (req, res, next) => {
     next();
 })
 
-router.update('/unfavoriteUserStory', async (req, res, next) => {
+router.put('/unfavoriteUserStory', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
@@ -85,7 +85,7 @@ router.update('/unfavoriteUserStory', async (req, res, next) => {
     next();
 })
 
-router.update('/setUserStoryDescription', async (req, res, next) => {
+router.put('/setUserStoryDescription', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
@@ -98,7 +98,7 @@ router.update('/setUserStoryDescription', async (req, res, next) => {
 
     next();
 })
-router.update('/setUserStoryTitle', async (req, res, next) => {
+router.put('/setUserStoryTitle', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
