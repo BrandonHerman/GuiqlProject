@@ -29,7 +29,7 @@ router.get('/authenticateRecruiter', async (req, res, next) => {
     next();
 })
 
-router.get('/authenticateRecruiter', async (req, res, next) => {
+router.get('/removeRecruiter', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
