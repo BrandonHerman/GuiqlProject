@@ -81,7 +81,7 @@ function createClassTableComponent() {
         </Alert>
       </Snackbar>
       <Box margin={2}>
-        <div style={{ display: "", justifyContent: "center" }}>
+        <div style={{ display: "", justifyContent: "space-evenly" }}>
           <div>
             {isEdit ? (
               <div>
