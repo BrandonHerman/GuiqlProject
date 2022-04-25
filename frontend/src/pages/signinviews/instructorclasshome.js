@@ -14,6 +14,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton, Dialog, DialogTitle } from '@mui/material';
 import TableDemo from '../components/createClassTable';
+import SignOutButton from '../components/signOutButton';
 
 export default function InstructorSignIn() {
     const [open, setOpen] = React.useState(false);
@@ -35,8 +36,8 @@ export default function InstructorSignIn() {
             { number: 3, enrollment: 13, teams: 2, time: "Tuesday 6:30pm - 8:20pm" },
             { number: 4, enrollment: 28, teams: 4, time: "Thursday 6:30pm - 8:20pm" },
             { number: 5, enrollment: 28, teams: 4, time: "Friday 2:30pm - 4:20pm" },
-            // { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
-            // { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
+            { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
+            { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
         ],
         id: [1]
     };
@@ -69,13 +70,13 @@ export default function InstructorSignIn() {
 
         <Grid container component="main" sx={{ height: '100vh' }}>
 
-            <Dialog open={open} onClose={handleClickClose} maxWidth>
+            <Dialog open={open} onClose={handleClickClose} minWidth >
 
                 <DialogTitle justify="center" align="center">Create Class</DialogTitle>
                 <Grid
                     container
                     direction="row"
-                    justify="center"
+                    justify="space-evenly"
                     align="center"
                 >
                     <TableDemo />
@@ -91,8 +92,7 @@ export default function InstructorSignIn() {
                     sx={{
                         my: 2,
                         mx: 4,
-                        display: 'center',
-                        flexDirection: 'column',
+                        display: 'flex',
                         alignItems: 'center',
                     }}
                 >
@@ -101,6 +101,9 @@ export default function InstructorSignIn() {
                     <Typography id="headerName" component="h1" variant="h5">
                         My Classes
                     </Typography>
+                    <div sx={{ml:"auto"}}>
+                        <SignOutButton></SignOutButton>
+                    </div>
                 </Box>
 
 
@@ -118,8 +121,9 @@ export default function InstructorSignIn() {
                         <Grid item xs={6} justifyContent="space-evenly" alignItems="center" key={data1.class.indexOf(elem)}>
                             <br></br>
 
-                            <CardActionArea display="block" disableTouchRipple>
-                                <Card display="block" sx={{ maxWidth: 545, minHeight: 250 }}>
+                            <Card display="block" sx={{ maxWidth: 545, minHeight: 250 }}>
+
+                                <CardActionArea display="block" disableTouchRipple>
                                     <CardHeader
                                         title={`Class ${elem.number}`}
                                         subheader={`Time: ${elem.time}`}
@@ -144,9 +148,9 @@ export default function InstructorSignIn() {
 
                                     </CardActions>
 
-                                </Card>
+                                </CardActionArea>
+                            </Card>
 
-                            </CardActionArea>
                             {/* TODO: conditional for last cell always being add class */}
 
                         </Grid>
