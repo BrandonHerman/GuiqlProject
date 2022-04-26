@@ -8,11 +8,28 @@ const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 const routes = require('./routes');
 
 // set up some configs for express.
-const config = {
-  name: 'sample-express-app',
-  port: 8000,
-  host: '0.0.0.0',
-};
+isHostedOnCloud = true
+var config = {};
+
+if (isHostedOnCloud) {
+  config = {
+    name: 'Ridr-Express',
+    port: process.env.MYSQL_PORT,
+    host: process.env. MYSQL_CLOUD_HOST,
+    user     : process.env.MYSQL_CLOUD_USER,
+    password : process.env.MYSQL_CLOUD_PASS,
+    database : process.env.MYSQL_DB
+  };
+} else {
+
+  config = {
+    name: 'sample-express-app',
+    port: 8000,
+    host: '0.0.0.0',
+  };
+}
+
+
 
 // create the express.js object
 const app = express();
