@@ -36,15 +36,15 @@ export default function InstructorSignIn() {
             { number: 3, enrollment: 13, teams: 2, time: "Tuesday 6:30pm - 8:20pm" },
             { number: 4, enrollment: 28, teams: 4, time: "Thursday 6:30pm - 8:20pm" },
             { number: 5, enrollment: 28, teams: 4, time: "Friday 2:30pm - 4:20pm" },
-            { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
-            { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
+            // { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
+            // { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
         ],
         id: [1]
     };
 
     function addClassCard() {
         return (
-            <Grid item xs={6} justifyContent="space-evenly" alignItems="center" key="Add class">
+            <Grid item xs={6} alignItems="center" key="Add class">
                 <br></br>
                 <Card id="createClassCard" raised="false" elevation="0" sx={{ maxWidth: 250, maxHeight: 239 }} >
 
@@ -68,6 +68,8 @@ export default function InstructorSignIn() {
 
     return (
 
+
+
         <Grid container component="main" sx={{ height: '100vh' }}>
 
             <Dialog open={open} onClose={handleClickClose} minWidth >
@@ -87,23 +89,22 @@ export default function InstructorSignIn() {
 
             <CssBaseline />
 
-            <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
+            <Grid container xs={12} sm={12} md={12} component={Paper} elevation={6} square>
                 <Box
                     sx={{
-                        my: 2,
+                        width: '100%',
                         mx: 4,
                         display: 'flex',
                         alignItems: 'center',
+                        flexDirection: 'row',
                     }}
                 >
                     <img src="https://i.imgur.com/uMa2apF.png" alt="Guiql Logo" />
                     <br></br>
-                    <Typography id="headerName" component="h1" variant="h5">
+                    <Typography display="absolute" id="headerName" component="h1" variant="h5">
                         My Classes
                     </Typography>
-                    <div sx={{ml:"auto"}}>
-                        <SignOutButton></SignOutButton>
-                    </div>
+                    <SignOutButton></SignOutButton>
                 </Box>
 
 
@@ -118,51 +119,52 @@ export default function InstructorSignIn() {
                     id="dynamicClass"
                 >
                     {data1.class.map((elem) => (
-                        <Grid item xs={6} justifyContent="space-evenly" alignItems="center" key={data1.class.indexOf(elem)}>
+                        <Grid item xs={5} mx={4} justifyContent="space-evenly" alignItems="center" key={data1.class.indexOf(elem)}>
                             <br></br>
 
-                            <Card display="block" sx={{ maxWidth: 545, minHeight: 250 }}>
 
-                                <CardActionArea display="block" disableTouchRipple>
-                                    <CardHeader
-                                        title={`Class ${elem.number}`}
-                                        subheader={`Time: ${elem.time}`}
-                                    />
-                                    <CardContent>
-                                        <Typography>Enrollement: {elem.enrollment} </Typography>
-                                        <Typography>Teams: {elem.teams} </Typography>
-                                        <br></br>
+                            <Card sx={{ display: 'flex', flexDirection: 'column', minWidth: 'calc(33%)', maxWidth: 500 }}>
 
-                                    </CardContent>
+                                <CardActionArea disableTouchRipple>
+                                <CardHeader
+                                    title={`Class ${elem.number}`}
+                                    subheader={`Time: ${elem.time}`}
+                                />
+                                <CardContent>
+                                    <Typography>Enrollement: {elem.enrollment} </Typography>
+                                    <Typography>Teams: {elem.teams} </Typography>
+                                    <br></br>
 
-                                    <CardActions justify="center" align="center">
-                                        <IconButton aria-label="add-reaction">
-                                            <AddReactionIcon></AddReactionIcon>
-                                        </IconButton>
-                                        <IconButton aria-label="delete">
-                                            <GroupAddIcon />
-                                        </IconButton>
-                                        <IconButton aria-label="delete">
-                                            <DeleteIcon />
-                                        </IconButton>
+                                </CardContent>
 
-                                    </CardActions>
+                                <CardActions justify="center" align="center">
+                                    <IconButton aria-label="add-reaction">
+                                        <AddReactionIcon></AddReactionIcon>
+                                    </IconButton>
+                                    <IconButton aria-label="delete">
+                                        <GroupAddIcon />
+                                    </IconButton>
+                                    <IconButton aria-label="delete">
+                                        <DeleteIcon />
+                                    </IconButton>
 
-                                </CardActionArea>
-                            </Card>
+                                </CardActions>
 
-                            {/* TODO: conditional for last cell always being add class */}
+                            </CardActionArea>
+                        </Card>
+
+                            {/* TODO: conditional for last cell always being add class */ }
 
                         </Grid>
                     ))}
-                    {addClassCard()};
-                </Grid>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
+                {addClassCard()};
             </Grid>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </Grid>
+        </Grid >
 
     );
 
