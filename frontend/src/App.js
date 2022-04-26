@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import InstructorStudentsView from './pages/classviews/instructorstudentsview';
 import StudentSignIn from './pages/signinviews/studentsignin';
 import {Theme, ThemeProvider} from '@material-ui/core/styles/'
 import { Link } from "react-router-dom";
@@ -73,6 +74,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  /*
   return ( //launch app at student sign in 
     // <ThemeProvider theme={theme}> 
     // {/* add gui theme to all child components */}
@@ -82,6 +84,8 @@ function App() {
       </div>
     // </ThemeProvider>
   );
+
+   
 }
 
 export default App;
