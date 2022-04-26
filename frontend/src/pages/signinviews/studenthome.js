@@ -36,6 +36,8 @@ import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
 
 const drawerWidth = 240;
 const ITEM_HEIGHT = 48;
@@ -51,7 +53,6 @@ const MenuProps = {
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
       <div
         role="tabpanel"
@@ -83,10 +84,6 @@ function a11yProps(index) {
 }
 
 export default function StudentHome() {
-    const [meeting, setMeeting] = React.useState([{ date: "04/25/2001", meeting: "Our Zoom Link"},
-                                                  { date: "04/25/2001", meeting: "Our Zoom Link"}]
-                                                  );
-
     const [myTeam, setStudents] = React.useState([{ first_name: "Josiah", last_name: "Castillo", comments: "fdasjlkdasnfrajkdfn"},
                                                   { first_name: "Brandon", last_name: "Herman", comments: ""},
                                                   { first_name: "Ariyan", last_name: "Kumaraswamy", comments: ""},
@@ -94,6 +91,9 @@ export default function StudentHome() {
                                                   { first_name: "More", last_name: "People", comments: ""},
                                                   { first_name: "ImSo", last_name: "Stupid", comments: ""},]
     );
+
+    const [open, setOpen] = React.useState(false);
+    const [verify, setVerify] = React.useState(false);
 
     const handleRatingChange = (index, event) => {
       const newTeam = myTeam.slice();
@@ -110,28 +110,55 @@ export default function StudentHome() {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+      setValue(newValue);
     };
 
+    const handleClickOpen = () => {
+      console.log("open boolean = " + open);
+      setOpen(true);
+    }
+    const handleDeleteOpen = () => {
+      console.log("setVerify boolean = " + verify);
+      setVerify(true);
+    }
+    const handleClickClose = () => {
+      console.log("open boolean = " + open);
+      console.log("setVerify boolean = " + verify);
+      setVerify(false);
+      setOpen(false);
+    }
+
     const deleteStories = () => {
-        
+      columns["Delete"].list = [];
+      setColumns(columns);
+      console.log(columns["Delete"]);
+      handleClickClose();
+    }
+    const addStory = () => {
+      handleClickOpen();
+    }
+    const submitStory = () => {
+      /* columns["To Do"].list.push(
+        {id:columns["To Do"].list.length + columns["In Progress"].list.length + columns["Delete"].list.length + 1,
+         text:}
+      ) */
     }
 
     const initialColumns = {
         "To Do": {
           id: "To Do",
           list: [
-            { id: "1", text: "text1" },
-            { id: "2", text: "text2" },
-            { id: "3", text: "text3" }
+            { id: "1", text: "text1", desc:"", favorite:false, teamId:0 },
+            { id: "2", text: "text2", desc:"", favorite:false, teamId:0 },
+            { id: "3", text: "text3", desc:"", favorite:false, teamId:0 }
           ]
         },
         "In Progress": {
           id: "In Progress",
           list: [
-            { id: "4", text: "text4" },
-            { id: "5", text: "text5" },
-            { id: "6", text: "text6" }
+            { id: "4", text: "text4", desc:"", favorite:false, teamId:0 },
+            { id: "5", text: "text5", desc:"", favorite:false, teamId:0 },
+            { id: "6", text: "text6", desc:"", favorite:false, teamId:0 }
           ]
         },
         "Done": {
@@ -217,6 +244,38 @@ const ratingArray = [];
     for (let i = 1; i <= 5; i++) {
         ratingArray.push(i);
     }
+    const [date, setDate] = React.useState('');
+    const [meetingPlace, setMeetingPlace] = React.useState('');
+    const [meeting, setMeeting] = React.useState([{ date: "04/25/2001", meeting: "Our Zoom Link"},
+                                                  { date: "04/25/2001", meeting: "Our Zoom Link"}]
+    );
+    function submitMeetingForm(e){
+      e.preventDefault();
+      console.log(date);
+      console.log(meetingPlace);
+    };
+    const handleDeleteMeeting = (elem) => {
+      console.log(elem);
+    };
+    const [sprint, setSprint] = React.useState('');
+    const [report, setReport] = React.useState('');
+    const [proReport, setProReport] = React.useState([{ sprint: "1", report: "Welp, I lost my job"},
+                                                      { sprint: "2", report: "Welp, I lost my job, but twice"},]
+    );
+    function submitProgressForm(e){
+      e.preventDefault();
+      console.log(sprint);
+      console.log(report);
+      //setProReport([...proReport, { sprint: sprint, report: report}]);
+    };
+    const handleDeleteReport = (elem) => {
+      console.log(elem);
+      console.log("hello");
+    };
+    const [peerReview, showPeerReview] = React.useState(false);
+    const [peerReviewLink, showPeerReviewLink] = React.useState('https://www.google.com/');
+    //API CALL BELOW TO GRAB THE SHOW
+    //showPeerReview(true);
 
   return (
     <Grid container component="main">
@@ -254,10 +313,102 @@ const ratingArray = [];
               })}
             </Grid>
           </DragDropContext>
+          <Button variant="outlined" color="error" onClick={handleDeleteOpen}>Delete</Button>
+          <Button variant="contained" onClick={addStory}>Add Story</Button>
+          <Dialog fullWidth maxWidth="md" open={open} onClose={handleClickClose}>
+          <DialogContent>
+            <Grid container>
+            <Typography variant="h5">Add a User Story</Typography>
+              <FormControl sx={{ m: 1, width: '100%' }} justify="center" align="left">
+                <Grid item>
+                  <TextField label="Title" id="title-field" sx={{my:2}}></TextField>
+                </Grid>
+                <Grid item>
+                  <TextField label="Description" id="desc-field" multiline rows={4} fullWidth>Include your acceptance criteria!</TextField>
+                </Grid>
+                <Grid item sx={{mt:2}}>
+                  <Button variant="contained" onClick={submitStory}>Add Story</Button>
+                </Grid>
+              </FormControl>
+            </Grid>
+          </DialogContent>
+          </Dialog>
+          <Dialog maxWidth="sm" open={verify} onClose={handleClickClose}>
+            <DialogContent>
+              <Typography variant="h6">Are you sure you want to delete these user stories?</Typography>
+              <br></br>
+              <Button variant="outlined" color="error" onClick={deleteStories}>Delete</Button>
+            </DialogContent>
+          </Dialog>
         </TabPanel>
 
         <TabPanel value={value} index={1}>
-        <Box
+          <Box
+              component="main"
+              sx={{ width: '90%', p: 3, justifyContent: 'center' }}
+            >
+              <Stack 
+                sx={{ m: 1, width: '100%' }}
+                justify="center"
+                align="center"
+              >
+                <FormControl 
+                  sx={{ m: 1, width: '100%' }}
+                  justify="center"
+                  align="center"
+                >
+                  Meeting Form:
+                  <br/>
+                  <br/>
+                  <TextField id="filled-basic" name="Date" label="Date" value={date} 
+                            onChange={(e) => setDate(e.target.value)} 
+                            variant="filled" sx={{ mb: 3 }}
+                  />
+                  <TextField id="outlined-multiline-static" name="MeetingPlace" label="Meeting Place: " 
+                           multiline rows={4} value={meetingPlace} onChange={(e) => setMeetingPlace(e.target.value)}
+                           sx={{ mb: 3 }}
+                  />
+                  <Button type="submit" variant="contained" color="primary" onClick={submitMeetingForm}>
+                  Submit
+                  </Button>
+                </FormControl>
+                <br/>
+                <br/>
+                <Table sx={{ width: '90%' }}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Meeting Date</TableCell>
+                      <TableCell>Meeting Place/Link</TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {meeting.map((elem) => (
+                      <TableRow>
+                        <TableCell>{elem.date}</TableCell>
+                        <TableCell>{elem.meeting}</TableCell>
+                        <TableCell>
+                          <Button variant="contained" color="success">
+                            Edit
+                          </Button>
+                        </TableCell>
+                        <TableCell>
+                          <Button variant="contained" color="error" onClick={() => handleDeleteMeeting(elem)}>
+                            Delete
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Stack>
+            </Box>
+        </TabPanel>
+
+
+        <TabPanel value={value} index={2}>
+          <Box
             component="main"
             sx={{ width: '90%', p: 3, justifyContent: 'center' }}
           >
@@ -271,33 +422,42 @@ const ratingArray = [];
                 justify="center"
                 align="center"
               >
-                Meeting Form:
-                <TextField id="filled-basic" label="Date" variant="filled" sx={{ mb: 3 }}/>
-                <TextField
-                  sx={{ mb: 3 }}
-                  id="outlined-multiline-static"
-                  label="Meeting Place"
-                  multiline
-                  rows={4}
-                  defaultValue=""
+                Progress Report Form:
+                <br/>
+                <br/>
+                <TextField id="filled-basic" name="Sprint" label="Sprint" value={sprint} 
+                            onChange={(e) => setSprint(e.target.value)} 
+                            variant="filled" sx={{ mb: 3 }}
                 />
-                <Button variant="contained" color="primary">
+                <TextField id="outlined-multiline-static" name="Report" label="Give your progress report: " 
+                           multiline rows={4} value={report} onChange={(e) => setReport(e.target.value)}
+                           sx={{ mb: 3 }}
+                />
+                <Button type="submit" variant="contained" color="primary" onClick={submitProgressForm}>
                   Submit
                 </Button>
               </FormControl>
+              <br/>
+              <br/>
               <Table sx={{ width: '90%' }}>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Meeting Date</TableCell>
-                    <TableCell>Meeting Place/Link</TableCell>
+                    <TableCell>Sprint</TableCell>
+                    <TableCell>Report</TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {/*CREATE a meeting map that displays first_name*/}
-                  {meeting.map((elem) => (
+                  {proReport.map((elem, index) => (
                     <TableRow>
-                      <TableCell>{elem.date}</TableCell>
-                      <TableCell>{elem.meeting}</TableCell>
+                      <TableCell>{elem.sprint}</TableCell>
+                      <TableCell>{elem.report}</TableCell>
+                      <TableCell>
+                        <Button variant="contained" color="error" onClick={() => handleDeleteReport(elem)}>
+                          Delete
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -306,16 +466,21 @@ const ratingArray = [];
           </Box>
         </TabPanel>
 
-        <TabPanel value={value} index={2}>
-          <div>
-            <Typography>Hello again again!</Typography>
-          </div>
-        </TabPanel>
-
         <TabPanel value={value} index={3}>
-        <Box component="main" sx={{ bgcolor: 'red', minWidth: '90%', p: 3, justifyItems: 'left' }}>
-            <h1>Peer Reviews Link</h1>
-            <p>Please click the link below to submit a peer review for your project.</p>
+          <Box component="main" sx={{ minWidth: '90%', p: 3, justifyItems: 'left' }}>
+              <h1>Peer Reviews</h1>
+              {peerReview === false &&
+                <>
+                  <h2>Your professor has not made this link available to you yet.</h2>
+                </>
+              }
+              {peerReview === true && 
+                <>
+                  <p>Please click the link below to submit a peer review for your project.</p>
+                  <p>Be the first to add a review!</p>
+                  <a href={peerReviewLink}>Click here to submit your peer review!</a>
+                </>
+              }
           </Box>
         </TabPanel>
 

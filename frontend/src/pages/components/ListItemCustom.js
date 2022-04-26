@@ -31,7 +31,6 @@ const ListItemCustom = ({ itemObject, index }) => {
               question-uid={itemObject.id}
               sx={{ borderRadius: 0, color: 'blue' }}
             >
-              {/* <DeleteIcon /> */}
             </IconButton>
           </ListItemSecondaryAction>
         </ListItem>
