@@ -74,7 +74,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  /*
   return ( //launch app at student sign in 
     // <ThemeProvider theme={theme}> 
     // {/* add gui theme to all child components */}
