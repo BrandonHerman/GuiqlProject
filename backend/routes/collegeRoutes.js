@@ -18,7 +18,7 @@ router.post('/createCollege', async (req, res, next) => {
 router.get('/searchCollegeByID', async (req, res, next) => {
     try {
         const college_id = req.params.college_id;
-        console.log(college_id);
+        console.log("CollegeId in searchCollegeByID: ", college_id);
         const result = await College.searchByID(college_id);
         res.status(201).json(result);
     } catch (err) {
