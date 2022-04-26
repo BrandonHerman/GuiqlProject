@@ -6,7 +6,6 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import './instructorsignup.css'
 import { Link } from "react-router-dom";
 import { Autocomplete, InputLabel } from '@mui/material';
 import unis from '../assets/universities.js';
@@ -20,7 +19,7 @@ universitiesPreSlice.map((university) => {
 })
 
 
-export default function InstructorSignUp() {
+export default function RecruiterSignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -45,7 +44,6 @@ export default function InstructorSignUp() {
         md={7}
         sx={{
           // background styling, i know bad practice but much easier to easily change background for each file (ssignin, isignin, isignout)
-          // i want to have fontenot on the instructor sign in and sign out and some other picture for student
           backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -64,7 +62,7 @@ export default function InstructorSignUp() {
           {/* for whatever reason the physical file wont load in assets so i uploaded it to imgur and its getting picture from imgur */}
           <img src="https://i.imgur.com/AxiNrn4.png" alt="Guiql Logo" />
           <Typography component="h1" variant="h5">
-            Instructor Sign Up
+            Recruiter Sign Up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <Grid container sx={{ textAlign: 'center' }}>
@@ -130,7 +128,7 @@ export default function InstructorSignUp() {
             >
             </Autocomplete>
             {/* inits the onSubmit function at top of file */}
-            <Link to="/instructorsignin">
+            <Link to="/recruitersignup">
               <Button
                 type="submit"
                 fullWidth
@@ -143,9 +141,9 @@ export default function InstructorSignUp() {
             <Grid container>
               <Grid item xs>
                 <br></br>
-                <Link to="/instructorsignin">
+                <Link to="/recruitersignin">
                   <h3>
-                    Have an account? Instructor Sign In Portal
+                    Have an account? Recruiter Sign In Portal
                   </h3>
                 </Link>
               </Grid>
@@ -153,7 +151,7 @@ export default function InstructorSignUp() {
             <br></br>
             <Link to="/studentsignin">
               <h3>
-                Not an Instructor? Student Sign In Portal
+                Not an Recruiter? Return 
               </h3>
             </Link>
           </Box>
