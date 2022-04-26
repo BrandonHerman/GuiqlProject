@@ -16,11 +16,13 @@ import { IconButton, Dialog, DialogTitle } from '@mui/material';
 import TableDemo from '../components/createClassTable';
 import SignOutButton from '../components/signOutButton';
 import { Link } from "react-router-dom";
+import { left } from '@popperjs/core';
+import StudentGeneration from '../utils/studentgeneration';
 
 
 export default function InstructorSignIn() {
     const [open, setOpen] = React.useState(false);
-
+    StudentGeneration("brandon", "herman");
     const handleClickOpen = () => {
         console.log("setOpen boolean = " + open);
         setOpen(true);
@@ -38,7 +40,7 @@ export default function InstructorSignIn() {
             { number: 3, enrollment: 13, teams: 2, time: "Tuesday 6:30pm - 8:20pm" },
             { number: 4, enrollment: 28, teams: 4, time: "Thursday 6:30pm - 8:20pm" },
             { number: 5, enrollment: 28, teams: 4, time: "Friday 2:30pm - 4:20pm" },
-            // { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
+            { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
             // { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
         ],
         id: [1]
@@ -46,23 +48,20 @@ export default function InstructorSignIn() {
 
     function addClassCard() {
         return (
-            <Grid item xs={6} alignItems="center" key="Add class">
-                <br></br>
-                <Card id="createClassCard" raised="false" elevation="0" sx={{ maxWidth: 250, maxHeight: 239 }} >
+            <Card id="createClassCard" raised="false" elevation="0" sx={{ maxWidth: 262, maxHeight: 239 }} >
 
-                    <CardActionArea disableTouchRipple onClick={handleClickOpen}>
-                        <CardContent>
-                            <br></br>
-                            <Typography variant="h1" >
-                                +
-                            </Typography>
-                        </CardContent>
+                <CardActionArea disableTouchRipple onClick={handleClickOpen}>
+                    <CardContent>
+                        <br></br>
+                        <Typography variant="h1" >
+                            +
+                        </Typography>
+                    </CardContent>
 
-                    </CardActionArea>
+                </CardActionArea>
 
 
-                </Card >
-            </Grid>
+            </Card >
         );
     }
 
@@ -70,11 +69,11 @@ export default function InstructorSignIn() {
 
     return (
 
-
-
         <Grid container component="main" sx={{ height: '100vh' }}>
             <Dialog open={open} onClose={handleClickClose} minWidth >
 
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <CssBaseline />
                 <DialogTitle justify="center" align="center">Create Class</DialogTitle>
                 <Grid
                     container
@@ -88,46 +87,45 @@ export default function InstructorSignIn() {
                 <br></br>
             </Dialog>
 
-            <CssBaseline />
 
-            <Grid container xs={12} sm={12} md={12} component={Paper} elevation={6} square>
-                <Box
-                    sx={{
-                        width: '100%',
-                        mx: 4,
-                        display: 'flex',
-                        alignItems: 'center',
-                        flexDirection: 'row',
-                    }}
+            <Grid
+                container
+                direction="column"
+                justifyContent="flex-start"
+                alignItems="center"
+            >
+                <Grid
+                    container
+                    sx={{ px: 4, py: 2 }}
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
                 >
-                    <img src="https://i.imgur.com/uMa2apF.png" alt="Guiql Logo" />
-                    <br></br>
+                    <img display="inline" src="https://i.imgur.com/RzmXLUB.png" alt="Guiql Logo" />
                     <Typography display="absolute" id="headerName" component="h1" variant="h5">
                         My Classes
                     </Typography>
+
                     <SignOutButton></SignOutButton>
-                </Box>
-
-
+                </Grid>
+                {/* TITLE END */}
+                {/* CLASSES START */}
                 <Grid
                     container
-                    spacing={6}
                     direction="row"
-                    justifyContent="center"
-                    justify="center"
+                    justifyContent="space-evenly"
                     alignItems="center"
-                    align="center"
-                    id="dynamicClass"
                 >
-                    {data1.class.map((elem) => (
-                        <Grid item xs={5} mx={4} justifyContent="space-evenly" alignItems="center" key={data1.class.indexOf(elem)}>
-                            <br></br>
 
 
-                            <Card sx={{ display: 'flex', flexDirection: 'column', minWidth: 'calc(33%)', maxWidth: 500 }}>
+                    <br></br>
+                    <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ flexWrap: 'wrap' }}>
 
-                                <Link to="/instructorstudentsview">
-                                    <CardActionArea disableTouchRipple>
+                        {data1.class.map((elem) => (
+                            <Grid item margin={2} xs={8} md={6} lg={4} justifyContent="center" alignItems="center">
+                                <Card sx={{ minWidth: "265px", maxWidth: "auto", height: "235px" }}>
+                                    
+                                    <Link to="/instructorstudentsview">
                                         <CardHeader
                                             title={`Class ${elem.number}`}
                                             subheader={`Time: ${elem.time}`}
@@ -135,11 +133,10 @@ export default function InstructorSignIn() {
                                         <CardContent>
                                             <Typography>Enrollment: {elem.enrollment} </Typography>
                                             <Typography>Teams: {elem.teams} </Typography>
-                                            <br></br>
-
                                         </CardContent>
 
-                                        <CardActions justify="center" align="center">
+                                    </Link>
+                                        <CardActions >
                                             <IconButton aria-label="add-reaction">
                                                 <AddReactionIcon></AddReactionIcon>
                                             </IconButton>
@@ -149,25 +146,21 @@ export default function InstructorSignIn() {
                                             <IconButton aria-label="delete">
                                                 <DeleteIcon />
                                             </IconButton>
-
                                         </CardActions>
 
-                                    </CardActionArea>
-                                </Link>
-                            </Card>
+                                </Card>
 
-                            {/* TODO: conditional for last cell always being add class */}
-
+                            </Grid>
+                        ))}
+                        <Grid item margin={2} justifyContent="center" alignItems="center" xs={8} md={6} lg={4}>
+                            {addClassCard()}
                         </Grid>
-                    ))}
-                    {addClassCard()};
+                    </Grid>
                 </Grid>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
+
+
             </Grid>
-        </Grid >
+        </Grid>
 
     );
 
