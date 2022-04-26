@@ -6,13 +6,12 @@ import {Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer,
     Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem,
     ListItemText, Button, Modal, TextField, Select, OutlinedInput, MenuItem} from "@mui/material"
 
-import Checkbox from '@mui/material/Checkbox';
-import {Student} from "../models/Student";
 
 //import InboxIcon from '@mui/icons-material/MoveToInbox';
 //import MailIcon from '@mui/icons-material/Mail';
 
 import Skeleton from '@mui/material/Skeleton';
+import {Student} from "../models/Student";
 const drawerWidth = 120;
 
 //const tableWidth = 100%;
@@ -237,6 +236,7 @@ function InstructorStudentsView() {
         <Box sx={{ display: 'flex' }}>
 
 
+
             <CssBaseline />
 
             <AppBar
@@ -283,6 +283,7 @@ function InstructorStudentsView() {
                 </List>
 
             </Drawer>
+
             <Box
                 component="main"
                 sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
@@ -350,159 +351,6 @@ function InstructorStudentsView() {
     );
 }
 
-/*
 
-<Link to="/classeshome">
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign In
-                        </Button>
-                    </Link>
-
-
-<Box sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                    Enter Student Info
-                                </Typography>
-                                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                                </Typography>
-                            </Box>
-
-<Paper>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell></TableCell>
-                                <TableCell>First Name</TableCell>
-                                <TableCell>Last Name</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>Team</TableCell>
-                                <TableCell>Select</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {listItems}
-                        </TableBody>
-                    </Table>
-                </Paper>
-
-<TableRow>
-                                <TableCell><Skeleton variant="circular" width={40} height={40}/></TableCell>
-                                <TableCell>{'Josiah'}</TableCell>
-                                <TableCell>{'Castillo'}</TableCell>
-                                <TableCell>{'jcastillo@mailstuff.com'}</TableCell>
-                                <TableCell>{'team 1'}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell><Skeleton variant="circular" width={40} height={40}/></TableCell>
-                                <TableCell>{'Brandon'}</TableCell>
-                                <TableCell>{'Herman'}</TableCell>
-                                <TableCell>{'bherman@mailstuff.com'}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell><Skeleton variant="circular" width={40} height={40}/></TableCell>
-                                <TableCell>{'Grant'}</TableCell>
-                                <TableCell>{'Stoehr'}</TableCell>
-                                <TableCell>{'gstoehro@mailstuff.com'}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell><Skeleton variant="circular" width={40} height={40}/></TableCell>
-                                <TableCell>{'Ariyan'}</TableCell>
-                                <TableCell>{'----'}</TableCell>
-                                <TableCell>{'ariyan@mailstuff.com'}</TableCell>
-                            </TableRow>
-
-            <TableCell><Skeleton variant="circular" width={40} height={40}/></TableCell>
-            <TableCell>{student.username}</TableCell>
-            <TableCell>{student.first_name}</TableCell>
-            <TableCell>{student.last_name}</TableCell>
-            <TableCell>{student.email}</TableCell>
-            <TableCell>{student.team_id}</TableCell>
-
-            ============================================================================================================
-
-            <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-            >
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div">
-                        CS 3345
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                }}
-                variant="permanent"
-                anchor="left"
-            >
-                <Toolbar />
-                <Divider />
-                <List>
-                    {['Students', 'Teams', 'Assignments', 'Files'].map((text, index) => (
-                        <ListItem button key={text}>
-
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['Discussions', 'Messages', 'Zoom'].map((text, index) => (
-                        <ListItem button key={text}>
-
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-            <Box
-                component="main"
-                sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-            >
-                <Toolbar />
-
-                <Paper sx={{ width: 1}}>
-            <TableContainer sx={{ maxHeight: 475, overflow: 'auto'}}>
-                <Table stickyHeader stickyFooter aria-label="sticky table" >
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {newListItems}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Paper>
-
-
-
-            </Box>
-        </Box>
- */
 
 export default InstructorStudentsView;
