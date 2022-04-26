@@ -17,11 +17,12 @@ import TableDemo from '../components/createClassTable';
 import SignOutButton from '../components/signOutButton';
 import { Link } from "react-router-dom";
 import { left } from '@popperjs/core';
+import StudentGeneration from '../utils/studentgeneration';
 
 
 export default function InstructorSignIn() {
     const [open, setOpen] = React.useState(false);
-
+    StudentGeneration("brandon", "herman");
     const handleClickOpen = () => {
         console.log("setOpen boolean = " + open);
         setOpen(true);
@@ -47,20 +48,20 @@ export default function InstructorSignIn() {
 
     function addClassCard() {
         return (
-                <Card id="createClassCard" raised="false" elevation="0" sx={{maxWidth: 262, maxHeight: 239 }} >
+            <Card id="createClassCard" raised="false" elevation="0" sx={{ maxWidth: 262, maxHeight: 239 }} >
 
-                    <CardActionArea disableTouchRipple onClick={handleClickOpen}>
-                        <CardContent>
-                            <br></br>
-                            <Typography variant="h1" >
-                                +
-                            </Typography>
-                        </CardContent>
+                <CardActionArea disableTouchRipple onClick={handleClickOpen}>
+                    <CardContent>
+                        <br></br>
+                        <Typography variant="h1" >
+                            +
+                        </Typography>
+                    </CardContent>
 
-                    </CardActionArea>
+                </CardActionArea>
 
 
-                </Card >
+            </Card >
         );
     }
 
@@ -69,9 +70,24 @@ export default function InstructorSignIn() {
     return (
 
         <Grid container component="main" sx={{ height: '100vh' }}>
+            <Dialog open={open} onClose={handleClickClose} minWidth >
 
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <CssBaseline />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <CssBaseline />
+                <DialogTitle justify="center" align="center">Create Class</DialogTitle>
+                <Grid
+                    container
+                    direction="row"
+                    justify="space-evenly"
+                    align="center"
+                >
+                    <TableDemo />
+                </Grid>
+                <br></br>
+                <br></br>
+            </Dialog>
+
+
             <Grid
                 container
                 direction="column"
@@ -102,13 +118,14 @@ export default function InstructorSignIn() {
                 >
 
 
-                        <br></br>
-                    <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{flexWrap: 'wrap'}}>
+                    <br></br>
+                    <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ flexWrap: 'wrap' }}>
 
                         {data1.class.map((elem) => (
-                                <Grid item margin={2} xs={8} md={6} lg={4} justifyContent="center" alignItems="center">
-                            <Card sx={{minWidth: "265px", maxWidth:"auto", height: "235px"}}>
-                                <Link to="/instructorstudentsview">
+                            <Grid item margin={2} xs={8} md={6} lg={4} justifyContent="center" alignItems="center">
+                                <Card sx={{ minWidth: "265px", maxWidth: "auto", height: "235px" }}>
+                                    
+                                    <Link to="/instructorstudentsview">
                                         <CardHeader
                                             title={`Class ${elem.number}`}
                                             subheader={`Time: ${elem.time}`}
@@ -118,6 +135,7 @@ export default function InstructorSignIn() {
                                             <Typography>Teams: {elem.teams} </Typography>
                                         </CardContent>
 
+                                    </Link>
                                         <CardActions >
                                             <IconButton aria-label="add-reaction">
                                                 <AddReactionIcon></AddReactionIcon>
@@ -130,13 +148,12 @@ export default function InstructorSignIn() {
                                             </IconButton>
                                         </CardActions>
 
-                                </Link>
-                            </Card>
+                                </Card>
 
                             </Grid>
                         ))}
                         <Grid item margin={2} justifyContent="center" alignItems="center" xs={8} md={6} lg={4}>
-                        {addClassCard()}
+                            {addClassCard()}
                         </Grid>
                     </Grid>
                 </Grid>
@@ -144,102 +161,6 @@ export default function InstructorSignIn() {
 
             </Grid>
         </Grid>
-        // <Grid container component="main" sx={{ height: '100vh' }}>
-        //     <Dialog open={open} onClose={handleClickClose} minWidth >
-
-        //         <DialogTitle justify="center" align="center">Create Class</DialogTitle>
-        //         <Grid
-        //             container
-        //             direction="row"
-        //             justify="space-evenly"
-        //             align="center"
-        //         >
-        //             <TableDemo />
-        //         </Grid>
-        //         <br></br>
-        //         <br></br>
-        //     </Dialog>
-
-        //     <CssBaseline />
-
-        //     <Grid container xs={12} sm={12} md={12} component={Paper} elevation={6} square>
-        //         <Box
-        //             sx={{
-        //                 width: '100%',
-        //                 mx: 4,
-        //                 display: 'flex',
-        //                 alignItems: 'center',
-        //                 flexDirection: 'row',
-        //             }}
-        //         >
-        //             <img src="https://i.imgur.com/uMa2apF.png" alt="Guiql Logo" />
-        //             <br></br>
-        //             <Typography display="absolute" id="headerName" component="h1" variant="h5">
-        //                 My Classes
-        //             </Typography>
-        //             <SignOutButton></SignOutButton>
-        //         </Box>
-
-
-        //         <Grid
-        //             container
-        //             spacing={6}
-        //             direction="row"
-        //             justifyContent="center"
-        //             justify="center"
-        //             alignItems="center"
-        //             align="center"
-        //             id="dynamicClass"
-        //         >
-        //             {data1.class.map((elem) => (
-        //                 <Grid item xs={5} mx={4} justifyContent="space-evenly" alignItems="center" key={data1.class.indexOf(elem)}>
-        //                     <br></br>
-
-
-        //                     <Card sx={{ display: 'flex', flexDirection: 'column', minWidth: 'calc(33%)', maxWidth: 500 }}>
-
-        //                         <Link to="/instructorstudentsview">
-        //                             <CardActionArea disableTouchRipple>
-        //                                 <CardHeader
-        //                                     title={`Class ${elem.number}`}
-        //                                     subheader={`Time: ${elem.time}`}
-        //                                 />
-        //                                 <CardContent>
-        //                                     <Typography>Enrollment: {elem.enrollment} </Typography>
-        //                                     <Typography>Teams: {elem.teams} </Typography>
-        //                                     <br></br>
-
-        //                                 </CardContent>
-
-        //                                 <CardActions justify="center" align="center">
-        //                                     <IconButton aria-label="add-reaction">
-        //                                         <AddReactionIcon></AddReactionIcon>
-        //                                     </IconButton>
-        //                                     <IconButton aria-label="delete">
-        //                                         <GroupAddIcon />
-        //                                     </IconButton>
-        //                                     <IconButton aria-label="delete">
-        //                                         <DeleteIcon />
-        //                                     </IconButton>
-
-        //                                 </CardActions>
-
-        //                             </CardActionArea>
-        //                         </Link>
-        //                     </Card>
-
-        //                     {/* TODO: conditional for last cell always being add class */}
-
-        //                 </Grid>
-        //             ))}
-        //             {addClassCard()};
-        //         </Grid>
-        //         <br></br>
-        //         <br></br>
-        //         <br></br>
-        //         <br></br>
-        //     </Grid>
-        // </Grid >
 
     );
 
