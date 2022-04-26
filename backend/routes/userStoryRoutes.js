@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const User_story = require('../models/user_story');
 router.post('/createUserStory', async (req, res, next) => {
     try {
         const body = req.body;
@@ -8,7 +8,7 @@ router.post('/createUserStory', async (req, res, next) => {
         const result = await req.models.user_story.createUserStory(body.story_id, body.title, body.description);
         res.status(201).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
+        console.error('Failed to create new user story:', err);
         res.status(500).json({ message: err.toString() });
     }
 
@@ -17,40 +17,37 @@ router.post('/createUserStory', async (req, res, next) => {
 
 router.get('/searchUserStoryById', async (req, res, next) => {
     try {
-        const body = req.body;
-        console.log(body);
-        const result = await req.models.user_story.searchByID(body.story_id);
+        const story_id = req.params.story_id;
+        console.log(story_id);
+        const result = await User_story.searchByID(story_id);
         res.status(201).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
-        res.status(500).json({ message: err.toString() });
+        console.error('Failed to load current user story:', err);
+        res.sendStatus(500).json({ message: err.toString() });
     }
-
-    next();
-})
+});
 
 router.get('/searchUserStoryByTitle', async (req, res, next) => {
     try {
-        const body = req.body;
-        console.log(body);
-        const result = await req.models.user_story.searchByTitle(body.title);
+        const title = req.params.title;
+        console.log(title);
+        const result = await User_story.searchByTitle(title);
         res.status(201).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
-        res.status(500).json({ message: err.toString() });
+        console.error('Failed to load current user story:', err);
+        res.sendStatus(500).json({ message: err.toString() });
     }
-
-    next();
-})
+});
 
 router.put('/setUserStoryStatus', async (req, res, next) => {
     try {
-        const body = req.body;
-        console.log(body);
-        const result = await req.models.user_story.setStatus(body.story_id,body.stat);
-        res.status(201).json(result);
+        const story_id = req.params.story_id;
+        const stat = req.params.stat;
+        console.log(story_id, stat);
+        const result = await req.models.user_story.setStatus(story_id, stat);
+        res.status(200).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
+        console.error('Failed to update user story:', err);
         res.status(500).json({ message: err.toString() });
     }
 
@@ -59,26 +56,26 @@ router.put('/setUserStoryStatus', async (req, res, next) => {
 
 router.put('/setUserStoryAsFavorite', async (req, res, next) => {
     try {
-        const body = req.body;
-        console.log(body);
-        const result = await req.models.user_story.setAsFavorite(body.story_id);
-        res.status(201).json(result);
+        const story_id = req.params.story_id;
+        console.log(story_id);
+        const result = await req.models.user_story.setAsFavorite(story_id);
+        res.status(200).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
+        console.error('Failed to update user story:', err);
         res.status(500).json({ message: err.toString() });
     }
 
     next();
 })
 
-router.put('/unfavoriteUserStory', async (req, res, next) => {
+router.put('/unfavorite', async (req, res, next) => {
     try {
-        const body = req.body;
-        console.log(body);
-        const result = await req.models.user_story.unfavorite(body.story_id);
-        res.status(201).json(result);
+        const story_id = req.params.story_id;
+        console.log(story_id);
+        const result = await req.models.user_story.unfavorite(story_id);
+        res.status(200).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
+        console.error('Failed to update user story:', err);
         res.status(500).json({ message: err.toString() });
     }
 
@@ -87,12 +84,13 @@ router.put('/unfavoriteUserStory', async (req, res, next) => {
 
 router.put('/setUserStoryDescription', async (req, res, next) => {
     try {
-        const body = req.body;
-        console.log(body);
-        const result = await req.models.user_story.setDescription(body.story_id,body.desc);
-        res.status(201).json(result);
+        const story_id = req.params.story_id;
+        const descp = req.params.descp;
+        console.log(story_id, descp);
+        const result = await req.models.user_story.setDescription(story_id, descp);
+        res.status(200).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
+        console.error('Failed to update user story:', err);
         res.status(500).json({ message: err.toString() });
     }
 
@@ -100,12 +98,13 @@ router.put('/setUserStoryDescription', async (req, res, next) => {
 })
 router.put('/setUserStoryTitle', async (req, res, next) => {
     try {
-        const body = req.body;
-        console.log(body);
-        const result = await req.models.user_story.setTitle(body.story_id, body.title);
-        res.status(201).json(result);
+        const story_id = req.params.story_id;
+        const title = req.params.title;
+        console.log(story_id, title);
+        const result = await req.models.user_story.setDescription(story_id, title);
+        res.status(200).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
+        console.error('Failed to update user story:', err);
         res.status(500).json({ message: err.toString() });
     }
 
@@ -114,12 +113,12 @@ router.put('/setUserStoryTitle', async (req, res, next) => {
 
 router.delete('/removeUserStory', async (req, res, next) => {
     try {
-        const body = req.body;
-        console.log(body);
-        const result = await req.models.user_story.removeStory(body.story_id);
-        res.status(201).json(result);
+        const story_id = req.params.story_id;
+        console.log(story_id);
+        const result = await req.models.user_story.removeStory(story_id);
+        res.status(204).json(result);
     } catch (err) {
-        console.error('Failed to create new allocation:', err);
+        console.error('Failed to delete user story:', err);
         res.status(500).json({ message: err.toString() });
     }
 
