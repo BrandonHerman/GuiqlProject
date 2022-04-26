@@ -50,6 +50,12 @@ const getTeamName = async (team_id) => {
     return result;
 }
 
+const deleteTeam = async (team_id) => {
+    const query = await knex(TEAM_TABLE).where({team_id}).del();
+    const result = await query;
+    return result;
+}
+
 module.exports = {
     createTeam,
     searchByID,
@@ -57,5 +63,6 @@ module.exports = {
     setTeamSize,
     getTeamSize,
     setTeamName,
-    getTeamName
+    getTeamName,
+    deleteTeam
 }

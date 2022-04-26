@@ -43,6 +43,12 @@ const authenticate = async (username,password) => {
     }
 }
 
+const addBio = async (recruiter_id,rec_bio) => {
+    const query = await knex(RECRUITER_TABLE).where({recruiter_id}).update({bio: rec_bio});
+    const result = await query;
+    return result;
+}
+
 const deleteRecruiter = async (recruiter_id) => {
     const query = await knex(RECRUITER_TABLE).where({recruiter_id}).del();
     const result = await query;
@@ -51,5 +57,6 @@ const deleteRecruiter = async (recruiter_id) => {
 module.exports = {
     createRecruiter,
     authenticate,
+    addBio,
     deleteRecruiter
 }
