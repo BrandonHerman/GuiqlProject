@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Professor = require('../models/professor');
-const app = express();
-const cors = require('cors');
 
-app.use(cors({
-    origin: 'http://localhost:3000/'
-}));
+
 
 
 router.post('/createProfessor', async (req, res, next) => {
