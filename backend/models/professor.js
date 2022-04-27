@@ -62,6 +62,12 @@ const searchByEmail = async (email) => {
     return result;
 }
 
+searchByCollge = async (college_id) => {
+    const query = await knex(PROFESSOR_TABLE).where({college_id});
+    const result = await query;
+    return result;
+}
+
 const getProfessorName = async (prof_id) => {
     const query = await knex(PROFESSOR_TABLE).select('first_name','last_name').where({prof_id});
     const result = await query;
