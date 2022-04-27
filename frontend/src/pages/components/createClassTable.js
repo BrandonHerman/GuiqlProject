@@ -11,20 +11,20 @@ import Alert from "@material-ui/lab/Alert";
 import './createClassTable.css';
 
 
-  
+
 function createClassTableComponent() {
-  
+
     // Defining a state named rows
     // which we can update by calling on setRows function
     const [rows, setRows] = useState([
-        { firstname: "John", lastname:"Smith", email: "example@student.edu", class:"GUI" }
+        { firstname: "John", lastname: "Smith", email: "example@student.edu", class: "GUI" }
     ]);
-  
+
     // Initial states
     const [open, setOpen] = React.useState(false);
     const [isEdit, setEdit] = React.useState(false);
     const [disable, setDisable] = React.useState(true);
-  
+
     // Function For closing the alert snackbar
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
@@ -32,7 +32,7 @@ function createClassTableComponent() {
         }
         setOpen(false);
     };
-  
+
     // Function For adding new row object
     const handleAdd = () => {
         setRows([
@@ -44,16 +44,16 @@ function createClassTableComponent() {
         ]);
         setEdit(true);
     };
-  
+
     // Function to handle save
     const handleSave = () => {
         setEdit(!isEdit);
         setRows(rows);
         console.log("saved : ", rows);
         setDisable(true);
-        setOpen(true); 
+        setOpen(true);
     };
-  
+
     // The handleInputChange handler can be set up to handle
     // many different inputs in the form, listen for changes 
     // to input elements and record their values in state
@@ -64,11 +64,11 @@ function createClassTableComponent() {
         list[index][name] = value;
         setRows(list);
     };
-  
 
 
-  
-  return (
+
+
+    return (
     <TableBody>
       <Snackbar
         open={open}
@@ -81,7 +81,7 @@ function createClassTableComponent() {
         </Alert>
       </Snackbar>
       <Box margin={2}>
-        <div style={{ display: "", justifyContent: "center" }}>
+        <div style={{ display: "", justifyContent: "space-evenly" }}>
           <div>
             {isEdit ? (
               <div>
@@ -187,8 +187,8 @@ function createClassTableComponent() {
         <Button textAlign="center">Submit</Button>
       )}
       </div> 
-    </TableBody>
+    </TableBody >
   );
 }
-  
+
 export default createClassTableComponent;
