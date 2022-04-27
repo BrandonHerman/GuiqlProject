@@ -17,7 +17,7 @@ export default function RecruiterHomeView() {
         first_name: 'John', last_name: 'Lawrimore', email: 'jLawrimore@smu.edu', class: 'GUI'
     }]);
 
-    const [students, setStuents] = React.useState([{
+    const [students, setStudents] = React.useState([{
         first_name: 'Jane', last_name: 'Doe', email: 'JDoe@smu.edu', class: 'DB'
     }]);
 
