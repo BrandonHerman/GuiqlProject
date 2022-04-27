@@ -49,14 +49,29 @@ const addBio = async (recruiter_id,rec_bio) => {
     return result;
 }
 
+const getBioByID = async (recruiter_id) => {
+    const query = await knex(RECRUITER_TABLE).select(bio).where({recruiter_id});
+    const result = await query;
+    return result;
+}
+
+const getBioByCollge = async (college_id) => {
+    const query = await knex(RECRUITER_TABLE).select(bio).where({college_id});
+    const result = await query;
+    return result;
+}
+
 const deleteRecruiter = async (recruiter_id) => {
     const query = await knex(RECRUITER_TABLE).where({recruiter_id}).del();
     const result = await query;
     return result;
 }
+
 module.exports = {
     createRecruiter,
     authenticate,
     addBio,
+    getBioByID,
+    getBioByCollge,
     deleteRecruiter
 }
