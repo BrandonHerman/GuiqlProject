@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Professor = require('../models/professor');
+const app = express();
+const cors = require('cors');
+
+app.use(cors({
+    origin: 'http://localhost:3000/'
+}));
+
 
 router.post('/createProfessor', async (req, res, next) => {
     try {
@@ -31,7 +38,7 @@ router.get('/authenticateProfessor', async (req, res, next) => {
 
 router.get('/searchProfessorByID', async (req, res, next) => {
     try {
-        const prof_id= req.params.prof_id;
+        const prof_id= req.query.prof_id;
         console.log(prof_id);
         const result = await Professor.searchByID(prof_id);
         res.status(201).json(result);
