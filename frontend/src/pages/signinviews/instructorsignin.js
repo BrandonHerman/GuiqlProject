@@ -7,20 +7,44 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import './instructorsignin.css'
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-
+import InstructorProfile from '../utils/instructorProfile';
 
 export default function InstructorSignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    handleEmail(data.get('email'));
+    handlePassword(data.get('password'));
     console.log({
       email: data.get('email'),
-      password: data.get('password'),
+      password: data.get('password') 
     });
+    InstructorProfile.setEmail(data.get('email'));
+    InstructorProfile.setPassword(data.get('password'));
+    navigate('/classeshome');
   };
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [redirect, setRedirect] = React.useState(false);
+  const handleEmail = (Email) => setEmail(Email);
+  const handlePassword = (password) => setPassword(password);
+  let navigate = useNavigate();
+  // const onClickNavigate = (event) => {
+  //     // <Navigate to='/classeshome' state={{ email: email, password: password }} />
+  //     event.preventDefalut();
+  //     const data = new FormData(event.curentTarget);
+  //     handleEmail(data.get('email'));
+  //     handlePassword(data.get('password'));
+  //     console.log(email+password);
+  //     setRedirect(true);
+  //     navigate('/classeshome');
+  // }
+
+
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -56,7 +80,7 @@ export default function InstructorSignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address or Username"
+              label="Email Address"
               name="email"
               autoComplete="email"
               autoFocus
@@ -76,16 +100,19 @@ export default function InstructorSignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link to="/classeshome">
+            
+            {redirect && <Navigate to={{
+              pathname: '/classeshome',
+              state: {email: email, password: password}}}/>}
               <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-            </Link>
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }
+              }
+            >
+              Sign In
+            </Button>
 
             <Grid container>
               <Grid item xs>

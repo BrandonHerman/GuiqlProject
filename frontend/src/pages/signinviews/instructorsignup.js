@@ -29,7 +29,7 @@ export default function InstructorSignUp() {
       lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
-      passwordConfirm: data.get('passwordConfirm'),
+      // passwordConfirm: data.get('passwordConfirm'),
       university: data.get('university')
 
     });
@@ -108,7 +108,7 @@ export default function InstructorSignUp() {
               id="password"
             />
             {/* password confirm will need some sort of check that password==passwordCheck */}
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
@@ -116,7 +116,7 @@ export default function InstructorSignUp() {
               type="password"
               label="Confirm Password"
               id="passwordConfirm"
-            />
+            /> */}
             {/* planning on this to be typable dropdown box, with preloaded JSON of universities to select */}
             {/* the p is for weird spacing with <br>, <p>'s new line works */}
             <p></p>
