@@ -225,17 +225,9 @@ function InstructorStudentsView() {
 
             );
 
-
-
-
-
     return (
 
-
-
         <Box sx={{ display: 'flex' }}>
-
-
 
             <CssBaseline />
 
@@ -268,7 +260,7 @@ function InstructorStudentsView() {
 
                 <List>
                     <ListItem>
-                        <Link to="/instructorsignin">
+                        <Link to="/classeshome">
                             <img src="https://i.imgur.com/AxiNrn4.png" alt="Guiql Logo" width={40} height={40}/>
                         </Link>
 

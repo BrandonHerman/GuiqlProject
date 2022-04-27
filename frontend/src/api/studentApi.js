@@ -10,7 +10,7 @@ import { hostname } from './repositoryConfig';
 export const deleteUserStoryById = (userStoryId) => new Promise((resolve, reject) => {
     var params = new URLSearchParams();
     params.append("story_id", userStoryId);
-    params.append()
+    params.append();
         var request = {
             params: params
         };
@@ -34,6 +34,12 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
             params: params
         };
     axios.post(`${hostname}/createUserStory`, request, apiConfig)
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
   
 // I need to get the students based on their university
 export const getStudentByUniversity = (university) => new Promise((resolve, reject) => {
@@ -54,6 +60,12 @@ export const getUserStoriesById = (teamId) => new Promise((resolve, reject) => {
             params: params
         };
     axios.get(`${hostname}/getUserStoriesById/${teamId}`, apiConfig)
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
   
 // Create a new student given class_id, first_name, last_name, and email
 export const createStudent = (class_id, first_name, last_name, email) => new Promise((resolve, reject) => {
@@ -73,6 +85,12 @@ export const updateUserStoryById = (userStoryId, status) => new Promise((resolve
         params: params
     };
     axios.put(`${hostname}/${userStoryId}`, request, apiConfig)
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
   
 // Get all the students in a class given class_id
 export const getStudents = (class_id) => new Promise((resolve, reject) => {
