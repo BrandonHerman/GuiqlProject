@@ -5,6 +5,17 @@ import { hostname } from './repositoryConfig';
 
 // Create a new Recruiter using their first_name, last_name, username, and password
 export const createRecruiter = async (recruiter_id, first_name, last_name, username, password) => {
+    var params = new URLSearchParams();
+    params.append("recruiter_id", recruiter_id);
+    params.append("first_name", first_name);
+    params.append("last_name", last_name);
+    params.append("username", username);
+    params.append("password", password);
+    params.append()
+        var request = {
+            params: params
+        };
+
     try {
         const result = await axios.post(`http://${hostname}:8000/createRecruiter`, { recruiter_id, first_name, last_name, username, password });
         return result.data;
@@ -17,7 +28,13 @@ export const createRecruiter = async (recruiter_id, first_name, last_name, usern
 
 // Get the Recruiter's bio based on their id
 export const getRecruiterBioById = (recruiterId) => new Promise((resolve, reject) => {
-    axios.get(`${hostname}/${recruiterId}`, apiConfig)
+    var params = new URLSearchParams();
+    params.append("recruiter", teamId);
+    params.append()
+        var request = {
+            params: params
+        };
+    axios.get(`${hostname}/getRecruiterBioByID/${recruiterId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -26,6 +43,7 @@ export const getRecruiterBioById = (recruiterId) => new Promise((resolve, reject
 });
 
 
+<<<<<<< Updated upstream
 // // I need to get the Recruiter's bio based on their university
 // export const getRecruiterBioByUniversity = (university) => new Promise((resolve, reject) => {
 //     axios.get(`${hostname}/${university}`, apiConfig)
@@ -35,6 +53,17 @@ export const getRecruiterBioById = (recruiterId) => new Promise((resolve, reject
 //             reject(x);
 //         });
 // });
+=======
+// I need to get the Recruiter's bio based on their university
+export const getRecruiterBioByUniversity = (university) => new Promise((resolve, reject) => {
+    axios.get(`${hostname}/getRecruiterBioByUniversity/${university}`, apiConfig)
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+>>>>>>> Stashed changes
 
 
 // // I need to get the professors based on their university
@@ -47,6 +76,15 @@ export const getRecruiterBioById = (recruiterId) => new Promise((resolve, reject
 //         });
 // });
 
+<<<<<<< Updated upstream
+=======
+    axios.post(`${hostname}/${request}/addRecruiterBio`, apiConfig)
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+>>>>>>> Stashed changes
 
 // // I need to get the students based on their university
 // export const getStudentByUniversity = (university) => new Promise((resolve, reject) => {

@@ -7,7 +7,17 @@ import { hostname } from './repositoryConfig';
 
 // Delete a User Story given its id
 export const deleteUserStoryById = (userStoryId) => new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     axios.delete(`${hostname}/removeUserStory${userStoryId}`, apiConfig)
+=======
+    var params = new URLSearchParams();
+    params.append("story_id", userStoryId);
+    params.append()
+        var request = {
+            params: params
+        };
+    axios.delete(`${hostname}/removeUserStory/${userStoryId}`, apiConfig)
+>>>>>>> Stashed changes
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -26,7 +36,11 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
         var request = {
             params: params
         };
+<<<<<<< Updated upstream
     axios.post(`${userStoriesBaseURL}`, request, apiConfig)
+=======
+    axios.post(`${hostname}/createUserStory`, request, apiConfig)
+>>>>>>> Stashed changes
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -36,8 +50,19 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
 
 
 // Get all User Stories for a team given team_id
+<<<<<<< Updated upstream
 export const getUserStoiesById = (teamId) => new Promise((resolve, reject) => {
     axios.get(`${userStoriesBaseURL}/${teamId}`, apiConfig)
+=======
+export const getUserStoriesById = (teamId) => new Promise((resolve, reject) => {
+    var params = new URLSearchParams();
+    params.append("team_id", teamId);
+    params.append()
+        var request = {
+            params: params
+        };
+    axios.get(`${hostname}/getUserStoriesById/${teamId}`, apiConfig)
+>>>>>>> Stashed changes
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -53,7 +78,11 @@ export const updateUserStoryById = (userStoryId, status) => new Promise((resolve
     var request = {
         params: params
     };
+<<<<<<< Updated upstream
     axios.put(`${userStoriesBaseURL}/${userStoryId}`, request, apiConfig)
+=======
+    axios.put(`${hostname}/${userStoryId}`, request, apiConfig)
+>>>>>>> Stashed changes
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -68,7 +97,11 @@ export const updateUserStoryById = (userStoryId, status) => new Promise((resolve
 
 // Get all Meetings for a team given team_id
 export const getMeetingsByTeamId = (teamId) => new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     axios.get(`${meetingBaseURL}/${teamId}`, apiConfig)
+=======
+    axios.get(`${hostname}/${teamId}`, apiConfig)
+>>>>>>> Stashed changes
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
