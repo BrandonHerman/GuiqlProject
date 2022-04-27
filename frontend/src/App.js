@@ -7,6 +7,7 @@ import {Theme, ThemeProvider} from '@material-ui/core/styles/'
 import { Link } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme.js'
+import apiTest from './pages/apiTest';
 
 // React functional component
 function App() {
@@ -79,7 +80,7 @@ function App() {
     // {/* add gui theme to all child components */}
       // <CssBaseline/>
       <div className="App">
-        <StudentSignIn></StudentSignIn>
+        <apiTest></apiTest>
       </div>
     // </ThemeProvider>
   );
