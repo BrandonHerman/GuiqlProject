@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { hostname } from './repositoryConfig';
 
 //make sure to get the proper apiEndpoint and Key as well as proper apiConfig
 //const profBaseURL = 'https://api.guiql.com/professor';
@@ -13,7 +14,7 @@ import axios from 'axios';
 //const stuBaseURL = 'https://api.guiql.com/student';
 
 
-
+const hostName = 'team1dockercompose.ch1rnpkjnswq.us-east-1.rds.amazonaws.com';
 
 //CREATE CLASS PAGE CALLS
 
