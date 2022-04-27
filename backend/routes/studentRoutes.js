@@ -14,7 +14,7 @@ router.post('/createStudent', async (req, res, next) => {
     }
 
     next();
-})
+});
 
 
 router.get('/authenticateStudent', async (req, res, next) => {

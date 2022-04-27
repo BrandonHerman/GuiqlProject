@@ -16,8 +16,6 @@ const drawerWidth = 120;
 
 //const tableWidth = 100%;
 
-
-
 function InstructorStudentsView() {
     const group_count = 8;
     const teamsArray = [];
