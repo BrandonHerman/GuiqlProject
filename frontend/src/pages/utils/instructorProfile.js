@@ -3,6 +3,7 @@ var InstructorProfile = (function () {
     var lastName = "";
     var email = "";
     var password = "";
+    var username = "";
 
     var profID = "";
     var getEmail = function () {
@@ -12,6 +13,15 @@ var InstructorProfile = (function () {
         email = mail;
         console.log("set email to:");
         console.log(email);
+    }
+
+    var getUsername = function() {
+        return username;
+    }
+    var setUsername = function(name) {
+        username = name;
+        console.log("set username to:");
+        console.log(username);
     }
     //pulled from database in login function, set here
     var getName = function () {
@@ -46,6 +56,8 @@ var InstructorProfile = (function () {
         setPassword: setPassword,
         getID: getID,
         setID: setID,
+        getUsername: getUsername,
+        setUsername: setUsername
     }
 })();
 

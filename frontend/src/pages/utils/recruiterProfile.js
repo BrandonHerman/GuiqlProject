@@ -3,6 +3,7 @@ var RecruiterProfile = (function () {
     var lastName = "";
     var email = "";
     var password = "";
+    var username = "";
 
     var getEmail = function () {
         return email;
@@ -13,6 +14,14 @@ var RecruiterProfile = (function () {
         console.log(email);
     }
     //pulled from database in login function, set here
+    var getUsername = function() {
+        return username;
+    }
+    var setUsername = function(name) {
+        username = name;
+        console.log("set username to:");
+        console.log(username);
+    }
     var getName = function () {
         return firstName, lastName;
     }
@@ -45,6 +54,8 @@ var RecruiterProfile = (function () {
         setPassword: setPassword,
         getID: getID,
         setID: setID,
+        getUsername: getUsername,
+        setUsername: setUsername
     }
 })();
 
