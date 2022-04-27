@@ -26,9 +26,9 @@ export default function RecruiterSignUp() {
     console.log({
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
-      passwordConfirm: data.get('passwordConfirm'),
+      // passwordConfirm: data.get('passwordConfirm'),
       university: data.get('university')
 
     });
@@ -91,10 +91,10 @@ export default function RecruiterSignUp() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
             />
             <TextField
               margin="normal"
@@ -106,7 +106,7 @@ export default function RecruiterSignUp() {
               id="password"
             />
             {/* password confirm will need some sort of check that password==passwordCheck */}
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
@@ -114,7 +114,7 @@ export default function RecruiterSignUp() {
               type="password"
               label="Confirm Password"
               id="passwordConfirm"
-            />
+            /> */}
             {/* planning on this to be typable dropdown box, with preloaded JSON of universities to select */}
             {/* the p is for weird spacing with <br>, <p>'s new line works */}
             <p></p>

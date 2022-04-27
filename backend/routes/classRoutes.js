@@ -18,8 +18,9 @@ router.post('/createClass', async (req, res, next) => {
 
 router.get('/searchClassByID', async (req, res, next) => {
     try {
+        // console.log("Params in class: ", req.q)
         const class_id = req.params.class_id;
-        console.log(class_id);
+        // console.log("Classid in searchClassbyId: ", {class_id});
         const result = await Class.searchByID(class_id);
         res.status(201).json(result);
     } catch (err) {

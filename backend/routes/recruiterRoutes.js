@@ -28,6 +28,21 @@ router.get('/authenticateRecruiter', async (req, res, next) => {
     }
 })
 
+router.put('/addRecruiterBio', async (req, res, next) => {
+    try {
+
+        const recruiter_id = req.params.recruiter_id;
+        const rec_bio = req.params.rec_bio;
+        //console.log(team_id, name);
+        const result = await req.models.recruiter.addBio(recruiter_id,rec_bio);
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Failed to update team:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+
+    next();
+});
 router.delete('/deleteRecruiter', async (req, res, next) => {
     try {
         const recruiter_id = req.params.recruiter_id;
@@ -39,7 +54,7 @@ router.delete('/deleteRecruiter', async (req, res, next) => {
         res.status(500).json({ message: err.toString() });
     }
 
-    next();
+    next(); 
 })
 
 module.exports = router;

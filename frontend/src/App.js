@@ -7,7 +7,6 @@ import {Theme, ThemeProvider} from '@material-ui/core/styles/'
 import { Link } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme.js'
-
 // React functional component
 function App() {
   // state for storage of the information on the webpage of forms and list, uses hooks
@@ -15,11 +14,11 @@ function App() {
   const [values, setValues] = useState([])
 
   // ENTER YOUR EC2 PUBLIC IP/URL HERE
-  const ec2_url = ''
+  const ec2_url = 'team1dockercompose.ch1rnpkjnswq.us-east-1.rds.amazonaws.com';
   // CHANGE THIS TO TRUE IF HOSTING ON EC2, MAKE SURE TO ADD IP/URL ABOVE
-  const ec2 = false;
+  const ec2 = true;
   // USE localhost OR ec2_url ACCORDING TO ENVIRONMENT
-  const url = ec2 ? ec2_url : 'localhost'
+  const url = ec2 ? ec2_url : 'ec2_url';
 
   // handle input field state change
   const handleChange = (e) => {
@@ -34,7 +33,7 @@ function App() {
 
   // fetches vals of db via GET request
   const fetchVals = () => {
-    axios.get(`http://${url}:8000/values`).then(
+    axios.get(`http://${url}:8000/`).then(
       res => {
         const values = res.data.data;
         console.log(values);
@@ -56,7 +55,6 @@ function App() {
     });;
     setNumber("");
   }
-
   // handle intialization and setup of database table, can reinitialize to wipe db
   const reset = () => {
     axios.post(`http://${url}:8000/reset`).then(res => {
@@ -66,6 +64,7 @@ function App() {
       console.log(err)
     });;
   }
+
 
   // tell app to fetch values from db on first load (if initialized)
   // the comment below silences an error that doesn't matter.=
