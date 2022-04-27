@@ -6,7 +6,7 @@ router.post('/createProfessor', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.professor.createProfessor(body.professor_id, body.first_name, body.last_name, body.username, body.password);
+        const result = await req.models.professor.createProfessor(body.prof_id, body.first_name, body.last_name, body.username, body.password);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new professor:', err);
@@ -31,9 +31,9 @@ router.get('/authenticateProfessor', async (req, res, next) => {
 
 router.get('/searchProfessorByID', async (req, res, next) => {
     try {
-        const professor_id = req.params.professor_id;
-        console.log(professor_id);
-        const result = await Professor.searchByID(professor_id);
+        const prof_id= req.params.prof_id;
+        console.log(prof_id);
+        const result = await Professor.searchByID(prof_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current professor:', err);
@@ -67,9 +67,9 @@ router.get('/searchProfessorByEmail', async (req, res, next) => {
 
 router.get('/getProfessorName', async (req, res, next) => {
     try {
-        const professor_id = req.params.professor_id;
-        console.log(professor_id);
-        const result = await Professor.getProfessorNamel(professor_id);
+        const prof_id = req.params.prof_id;
+        console.log(prof_id);
+        const result = await Professor.getProfessorNamel(prof_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current professor:', err);
@@ -80,9 +80,9 @@ router.get('/getProfessorName', async (req, res, next) => {
 
 router.delete('/removeProfessor', async (req, res, next) => {
     try {
-        const professor_id = req.params.professor_id;
-        console.log(professor_id);
-        const result = await req.models.professor.removeProfessor(professor_id);
+        const prof_id = req.params.prof_id;
+        console.log(prof_id);
+        const result = await req.models.professor.removeProfessor(prof_id);
         res.status(204).json(result);
     } catch (err) {
         console.error('Failed to delete professor:', err);

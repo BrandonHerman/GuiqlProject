@@ -6,7 +6,7 @@ const createCollege = async (college_id,name) => {
     //check if college already exists
     const id = await searchByID(college_id);
 
-    if(id) {
+    if(college_id) {
         return "College already exists";
     } else {
         const query = await knex(COLLEGE_TABLE).insert({college_id,name});
