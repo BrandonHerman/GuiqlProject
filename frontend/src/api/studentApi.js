@@ -3,13 +3,11 @@ import { hostname } from './repositoryConfig';
 
 
 
+
 //USER STORY ROUTES
 
 // Delete a User Story given its id
 export const deleteUserStoryById = (userStoryId) => new Promise((resolve, reject) => {
-<<<<<<< Updated upstream
-    axios.delete(`${hostname}/removeUserStory${userStoryId}`, apiConfig)
-=======
     var params = new URLSearchParams();
     params.append("story_id", userStoryId);
     params.append()
@@ -17,7 +15,6 @@ export const deleteUserStoryById = (userStoryId) => new Promise((resolve, reject
             params: params
         };
     axios.delete(`${hostname}/removeUserStory/${userStoryId}`, apiConfig)
->>>>>>> Stashed changes
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -36,11 +33,11 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
         var request = {
             params: params
         };
-<<<<<<< Updated upstream
-    axios.post(`${userStoriesBaseURL}`, request, apiConfig)
-=======
     axios.post(`${hostname}/createUserStory`, request, apiConfig)
->>>>>>> Stashed changes
+  
+// I need to get the students based on their university
+export const getStudentByUniversity = (university) => new Promise((resolve, reject) => {
+    axios.get(`${hostname}/${university}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -48,12 +45,7 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
         });
 });
 
-
 // Get all User Stories for a team given team_id
-<<<<<<< Updated upstream
-export const getUserStoiesById = (teamId) => new Promise((resolve, reject) => {
-    axios.get(`${userStoriesBaseURL}/${teamId}`, apiConfig)
-=======
 export const getUserStoriesById = (teamId) => new Promise((resolve, reject) => {
     var params = new URLSearchParams();
     params.append("team_id", teamId);
@@ -62,14 +54,16 @@ export const getUserStoriesById = (teamId) => new Promise((resolve, reject) => {
             params: params
         };
     axios.get(`${hostname}/getUserStoriesById/${teamId}`, apiConfig)
->>>>>>> Stashed changes
+  
+// Create a new student given class_id, first_name, last_name, and email
+export const createStudent = (class_id, first_name, last_name, email) => new Promise((resolve, reject) => {
+    axios.post(`${hostname}/create`, {class_id, first_name, last_name, email}, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
             reject(x);
         });
 });
-
 
 // Update a User Story given userStoryId and status
 export const updateUserStoryById = (userStoryId, status) => new Promise((resolve, reject) => {
@@ -78,11 +72,11 @@ export const updateUserStoryById = (userStoryId, status) => new Promise((resolve
     var request = {
         params: params
     };
-<<<<<<< Updated upstream
-    axios.put(`${userStoriesBaseURL}/${userStoryId}`, request, apiConfig)
-=======
     axios.put(`${hostname}/${userStoryId}`, request, apiConfig)
->>>>>>> Stashed changes
+  
+// Get all the students in a class given class_id
+export const getStudents = (class_id) => new Promise((resolve, reject) => {
+    axios.get(`${hostname}/${class_id}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -97,11 +91,7 @@ export const updateUserStoryById = (userStoryId, status) => new Promise((resolve
 
 // Get all Meetings for a team given team_id
 export const getMeetingsByTeamId = (teamId) => new Promise((resolve, reject) => {
-<<<<<<< Updated upstream
-    axios.get(`${meetingBaseURL}/${teamId}`, apiConfig)
-=======
     axios.get(`${hostname}/${teamId}`, apiConfig)
->>>>>>> Stashed changes
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
