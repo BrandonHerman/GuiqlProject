@@ -3,7 +3,7 @@ const knex = require('../database/knex');
 const STORY_TABLE = 'User_story';
 
 const createUserStory = async (story_id,title,description) => {
-    //check if team already exists
+    //check if story already exists
     const id = await searchByID(team_id);
 
     if(id) {
