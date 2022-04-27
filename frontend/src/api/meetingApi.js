@@ -5,7 +5,7 @@ import { hostname } from './repositoryConfig';
 
 // Get all Meetings for a team given team_id
 export const getMeetingsByTeamId = (teamId) => new Promise((resolve, reject) => {
-    axios.get(`${meetingBaseURL}/${teamId}`, apiConfig)
+    axios.get(`${hostname}/${teamId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -21,7 +21,7 @@ export const addMeeting = (date, place) => new Promise((resolve, reject) => {
     var request = {
         params: params
     };
-    axios.post(`${meetingBaseURL}`, request, apiConfig)
+    axios.post(`${hostname}`, request, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -31,7 +31,7 @@ export const addMeeting = (date, place) => new Promise((resolve, reject) => {
 
 // Delete a Meeting given its id
 export const deleteMeetingById = (meetingId) => new Promise((resolve, reject) => {
-    axios.delete(`${meetingBaseURL}/${meetingId}`, apiConfig)
+    axios.delete(`${hostname}/${meetingId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -46,7 +46,7 @@ export const updateMeetingById = (meetingId, status) => new Promise((resolve, re
     var request = {
         params: params
     };
-    axios.put(`${meetingBaseURL}/${meetingId}`, request, apiConfig)
+    axios.put(`${hostname}/${meetingId}`, request, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

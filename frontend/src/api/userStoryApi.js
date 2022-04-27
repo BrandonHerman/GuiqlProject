@@ -24,7 +24,7 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
         var request = {
             params: params
         };
-    axios.post(`${userStoriesBaseURL}`, request, apiConfig)
+    axios.post(`${hostname}`, request, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -35,7 +35,7 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
 
 // Get all User Stories for a team given team_id
 export const getUserStoiesById = (teamId) => new Promise((resolve, reject) => {
-    axios.get(`${userStoriesBaseURL}/${teamId}`, apiConfig)
+    axios.get(`${hostname}/${teamId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -51,7 +51,7 @@ export const updateUserStoryById = (userStoryId, status) => new Promise((resolve
     var request = {
         params: params
     };
-    axios.put(`${userStoriesBaseURL}/${userStoryId}`, request, apiConfig)
+    axios.put(`${hostname}/${userStoryId}`, request, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

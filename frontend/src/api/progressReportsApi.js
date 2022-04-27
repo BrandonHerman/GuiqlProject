@@ -5,7 +5,7 @@ import { hostname } from './repositoryConfig';
 
 // Get progress reports based on a team_id
 export const getProgressReportsByTeamId = (teamId) => new Promise((resolve, reject) => {
-    axios.get(`${progressReportBaseURL}/${teamId}`, apiConfig)
+    axios.get(`${hostname}/${teamId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -21,7 +21,7 @@ export const createProgressReport = (teamId, progressReport) => new Promise((res
     var request = {
         params: params
     };
-    axios.post(`${progressReportBaseURL}`, request, apiConfig)
+    axios.post(`${hostname}`, request, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -31,7 +31,7 @@ export const createProgressReport = (teamId, progressReport) => new Promise((res
 
 // Delete progress reports based on progress_report_id
 export const deleteProgressReportById = (progressReportId) => new Promise((resolve, reject) => {
-    axios.delete(`${progressReportBaseURL}/${progressReportId}`, apiConfig)
+    axios.delete(`${hostname}/${progressReportId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

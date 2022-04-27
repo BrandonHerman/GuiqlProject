@@ -8,7 +8,7 @@ export const createClass = (class_name, class_day, class_time, students, prof_id
     //CREATES THE CLASS
     size = students.length;
     group_count = Math.ceil(size / 4);
-    axios.post(`${classBaseURL}/create`, {class_name, class_day, class_time, size, group_count, prof_id}, apiConfig)
+    axios.post(`${hostname}/create`, {class_name, class_day, class_time, size, group_count, prof_id}, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -36,7 +36,7 @@ export const createClass = (class_name, class_day, class_time, students, prof_id
             params: params
         };
     
-        axios.post(`${stuBaseURL}/${request}`, apiConfig)
+        axios.post(`${hostname}/${request}`, apiConfig)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);
@@ -56,7 +56,7 @@ export const createClass = (class_name, class_day, class_time, students, prof_id
 
 // Get the group count given instructor id and class id
 export const getGroupCount = (instructor_id, class_id) => new Promise((resolve, reject) => {
-    axios.get(`${classBaseURL}/${instructor_id}/${class_id}`, apiConfig)
+    axios.get(`${hostname}/${instructor_id}/${class_id}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
