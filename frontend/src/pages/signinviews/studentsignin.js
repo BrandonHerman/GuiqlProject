@@ -18,7 +18,7 @@ export default function StudentSignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
     });
   };
@@ -56,10 +56,10 @@ export default function StudentSignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address or Username"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -95,8 +95,11 @@ export default function StudentSignIn() {
                 </Tooltip>
               </Grid>
             </Grid>
-            <br></br>
-            <br></br>
+            <Link to="/recruitersignin">
+              <h3>
+                Recruiter Sign In
+              </h3>
+            </Link>
             <Typography component="h1" variant="h5">
               Instructors
             </Typography>

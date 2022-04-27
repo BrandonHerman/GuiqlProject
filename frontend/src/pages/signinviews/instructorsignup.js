@@ -10,7 +10,8 @@ import './instructorsignup.css'
 import { Link } from "react-router-dom";
 import { Autocomplete, InputLabel } from '@mui/material';
 import unis from '../assets/universities.js';
-
+import { Repository } from '../../api/repository';
+import { useEffect } from 'react';
 // parse university list for sign in
 // remove state from name
 var universitiesPreSlice = unis.split(/\r\n|\r|\n/);
@@ -19,17 +20,37 @@ universitiesPreSlice.map((university) => {
   universitiesArray.push(university.slice(0, -4));
 })
 
+  var repository = new Repository();
+
+  repository.searchProf(12);   
 
 export default function InstructorSignUp() {
+  var professor = {
+    id: 0,
+    first_name: '',
+    last_name: '',
+    username: '',
+    password: ''
+  }
+
+
   const handleSubmit = (event) => {
+    professor = {
+      id: 0,
+      first_name: data.get('firstName'),
+      last_name: data.get('lastName'),
+      username: data.get('email'),
+      password: data.get('password')
+    }
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    repository.createProfessor(professor);
     console.log({
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
-      passwordConfirm: data.get('passwordConfirm'),
+      // passwordConfirm: data.get('passwordConfirm'),
       university: data.get('university')
 
     });
@@ -108,7 +129,7 @@ export default function InstructorSignUp() {
               id="password"
             />
             {/* password confirm will need some sort of check that password==passwordCheck */}
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
@@ -116,7 +137,7 @@ export default function InstructorSignUp() {
               type="password"
               label="Confirm Password"
               id="passwordConfirm"
-            />
+            /> */}
             {/* planning on this to be typable dropdown box, with preloaded JSON of universities to select */}
             {/* the p is for weird spacing with <br>, <p>'s new line works */}
             <p></p>
