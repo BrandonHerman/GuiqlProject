@@ -19,12 +19,16 @@ const meetingRoutes = require('./routes/meetingRoutes');
 //define express app instance
 const app = express();
 const port = 8000;
-
+const cors = require('cors');
 //start middleware chain
 const { createModelsMiddleware } = require('./middleware/model-middleware');
 
 app.use(createModelsMiddleware);
 app.use(bodyParser.json());
+
+app.use(cors({
+    origin: '*'
+}));
 
 //health route
 app.get('/health', (request, response, next) => {

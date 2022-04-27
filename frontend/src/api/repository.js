@@ -193,7 +193,12 @@ export class Repository {
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/getMeetingsByTeamId?team_id=${team_id}`)
                 .then(x => {
+<<<<<<< HEAD
                     resolve(x.data);
+=======
+                    resolve(x);
+                    console.log(x);
+>>>>>>> 0496655bd107599210aa42d9a34b386dd53b56b9
                 })
                 .catch(x => {
                     alert(x);
