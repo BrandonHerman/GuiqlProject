@@ -18,7 +18,7 @@ import SignOutButton from '../components/signOutButton';
 import { Link } from "react-router-dom";
 import { left } from '@popperjs/core';
 import StudentGeneration from '../utils/studentgeneration';
-
+import InstructorProfile from '../utils/instructorProfile';
 
 export default function InstructorSignIn() {
     const [open, setOpen] = React.useState(false);
@@ -27,7 +27,11 @@ export default function InstructorSignIn() {
         console.log("setOpen boolean = " + open);
         setOpen(true);
     }
-
+    var email = InstructorProfile.getEmail(); 
+    var password = InstructorProfile.getPassword();
+    console.log("hello ");
+    console.log(email);
+    console.log(password);
     const handleClickClose = () => {
         console.log("setOpen boolean = " + open);
         setOpen(false);
@@ -48,6 +52,7 @@ export default function InstructorSignIn() {
 
     function addClassCard() {
         return (
+
             <Card id="createClassCard" raised="false" elevation="0" sx={{ maxWidth: 262, maxHeight: 239 }} >
 
                 <CardActionArea disableTouchRipple onClick={handleClickOpen}>
@@ -68,20 +73,19 @@ export default function InstructorSignIn() {
 
 
     return (
-
         <Grid container component="main" sx={{ height: '100vh' }}>
-            <Dialog open={open} onClose={handleClickClose} minWidth >
 
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <CssBaseline />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <CssBaseline />
+            <Dialog open={open} onClose={handleClickClose} fullWidth maxWidth="100%">
+
                 <DialogTitle justify="center" align="center">Create Class</DialogTitle>
                 <Grid
                     container
-                    direction="row"
-                    justify="space-evenly"
-                    align="center"
+                    // justify="space-evenly"
+                    // align="center"
                 >
-                    <TableDemo />
+                    <TableDemo  />
                 </Grid>
                 <br></br>
                 <br></br>

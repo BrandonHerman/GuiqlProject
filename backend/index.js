@@ -8,7 +8,9 @@ const professorRoutes = require('./routes/professorRoutes');
 const recruiterRoutes = require('./routes/recruiterRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const teamRoutes = require('./routes/teamRoutes');
-const usersRoutes = require('./routes/userStoryRoutes');
+const userStoryRoutes = require('./routes/userStoryRoutes');
+const assessmentRoutes = require('./routes/assessmentRoutes');
+const meetingRoutes = require('./routes/meetingRoutes');
 
 //middle ware
 // const { createModelsMiddleware } = require('./middleware/model-middleware');
@@ -38,7 +40,9 @@ app.use('/professor', professorRoutes);
 app.use('/recruiter', recruiterRoutes);
 app.use('/student', studentRoutes);
 app.use('/team', teamRoutes);
-app.use('/users', usersRoutes);
+app.use('/user_story', userStoryRoutes);
+app.use('/assessment', assessmentRoutes);
+app.use('/meeting', meetingRoutes);
 
 //listen for incoming requests
 app.listen(port, () => {

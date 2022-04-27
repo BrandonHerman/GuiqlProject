@@ -54,7 +54,7 @@ router.delete('/deleteRecruiter', async (req, res, next) => {
         res.status(500).json({ message: err.toString() });
     }
 
-    next();
+    next(); 
 })
 
 module.exports = router;
