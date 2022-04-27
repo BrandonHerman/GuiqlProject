@@ -56,9 +56,8 @@ export const createClass = (class_name, class_day, class_time, students, prof_id
 
 
 // Get the group count given instructor id and class id
-export const getGroupCount = (prof_id, class_id) => new Promise((resolve, reject) => {
+export const getGroupCount = (class_id) => new Promise((resolve, reject) => {
     var params = new URLSearchParams();
-        params.append("prof_id", prof_id);
         params.append("class_id", class_id);
     
         params.append()
