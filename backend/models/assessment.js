@@ -33,6 +33,12 @@ const setAssessmentLink = async (assessment_id,link) => {
     return result;
 }
 
+const getAssessmentFlag = async (assessment_id) => {
+    const query = await knex(ASSESSMENT_TABLE).where({assessment_id});
+    const result = await query;
+    return result;
+}
+
 const setFlagPublished = async (assessment_id) => {
     const query = await knex(ASSESSMENT_TABLE).where({assessment_id}).update({assessment_flag: true});
     const result = await query;
@@ -50,6 +56,7 @@ module.exports = {
     searchByLink,
     getAssessmentLink,
     setAssessmentLink,
+    getAssessmentFlag,
     setFlagPublished,
     setFlagUnpublished
 }
