@@ -18,7 +18,7 @@ export const getAssessmentFlagByProfId= (profId) => new Promise((resolve, reject
     var request = {
         params: params
     };
-    axios.get(`${hostname}/getAssessmentFlag/`, request, apiConfig)
+    axios.get(`${hostname}/getAssessmentFlag/${profId}`, request, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -88,10 +88,9 @@ export const setAssessmentFlagPublishedByProfId = (profId, flag) => new Promise(
 
 
 // Set the assessment flag to unpublished
-export const setAssessmentFlagUnpublishedByProfId = (profId, flag) => new Promise((resolve, reject) => {
+export const setAssessmentFlagUnpublishedByProfId = (profId) => new Promise((resolve, reject) => {
     var params = new URLSearchParams();
     params.append('prof_id', profId);
-    params.append('assessment_flag', link);
 
     params.append()
     var request = {
