@@ -90,10 +90,9 @@ export class Repository {
     //CLASS API CALLS
 
     // Create a class with the student information
-    createClass(class_name, class_day, class_time, prof_id) {
+    createClass(class_name, class_day, class_time, prof_id, size) {
         console.log("Creating class: " + class_name);
-        size = students.length;
-        group_count = Math.ceil(size / 4);
+        var group_count = Math.ceil(size / 4);
         return new Promise((resolve, reject) => {
             axios.post(`${this.url}/createClass?class_name=${class_name}&class_day=${class_day}&class_time=${class_time}&prof_id=${prof_id}&group_count=${group_count}`)
                 .then(x => {
@@ -193,12 +192,7 @@ export class Repository {
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/getMeetingsByTeamId?team_id=${team_id}`)
                 .then(x => {
-<<<<<<< HEAD
                     resolve(x.data);
-=======
-                    resolve(x);
-                    console.log(x);
->>>>>>> 0496655bd107599210aa42d9a34b386dd53b56b9
                 })
                 .catch(x => {
                     alert(x);
