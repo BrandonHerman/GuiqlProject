@@ -27,10 +27,10 @@ export default function InstructorSignIn() {
         console.log("setOpen boolean = " + open);
         setOpen(true);
     }
-    var email = InstructorProfile.getEmail(); 
+    var username = InstructorProfile.getUsername(); 
     var password = InstructorProfile.getPassword();
     console.log("hello ");
-    console.log(email);
+    console.log(username);
     console.log(password);
     const handleClickClose = () => {
         console.log("setOpen boolean = " + open);

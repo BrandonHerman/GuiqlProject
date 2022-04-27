@@ -2,6 +2,7 @@ var StudentProfile = (function () {
     var firstName = "";
     var lastName = "";
     var email = "";
+    var username = "";
     var password = "";
     var getEmail = function () {
         return email;
@@ -11,6 +12,16 @@ var StudentProfile = (function () {
         console.log("set email to:");
         console.log(email);
     }
+
+    var getUsername = function() {
+        return username;
+    }
+    var setUsername = function(name) {
+        username = name;
+        console.log("set username to:");
+        console.log(username);
+    }
+    
     //pulled from database in login function, set here
     var getName = function () {
         return firstName, lastName;
@@ -34,6 +45,8 @@ var StudentProfile = (function () {
         setEmail: setEmail,
         getPassword: getPassword,
         setPassword: setPassword,
+        getUsername: getUsername,
+        setUsername: setUsername
     }
 })();
 
