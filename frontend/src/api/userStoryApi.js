@@ -1,11 +1,21 @@
 import axios from 'axios';
 import { hostname } from './repositoryConfig';
 
-
+const apiConfig = {
+    headers: {
+        
+    }
+};
 
 // Delete a User Story given its id
 export const deleteUserStoryById = (userStoryId) => new Promise((resolve, reject) => {
-    axios.delete(`${hostname}/removeUserStory${userStoryId}`, apiConfig)
+    var params = new URLSearchParams();
+    params.append("story_id", userStoryId);
+    params.append()
+        var request = {
+            params: params
+        };
+    axios.delete(`${hostname}/removeUserStory/${userStoryId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -24,7 +34,7 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
         var request = {
             params: params
         };
-    axios.post(`${hostname}`, request, apiConfig)
+    axios.post(`${hostname}/createUserStory`, request, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -34,8 +44,14 @@ export const addUserStory = (title, description, team_id) => new Promise((resolv
 
 
 // Get all User Stories for a team given team_id
-export const getUserStoiesById = (teamId) => new Promise((resolve, reject) => {
-    axios.get(`${hostname}/${teamId}`, apiConfig)
+export const getUserStoriesById = (teamId) => new Promise((resolve, reject) => {
+    var params = new URLSearchParams();
+    params.append("team_id", teamId);
+    params.append()
+        var request = {
+            params: params
+        };
+    axios.get(`${hostname}/searchUserStoryById/${teamId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -51,7 +67,7 @@ export const updateUserStoryById = (userStoryId, status) => new Promise((resolve
     var request = {
         params: params
     };
-    axios.put(`${hostname}/${userStoryId}`, request, apiConfig)
+    axios.put(`${hostname}/setUserStoryStatus/${userStoryId}`, request, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
