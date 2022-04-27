@@ -1,9 +1,5 @@
 import axios from 'axios';
-
-
-//const stuBaseURL = 'https://api.guiql.com/student';
-//const userStoriesBaseURL = 'https://api.guiql.com/userstories';
-
+import { hostname } from './repositoryConfig';
 
 
 
@@ -11,7 +7,7 @@ import axios from 'axios';
 
 // Delete a User Story given its id
 export const deleteUserStoryById = (userStoryId) => new Promise((resolve, reject) => {
-    axios.delete(`${userStoriesBaseURL}/${userStoryId}`, apiConfig)
+    axios.delete(`${hostname}/removeUserStory${userStoryId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
