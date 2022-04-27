@@ -17,7 +17,7 @@ export default function RecruiterSignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
     });
   };
@@ -55,10 +55,10 @@ export default function RecruiterSignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address or Username"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField

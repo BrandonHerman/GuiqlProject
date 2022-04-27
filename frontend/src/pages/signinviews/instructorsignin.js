@@ -16,21 +16,21 @@ export default function InstructorSignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    handleEmail(data.get('email'));
+    handleUsername(data.get('username'));
     handlePassword(data.get('password'));
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password') 
     });
-    InstructorProfile.setEmail(data.get('email'));
+    InstructorProfile.setUsername(data.get('username'));
     InstructorProfile.setPassword(data.get('password'));
     navigate('/classeshome');
   };
 
-  const [email, setEmail] = React.useState('');
+  const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [redirect, setRedirect] = React.useState(false);
-  const handleEmail = (Email) => setEmail(Email);
+  const handleUsername = (username) => setUsername(username);
   const handlePassword = (password) => setPassword(password);
   let navigate = useNavigate();
   // const onClickNavigate = (event) => {
@@ -79,10 +79,10 @@ export default function InstructorSignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -103,7 +103,7 @@ export default function InstructorSignIn() {
             
             {redirect && <Navigate to={{
               pathname: '/classeshome',
-              state: {email: email, password: password}}}/>}
+              state: {username: username, password: password}}}/>}
               <Button
               type="submit"
               fullWidth

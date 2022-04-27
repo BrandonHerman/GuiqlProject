@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { hostname } from './repositoryConfig';
+import collegeApi from './collegeApi';
 
-
+collegeApi = new collegeApi();
 
 // Create a class with the student information
 export const createClass = (class_name, class_day, class_time, students, prof_id) => new Promise((resolve, reject) => {
     //CREATES THE CLASS
     size = students.length;
     group_count = Math.ceil(size / 4);
-    axios.post(`${hostname}/create`, {class_name, class_day, class_time, size, group_count, prof_id}, apiConfig)
+    axios.post(`${hostname}/createClass`, {class_name, class_day, class_time, size, group_count, prof_id}, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -17,7 +18,7 @@ export const createClass = (class_name, class_day, class_time, students, prof_id
 
 
     //CREATES THE STUDENTS
-    university_id = getUniversityByProfId(prof_id);
+    university_id = collegeApi.getUniversityByProfId(prof_id);
     class_id = getClassByTimes(class_day, class_time, university_id);
     for (let i = 0; i < students.length; i++) {
         var params = new URLSearchParams();
@@ -36,7 +37,7 @@ export const createClass = (class_name, class_day, class_time, students, prof_id
             params: params
         };
     
-        axios.post(`${hostname}/${request}`, apiConfig)
+        axios.post(`${hostname}/CreateStudent/${request}`, apiConfig)
             .then(x => resolve(x.data))
             .catch(x => {
                 alert(x);
@@ -55,8 +56,37 @@ export const createClass = (class_name, class_day, class_time, students, prof_id
 
 
 // Get the group count given instructor id and class id
-export const getGroupCount = (instructor_id, class_id) => new Promise((resolve, reject) => {
-    axios.get(`${hostname}/${instructor_id}/${class_id}`, apiConfig)
+export const getGroupCount = (prof_id, class_id) => new Promise((resolve, reject) => {
+    var params = new URLSearchParams();
+        params.append("prof_id", prof_id);
+        params.append("class_id", class_id);
+    
+        params.append()
+        var request = {
+            params: params
+        };
+    axios.get(`${hostname}/getNumberOfGroups/`, request, apiConfig)
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+
+
+
+// Get the class given the class day and class time
+export const getClassByTimes = (class_day, class_time, college_id) => new Promise((resolve, reject) => {
+    var params = new URLSearchParams();
+        params.append("class_day", class_day);
+        params.append("class_time", class_time);
+        params.append("college_id", college_id);
+    
+        params.append()
+        var request = {
+            params: params
+        };
+    axios.get(`${hostname}/`, requests, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
