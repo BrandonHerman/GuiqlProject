@@ -289,13 +289,13 @@ export class Repository {
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/professor/searchProfessorByID?prof_id=${id}`) 
                 .then(x => {
-                    console.log(x);
-                    resolve(x);
+                    console.log(x.data);
+                    resolve(x.data);
                     
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 })
         })
 
