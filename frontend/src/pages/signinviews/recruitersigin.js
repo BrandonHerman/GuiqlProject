@@ -44,7 +44,8 @@ export default function RecruiterSignIn() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
+          // backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
+          backgroundImage: 'url(https://www.marketplace.org/wp-content/uploads/2021/04/CM4.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

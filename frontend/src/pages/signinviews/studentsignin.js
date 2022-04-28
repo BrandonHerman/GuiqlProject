@@ -37,7 +37,8 @@ export default function StudentSignIn() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://www.smu.edu/-/media/Site/StudentAffairs/NewStudent/New-Website-Photos/AARO-TAARO-JARRO-Page/AAROTARROJARROHeroImage1optimized.jpg?h=1706&la=en&w=2563&hash=5BACD211ABBDE8EFC08ECC0E58100D81)',
+          // backgroundImage: 'url(https://www.smu.edu/-/media/Site/StudentAffairs/NewStudent/New-Website-Photos/AARO-TAARO-JARRO-Page/AAROTARROJARROHeroImage1optimized.jpg?h=1706&la=en&w=2563&hash=5BACD211ABBDE8EFC08ECC0E58100D81)',
+          backgroundImage: 'url(https://highbrook.media/abd/wp-content/gallery/blog-posts//shutterstock_1045282858.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
