@@ -2,8 +2,8 @@ const knex = require('../database/knex');
 
 const STORY_TABLE = 'User_story';
 
-const createUserStory = async (title,description) => {
-    const query = await knex(STORY_TABLE).insert({status:false,title,description,favorite:false});
+const createUserStory = async (title,description,student_id,team_id) => {
+    const query = await knex(STORY_TABLE).insert({status:'to do',title,description,favorite:false,student_id,team_id});
     const returnValue = await knex(STORY_TABLE).select('User_story.story_id','User_story.title','User_story.description');
     return returnValue;
 }
@@ -11,7 +11,7 @@ const createUserStory = async (title,description) => {
 const searchById = async (story_id) => {
     const query = await knex(STORY_TABLE).where({story_id});
     const result = await query;
-    return query;
+    return result;
 }
 
 const searchByTitle = async (title) => {
