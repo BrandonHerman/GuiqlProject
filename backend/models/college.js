@@ -21,13 +21,13 @@ const searchByName = async (name) => {
 }
 
 const getName = async (college_id) => {
-    const query = await knex(COLLEGE_TABLE).select(name).where({college_id});
+    const query = await knex(COLLEGE_TABLE).select('name').where({college_id});
     const result = await query;
     return result;
 }
 
 const getId = async (name) => {
-    const query = await knex(COLLEGE_TABLE).select(college_id).where({name});
+    const query = await knex(COLLEGE_TABLE).select('college_id').where({name});
     const result = await query;
     return result;
 }
@@ -39,7 +39,7 @@ const getCollegeByProfId = async (prof_id) => {
 }
 
 const getCollegeIdByProfId = async (prof_id) => {
-    const query = await knex(COLLEGE_TABLE).select(college_id).where({prof_id});
+    const query = await knex(COLLEGE_TABLE).select('college_id').where({prof_id});
     const result = await query;
     return result;
 }
