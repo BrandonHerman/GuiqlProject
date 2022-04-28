@@ -14,21 +14,27 @@ const createRecruiter = async (first_name, last_name, username, password, email)
 }
 
 const authenticate = async (username,password) => {
-    const validUsername = await searchByUsername(username);
+    const recruiters = await searchByUsername(username);
 
     // check if username exists
-    if (validUsername == false) {
-        return "Username does not exist!";
-    } else {
-        // check if password is correct
-        const validPassword = await findUserByPassword(username,password);
-         if (validPassword.length !== 0) {;
-            const query = await knex(RECRUITER_TABLE).where({username,password: validPassword[0].password});
-            return query;
-        } else {
-            return "Password is incorrect!";
-        }
+    if (validUsername.length === 0) {
+        console.error(`No recruiters matched the username: ${username}`);
+        return null;
     }
+    // check if password is correct
+    const recruiter = recruiters[0];
+    const validPassword = await findUserByPassword(username,password);
+    if (validPassword.length !== 0) {;
+        delete user.password;
+        return user;
+    }
+    return null;
+}
+
+const searchByUsername = async (username) => {
+    const query = await knex(RECRUITER_TABLE).where({username});
+    const result = await query;
+    return result;
 }
 
 const addBio = async (recruiter_id,rec_bio) => {
@@ -64,6 +70,7 @@ const deleteRecruiter = async (recruiter_id) => {
 module.exports = {
     createRecruiter,
     authenticate,
+    searchByUsername,
     addBio,
     getBioById,
     getBioByCollege,
