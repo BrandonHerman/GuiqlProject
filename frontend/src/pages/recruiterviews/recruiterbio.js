@@ -10,7 +10,9 @@ import Paper from '@mui/material/Paper';
 import ButtonBase from '@mui/material/ButtonBase';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
+import RecruiterProfile from '../utils/recruiterProfile';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -30,6 +32,8 @@ const Img = styled('img')({
 
 export default function RecruiterBio() {
     const theme = useTheme();
+    const [picture, setPicture] = React.useState("https://picsum.photos/200/300");
+
     const [recruiter, setRecruiter] = React.useState([{
         first_name: "John",
         last_name: "Lawrimore",
@@ -41,62 +45,64 @@ export default function RecruiterBio() {
 
     //let navigate = useNavigate(); 
     /* HONESTLY NO CLUE HOW TO DO THIS */
-    const pageChange = () =>{ 
+    const pageChange = () => {
         //let path = `/recruiter/bio/edit`;
         //navigate(path);
     }
 
     return (
         <>
-            <Typography gutterBottom variant="h1" component="div" sx={{ fontWeight: 'bold' }}>
-                    Recruiter Bio
-            </Typography>
-        <Paper
-            sx={{ p: 2, margin: 'auto', maxWidth: 900,
-                flexGrow: 1, backgroundColor: (theme) =>
-                theme.palette.mode === 'dark' ? '#1A2027' : '#fff' }}
-        >
-            {recruiter.map((elem) => (
-                <Grid container spacing={2}>
-                    <Grid item>
-                        <ButtonBase sx={{ width: 400, height: 400 }}>
-                            <Img alt="Professor Image" src={elem.image} />
-                        </ButtonBase>
-                    </Grid>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs>
-                                <Typography gutterBottom variant="h2" component="div" sx={{ fontWeight: 'bold' }}>
-                                    {elem.first_name} {elem.last_name}
-                                </Typography>
-                                <Typography variant="h6" gutterBottom>
-                                    {elem.university}
-                                </Typography>
-                                <Typography variant="h6" gutterBottom>
-                                    <hr/>
-                                    Email: {elem.email}
-                                    <hr/>
-                                </Typography>
-                                <Typography variant="body2">
-                                    Bio:
-                                </Typography>
-                                <Typography variant="body2">
-                                    {elem.bio}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+            <br></br>
+            <Grid container justifyContent="center"
+                alignItems="center" sx={{ justifyItems: 'center' }}>
+                <CssBaseline />
+
+                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{ justifyItems: 'center' }}>
+                    <Box
+                        sx={{
+                            my: 5,
+                            mx: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Typography component="h1" variant="h4">
+                            Recruiter
+                        </Typography>
+                        <br></br>
+                        <Avatar alt="Recruiter" src={picture} sx={{ width: 100, height: 100 }} />
+                        <br></br>
+                        <Box sx={{ mt: 1 }}>
+                            <Typography variant="h5" component="h2">
+                                Recruiter Name: 
+                                <hr/>
+                            </Typography>
+                            
+                            <Typography variant="h6" component="h2">
+                                {RecruiterProfile.getName}
+                            </Typography>
+                            <Typography variant="h5" component="h2" >
+                                University:
+                            </Typography>
+                            <Typography variant="h6" component="h2" >
+                                {RecruiterProfile.getUni()}
+                            </Typography>
+                            <Typography variant="h5" component="h2" >
+                                <hr />
+                                Email: {RecruiterProfile.getEmail()}
+                                <hr /> </Typography>
+
+                            <Typography variant="h5" component="h2">
+                                Bio:
+                            </Typography>
+                            <Typography variant="h6" component="h2">
+                                {RecruiterProfile.getBio()}
+                            </Typography>
+                        </Box>
+                    </Box>
                 </Grid>
-            ))}
-        </Paper>
-        <Typography sx={{mt: 7}}>
-            <Button variant="contained" textPrimary
-                sx={{ minWidth: '50%' }}
-                onClick={pageChange}
-            >
-                Edit Bio
-            </Button>
-        </Typography>
+            </Grid>
         </>
 
     );

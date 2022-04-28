@@ -10,9 +10,14 @@ import './instructorsignin.css'
 import { Link } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import {Navigate, useNavigate} from 'react-router-dom';
+import RecruiterProfile from '../utils/recruiterProfile';
 
 
 export default function RecruiterSignIn() {
+
+  var navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -20,6 +25,13 @@ export default function RecruiterSignIn() {
       username: data.get('username'),
       password: data.get('password'),
     });
+    var username = data.get('username');
+    console.log(username);
+    RecruiterProfile.setName(username, username); 
+    //need all recruiter set info from API
+    console.log(RecruiterProfile.getName());
+    console.log("clicked recruiter sign in button");
+    navigate("/recruiterhome");
   };
 
   return (
@@ -76,7 +88,6 @@ export default function RecruiterSignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Link to="/classeshome">
               <Button
                 type="submit"
                 fullWidth
@@ -85,7 +96,6 @@ export default function RecruiterSignIn() {
               >
                 Sign In
               </Button>
-            </Link>
 
             <Grid container>
               <Grid item xs>

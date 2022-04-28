@@ -11,8 +11,11 @@ import './studentsignin.css'
 import { Link } from "react-router-dom";
 import { FormControlLabel } from '@mui/material';
 import { Checkbox } from '@mui/material';
+import {Navigate, useNavigate } from "react-router-dom";
 
 export default function StudentSignIn() {
+
+  var navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,6 +24,8 @@ export default function StudentSignIn() {
       username: data.get('username'),
       password: data.get('password'),
     });
+    navigate('/studenthome');
+
   };
 
   return (

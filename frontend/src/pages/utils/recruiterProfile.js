@@ -4,7 +4,28 @@ var RecruiterProfile = (function () {
     var email = "";
     var password = "";
     var username = "";
+    var bio = "";
+    var image = "";
+    var uni = "";
 
+    var getUni = function() {
+        return uni;
+    }
+    var setUni = function(input) {
+        uni = input;
+    }
+    var getImage = function() {
+        return image;
+    }
+    var setImage = function(url) {
+        image = url;
+    }
+    var setBio = function(b) {
+        bio = b;
+    }
+    var getBio = function() {
+        return bio;
+    }
     var getEmail = function () {
         return email;
     }
@@ -31,13 +52,13 @@ var RecruiterProfile = (function () {
         lastName = last;
     }
 
-    var getID = function() {
-        return profID;
-    }
+    // var getID = function() {
+        // return profID;
+    // }
 
-    var setID = function(id) {
-        profID = id;
-    }
+    // var setID = function(id) {
+        // profID = id;
+    // }
 
     var getPassword = function () {
         return password;
@@ -52,10 +73,16 @@ var RecruiterProfile = (function () {
         setEmail: setEmail,
         getPassword: getPassword,
         setPassword: setPassword,
-        getID: getID,
-        setID: setID,
+        // getID: getID,
+        // setID: setID,
         getUsername: getUsername,
-        setUsername: setUsername
+        setUsername: setUsername,
+        setBio: setBio,
+        getBio: getBio,
+        setImage: setImage,
+        getImage: getImage,
+        getUni: getUni,
+        setUni: setUni
     }
 })();
 

@@ -8,6 +8,8 @@ import InstructorSignUp from './pages/signinviews/instructorsignup';
 import InstructorClassHome from './pages/signinviews/instructorclasshome';
 import RecruiterSignIn from './pages/signinviews/recruitersigin';
 import RecruiterSignUp from './pages/signinviews/recruitersignup';
+import StudentHome from './pages/classviews/studenthome';
+import RecruiterPage from './pages/recruiterviews/recruiterpage';
 
 const rootElement = document.getElementById("root");
 render( //browserrouter and routes allows react router to move views based on what the URL extension is
@@ -22,6 +24,8 @@ render( //browserrouter and routes allows react router to move views based on wh
                 <Route path="/recruitersignup" element={<RecruiterSignUp/>} />
                 <Route path="/recruitersignin" element={<RecruiterSignIn />} />
                 <Route path="/instructorstudentsview" element={<InstructorStudentsView/>} />
+                <Route path="/studenthome" element={<StudentHome/>} />
+                <Route path="/recruiterhome" element={<RecruiterPage/>}/>
             </Routes>
         </BrowserRouter>,
 
