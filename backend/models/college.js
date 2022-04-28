@@ -8,7 +8,7 @@ const createCollege = async (name) => {
     return returnValue;
 }
 
-const searchByID = async (college_id) => {
+const searchById = async (college_id) => {
     const query = await knex(COLLEGE_TABLE).where({college_id});
     const result = await query;
     return result;
@@ -26,23 +26,30 @@ const getName = async (college_id) => {
     return result;
 }
 
-const getID = async (name) => {
+const getId = async (name) => {
     const query = await knex(COLLEGE_TABLE).select(college_id).where({name});
     const result = await query;
     return result;
 }
 
-const getCollegeByProfID = async (prof_id) => {
+const getCollegeByProfId = async (prof_id) => {
     const query = await knex(COLLEGE_TABLE).where({prof_id});
+    const result = await query;
+    return result;
+}
+
+const getCollegeIdByProfId = async (prof_id) => {
+    const query = await knex(COLLEGE_TABLE).select(college_id).where({prof_id});
     const result = await query;
     return result;
 }
 
 module.exports = {
     createCollege,
-    searchByID,
+    searchById,
     searchByName,
     getName,
-    getID,
-    getCollegeByProfID
+    getId,
+    getCollegeByProfId,
+    getCollegeIdByProfId
 }
