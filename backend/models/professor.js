@@ -103,10 +103,16 @@ const getCollegeIdByProfId = async (prof_id) => {
     return result;
 }
 
+const getCollegeByProfId = async (prof_id) => {
+    const query = await knex(COLLEGE_TABLE).where({prof_id});
+    const result = await query;
+    return result;
+}
+
 const removeProfessor = async (prof_id) => {
     const query = await knex(PROFESSOR_TABLE).where({prof_id}).del();
     const result = await query;
-    return result;
+    return result; 
 }
 
 module.exports = {
@@ -120,5 +126,6 @@ module.exports = {
     searchByCollege,
     getProfessorName,
     getCollegeIdByProfId,
+    getCollegeByProfId,
     removeProfessor
 }
