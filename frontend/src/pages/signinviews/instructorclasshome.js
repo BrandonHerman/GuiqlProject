@@ -20,7 +20,16 @@ import { left } from '@popperjs/core';
 import StudentGeneration from '../utils/studentgeneration';
 import InstructorProfile from '../utils/instructorProfile';
 
+import { Repository } from '../../api/repository';
+
+import green from "@material-ui/core/colors/green";
+import purple from "@material-ui/core/colors/purple";
+
+
 export default function InstructorSignIn() {
+
+    var repository = new Repository();
+
     const [open, setOpen] = React.useState(false);
     StudentGeneration("brandon", "herman");
     const handleClickOpen = () => {
@@ -37,7 +46,10 @@ export default function InstructorSignIn() {
         setOpen(false);
     }
 
-    const data1 = {
+    //GET CLASS BY PROF ID HERE API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
+    //class_name, class_time, size, group_count
+    // const classes = repository.getClassesByProfessorId(this.profID);
+    const classes = {
         class: [
             { number: 1, enrollment: 24, teams: 3, time: "Monday 6:30pm - 8:20pm" },
             { number: 2, enrollment: 32, teams: 5, time: "Tuesday 4:30pm - 6:20pm" },
@@ -50,10 +62,11 @@ export default function InstructorSignIn() {
         id: [1]
     };
 
+ 
     function addClassCard() {
         return (
 
-            <Card id="createClassCard" raised="false" elevation="0" sx={{ maxWidth: 262, maxHeight: 239 }} >
+            <Card id="createClassCard" raised="false" elevation="0" sx={{ minWidth:100, maxHeight: 239 }} >
 
                 <CardActionArea disableTouchRipple onClick={handleClickOpen}>
                     <CardContent>
@@ -125,26 +138,29 @@ export default function InstructorSignIn() {
                     <br></br>
                     <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ flexWrap: 'wrap' }}>
 
-                        {data1.class.map((elem) => (
+
+                        {classes.class.map((elem, i) => (
+
                             <Grid item margin={2} xs={8} md={6} lg={4} justifyContent="center" alignItems="center">
                                 <Card sx={{ minWidth: "265px", maxWidth: "auto", height: "235px" }}>
                                     
                                     <Link to="/instructorstudentsview">
                                         <CardHeader
-                                            title={`Class ${elem.number}`}
+                                            title={`Class ${i}`}
                                             subheader={`Time: ${elem.time}`}
                                         />
                                         <CardContent>
-                                            <Typography>Enrollment: {elem.enrollment} </Typography>
-                                            <Typography>Teams: {elem.teams} </Typography>
+                                            <Typography>Enrollment: {elem.size} </Typography>
+                                            <Typography>Teams: {elem.group_count} </Typography>
                                         </CardContent>
 
                                     </Link>
                                         <CardActions >
-                                            <IconButton aria-label="add-reaction">
+                                            <IconButton 
+                                                aria-label="add-reaction">
                                                 <AddReactionIcon></AddReactionIcon>
                                             </IconButton>
-                                            <IconButton aria-label="delete">
+                                            <IconButton  aria-label="delete">
                                                 <GroupAddIcon />
                                             </IconButton>
                                             <IconButton aria-label="delete">

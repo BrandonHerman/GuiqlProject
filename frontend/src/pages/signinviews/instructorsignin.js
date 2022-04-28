@@ -11,27 +11,28 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import InstructorProfile from '../utils/instructorProfile';
+import { JSONCalls} from '../assets/JSONCalls';
+import Alert from '@material-ui/lab/Alert';
 
 export default function InstructorSignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    handleUsername(data.get('username'));
-    handlePassword(data.get('password'));
-    console.log({
-      username: data.get('username'),
-      password: data.get('password') 
-    });
-    InstructorProfile.setUsername(data.get('username'));
-    InstructorProfile.setPassword(data.get('password'));
-    navigate('/classeshome');
-  };
+
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   var username = data.get('username')
+  //   var password = data.get('password')
+  //   console.log({
+  //     username: data.get('username'),
+  //     password: data.get('password')
+  //   });
+  //   validateUser(username, password);
+  // };
 
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [redirect, setRedirect] = React.useState(false);
-  const handleUsername = (username) => setUsername(username);
-  const handlePassword = (password) => setPassword(password);
+  const [error, setError] = React.useState(false);
   let navigate = useNavigate();
   // const onClickNavigate = (event) => {
   //     // <Navigate to='/classeshome' state={{ email: email, password: password }} />
@@ -44,7 +45,24 @@ export default function InstructorSignIn() {
   //     navigate('/classeshome');
   // }
 
-
+  //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
+  const validateUser = (inUsername, inPassword) => {
+    //get prof by username
+    var rep = new JSONCalls();
+    var prof, success = rep.profSignIn(inUsername, inPassword);
+    console.log(prof);
+    if (success) {
+      console.log("Successful Login");
+      InstructorProfile.setEmail(prof.email);
+      InstructorProfile.setName(prof.firstName, prof.last_name);
+      InstructorProfile.setID(prof.id);
+      InstructorProfile.setUsername(prof.username);
+      InstructorProfile.setPassword(prof.password);
+      navigate('/classeshome');
+    } else {
+      setError(true);
+    }
+  }
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -55,7 +73,8 @@ export default function InstructorSignIn() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
+          // backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
+          backgroundImage: 'url(https://www.marketplace.org/wp-content/uploads/2021/04/CM4.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -74,7 +93,7 @@ export default function InstructorSignIn() {
           <Typography component="h1" variant="h5">
             Instructor Sign In
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
+          <Box component="form" onSubmit={validateUser} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
             <TextField
               margin="normal"
               required
@@ -100,11 +119,12 @@ export default function InstructorSignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            
+
             {redirect && <Navigate to={{
               pathname: '/classeshome',
-              state: {username: username, password: password}}}/>}
-              <Button
+              state: { username: username, password: password }
+            }} />}
+            <Button
               type="submit"
               fullWidth
               variant="contained"
@@ -131,7 +151,14 @@ export default function InstructorSignIn() {
               </h3>
             </Link>
           </Box>
+
+          {error &&
+            <>
+            <br></br>
+              <Alert sx={{ m: 5 }} onClose={() => setError(false)} severity="error">Username or Password is incorrect</Alert>
+            </>}
         </Box>
+
       </Grid>
     </Grid>
   );

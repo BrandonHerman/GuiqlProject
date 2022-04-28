@@ -8,6 +8,11 @@ import {Theme, ThemeProvider} from '@material-ui/core/styles/'
 import { Link } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme.js'
+
+import Test from './pages/test';
+
+import StudentHome from './pages/classviews/studenthome';
+
 // React functional component
 function App() {
   // state for storage of the information on the webpage of forms and list, uses hooks
@@ -79,6 +84,7 @@ function App() {
     // {/* add gui theme to all child components */}
       // <CssBaseline/>
       <div className="App">
+
         <StudentSignIn></StudentSignIn>
       </div>
     // </ThemeProvider>

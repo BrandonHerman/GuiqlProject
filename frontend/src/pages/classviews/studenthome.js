@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-//import './instructorsignin.css'
+import '../signinviews/instructorsignin.css'
 import { Tabs } from '@mui/material';
 import { Tab } from '@mui/material';
 import { spacing } from '@mui/system';
@@ -38,6 +38,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Stack from '@mui/material/Stack';
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
+import { Repository } from '../../api/repository';
 
 const drawerWidth = 240;
 const ITEM_HEIGHT = 48;
@@ -83,6 +84,8 @@ function a11yProps(index) {
     };
 }
 
+var repository = new Repository();
+
 export default function StudentHome() {
     const [myTeam, setStudents] = React.useState([{ first_name: "Josiah", last_name: "Castillo", comments: "fdasjlkdasnfrajkdfn"},
                                                   { first_name: "Brandon", last_name: "Herman", comments: ""},
@@ -94,18 +97,7 @@ export default function StudentHome() {
 
     const [open, setOpen] = React.useState(false);
     const [verify, setVerify] = React.useState(false);
-
-    const handleRatingChange = (index, event) => {
-      const newTeam = myTeam.slice();
-      newTeam[index].myTeam = event.target.value;
-      setStudents(newTeam);
-    };
-
-    const handleCommentsChange = (index, event) => {
-      const newTeam = myTeam.slice();
-      newTeam[index].comments = event.target.value;
-      setStudents(newTeam);
-    };
+    const [edit, setEdit] = React.useState(false);
 
     const [value, setValue] = React.useState(0);
 
@@ -137,9 +129,15 @@ export default function StudentHome() {
     const addStory = () => {
       handleClickOpen();
     }
-    const submitStory = () => {
+    const submitStory = (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      console.log("Title field: " + data.get('title'));
       columns["To Do"].list.push(
-        {id: "7", text: "text7", desc:"", favorite:false, teamId:0}
+        /* {id: "7", text: "text7", desc:"", favorite:false, teamId:0} */
+        {id:(columns["Delete"].list.length + columns["To Do"].list.length + columns["In Progress"].list.length + 1).toString(),
+        text: data.get('title'),
+        desc: data.get('description')}
       )
       handleClickClose();
     }
@@ -283,12 +281,12 @@ const ratingArray = [];
       <Grid container>
         <AppBar
           position="fixed"
-          sx={{ width: '100%', ml: `${drawerWidth}px` }}
+          sx={{ width: '100%', ml: `${drawerWidth}px`, bgcolor:'#9C27B0'}}
         >
           <Toolbar>
             <Typography variant="h6" noWrap component="div">
               <Tabs value={value} onChange={handleChange} aria-label="student page tabs">
-                <Tab label="User Stories" {...a11yProps(0)}></Tab>
+                <Tab label="User Stories" {...a11yProps(0) }></Tab>
                 <Tab label="Meetings" {...a11yProps(1)}></Tab>
                 <Tab label="Progress Reports" {...a11yProps(2)}></Tab>
                 <Tab label="Peer Reviews" {...a11yProps(3)}></Tab>
@@ -299,38 +297,47 @@ const ratingArray = [];
       </Grid>
 
 
-      <Grid container sx={{ m: 9 }}>
+      <Grid container sx={{ m: 9 }} justifyContent={"center"}>
         <TabPanel value={value} index={0}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Grid container direction={"row"} justify={"center"}>
-              {Object.values(columns).map((column) => {
-                console.log(column);
-                return (
-                  <Grid item sx={{mx:2, minWidth:'21%', maxWidth:'21%'}}>
-                    <Column column={column} key={column.id} />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </DragDropContext>
-          <Button variant="outlined" color="error" onClick={handleDeleteOpen}>Delete</Button>
-          <Button variant="contained" onClick={addStory}>Add Story</Button>
+          <Grid sx={{ minWidth: '100%', maxHeight: '75%'}}>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Grid container spacing={10} direction={"row"} justifyContent={"center"}>
+                {Object.values(columns).map((column) => {
+                  console.log(column);
+                  return (
+                    <Grid item sx={{mx:2, minWidth:'21%', maxWidth:'21%'}}>
+                      <Column column={column} key={column.id} />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </DragDropContext>
+          </Grid>
+          
+          <Grid sx={{display:'flex', mb:'3'}}item justifyContent={"flex-end"}>
+            <Button variant="contained" onClick={addStory}>Add Story</Button>
+          </Grid>
+          <Grid sx={{display:'flex', mb:'3'}}item justifyContent={"flex-end"}>
+            <Button variant="outlined" color="error" onClick={handleDeleteOpen}>Delete</Button>
+          </Grid>
+          <Grid sx={{display:'flex', mb:'3'}}item justifyContent={"flex-end"}>
+          </Grid>
           <Dialog fullWidth maxWidth="md" open={open} onClose={handleClickClose}>
           <DialogContent>
-            <Grid container>
-            <Typography variant="h5">Add a User Story</Typography>
+            <Box container component="form" noValidate onSubmit={submitStory}>
+              <Typography variant="h5">Add a User Story</Typography>
               <FormControl sx={{ m: 1, width: '100%' }} justify="center" align="left">
                 <Grid item>
-                  <TextField label="Title" id="title-field" sx={{my:2}}></TextField>
+                  <TextField label="title" id="title" name='title' sx={{my:2}}></TextField>
                 </Grid>
                 <Grid item>
-                  <TextField label="Description" id="desc-field" multiline rows={4} fullWidth>Include your acceptance criteria!</TextField>
+                  <TextField label="description" id="description" name='description' multiline rows={4} fullWidth></TextField>
                 </Grid>
                 <Grid item sx={{mt:2}}>
-                  <Button variant="contained" onClick={submitStory}>Add Story</Button>
+                  <Button variant="contained" type="submit">Add Story</Button>
                 </Grid>
               </FormControl>
-            </Grid>
+            </Box>
           </DialogContent>
           </Dialog>
           <Dialog maxWidth="sm" open={verify} onClose={handleClickClose}>
