@@ -15,6 +15,8 @@ import {
 
 import Skeleton from '@mui/material/Skeleton';
 import {Student} from "../models/Student";
+import {Team} from "../models/Team";
+
 const drawerWidth = 120;
 
 //const tableWidth = 100%;
@@ -22,6 +24,9 @@ const drawerWidth = 120;
 
 
 function InstructorTeamsView() {
+    const [teams, setTeams] = React.useState([new Team(1, 'teamsters', 1), new Team(2, 'teamers', 2), new Team(3,'teamthreestar', 3)]
+    );
+
     const [students, setStudents] = React.useState([new Student('1', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com', 0, 1, 3),
             new Student('2', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com')
         ]
@@ -88,6 +93,37 @@ function InstructorTeamsView() {
         setStudents(newStudents);
     };
 
+    const [addTeam, setAddTeam] = React.useState({
+        team_name: '',
+        team_number: teams.length+1,
+        team_size: 0,
+
+    });
+
+    const handleNewTeam = (event) => {
+        event.preventDefault();
+
+        const fieldName = event.target.getAttribute('id');
+        const fieldValue = event.target.value;
+
+        const newTeamData = { ...addTeam};
+        newTeamData[fieldName] = fieldValue;
+
+        setAddTeam(newTeamData);
+    };
+
+    const handleNewTeamSubmit = (event) => {
+        event.preventDefault();
+
+        const newTeam = new Team(teams.length+1, addTeam.team_name, addTeam.team_number, addTeam.team_size);
+        const newTeams = [...teams, newTeam];
+        setTeams(newTeams);
+    };
+
+
+
+
+
     /*
     const handleDeleteStudent = (studentId) => {
         const newStudents = [...students];
@@ -100,42 +136,49 @@ function InstructorTeamsView() {
      */
 
 
+    //NEED GET STUDENTS BY TEAM ID
     const viewForm =
         <form>
             <div className="form-row" style={{display:"flex"}}>
                 <h1>List of Students:</h1>
-                <button type="submit"
-                        className="btn btn-primary"
-                        onClick={handleNewStudentSubmit}
-                >
-                    Submit
-                </button>
+
+
             </div>
         </form>
     ;
 
 
 
+
     const teamForm =
-        <form>
-            <div className="form-row" style={{display:"flex"}}>
-                <div className="col-4">
-                    <TextField id="first_name" label="First Name" variant="outlined" onChange={ handleNewStudent }/>
-                </div>
-                <div className="col-2">
-                    <TextField id="last_name" label="Last Name" variant="outlined" onChange={ handleNewStudent }/>
-                </div>
-                <div className="col-2">
-                    <TextField id="email" label="Email" variant="outlined" onChange={ handleNewStudent }/>
-                </div>
-                <button type="submit"
-                        className="btn btn-primary"
-                        onClick={ handleNewStudentSubmit }
-                >
-                    Submit
-                </button>
+        <Box
+            component="form"
+            sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+            <div>
+                <TextField
+                    required
+                    id="team_name"
+                    label="Team Name"
+                    variant="outlined"
+                    //defaultValue="Hello World"
+                    onChange={ handleNewTeam }
+                />
             </div>
-        </form>
+
+
+            <button type="submit"
+                    className="btn btn-primary"
+                    onClick={handleNewTeamSubmit}
+            >
+                Submit
+            </button>
+
+        </Box>
     ;
 
 
@@ -242,29 +285,29 @@ function InstructorTeamsView() {
     const handleViewOpen = () => setViewOpen(true);
     const handleViewClose = () => setViewOpen(false);
 
-    const gridItems = teamsArray.map((teamName, index) =>
+    const gridItems = teams.map((team, index) =>
         <Grid item xs={4}>
             <Card sx={{height: '32vh'}}>
 
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                            Team Name
+                            Team Name:
                         </Typography>
                         <Typography variant="h5" component="div">
-                            {teamName}
+                            {team.team_name}
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            Other stuff (students maybe?)
+                            Number: {index+1}
                         </Typography>
                         <Typography variant="body2">
-                            list of students?
+                            Number of students:
                             <br />
-                            {'table-goes-here'}
+                            {team.team_size}
                         </Typography>
                     </CardContent>
                 <CardActions>
-                    <Button onClick={handleViewOpen} type="text">
-                        VIEW TEAM
+                    <Button onClick={ handleViewOpen} type="text">
+                        View Members
                     </Button>
                     <Modal
                         open={viewOpen}

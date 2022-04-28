@@ -12,42 +12,45 @@ import {Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer,
 
 import Skeleton from '@mui/material/Skeleton';
 import {Student} from "../models/Student";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
 const drawerWidth = 120;
 
 //const tableWidth = 100%;
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
 
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
 
 function InstructorStudentsView() {
+
     const [students, setStudents] = React.useState([new Student('1', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com', 0, 1, 3),
             new Student('2', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com')
         ]
     );
 
+
+
     const group_count = 8;
     const teamsArray = [];
+
     for (let i = 1; i <= group_count; i++) {
         teamsArray.push(i);
     }
 
-    /*
+
     const handleTeamChange = (index, event) => {
         const newTeam = students.slice();
         newTeam[index].students = event.target.value;
         setStudents(newTeam);
-    };
-
-     */
-
-    const handleTeamChange = (index, event) => {
-        /*
-        const newStudentChange = { ...students};
-        newStudentChange[index].team_id = event.target.value;
-        setStudents(newStudentChange);
-        */
-        students[index].team_id = event.target.value;
-        setStudents(students);
-        //setAge(event.target.value);
     };
 
     const [open, setOpen] = React.useState(false);
@@ -71,6 +74,7 @@ function InstructorStudentsView() {
         first_name: '',
         last_name: '',
         email: '',
+        team_id: '',
     });
 
     //let newStudents = students;
@@ -107,16 +111,48 @@ function InstructorStudentsView() {
 
 
     const studentForm =
-    <form>
-        <div className="form-row" style={{display:"flex"}}>
-            <div className="col-4">
-                <TextField id="first_name" label="First Name" variant="outlined" onChange={ handleNewStudent }/>
-            </div>
-            <div className="col-2">
-                <TextField id="last_name" label="Last Name" variant="outlined" onChange={ handleNewStudent }/>
-            </div>
-            <div className="col-2">
-                <TextField id="email" label="Email" variant="outlined" onChange={ handleNewStudent }/>
+        <Box
+            component="form"
+            sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+            <div>
+                <TextField
+                    required
+                    id="first_name"
+                    label="First Name"
+                    variant="outlined"
+                    //defaultValue="Hello World"
+                    onChange={ handleNewStudent }
+                />
+                <TextField
+                    required
+                    id="last_name"
+                    label="Disabled"
+                    variant="outlined"
+                    //defaultValue="Hello World"
+                    onChange={ handleNewStudent }
+                />
+                <TextField
+                    required
+                    id="email"
+                    label="Email Address"
+                    variant="outlined"
+                    onChange={ handleNewStudent }
+
+                />
+                <TextField
+                    optional
+                    id="team_id"
+                    label="Team ID"
+                    variant="outlined"
+                    //defaultValue="Hello World"
+
+                />
+
             </div>
             <button type="submit"
                     className="btn btn-primary"
@@ -124,8 +160,8 @@ function InstructorStudentsView() {
             >
                 Submit
             </button>
-        </div>
-    </form>
+
+        </Box>
     ;
 
 
@@ -148,7 +184,6 @@ function InstructorStudentsView() {
             label: 'Team',
             minWidth: 1/6,
             align: 'center',
-            format: (value) => value.toLocaleString(),
         },
         {
             id: 'action',
@@ -198,22 +233,32 @@ function InstructorStudentsView() {
                                 case 'team_id':
                                     return(
                                         <TableCell key={column.id} align={column.align}>
-                                            <Select
-                                                labelId="demo-simple-select-autowidth-label"
-                                                id="demo-simple-select-autowidth"
-                                                value={column.id}
-                                                onChange={handleTeamChange.bind(this, index)}
-                                                minWidth={1/6}
+                                            <FormControl
+                                                sx={{ m: 1, width: 150 }}
+                                                justify="center"
+                                                align="center"
                                             >
-                                                {teamsArray.map((team) => (
-                                                    <MenuItem
-                                                        key={team}
-                                                        value={team}
-                                                    >
-                                                        {team}
-                                                    </MenuItem>
-                                                ))}
-                                            </Select>
+                                                <InputLabel id="demo-multiple-name-label" justify="center" align="center">Team Number</InputLabel>
+                                                <Select
+                                                    justify="center"
+                                                    align="center"
+                                                    labelId="demo-multiple-name-label"
+                                                    id="demo-multiple-name"
+                                                    value={student.team_id}
+                                                    onChange={handleTeamChange.bind(this, index)}
+                                                    input={<OutlinedInput label="Team Number" />}
+                                                    MenuProps={MenuProps}
+                                                >
+                                                    {teamsArray.map((team) => (
+                                                        <MenuItem
+                                                            key={team}
+                                                            value={team}
+                                                        >
+                                                            {team}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
                                         </TableCell>
                                     );
                                 case 'action':
