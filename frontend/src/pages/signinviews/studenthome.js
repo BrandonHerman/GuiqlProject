@@ -287,9 +287,9 @@ const ratingArray = [];
         >
           <Toolbar>
             <Typography variant="h6" noWrap component="div">
-              <Tabs value={value} onChange={handleChange} aria-label="student page tabs">
+              <Tabs value={value} onChange={handleChange} aria-label="student page tabs" indicatorColor='primary' textColor='primary'>
                 <Tab label="User Stories" {...a11yProps(0)}></Tab>
-                <Tab label="Meetings" {...a11yProps(1)}></Tab>
+                <Tab label="Meetings" {...a11yProps(1)} sx={{mx:"4"}}></Tab>
                 <Tab label="Progress Reports" {...a11yProps(2)}></Tab>
                 <Tab label="Peer Reviews" {...a11yProps(3)}></Tab>
               </Tabs>
@@ -313,8 +313,8 @@ const ratingArray = [];
               })}
             </Grid>
           </DragDropContext>
-          <Button variant="outlined" color="error" onClick={handleDeleteOpen}>Delete</Button>
-          <Button variant="contained" onClick={addStory}>Add Story</Button>
+          <Button variant="contained" color="error" onClick={handleDeleteOpen}>Delete</Button>
+          <Button variant="contained" color="success" onClick={addStory}>Add Story</Button>
           <Dialog fullWidth maxWidth="md" open={open} onClose={handleClickClose}>
           <DialogContent>
             <Grid container>

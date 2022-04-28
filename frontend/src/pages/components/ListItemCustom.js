@@ -5,6 +5,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Draggable } from "react-beautiful-dnd";
+import Card from "@material-ui/core/Card";
 
 const ListItemCustom = ({ itemObject, index }) => {
   return (
@@ -25,13 +26,13 @@ const ListItemCustom = ({ itemObject, index }) => {
             primary={`${itemObject.text}`}
           />
           <ListItemSecondaryAction>
-            <IconButton
+            {/* <IconButton
               edge="end"
               aria-label="comments"
               question-uid={itemObject.id}
               sx={{ borderRadius: 0, color: 'blue' }}
             >
-            </IconButton>
+            </IconButton> */}
           </ListItemSecondaryAction>
         </ListItem>
       )}

@@ -22,7 +22,8 @@ const Column = ({ column }) => {
         bgcolor: 'LightGray', 
         display:'flex', 
         flexDirection:'column',
-        justifyContent:'center'}}>
+        justifyContent:'center',
+        mx:'2'}}>
       <Typography variant={"h4"}>{column.id}</Typography>
       <Droppable droppableId={column.id}>
         {(provided) => (
