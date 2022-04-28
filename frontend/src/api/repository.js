@@ -19,8 +19,8 @@ export class Repository {
                 resolve(x.data);
             })
             .catch(x => {
-                alert(x);
-                reject(x);
+                alert(x.data);
+                reject(x.data);
             });
         })
     }
@@ -34,8 +34,8 @@ export class Repository {
                 resolve(x.data);
             })
             .catch(x => {
-                alert(x);
-                reject(x);
+                alert(x.data);
+                reject(x.data);
             });
         })
     }
@@ -49,8 +49,8 @@ export class Repository {
                 resolve(x.data);
             })
             .catch(x => {
-                alert(x);
-                reject(x);
+                alert(x.data);
+                reject(x.data);
             });
         })
     }
@@ -64,8 +64,8 @@ export class Repository {
                 resolve(x.data);
             })
             .catch(x => {
-                alert(x);
-                reject(x);
+                alert(x.data);
+                reject(x.data);
             });
         })
     }
@@ -79,8 +79,8 @@ export class Repository {
                 resolve(x.data);
             })
             .catch(x => {
-                alert(x);
-                reject(x);
+                alert(x.data);
+                reject(x.data);
             });
         })
     }
@@ -99,8 +99,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -114,8 +114,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -129,8 +129,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -153,8 +153,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -172,8 +172,38 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
+    // Create University given name
+    createCollege(name) {
+        console.log("Creating university: " + name);
+        return new Promise((resolve, reject) => {
+            axios.post(`${this.url}/createCollege?name=${name}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
+    // Get College given name
+    getCollegeByName(name) {
+        console.log("Getting college for name: " + name);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getCollegeByName?name=${name}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -195,8 +225,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -210,8 +240,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -226,8 +256,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -241,8 +271,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -260,28 +290,27 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
 
-    // I need to create professors given a professor object
-    createProfessor(professor) {
-        console.log("Adding Prof ", professor);
+    // I need to create professors given a username, password, first name, last name, email, and college id
+    createProfessor(first_name, last_name, username, password, email, college_id) {
+        console.log("Creating professor for first_name: " + first_name + " and last_name: " + last_name);
         return new Promise((resolve, reject) => {
-            axios.post(`${this.url}/createProfessor`, professor, this.config)
+            axios.post(`${this.url}/createProfessor?first_name=${first_name}&last_name=${last_name}&user_name=${username}&password=${password}&email=${email}&college_id=${college_id}`)
                 .then(x => {
                     resolve(x.data);
-                    console.log(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
-                })
+                    alert(x.data);
+                    reject(x.data);
+                });
         })
-
     }
+
 
     // I need to get a professor given their prof_id
     searchProf(id) {
@@ -314,8 +343,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -329,8 +358,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -344,8 +373,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -363,8 +392,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -378,8 +407,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -393,8 +422,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -408,8 +437,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -423,8 +452,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -442,8 +471,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -457,8 +486,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -472,8 +501,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -487,8 +516,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -506,8 +535,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -525,8 +554,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -540,8 +569,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -555,8 +584,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
@@ -570,8 +599,8 @@ export class Repository {
                     resolve(x.data);
                 })
                 .catch(x => {
-                    alert(x);
-                    reject(x);
+                    alert(x.data);
+                    reject(x.data);
                 });
         })
     }
