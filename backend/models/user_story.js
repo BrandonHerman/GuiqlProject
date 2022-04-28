@@ -11,7 +11,7 @@ const createUserStory = async (title,description,student_id,team_id) => {
 const searchById = async (story_id) => {
     const query = await knex(STORY_TABLE).where({story_id});
     const result = await query;
-    return query;
+    return result;
 }
 
 const searchByTitle = async (title) => {
