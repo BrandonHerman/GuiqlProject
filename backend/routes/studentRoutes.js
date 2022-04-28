@@ -6,7 +6,7 @@ router.post('/createStudent', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.student.createStudent(body.student_id, body.first_name, body.last_name, body.username, body.password);
+        const result = await req.models.student.createStudent(body.first_name, body.last_name, body.username, body.password, body.in_team, body.prof_id, body.class_id, body.college_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new Student:', err);
@@ -66,6 +66,34 @@ router.get('/searchStudentByEmail', async (req, res, next) => {
     }
 });
 
+router.get('/searchStudentByCollege', async (req, res, next) => {
+    try {
+        const college_id = req.params.college_id;
+        console.log(college_id);
+        const result = await Student.searchByCollge(college_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current Student:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+});
+
+router.put('/updateTeam', async (req, res, next) => {
+    try {
+
+        const student_id = req.params.student_id;
+        const team = req.params.team;
+        //console.log(team_id, name);
+        const result = await req.models.student.updateTeam(student_id, team);
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Failed to update team:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+
+    next();
+});
+
 router.get('/searchStudentByTeam', async (req, res, next) => {
     try {
         const team_id = req.params.team_id;
@@ -102,7 +130,7 @@ router.get('/getStudentName', async (req, res, next) => {
     }
 });
 
-router.delete('/:student_id', async (req, res, next) => {
+router.delete('/deleteStudent', async (req, res, next) => {
     try {
         const student_id = req.params.student_id;
         console.log(student_id);

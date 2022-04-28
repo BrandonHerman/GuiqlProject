@@ -6,7 +6,7 @@ router.post('/createCollege', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.college.createCollege(body.college_id, body.name);
+        const result = await req.models.college.createCollege(body.name);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new College:', err);
@@ -56,6 +56,18 @@ router.get('/getCollegeID', async (req, res, next) => {
         const name = req.params.name;
         console.log(name);
         const result = await College.getID(name);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current College:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
+router.get('/getCollegeByProfID', async (req, res, next) => {
+    try {
+        const prof_id = req.params.prof_id;
+        console.log(prof_id);
+        const result = await College.getCollegeByProfID(prof_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current College:', err);

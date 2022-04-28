@@ -6,7 +6,7 @@ router.post('/createRecruiter', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.recruiter.createRecruiter(body.recruiter_id, body.first_name, body.last_name, body.username, password);
+        const result = await req.models.recruiter.createRecruiter(body.first_name, body.last_name, body.username, body.password);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new recruiter:', err);
@@ -43,6 +43,29 @@ router.put('/addRecruiterBio', async (req, res, next) => {
 
     next();
 });
+
+router.get('/getBioByID', async (req, res, next) => {
+    try {
+        const recruiter_id = req.params.recruiter_id;
+        const result = await Recruiter.getBioByID(recruiter_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current recruiter:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
+router.get('/getBioByCollege', async (req, res, next) => {
+    try {
+        const college_id = req.params.college_id;
+        const result = await Recruiter.getBioByCollege(college_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current recruiter:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
 router.delete('/deleteRecruiter', async (req, res, next) => {
     try {
         const recruiter_id = req.params.recruiter_id;

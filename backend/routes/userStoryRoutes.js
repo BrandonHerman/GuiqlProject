@@ -5,7 +5,7 @@ router.post('/createUserStory', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.user_story.createUserStory(body.story_id, body.title, body.description);
+        const result = await req.models.user_story.createUserStory(body.title, body.description);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new user story:', err);

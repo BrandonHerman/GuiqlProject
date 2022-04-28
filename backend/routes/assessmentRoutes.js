@@ -6,7 +6,7 @@ router.post('/createAssessment', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.assessment.createAssessment(body.assessment_id, body.assessment_link, body.prof_id, body.team_id);
+        const result = await req.models.assessment.createAssessment(body.assessment_link, body.prof_id, body.team_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new Class:', err);
@@ -53,6 +53,39 @@ router.put('/setAssessmentLink', async (req, res, next) => {
 
     next();
 });
+
+router.get('/getAssessmentFlag', async (req, res, next) => {
+    try {
+        const assessment_id = req.params.assessment_id;
+        const result = await Assessment.getAssessmentFlag(assessment_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current assessment:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
+router.get('/getFlagByProfID', async (req, res, next) => {
+    try {
+        const prof_id = req.params.prof_id;
+        const result = await Assessment.getFlagByProfID(prof_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current assessment:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
+router.get('/getLinkByProfID', async (req, res, next) => {
+    try {
+        const prof_id = req.params.prof_id;
+        const result = await Assessment.getLinkByProfID(prof_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current assessment:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
 
 router.put('/setFlagPublished', async (req, res, next) => {
     try {

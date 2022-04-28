@@ -9,7 +9,7 @@ router.post('/createProfessor', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.professor.createProfessor(body.prof_id, body.first_name, body.last_name, body.username, body.password);
+        const result = await req.models.professor.createProfessor(body.first_name, body.last_name, body.username, body.email, body.password);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new professor:', err);
@@ -61,6 +61,18 @@ router.get('/searchProfessorByEmail', async (req, res, next) => {
         const email = req.params.email;
         console.log(email);
         const result = await Professor.searchByEmail(email);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current professor:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
+router.get('/searchProfessorByCollege', async (req, res, next) => {
+    try {
+        const college_id = req.params.college_id;
+        console.log(college_id);
+        const result = await Professor.searchByCollege(college_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current professor:', err);

@@ -6,7 +6,7 @@ router.post('/createClass', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.class.createClass(body.class_id,body.start_time,body.end_time,body.prof_id);
+        const result = await req.models.class.createClass(body.class_name, body.class_day, body.class_time, body.size, body.group_count, body.prof_id, body.college_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new Class:', err);
@@ -46,6 +46,20 @@ router.get('/getEndTimeOfClass', async (req, res, next) => {
         const class_id = req.params.class_id;
         console.log(class_id);
         const result = await Class.getEndTime(class_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current class:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
+router.get('/getClass', async (req, res, next) => {
+    try {
+        const class_day = req.params.class_day;
+        const class_time = req.params.class_time;
+        const college_id = req.params.college_id;
+        console.log(class_day, class_time, college_id);
+        const result = await Class.getClass(class_day, class_time, college_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current class:', err);

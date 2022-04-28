@@ -6,7 +6,7 @@ router.post('/createTeam', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.team.createTeam(body.team_id,body.team_name,body.team_num);
+        const result = await req.models.team.createTeam(body.team_name,body.team_num);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new team:', err);
@@ -96,6 +96,20 @@ router.get('/getTeamName', async (req, res, next) => {
         res.sendStatus(500).json({ message: err.toString() });
     }
 });
+
+router.delete('/deleteTeam', async (req, res, next) => {
+    try {
+        const team_id = req.params.team_id;
+        console.log(team_id);
+        const result = await req.models.student.removeTeam(team_id);
+        res.status(204).json(result);
+    } catch (err) {
+        console.error('Failed to delete team:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+
+    next();
+})
 
 module.exports = router;
 
