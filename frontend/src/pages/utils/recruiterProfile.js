@@ -4,6 +4,7 @@ var RecruiterProfile = (function () {
     var email = "";
     var password = "";
     var username = "";
+    var recruiterID = -1;
 
     var getEmail = function () {
         return email;
@@ -32,11 +33,11 @@ var RecruiterProfile = (function () {
     }
 
     var getID = function() {
-        return profID;
+        return recruiterID;
     }
 
     var setID = function(id) {
-        profID = id;
+        recruiterID = id;
     }
 
     var getPassword = function () {

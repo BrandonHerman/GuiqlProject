@@ -23,15 +23,16 @@ export default function RecruiterSignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      username: data.get('username'),
-      password: data.get('password'),
-      // passwordConfirm: data.get('passwordConfirm'),
-      university: data.get('university')
-
-    });
+    const college_id = repository.getCollegeByName(data.get('university'));
+    const username = data.get('firstName')[0] + data.get('lastName');
+    repository.createRecruiter(
+      data.get('firstName'),
+      data.get('lastName'),
+      username,
+      data.get('password'),
+      data.get('email'),
+      college_id
+    );
   };
 
   return (
@@ -91,10 +92,10 @@ export default function RecruiterSignUp() {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
             />
             <TextField
               margin="normal"
