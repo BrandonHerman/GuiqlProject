@@ -49,9 +49,7 @@ export default function InstructorClassHome() {
     }
 
     const navigate = useNavigate();
-    const navigateLink = function (classId, profID) {
-        navigate('/instructorstudentsview', { state: { cID: classId, pID: profID } });
-    }
+    
 
     //GET CLASS BY PROF ID HERE API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
     //class_name, class_time, size, group_count

@@ -9,7 +9,7 @@ import {
     Card, CardContent, CardActions, CardActionArea, ButtonBase, Alert
 } from "@mui/material"
 import SignOutButton from '../components/signOutButton';
-
+import { useLocation } from 'react-router-dom';
 
 //import InboxIcon from '@mui/icons-material/MoveToInbox';
 //import MailIcon from '@mui/icons-material/Mail';
@@ -17,27 +17,48 @@ import SignOutButton from '../components/signOutButton';
 import Skeleton from '@mui/material/Skeleton';
 import { Student } from "../models/Student";
 import { Team } from "../models/Team";
-
+import JSONCalls from '../assets/JSONCalls';
 const drawerWidth = 120;
 
 //const tableWidth = 100%;
 
 
 
-function InstructorTeamsView() {
-    const [teams, setTeams] = React.useState([new Team(1, 'teamsters', 1), new Team(2, 'teamers', 2), new Team(3, 'teamthreestar', 3)]
-    );
+const InstructorTeamsView = (props) => {
 
-    const [students, setStudents] = React.useState([new Student('1', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com', 0, 1, 3),
-    new Student('2', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com')
-    ]
-    );
+    const calls = new JSONCalls;
 
+        const location = useLocation();
+    const data = location.state;
+    console.log(data);
     const group_count = 8;
-    const teamsArray = [];
-    for (let i = 1; i <= group_count; i++) {
-        teamsArray.push(i);
-    }
+    console.log(data.studentsList);
+    const [students, setStudents] = React.useState(data.studentsList);
+
+    const [teams, setTeams] = React.useState([]);
+
+    let numTeams = 0;
+    const getNumTeams = students.map((student, index) =>{
+        for (let i = 0; i < students.length; i++){
+            if(student.teamID > numTeams){
+                numTeams = student.teamID
+            }
+        }
+    });
+
+
+    let count = 0;
+    const generateTeams = students.map((student, index) => {
+        for (let i = 0; i < numTeams; i++){
+            count = 0;
+            for(let j = 0; j < students.length; j++){
+                if(students.teamID === i+1){
+                    count++;
+                }
+            }
+
+        }
+    });
 
     /*
     const handleTeamChange = (index, event) => {
@@ -285,6 +306,8 @@ function InstructorTeamsView() {
     const [viewOpen, setViewOpen] = React.useState(false);
     const handleViewOpen = () => setViewOpen(true);
     const handleViewClose = () => setViewOpen(false);
+
+
 
     const gridItems = teams.map((team, index) =>
         <Grid item xs={4}>

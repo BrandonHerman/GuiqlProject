@@ -37,14 +37,14 @@ const MenuProps = {
 
 const InstructorStudentsView = (props) => {
 
-    const {cID, pID} = useLocation();
+    // const {cID, pID} = useLocation();
 
-const calls = new JSONCalls;
+    const calls = new JSONCalls;
     const location = useLocation();
     const data = location.state;
     console.log(data);
     const [students, setStudents] = React.useState(calls.getStudentsByClassId(data.userID, data.classID));
-    
+
     const group_count = 8;
     const teamsArray = [];
 
@@ -74,10 +74,10 @@ const calls = new JSONCalls;
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         p: 4,
-        pl:8, 
+        pl: 8,
         flexDirection: 'column'
     };
 
@@ -138,9 +138,9 @@ const calls = new JSONCalls;
             component="form"
             sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
-              justifyContent:'center',
-              alignContent:'center',
-              p:5
+                justifyContent: 'center',
+                alignContent: 'center',
+                p: 5
             }}
             noValidate
             autoComplete="off"
@@ -181,15 +181,15 @@ const calls = new JSONCalls;
 
             </div>
             <Box item justifyContent="center" alignItems="center">
-            <Button disableTouchRipple variant="contained" color="primary"
-                onClick={handleNewStudentSubmit}
-                justifyContent= "center"
-                alignItems= "center" 
-                pl='10'
-            >
-                Submit
-            </Button>
-</Box>
+                <Button disableTouchRipple variant="contained" color="primary"
+                    onClick={handleNewStudentSubmit}
+                    justifyContent="center"
+                    alignItems="center"
+                    pl='10'
+                >
+                    Submit
+                </Button>
+            </Box>
         </Box>
         ;
 
@@ -240,12 +240,12 @@ const calls = new JSONCalls;
                                 >
                                     {/* <InputLabel id="demo-multiple-name-label" justify="center" align="center">Team Number</InputLabel> */}
                                     <Select
-                                        sx={{width:'75px'}}
+                                        sx={{ width: '75px' }}
                                         labelId="demo-multiple-name-label"
                                         id="demo-multiple-name"
                                         value={student.team_id}
                                         onChange={handleTeamChange.bind(this, index)}
-                                        input={<OutlinedInput/>}
+                                        input={<OutlinedInput />}
                                         MenuProps={MenuProps}
                                     >
                                         {teamsArray.map((team, i) => (
@@ -288,140 +288,124 @@ const calls = new JSONCalls;
 
     );
 
+return (
+    <Grid container>
 
-    return (
+        <CssBaseline />
 
-        <Grid container>
-
-            <CssBaseline />
-
-            <AppBar
-                sx={{ width: `100%`, bgcolor: '#ffffff' }}
+        <AppBar
+            sx={{ width: `100%`, bgcolor: '#ffffff' }}
+        >
+            <Grid
+                container
+                sx={{ px: 4, py: 2 }}
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="center"
             >
-                <Grid
-                    container
-                    sx={{ px: 4, py: 2 }}
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="center"
-                >
-
+                <Link to="/classeshome">
                     <img display="inline" src="https://i.imgur.com/RzmXLUB.png" alt="Guiql Logo" />
+                </Link>
+                <Typography display="absolute" id="headerName" component="h1" variant="h5">
+                    Good evening, Prof. lastname!
+                </Typography>
 
-                    <Typography display="absolute" id="headerName" component="h1" variant="h5">
-                        Good evening, Prof. lastname!
-                    </Typography>
-
-                    <SignOutButton></SignOutButton>
-                </Grid>
-
-
-                <Grid container
-                    sx={{ px: 4, py: 2 }}
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="center">
+                <SignOutButton></SignOutButton>
+            </Grid>
 
 
-                    {/* <Typography variant="h1" component="h1"> */}
-                    {/* CS 3345 */}
-                    {/* </Typography> */}
+            <Grid container
+                sx={{ px: 4, py: 2 }}
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="center">
 
 
-                    <Link to="/instructorstudentsview" state={{
-                        userID: InstructorProfile.getID(),
-                        classID: elem.id
-                    }}>
-                        <Button>Students</Button>
-                    </Link>
-
-                    <Link to="/instructorteamsview">
-                        <Button>Teams</Button>
-                    </Link>
-
-                </Grid>
-            </AppBar>
 
 
-            <Box
-                component="main"
-                sx={{ width: 1, height: '100vh', bgcolor: '#eeeeee', p: 3 }}
-            >
 
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-               
-                <Paper maxHeight sx={{ width: '100%'}}>
-                    <TableContainer sx={{ overflow: 'auto' }}>
-                        <Table stickyHeader aria-label="sticky table" >
-                            <TableHead >
-                                <TableRow >
-                                    {columns.map((column) => (
-                                        <TableCell
-                                            key={column.id}
-                                            align={column.align}
-                                            style={{ minWidth: column.minWidth }}
-                                            sx={{ bgcolor: '#ffffff' }}
-                                        >
-                                            {column.label}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {newListItems}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+            </Grid>
+        </AppBar >
 
 
-                    <div>
-                        <Button onClick={handleOpen} type="submit"
-                            fullWidth
-                            variant="contained" sx={{ bgcolor: '#eeeeee' }}>Add Student</Button>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                            alignItems="center"
-                            jutsifyContent="center"
-                            direction="column"
-                            style={{display:'flex',alignItems:'center',justifyContent:'center'}}
-                        >
-                            <Box sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                    Enter Student Info
-                                </Typography>
+        <Box
+            component="main"
+            sx={{ width: 1, height: '100vh', bgcolor: '#eeeeee', p: 3 }}
+        >
 
-                                {studentForm}
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
 
-                            </Box>
-
-                        </Modal>
-
-                    </div>
-                </Paper>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
+            <Paper maxHeight sx={{ width: '100%' }}>
+                <TableContainer sx={{ overflow: 'auto' }}>
+                    <Table stickyHeader aria-label="sticky table" >
+                        <TableHead >
+                            <TableRow >
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                        sx={{ bgcolor: '#ffffff' }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {newListItems}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
 
 
-            </Box>
+                <div>
+                    <Button onClick={handleOpen} type="submit"
+                        fullWidth
+                        variant="contained" sx={{ bgcolor: '#eeeeee' }}>Add Student</Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                        alignItems="center"
+                        jutsifyContent="center"
+                        direction="column"
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Enter Student Info
+                            </Typography>
 
-        </Grid>
+                            {studentForm}
 
-    );
+                        </Box>
+
+                    </Modal>
+
+                </div>
+            </Paper>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+        </Box>
+
+    </Grid >
+);
 }
 // flexGrow: 1,
 
