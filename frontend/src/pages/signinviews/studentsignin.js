@@ -11,22 +11,50 @@ import './studentsignin.css'
 import { Link } from "react-router-dom";
 import { FormControlLabel } from '@mui/material';
 import { Checkbox } from '@mui/material';
+import StudentProfile from '../utils/studentProfile';
+import { Repository } from '../../api/repository';
 import {Navigate, useNavigate } from "react-router-dom";
 
 export default function StudentSignIn() {
 
+  var repository = new Repository();
   var navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const username = data.get('username');
+    const password = data.get('password');
     console.log({
       username: data.get('username'),
       password: data.get('password'),
     });
+
+    validateUser(username, password);
+
     navigate('/studenthome');
 
+
   };
+
+    //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
+    const validateUser = (inUsername, inPassword) => {
+      var student = repository.getStudentByUsername(inUsername);
+      if(student.username === null){
+        alert("User does not exist");
+      } else if(student.password === inPassword && student.username === inUsername){
+        console.log("Successful Login");
+        StudentProfile.setEmail(student.email);
+        StudentProfile.setName(student.first_name, student.last_name);
+        StudentProfile.setID(student.recruiter_id);
+        StudentProfile.setUsername(student.username);
+        StudentProfile.setPassword(student.password);
+        //ADD PROPER NAVIGATE FOR STUDENTS
+        //navigate('/classeshome');
+      }else{
+        alert("Username or Password is incorrect, try again!");
+      }
+    }
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>

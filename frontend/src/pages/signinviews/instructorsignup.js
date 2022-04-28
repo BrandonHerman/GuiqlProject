@@ -48,25 +48,7 @@ export default function InstructorSignUp() {
       data.get('email'),
       college_id
     );
-    // professor = {
-    //   id: 0,
-    //   first_name: data.get('firstName'),
-    //   last_name: data.get('lastName'),
-    //   username: data.get('email'),
-    //   password: data.get('password')
-    // }
     event.preventDefault();
-
-    repository.createProfessor(professor);
-    console.log({
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-      // passwordConfirm: data.get('passwordConfirm'),
-      university: data.get('university')
-
-    });
   };
 
   return (

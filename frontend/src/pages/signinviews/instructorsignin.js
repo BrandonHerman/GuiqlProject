@@ -11,27 +11,27 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import InstructorProfile from '../utils/instructorProfile';
+import { Repository } from '../../api/repository';
 
 export default function InstructorSignIn() {
+
+  var repository = new Repository();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    handleUsername(data.get('username'));
-    handlePassword(data.get('password'));
+    var username = data.get('username')
+    var password = data.get('password')
     console.log({
       username: data.get('username'),
       password: data.get('password') 
     });
-    InstructorProfile.setUsername(data.get('username'));
-    InstructorProfile.setPassword(data.get('password'));
-    navigate('/classeshome');
+    validateUser(username, password);
   };
 
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [redirect, setRedirect] = React.useState(false);
-  const handleUsername = (username) => setUsername(username);
-  const handlePassword = (password) => setPassword(password);
   let navigate = useNavigate();
   // const onClickNavigate = (event) => {
   //     // <Navigate to='/classeshome' state={{ email: email, password: password }} />
@@ -44,7 +44,24 @@ export default function InstructorSignIn() {
   //     navigate('/classeshome');
   // }
 
-
+  //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
+  const validateUser = (inUsername, inPassword) => {
+    //get prof by username
+    var prof = repository.getInstructorByUsername(username);
+    if(prof.username === null){
+      alert("User does not exist");
+    } else if(prof.password === password && prof.username === inUsername){
+      console.log("Successful Login");
+      InstructorProfile.setEmail(prof.email);
+      InstructorProfile.setName(prof.first_name, prof.last_name);
+      InstructorProfile.setID(prof.prof_id);
+      InstructorProfile.setUsername(prof.username);
+      InstructorProfile.setPassword(prof.password);
+      navigate('/classeshome');
+    }else{
+      alert("Username or Password is incorrect, try again!");
+    }
+  }
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -75,7 +92,7 @@ export default function InstructorSignIn() {
           <Typography component="h1" variant="h5">
             Instructor Sign In
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
+          <Box component="form" noValidate onSubmit={validateUser} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
             <TextField
               margin="normal"
               required

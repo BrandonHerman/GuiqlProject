@@ -9,6 +9,9 @@ import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 import { Autocomplete, InputLabel } from '@mui/material';
 import unis from '../assets/universities.js';
+
+import { Repository } from '../../api/repository';
+
 // parse university list for sign in
 // remove state from name
 var universitiesPreSlice = unis.split(/\r\n|\r|\n/);
@@ -19,9 +22,22 @@ universitiesPreSlice.map((university) => {
 
 
 export default function RecruiterSignUp() {
+
+  var repository = new Repository();
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const college_id = repository.getCollegeByName(data.get('university'));
+    const username = data.get('firstName')[0] + data.get('lastName');
+    repository.createRecruiter(
+      data.get('firstName'),
+      data.get('lastName'),
+      username,
+      data.get('password'),
+      data.get('email'),
+      college_id
+    );
     console.log({
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),
@@ -92,10 +108,10 @@ export default function RecruiterSignUp() {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
             />
             <TextField
               margin="normal"

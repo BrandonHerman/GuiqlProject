@@ -3,7 +3,6 @@ import './App.css';
 import axios from 'axios';
 import InstructorStudentsView from './pages/classviews/instructorstudentsview';
 import StudentSignIn from './pages/signinviews/studentsignin';
-import StudentHome from './pages/signinviews/studenthome';
 import {Theme, ThemeProvider} from '@material-ui/core/styles/'
 import { Link } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -79,7 +78,7 @@ function App() {
     // {/* add gui theme to all child components */}
       // <CssBaseline/>
       <div className="App">
-        <StudentSignIn></StudentSignIn>
+        <InstructorStudentsView></InstructorStudentsView>
       </div>
     // </ThemeProvider>
   );

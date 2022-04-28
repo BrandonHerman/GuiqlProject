@@ -10,21 +10,31 @@ import './instructorsignin.css'
 import { Link } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import {Navigate, useNavigate} from 'react-router-dom';
 import RecruiterProfile from '../utils/recruiterProfile';
+import { Repository } from '../../api/repository';
+
+
+
+import {Navigate, useNavigate} from 'react-router-dom';
+
 import Avatar, { genConfig } from 'react-nice-avatar'
 
 export default function RecruiterSignIn() {
-
+  var repository = new Repository();
   var navigate = useNavigate();
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const username = data.get('username');
+    const password = data.get('password');
     console.log({
       username: data.get('username'),
       password: data.get('password'),
     });
+
+    validateUser(username, password);
     var username = data.get('username');
     console.log(username);
     RecruiterProfile.setName(username, username); 
@@ -34,6 +44,25 @@ export default function RecruiterSignIn() {
     console.log("clicked recruiter sign in button");
     navigate("/recruiterhome");
   };
+
+    //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
+    const validateUser = (inUsername, inPassword) => {
+      var recruiter = repository.getRecruiterByUsername(inUsername);
+      if(recruiter.username === null){
+        alert("User does not exist");
+      } else if(recruiter.password === inPassword && recruiter.username === inUsername){
+        console.log("Successful Login");
+        RecruiterProfile.setEmail(recruiter.email);
+        RecruiterProfile.setName(recruiter.first_name, recruiter.last_name);
+        RecruiterProfile.setID(recruiter.recruiter_id);
+        RecruiterProfile.setUsername(recruiter.username);
+        RecruiterProfile.setPassword(recruiter.password);
+        //ADD PROPER NAVIGATE FOR RECRUITERS
+        //navigate('/classeshome');
+      }else{
+        alert("Username or Password is incorrect, try again!");
+      }
+    }
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>

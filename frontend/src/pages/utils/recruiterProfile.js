@@ -4,10 +4,13 @@ var RecruiterProfile = (function () {
     var email = "";
     var password = "";
     var username = "";
+    var recruiterID = -1;
+
     var bio = "";
     var image = "";
     var uni = "";
     var config;
+
 
     var getUni = function() {
         return uni;
@@ -53,13 +56,15 @@ var RecruiterProfile = (function () {
         lastName = last;
     }
 
-    // var getID = function() {
-        // return profID;
-    // }
 
-    // var setID = function(id) {
-        // profID = id;
-    // }
+    var getID = function() {
+        return recruiterID;
+    }
+
+    var setID = function(id) {
+        recruiterID = id;
+    }
+
 
     var getPassword = function () {
         return password;
@@ -82,8 +87,8 @@ var RecruiterProfile = (function () {
         setEmail: setEmail,
         getPassword: getPassword,
         setPassword: setPassword,
-        // getID: getID,
-        // setID: setID,
+         getID: getID,
+         setID: setID,
         getUsername: getUsername,
         setUsername: setUsername,
         setBio: setBio,
