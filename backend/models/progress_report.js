@@ -2,17 +2,10 @@ const knex = require('../database/knex');
 
 const PROGRESS_REPORT_TABLE = 'Progress_Report';
 
-const createProgressReport = async (report_id,sprint,report,team_id) => {
-    //check if report already exists
-    const id = await searchByID(report_id);
-
-    if(id) {
-        return "Report already exists";
-    } else {
-        const query = await knex(PROGRESS_REPORT_TABLE).insert({report_id,sprint,report,team_id});
-        const returnValue = await knex(PROGRESS_REPORT_TABLE).select('Progress_Report.report_id','Progress_Report.sprint','Progress_Report.report','Progress_Report.team_id');
-        return returnValue;
-    }
+const createProgressReport = async (sprint,report,team_id) => {
+    const query = await knex(PROGRESS_REPORT_TABLE).insert({sprint,report,team_id});
+    const returnValue = await knex(PROGRESS_REPORT_TABLE).select('Progress_Report.report_id','Progress_Report.sprint','Progress_Report.report','Progress_Report.team_id');
+    return returnValue;
 }
 
 const searchByID = async (report_id) => {

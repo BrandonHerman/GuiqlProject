@@ -2,17 +2,10 @@ const knex = require('../database/knex');
 
 const STORY_TABLE = 'User_story';
 
-const createUserStory = async (story_id,title,description) => {
-    //check if story already exists
-    const id = await searchByID(team_id);
-
-    if(id) {
-        return "Team already exists";
-    } else {
-        const query = await knex(STORY_TABLE).insert({story_id,status:false,title,description,favorite:false});
-        const returnValue = await knex(STORY_TABLE).select('User_story.story_id','User_story.title','User_story.description');
-        return returnValue;
-    }
+const createUserStory = async (title,description) => {
+    const query = await knex(STORY_TABLE).insert({status:false,title,description,favorite:false});
+    const returnValue = await knex(STORY_TABLE).select('User_story.story_id','User_story.title','User_story.description');
+    return returnValue;
 }
 
 const searchByID = async (story_id) => {
