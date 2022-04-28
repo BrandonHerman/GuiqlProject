@@ -8,7 +8,7 @@ const createClass = async (class_time,prof_id,group_count,size,college_id) => {
     return returnValue;
 }
 
-const searchByID = async (class_id) => {
+const searchById = async (class_id) => {
     const query = await knex(CLASS_TABLE).where({class_id});
     const result = await query;
     return result;
@@ -64,7 +64,7 @@ const makePeerReviewVisible = async (class_id) => {
 
 module.exports = {
     createClass,
-    searchByID,
+    searchById,
     getClass,
     getClassesByProfId,
     getProfessor,
