@@ -46,10 +46,11 @@ export default function InstructorSignIn() {
 
   //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
   const validateUser = (inUsername, inPassword) => {
-    var prof = repository.getInstructorByUsername(inUsername);
+    //get prof by username
+    var prof = repository.getInstructorByUsername(username);
     if(prof.username === null){
       alert("User does not exist");
-    } else if(prof.password === inPassword && prof.username === inUsername){
+    } else if(prof.password === password && prof.username === inUsername){
       console.log("Successful Login");
       InstructorProfile.setEmail(prof.email);
       InstructorProfile.setName(prof.first_name, prof.last_name);
