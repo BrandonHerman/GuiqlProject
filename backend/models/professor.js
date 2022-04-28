@@ -27,16 +27,16 @@ const createProfessor = async (first_name,last_name,username,email,password,coll
 }
 
 const authenticate = async (username,password) => {
-    const validUsername = await searchByUsername(username);
+    const validUsername = await findByUsername(username);
 
     // check if username exists
     if (validUsername == false) {
         return "Username does not exist!";
     } else {
         // check if password is correct
-        const saltH = await knex(PROFESSOR_TABLE).select(salt).where({username});
+        //const saltH = await knex(PROFESSOR_TABLE).select(salt).where({username});
         //const passwdHash = await bcrypt.hash(password,saltH);
-        passwdHash = password;
+        //passwdHash = password;
         const validPassword = await findUserByPassword(username,passwdHash);
          if (validPassword.length !== 0) {;
             const query = await knex(PROFESSOR_TABLE).where({username,password: validPassword[0].password});
