@@ -47,7 +47,7 @@ const addBio = async (recruiter_id,rec_bio) => {
     return result;
 }
 
-const getBioByID = async (recruiter_id) => {
+const getBioById = async (recruiter_id) => {
     const query = await knex(RECRUITER_TABLE).select(bio).where({recruiter_id});
     const result = await query;
     return result;
@@ -75,7 +75,7 @@ module.exports = {
     createRecruiter,
     authenticate,
     addBio,
-    getBioByID,
+    getBioById,
     getBioByCollege,
     getByUsername,
     deleteRecruiter
