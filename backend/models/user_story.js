@@ -8,7 +8,7 @@ const createUserStory = async (title,description) => {
     return returnValue;
 }
 
-const searchByID = async (story_id) => {
+const searchById = async (story_id) => {
     const query = await knex(STORY_TABLE).where({story_id});
     const result = await query;
     return query;
@@ -58,7 +58,7 @@ const removeStory = async (story_id) => {
 
 module.exports = {
     createUserStory,
-    searchByID,
+    searchById,
     searchByTitle,
     setStatus,
     setAsFavorite,
