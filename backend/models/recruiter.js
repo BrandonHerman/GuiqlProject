@@ -48,13 +48,13 @@ const addBio = async (recruiter_id,rec_bio) => {
 }
 
 const getBioById = async (recruiter_id) => {
-    const query = await knex(RECRUITER_TABLE).select(bio).where({recruiter_id});
+    const query = await knex(RECRUITER_TABLE).select('bio').where({recruiter_id});
     const result = await query;
     return result;
 }
 
 const getBioByCollege = async (college_id) => {
-    const query = await knex(RECRUITER_TABLE).select(bio).where({college_id});
+    const query = await knex(RECRUITER_TABLE).select('bio').where({college_id});
     const result = await query;
     return result;
 }
