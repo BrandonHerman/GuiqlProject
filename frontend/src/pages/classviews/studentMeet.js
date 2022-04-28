@@ -44,16 +44,22 @@ export default function StudentTabs() {
 
     const [date, setDate] = React.useState('');
     const [meetingPlace, setMeetingPlace] = React.useState('');
-    const [meeting, setMeeting] = React.useState([{ date: "04/25/2001", meeting: "Our Zoom Link" },
-    { date: "04/25/2001", meeting: "Our Zoom Link" }]
+    const [meeting, setMeeting] = React.useState([{id: 1, date: "04/25/2001", meeting: "Our Zoom Link" },
+    { id: 2, date: "04/25/2001", meeting: "Our Zoom Link" }]
     );
     function submitMeetingForm(e) {
         e.preventDefault();
         console.log(date);
         console.log(meetingPlace);
     };
-    const handleDeleteMeeting = (elem) => {
-        console.log(elem);
+    const handleDeleteMeeting = (meetingId) => {
+        const newMeetings = [...meeting];
+
+        const index = meeting.findIndex((meetings)=> meetings.id === meetingId);
+
+        newMeetings.splice(index, 1);
+
+        setMeeting(newMeetings);
     };
 
     return (
@@ -104,12 +110,10 @@ export default function StudentTabs() {
                                 <TableCell>{elem.date}</TableCell>
                                 <TableCell>{elem.meeting}</TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="success">
-                                        Edit
-                                    </Button>
+                                    
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="error" onClick={() => handleDeleteMeeting(elem)}>
+                                    <Button variant="contained" color="error" onClick={() => handleDeleteMeeting(elem.id)}>
                                         Delete
                                     </Button>
                                 </TableCell>
