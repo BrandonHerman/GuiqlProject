@@ -5,7 +5,6 @@ var json = JSON.parse(JSON.stringify(testStuff));
 
 export class Repository {
     profSignIn(inUsername, inPassword){
-        // FIND PROFESSOR GIVEN USERNAME
         for(let i = 0; i < json.profs.length; i++){
             if(json.profs[i].username === inUsername){
                 if(json.profs[i].password === inPassword){
@@ -18,7 +17,6 @@ export class Repository {
     }
 
     studentSignIn(inUsername, inPassword){
-        // FIND STUDENT GIVEN USERNAME
         for(let i = 0; i < json.profs.length; i++){
             for(let x = 0; i < json.profs[i].classes.length; x++){
                 for(let y = 0; i < json.profs[i].classes[x].students.length; y++){
@@ -45,7 +43,6 @@ export class Repository {
     }
 
     getStudentsByClassId(profId, classId){
-        // FIND STUDENTS GIVEN CLASS ID and profId
         for(let i = 0; i < json.profs.length; i++){
             if(json.profs[i].id === profId){
                 for(let x = 0; x < json.profs[i].classes.length; x++){
@@ -56,5 +53,37 @@ export class Repository {
                 }
             }
         }
+    }
+
+    getMeetingByTeamId(profId, teamId){
+        for(let i = 0; i < json.profs.length; i++){
+            for(let x = 0; i < json.profs[i].classes.length; x++){
+                for(let y = 0; i < json.profs[i].classes[x].teams.length; y++){
+                    if(json.profs[i].classes[x].teams[y].teamID === teamId){
+                        console.log(json.profs[i].classes[x].teams[y].meeting);
+                        return json.profs[i].classes[x].teams[y].meeting;
+                    }
+                }
+            }
+        }
+    }
+
+    getStudentsByProfClassTeamId(profId, classId, teamId){
+        var stuArray = [];
+        for(let i = 0; i < json.profs.length; i++){
+            if(json.profs[i].id === profId){
+                for(let x = 0; x < json.profs[i].classes.length; x++){
+                    if(json.profs[i].classes[x].id === classId){
+                        for(let y = 0; y < json.profs[i].classes[x].students.length; y++){
+                            if(json.profs[i].classes[x].students[y].teamID === teamId){
+                                stuArray.push(json.profs[i].classes[x].students[y]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        console.log(stuArray);
+        return stuArray;
     }
 }
