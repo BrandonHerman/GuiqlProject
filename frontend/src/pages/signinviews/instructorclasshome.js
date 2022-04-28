@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { left } from '@popperjs/core';
 import StudentGeneration from '../utils/studentgeneration';
 import InstructorProfile from '../utils/instructorProfile';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // import { Repository } from '../../api/repository';
 import JSONCalls from '../assets/JSONCalls';
@@ -27,7 +28,7 @@ import green from "@material-ui/core/colors/green";
 import purple from "@material-ui/core/colors/purple";
 
 
-export default function InstructorSignIn() {
+export default function InstructorClassHome() {
 
     var calls = new JSONCalls();
 
@@ -37,7 +38,7 @@ export default function InstructorSignIn() {
         console.log("setOpen boolean = " + open);
         setOpen(true);
     }
-    var username = InstructorProfile.getUsername(); 
+    var username = InstructorProfile.getUsername();
     var password = InstructorProfile.getPassword();
     console.log("hello ");
     console.log(username);
@@ -47,28 +48,33 @@ export default function InstructorSignIn() {
         setOpen(false);
     }
 
+    const navigate = useNavigate();
+    const navigateLink = function (classId, profID) {
+        navigate('/instructorstudentsview', { state: { cID: classId, pID: profID } });
+    }
+
     //GET CLASS BY PROF ID HERE API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
     //class_name, class_time, size, group_count
     // const classes = repository.getClassesByProfessorId(this.profID);
     // const classes = {
 
-        // class: [
-        //     { number: 1, enrollment: 24, teams: 3, time: "Monday 6:30pm - 8:20pm" },
-        //     { number: 2, enrollment: 32, teams: 5, time: "Tuesday 4:30pm - 6:20pm" },
-        //     { number: 3, enrollment: 13, teams: 2, time: "Tuesday 6:30pm - 8:20pm" },
-        //     { number: 4, enrollment: 28, teams: 4, time: "Thursday 6:30pm - 8:20pm" },
-        //     { number: 5, enrollment: 28, teams: 4, time: "Friday 2:30pm - 4:20pm" },
-        //     { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
-        //     // { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
-        // ],
-        // id: [1]
+    // class: [
+    //     { number: 1, enrollment: 24, teams: 3, time: "Monday 6:30pm - 8:20pm" },
+    //     { number: 2, enrollment: 32, teams: 5, time: "Tuesday 4:30pm - 6:20pm" },
+    //     { number: 3, enrollment: 13, teams: 2, time: "Tuesday 6:30pm - 8:20pm" },
+    //     { number: 4, enrollment: 28, teams: 4, time: "Thursday 6:30pm - 8:20pm" },
+    //     { number: 5, enrollment: 28, teams: 4, time: "Friday 2:30pm - 4:20pm" },
+    //     { number: 6, enrollment: 28, teams: 4, time: "Friday 4:30pm - 6:20pm" },
+    //     // { number: 7, enrollment: 28, teams: 4, time: "Friday 6:30pm - 8:20pm" },
+    // ],
+    // id: [1]
     // };
-        const classes = calls.getClassesByProfId(InstructorProfile.getID());
- 
+    const classes = calls.getClassesByProfId(InstructorProfile.getID());
+
     function addClassCard() {
         return (
 
-            <Card id="createClassCard" raised="false" elevation="0" sx={{ minWidth:100, maxHeight: 239 }} >
+            <Card id="createClassCard" raised="false" elevation="0" sx={{ minWidth: 100, maxHeight: 239 }} >
 
                 <CardActionArea disableTouchRipple onClick={handleClickOpen}>
                     <CardContent>
@@ -97,10 +103,10 @@ export default function InstructorSignIn() {
                 <DialogTitle justify="center" align="center">Create Class</DialogTitle>
                 <Grid
                     container
-                    // justify="space-evenly"
-                    // align="center"
+                // justify="space-evenly"
+                // align="center"
                 >
-                    <TableDemo  />
+                    <TableDemo />
                 </Grid>
                 <br></br>
                 <br></br>
@@ -138,25 +144,28 @@ export default function InstructorSignIn() {
 
 
                     <br></br>
-                    <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ flexWrap: 'wrap' }}>
+                    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ justifyContent: 'center', flexWrap: 'wrap' }}>
 
-                        {classes.map((elem, i) => (
-
-                            <Grid item margin={2} xs={8} md={6} lg={4} justifyContent="center" alignItems="center">
-                                <Card sx={{ minWidth: "265px", maxWidth: "auto", height: "235px" }}>
-                                    
-                                    <Link to="/instructorstudentsview">
-                                        <CardHeader
-                                            title={`Class ${elem.id}`}
-                                            subheader={`Time: ${elem.time}`}
-                                        />
-                                        <CardContent>
-                                            <Typography>Enrollment: {elem.size} </Typography>
-                                            <Typography>Teams: {elem.groupCount} </Typography>
-                                        </CardContent>
-
-                                    </Link>
-                                        {/* <CardActions >
+                        {classes.map((elem, i) => 
+                                (
+                                    <Grid item margin={2} xs={8} md={6} lg={4} justifyContent="center" alignItems="center">
+                                        <Card sx={{ minWidth: "265px", maxWidth: "auto", height: "235px" }}>
+                                            <Link to="/instructorstudentsview" state={{
+                                                userID: InstructorProfile.getID(),
+                                                classID: elem.id
+                                            }}>
+                                                {/* <CardActionArea onClick={() => navigateLink(elem.id, InstructorProfile.getID())}> */}
+                                                <CardHeader
+                                                    title={`Class ${elem.id}`}
+                                                    subheader={`Time: ${elem.time}`}
+                                                />
+                                                <CardContent>
+                                                    <Typography>Enrollment: {elem.size} </Typography>
+                                                    <Typography>Teams: {elem.groupCount} </Typography>
+                                                </CardContent>
+                                                {/* </CardActionArea> */}
+                                            </Link>
+                                            {/* <CardActions >
                                             <IconButton 
                                                 aria-label="add-reaction">
                                                 <AddReactionIcon></AddReactionIcon>
@@ -169,10 +178,10 @@ export default function InstructorSignIn() {
                                             </IconButton>
                                         </CardActions> */}
 
-                                </Card>
+                                        </Card>
 
-                            </Grid>
-                        ))}
+                                    </Grid>
+                                ))};
                         <Grid item margin={2} justifyContent="center" alignItems="center" xs={8} md={6} lg={4}>
                             {addClassCard()}
                         </Grid>

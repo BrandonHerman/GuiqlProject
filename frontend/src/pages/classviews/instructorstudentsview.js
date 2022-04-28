@@ -2,22 +2,26 @@ import * as React from 'react';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 //import '.instructorstudentsview.css';
-import {Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer,
+import {
+    Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer,
     Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem,
-    ListItemText, Button, Modal, TextField, Select, OutlinedInput, colors, MenuItem, Icon} from "@mui/material"
-
+    ListItemText, Button, Modal, TextField, Select, OutlinedInput, colors, MenuItem, Grid, Icon
+} from "@mui/material"
+import SignOutButton from '../components/signOutButton';
 
 //import InboxIcon from '@mui/icons-material/MoveToInbox';
 //import MailIcon from '@mui/icons-material/Mail';
 
 import Skeleton from '@mui/material/Skeleton';
-import {Student} from "../models/Student";
+import { Student } from "../models/Student";
 import FormControl from "@material-ui/core/FormControl";
+import JSONCalls from '../assets/JSONCalls';
 import InputLabel from "@material-ui/core/InputLabel";
+import { useLocation } from 'react-router-dom';
+
 const drawerWidth = 120;
 
 //const tableWidth = 100%;
-
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 
@@ -30,15 +34,16 @@ const MenuProps = {
     },
 };
 
-function InstructorStudentsView() {
+const InstructorStudentsView = (props) => {
 
-    const [students, setStudents] = React.useState([new Student('1', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com', 0, 1, 3),
-            new Student('2', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com')
-        ]
-    );
+    const {cID, pID} = useLocation();
 
-
-
+const calls = new JSONCalls;
+    const location = useLocation();
+    const data = location.state;
+    console.log(data);
+    const [students, setStudents] = React.useState(calls.getStudentsByClassId(data.userID, data.classID));
+    
     const group_count = 8;
     const teamsArray = [];
 
@@ -59,15 +64,17 @@ function InstructorStudentsView() {
 
     const style = {
         position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
+        display: 'flex',
         width: '75%',
-        height: '75%',
+        // height: '75%',
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
+        justifyContent:'center',
+        alignItems:'center',
         p: 4,
+        pl:8, 
+        flexDirection: 'column'
     };
 
     const [addStudent, setAddStudent] = React.useState({
@@ -84,16 +91,15 @@ function InstructorStudentsView() {
         const fieldName = event.target.getAttribute('id');
         const fieldValue = event.target.value;
 
-        const newStudentData = { ...addStudent};
+        const newStudentData = { ...addStudent };
         newStudentData[fieldName] = fieldValue;
-
-        setAddStudent(newStudentData);
+        // setAddStudent(newStudentData);
     };
 
     const handleNewStudentSubmit = (event) => {
         event.preventDefault();
 
-        const newStudent = new Student(students.length+1, addStudent.first_name[0] + addStudent.last_name, addStudent.first_name, addStudent.last_name, addStudent.email);
+        const newStudent = new Student(students.length + 1, addStudent.first_name[0] + addStudent.last_name, addStudent.first_name, addStudent.last_name, addStudent.email);
         const newStudents = [...students, newStudent];
         setStudents(newStudents);
     };
@@ -102,7 +108,7 @@ function InstructorStudentsView() {
     const handleDeleteStudent = (studentId) => {
         const newStudents = [...students];
 
-        const index = students.findIndex((student)=> student.id === studentId);
+        const index = students.findIndex((student) => student.id === studentId);
 
         newStudents.splice(index, 1);
 
@@ -115,6 +121,9 @@ function InstructorStudentsView() {
             component="form"
             sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
+              justifyContent:'center',
+              alignContent:'center',
+              p:5
             }}
             noValidate
             autoComplete="off"
@@ -126,22 +135,22 @@ function InstructorStudentsView() {
                     label="First Name"
                     variant="outlined"
                     //defaultValue="Hello World"
-                    onChange={ handleNewStudent }
+                    onChange={handleNewStudent}
                 />
                 <TextField
                     required
-                    id="last_name"
-                    label="Disabled"
+                    id="lastName"
+                    label="Last Name"
                     variant="outlined"
                     //defaultValue="Hello World"
-                    onChange={ handleNewStudent }
+                    onChange={handleNewStudent}
                 />
                 <TextField
                     required
                     id="email"
                     label="Email Address"
                     variant="outlined"
-                    onChange={ handleNewStudent }
+                    onChange={handleNewStudent}
 
                 />
                 <TextField
@@ -149,46 +158,49 @@ function InstructorStudentsView() {
                     id="team_id"
                     label="Team ID"
                     variant="outlined"
-                    //defaultValue="Hello World"
+                //defaultValue="Hello World"
 
                 />
 
             </div>
-            <button type="submit"
-                    className="btn btn-primary"
-                    onClick={handleNewStudentSubmit}
+            <Box item justifyContent="center" alignItems="center">
+            <Button disableTouchRipple variant="contained" color="primary"
+                onClick={handleNewStudentSubmit}
+                justifyContent= "center"
+                alignItems= "center" 
+                pl='10'
             >
                 Submit
-            </button>
-
+            </Button>
+</Box>
         </Box>
-    ;
+        ;
 
 
 
     const columns = [
         //{ id: 'profilePic', label: '', minWidth: 100, align: 'center', },
-        { id: 'username', label: 'Username', minWidth: 1/6, align: 'center', },
-        { id: 'first_name', label: 'First Name', minWidth: 1/6, align: 'center', },
-        { id: 'last_name', label: 'Last Name', minWidth: 1/6, align: 'center', },
+        { id: 'username', label: 'Username', minWidth: 1 / 6, align: 'center', },
+        { id: 'first_name', label: 'First Name', minWidth: 1 / 6, align: 'center', },
+        { id: 'last_name', label: 'Last Name', minWidth: 1 / 6, align: 'center', },
         //{ id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
         {
             id: 'email',
             label: 'Email',
-            minWidth: 1/6,
+            minWidth: 1 / 6,
             align: 'center',
             //format: (value) => value.toLocaleString('en-US'),
         },
         {
             id: 'team_id',
             label: 'Team',
-            minWidth: 1/6,
+            minWidth: 1 / 6,
             align: 'center',
         },
         {
             id: 'action',
             label: '',
-            minWidth: 1/8,
+            minWidth: 1 / 8,
             align: 'center',
         },
     ];
@@ -214,7 +226,7 @@ function InstructorStudentsView() {
 
     const listItems = students.map((student, index) =>
         <TableRow hover role="checkbox" tabIndex={-1} item key={students.indexOf(student)}>
-            <TableCell><Skeleton variant="circular" width={40} height={40}/></TableCell>
+            <TableCell><Skeleton variant="circular" width={40} height={40} /></TableCell>
             <TableCell>{student.username}</TableCell>
             <TableCell>{student.first_name}</TableCell>
             <TableCell>{student.last_name}</TableCell>
@@ -225,72 +237,71 @@ function InstructorStudentsView() {
     );
 
     const newListItems = students.map((student, index) =>
-                    <TableRow hover role="checkbox" tabIndex={-1} key={students.indexOf(student)}>
+        <TableRow hover role="checkbox" tabIndex={-1} key={students.indexOf(student)}>
 
-                        {columns.map((column) => {
+            {columns.map((column) => {
 
-                            switch(column.id){
-                                case 'team_id':
-                                    return(
-                                        <TableCell key={column.id} align={column.align}>
-                                            <FormControl
-                                                sx={{ m: 1, width: 150 }}
-                                                justify="center"
-                                                align="center"
+                switch (column.id) {
+                    case 'team_id':
+                        return (
+                            <TableCell key={column.id} align={column.align}>
+                                <FormControl
+                                    sx={{ m: 1, width: 150 }}
+                                    justify="center"
+                                    align="center"
+                                >
+                                    {/* <InputLabel id="demo-multiple-name-label" justify="center" align="center">Team Number</InputLabel> */}
+                                    <Select
+                                        sx={{width:'75px'}}
+                                        labelId="demo-multiple-name-label"
+                                        id="demo-multiple-name"
+                                        value={student.team_id}
+                                        onChange={handleTeamChange.bind(this, index)}
+                                        input={<OutlinedInput/>}
+                                        MenuProps={MenuProps}
+                                    >
+                                        {teamsArray.map((team, i) => (
+                                            <MenuItem
+                                                key={i}
+                                                value={team}
                                             >
-                                                <InputLabel id="demo-multiple-name-label" justify="center" align="center">Team Number</InputLabel>
-                                                <Select
-                                                    justify="center"
-                                                    align="center"
-                                                    labelId="demo-multiple-name-label"
-                                                    id="demo-multiple-name"
-                                                    value={student.team_id}
-                                                    onChange={handleTeamChange.bind(this, index)}
-                                                    input={<OutlinedInput label="Team Number" />}
-                                                    MenuProps={MenuProps}
-                                                >
-                                                    {teamsArray.map((team) => (
-                                                        <MenuItem
-                                                            key={team}
-                                                            value={team}
-                                                        >
-                                                            {team}
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </FormControl>
-                                        </TableCell>
-                                    );
-                                case 'action':
-                                    return(
-                                        <TableCell key={column.id} align={column.align}>
-                                            <Button variant="contained" sx={{ backgroundColor: 'red', maxWidth: 1/8}}
-                                                onClick={()=> handleDeleteStudent(student.id)}>
-                                                X
-                                            </Button>
-                                        </TableCell>
-                                    );
-                                default:
-                                    const value = student[column.id];
-                                    return (
-                                        <TableCell key={column.id} align={column.align}>
-                                            {column.format && typeof value === 'number'
-                                                ? column.format(value)
-                                                : value}
-                                        </TableCell>
-                                    );
+                                                {team}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </TableCell>
+                        );
+                    case 'action':
+                        return (
+                            <TableCell key={column.id} align={column.align}>
+                                <Button variant="contained" sx={{ backgroundColor: 'red', maxWidth: 1 / 8 }}
+                                    onClick={() => handleDeleteStudent(student.id)}>
+                                    X
+                                </Button>
+                            </TableCell>
+                        );
+                    default:
+                        const value = student[column.id];
+                        return (
+                            <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === 'number'
+                                    ? column.format(value)
+                                    : value}
+                            </TableCell>
+                        );
 
 
-                            }
+                }
 
-                        })}
+            })}
 
-                    </TableRow>
+        </TableRow>
 
-            );
+    );
 
     const navItems = ['Students', 'Teams', 'Assessments'].map((text, index) => {
-        switch(text){
+        switch (text) {
             case 'Students':
                 return (
                     <ListItem button key={text}>
@@ -330,49 +341,68 @@ function InstructorStudentsView() {
 
     return (
 
-        <Box sx={{ width: '100vw', height: '100vh', bgcolor: '#9c27b0', overflow: 'hidden'}}>
+        <Grid container>
 
             <CssBaseline />
 
             <AppBar
-                position="fixed"
-                sx={{ width: `100%`, height: `10%`, bgcolor: '#9c27b0' }}
+                sx={{ width: `100%`, bgcolor: '#ffffff' }}
             >
+                <Grid
+                    container
+                    sx={{ px: 4, py: 2 }}
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                >
 
-                <Toolbar>
+                    <img display="inline" src="https://i.imgur.com/RzmXLUB.png" alt="Guiql Logo" />
 
-                    <Link to="/classeshome" >
-                        <img src="https://i.imgur.com/AxiNrn4.png" alt="Guiql Logo" width={40} height={40}/>
-                    </Link>
-
-                    <Typography variant="h6" noWrap component="div">
-                        CS 3345
+                    <Typography display="absolute" id="headerName" component="h1" variant="h5">
+                        Good evening, Prof. lastname!
                     </Typography>
 
+                    <SignOutButton></SignOutButton>
+                </Grid>
+
+
+                <Grid container
+                    sx={{ px: 4, py: 2 }}
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center">
+
+
+                    {/* <Typography variant="h1" component="h1"> */}
+                    {/* CS 3345 */}
+                    {/* </Typography> */}
+
                     <Link to="/instructorstudentsview">
-                        <ListItemText primary="students" />
+                        <Button>Students</Button>
                     </Link>
 
                     <Link to="/instructorteamsview">
-                        <ListItemText primary="teams" />
+                        <Button>Teams</Button>
                     </Link>
 
-                    <Button variant="text">
-                        text button
-                    </Button>
-
-                </Toolbar>
+                </Grid>
             </AppBar>
 
 
             <Box
                 component="main"
-                sx={{ width: 1, height: 1 , bgcolor: '#ee99fc', p: 3 }}
+                sx={{ width: 1, height: '100vh', bgcolor: '#eeeeee', p: 3 }}
             >
-                <Toolbar />
 
-                <Paper sx={{ width: '100%', maxHeight: '100%'}}>
-                    <TableContainer sx={{ maxHeight: 500, overflow: 'auto'}}>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+               
+                <Paper maxHeight sx={{ width: '100%'}}>
+                    <TableContainer sx={{ overflow: 'auto' }}>
                         <Table stickyHeader aria-label="sticky table" >
                             <TableHead >
                                 <TableRow >
@@ -381,7 +411,7 @@ function InstructorStudentsView() {
                                             key={column.id}
                                             align={column.align}
                                             style={{ minWidth: column.minWidth }}
-                                            sx={{ bgcolor: '#bb6bc9'}}
+                                            sx={{ bgcolor: '#ffffff' }}
                                         >
                                             {column.label}
                                         </TableCell>
@@ -397,13 +427,17 @@ function InstructorStudentsView() {
 
                     <div>
                         <Button onClick={handleOpen} type="submit"
-                                fullWidth
-                                variant="contained" sx={{ bgcolor: '#bb6bc9' }}>Add Student</Button>
+                            fullWidth
+                            variant="contained" sx={{ bgcolor: '#eeeeee' }}>Add Student</Button>
                         <Modal
                             open={open}
                             onClose={handleClose}
                             aria-labelledby="modal-modal-title"
                             aria-describedby="modal-modal-description"
+                            alignItems="center"
+                            jutsifyContent="center"
+                            direction="column"
+                            style={{display:'flex',alignItems:'center',justifyContent:'center'}}
                         >
                             <Box sx={style}>
                                 <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -417,12 +451,21 @@ function InstructorStudentsView() {
                         </Modal>
 
                     </div>
-
                 </Paper>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
 
             </Box>
 
-        </Box>
+        </Grid>
 
     );
 }

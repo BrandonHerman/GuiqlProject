@@ -1,9 +1,14 @@
+import { ClickAwayListener } from "@material-ui/core";
+import JSONCalls from "../assets/JSONCalls";
+
 var InstructorProfile = (function () {
+    var calls = new JSONCalls;
     var firstName = "";
     var lastName = "";
     var email = "";
     var password = "";
     var username = "";
+    var students = [];
 
     var profID;
     var getEmail = function () {
@@ -47,6 +52,14 @@ var InstructorProfile = (function () {
     var setPassword = function (pass) {
         password = pass;
     }
+
+    var setStudents = function(stud) {
+      return calls.getStudentsByClassId(this.getID(), stud);
+    }
+
+    var getStudents = function() {
+        return students;
+    }
     return {
         getName: getName,
         setName: setName,
@@ -57,7 +70,9 @@ var InstructorProfile = (function () {
         getID: getID,
         setID: setID,
         getUsername: getUsername,
-        setUsername: setUsername
+        setUsername: setUsername,
+        setStudents: setStudents,
+        getStudents: getStudents
     }
 })();
 

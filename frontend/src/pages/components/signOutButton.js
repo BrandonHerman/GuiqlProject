@@ -26,7 +26,8 @@ function SignOutButton() {
                         InstructorProfile.setUsername("");
                         InstructorProfile.setPassword("");
                         StudentProfile.setEmail("");
-                        StudentProfile.setName("", "");
+                        StudentProfile.setfirstName("");
+                        StudentProfile.setlastName("");
                         StudentProfile.setID(0);
                         StudentProfile.setUsername("");
                         StudentProfile.setPassword("");

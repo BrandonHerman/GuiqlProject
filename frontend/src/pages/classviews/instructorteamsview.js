@@ -8,14 +8,15 @@ import {
     ListItemText, Button, Modal, TextField, Select, OutlinedInput, MenuItem, Grid,
     Card, CardContent, CardActions, CardActionArea, ButtonBase, Alert
 } from "@mui/material"
+import SignOutButton from '../components/signOutButton';
 
 
 //import InboxIcon from '@mui/icons-material/MoveToInbox';
 //import MailIcon from '@mui/icons-material/Mail';
 
 import Skeleton from '@mui/material/Skeleton';
-import {Student} from "../models/Student";
-import {Team} from "../models/Team";
+import { Student } from "../models/Student";
+import { Team } from "../models/Team";
 
 const drawerWidth = 120;
 
@@ -24,12 +25,12 @@ const drawerWidth = 120;
 
 
 function InstructorTeamsView() {
-    const [teams, setTeams] = React.useState([new Team(1, 'teamsters', 1), new Team(2, 'teamers', 2), new Team(3,'teamthreestar', 3)]
+    const [teams, setTeams] = React.useState([new Team(1, 'teamsters', 1), new Team(2, 'teamers', 2), new Team(3, 'teamthreestar', 3)]
     );
 
     const [students, setStudents] = React.useState([new Student('1', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com', 0, 1, 3),
-            new Student('2', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com')
-        ]
+    new Student('2', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com')
+    ]
     );
 
     const group_count = 8;
@@ -79,7 +80,7 @@ function InstructorTeamsView() {
         const fieldName = event.target.getAttribute('id');
         const fieldValue = event.target.value;
 
-        const newStudentData = { ...addStudent};
+        const newStudentData = { ...addStudent };
         newStudentData[fieldName] = fieldValue;
 
         setAddStudent(newStudentData);
@@ -88,14 +89,14 @@ function InstructorTeamsView() {
     const handleNewStudentSubmit = (event) => {
         event.preventDefault();
 
-        const newStudent = new Student(students.length+1, addStudent.first_name[0] + addStudent.last_name, addStudent.first_name, addStudent.last_name, addStudent.email);
+        const newStudent = new Student(students.length + 1, addStudent.first_name[0] + addStudent.last_name, addStudent.first_name, addStudent.last_name, addStudent.email);
         const newStudents = [...students, newStudent];
         setStudents(newStudents);
     };
 
     const [addTeam, setAddTeam] = React.useState({
         team_name: '',
-        team_number: teams.length+1,
+        team_number: teams.length + 1,
         team_size: 0,
 
     });
@@ -106,7 +107,7 @@ function InstructorTeamsView() {
         const fieldName = event.target.getAttribute('id');
         const fieldValue = event.target.value;
 
-        const newTeamData = { ...addTeam};
+        const newTeamData = { ...addTeam };
         newTeamData[fieldName] = fieldValue;
 
         setAddTeam(newTeamData);
@@ -115,7 +116,7 @@ function InstructorTeamsView() {
     const handleNewTeamSubmit = (event) => {
         event.preventDefault();
 
-        const newTeam = new Team(teams.length+1, addTeam.team_name, addTeam.team_number, addTeam.team_size);
+        const newTeam = new Team(teams.length + 1, addTeam.team_name, addTeam.team_number, addTeam.team_size);
         const newTeams = [...teams, newTeam];
         setTeams(newTeams);
     };
@@ -139,13 +140,13 @@ function InstructorTeamsView() {
     //NEED GET STUDENTS BY TEAM ID
     const viewForm =
         <form>
-            <div className="form-row" style={{display:"flex"}}>
+            <div className="form-row" style={{ display: "flex" }}>
                 <h1>List of Students:</h1>
 
 
             </div>
         </form>
-    ;
+        ;
 
 
 
@@ -166,47 +167,47 @@ function InstructorTeamsView() {
                     label="Team Name"
                     variant="outlined"
                     //defaultValue="Hello World"
-                    onChange={ handleNewTeam }
+                    onChange={handleNewTeam}
                 />
             </div>
 
 
             <button type="submit"
-                    className="btn btn-primary"
-                    onClick={handleNewTeamSubmit}
+                className="btn btn-primary"
+                onClick={handleNewTeamSubmit}
             >
                 Submit
             </button>
 
         </Box>
-    ;
+        ;
 
 
 
     const columns = [
         //{ id: 'profilePic', label: '', minWidth: 100, align: 'center', },
-        { id: 'username', label: 'Username', minWidth: 1/6, align: 'center', },
-        { id: 'first_name', label: 'First Name', minWidth: 1/6, align: 'center', },
-        { id: 'last_name', label: 'Last Name', minWidth: 1/6, align: 'center', },
+        { id: 'username', label: 'Username', minWidth: 1 / 6, align: 'center', },
+        { id: 'first_name', label: 'First Name', minWidth: 1 / 6, align: 'center', },
+        { id: 'last_name', label: 'Last Name', minWidth: 1 / 6, align: 'center', },
         //{ id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
         {
             id: 'email',
             label: 'Email',
-            minWidth: 1/6,
+            minWidth: 1 / 6,
             align: 'center',
             //format: (value) => value.toLocaleString('en-US'),
         },
         {
             id: 'team_id',
             label: 'Team',
-            minWidth: 1/6,
+            minWidth: 1 / 6,
             align: 'center',
             format: (value) => value.toLocaleString(),
         },
         {
             id: 'action',
             label: '',
-            minWidth: 1/6,
+            minWidth: 1 / 6,
             align: 'center',
         },
     ];
@@ -232,7 +233,7 @@ function InstructorTeamsView() {
 
     const listItems = students.map((student, index) =>
         <TableRow hover role="checkbox" tabIndex={-1} item key={students.indexOf(student)}>
-            <TableCell><Skeleton variant="circular" width={40} height={40}/></TableCell>
+            <TableCell><Skeleton variant="circular" width={40} height={40} /></TableCell>
             <TableCell>{student.username}</TableCell>
             <TableCell>{student.first_name}</TableCell>
             <TableCell>{student.last_name}</TableCell>
@@ -243,7 +244,7 @@ function InstructorTeamsView() {
     );
 
     const navItems = ['Students', 'Teams', 'Assessments'].map((text, index) => {
-        switch(text){
+        switch (text) {
             case 'Students':
                 return (
                     <ListItem button key={text}>
@@ -287,26 +288,26 @@ function InstructorTeamsView() {
 
     const gridItems = teams.map((team, index) =>
         <Grid item xs={4}>
-            <Card sx={{height: '32vh'}}>
+            <Card sx={{ height: '32vh' }}>
 
-                    <CardContent>
-                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                            Team Name:
-                        </Typography>
-                        <Typography variant="h5" component="div">
-                            {team.team_name}
-                        </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            Number: {index+1}
-                        </Typography>
-                        <Typography variant="body2">
-                            Number of students:
-                            <br />
-                            {team.team_size}
-                        </Typography>
-                    </CardContent>
+                <CardContent>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                        Team Name:
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                        {team.team_name}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        Number: {index + 1}
+                    </Typography>
+                    <Typography variant="body2">
+                        Number of students:
+                        <br />
+                        {team.team_size}
+                    </Typography>
+                </CardContent>
                 <CardActions>
-                    <Button onClick={ handleViewOpen} type="text">
+                    <Button onClick={handleViewOpen} type="text">
                         View Members
                     </Button>
                     <Modal
@@ -338,56 +339,73 @@ function InstructorTeamsView() {
 
 
     return (
-
-        <Box sx={{ width: '100vw', height: '100vh', bgcolor: '#ee99fc', overflow: 'auto'}}>
-
+        <Grid container>
             <CssBaseline />
-
             <AppBar
-                position="fixed"
-                sx={{ width: `100%`, height: `10%`, bgcolor: '#9c27b0' }}
+                sx={{ width: `100%`, bgcolor: '#ffffff' }}
             >
+                <Grid
+                    container
+                    sx={{ px: 4, py: 2 }}
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                >
 
-                <Toolbar>
+                    <img display="inline" src="https://i.imgur.com/RzmXLUB.png" alt="Guiql Logo" />
 
-                    <Link to="/classeshome" >
-                        <img src="https://i.imgur.com/AxiNrn4.png" alt="Guiql Logo" width={40} height={40}/>
-                    </Link>
-
-                    <Typography variant="h6" noWrap component="div">
-                        CS 3345
+                    <Typography display="absolute" id="headerName" component="h1" variant="h5">
+                        Good evening, Prof. lastname!
                     </Typography>
 
+                    <SignOutButton></SignOutButton>
+                </Grid>
+
+
+                <Grid container
+                    sx={{ px: 4, py: 2 }}
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center">
+
+
+                    {/* <Typography variant="h1" component="h1"> */}
+                    {/* CS 3345 */}
+                    {/* </Typography> */}
+
                     <Link to="/instructorstudentsview">
-                        <ListItemText primary="Students" />
+                        <Button>Students</Button>
                     </Link>
 
                     <Link to="/instructorteamsview">
-                        <ListItemText primary="Teams" />
+                        <Button>Teams</Button>
                     </Link>
 
-                    <Button variant="text">
-                        text button
-                    </Button>
-
-                </Toolbar>
+                </Grid>
             </AppBar>
 
 
+
+     
+
             <Box
                 component="main"
-                sx={{ width: 1 , bgcolor: '#ee99fc', p: 3 }}
+                sx={{ width: 1, bgcolor: '#ffffff', pt: 15 }}
             >
-                <Toolbar />
-
-                <Grid container spacing={2} alignItems="center" justify="center">
+       <br />
+            <br />
+            <br />
+                <Grid container sx={{align:'center', justifyContent:'center'}} spacing={2} alignItems="center" justifyContext="center">
                     {gridItems}
-                    <Grid item xs={4} >
+                    <Grid item xs={12} md={8} lg={4} justifyContent="space-between" >
 
-                        <Card sx={{height: '32vh'}}>
+                        <Card sx={{ height: '32vh' }}>
                             <CardContent>
-                                <Typography sx={{ fontSize: '10rem', width: '100%' }} color="text.secondary">
-                                    <Button onClick={handleAddOpen} type="text">
+                                <Typography variant="h3" sx={{ fontSize: '100', width: '100%', top: '50%', pt:'10'}} color="text.secondary">
+                                    <br></br>
+                                    <br></br>
+                                    <Button style={{maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px'}}onClick={handleAddOpen} type="text">
+
                                         ADD TEAMS
                                     </Button>
                                     <Modal
@@ -416,9 +434,7 @@ function InstructorTeamsView() {
                 </Grid>
 
             </Box>
-
-        </Box>
-
+        </Grid>
     );
 }
 // flexGrow: 1,
