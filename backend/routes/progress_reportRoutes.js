@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Progress_Report = require('../models/progress_reportRoutes');
+const Progress_Report = require('../models/progress_report');
 
 router.post('/createProgressReport', async (req, res, next) => {
     try {
@@ -16,11 +16,11 @@ router.post('/createProgressReport', async (req, res, next) => {
     next();
 })
 
-router.get('/searchProgressReportByID', async (req, res, next) => {
+router.get('/searchProgressReportById', async (req, res, next) => {
     try {
         const report_id= req.params.report_id;
         console.log(report_id);
-        const result = await Progress_Report.searchByID(report_id);
+        const result = await Progress_Report.searchById(report_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current progress report: ', err);
@@ -28,11 +28,11 @@ router.get('/searchProgressReportByID', async (req, res, next) => {
     }
 })
 
-router.get('/searchProgressReportByTeamID', async (req, res, next) => {
+router.get('/searchProgressReportByTeamId', async (req, res, next) => {
     try {
         const team_id= req.params.team_id;
         console.log(team_id);
-        const result = await Progress_Report.searchByTeamID(team_id);
+        const result = await Progress_Report.searchByTeamId(team_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current progress report: ', err);
