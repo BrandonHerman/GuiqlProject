@@ -13,7 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import RecruiterProfile from '../utils/recruiterProfile';
 // import { Repository } from '../../api/repository';
 import JSONCalls from '../assets/JSONCalls';
-
+import Alert from '@mui/material/Alert';
 
 
 import {Navigate, useNavigate} from 'react-router-dom';
@@ -23,7 +23,7 @@ import Avatar, { genConfig } from 'react-nice-avatar'
 export default function RecruiterSignIn() {
   var calls = new JSONCalls();
   var navigate = useNavigate();
-
+  const [error, setError] = React.useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,8 +41,9 @@ export default function RecruiterSignIn() {
     //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
     const validateUser = (inUsername, inPassword) => {
       var recruiter = calls.recruitSignIn(inUsername, inPassword);
-      if(recruiter.username === null){
+      if(recruiter.username === null || recruiter.password === null){
         alert("User does not exist");
+        setError(true);
       } else if(recruiter.password === inPassword && recruiter.username === inUsername){
         console.log("Successful Login");
         RecruiterProfile.setEmail(recruiter.email);
@@ -59,6 +60,7 @@ export default function RecruiterSignIn() {
         navigate('/recruiterhome');
       }else{
         alert("Username or Password is incorrect, try again!");
+        setError(true);
       }
     }
 
@@ -138,6 +140,11 @@ export default function RecruiterSignIn() {
               </h3>
             </Link>
           </Box>
+          {error &&
+            <>
+            <br></br>
+              <Alert sx={{ m: 5 }} onClose={() => setError(false)} severity="error">Username or Password is incorrect</Alert>
+            </>}
         </Box>
       </Grid>
     </Grid>

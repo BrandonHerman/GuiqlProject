@@ -12,7 +12,7 @@ const Column = ({ column }) => {
     <div
       style={{
         backgroundColor: "LightGray",
-        margin: 30,
+        margin: 0,
         padding: 0,
         color: "blue",
         minWidth: '100%'

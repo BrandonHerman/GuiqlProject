@@ -31,13 +31,20 @@ var StudentProfile = (function () {
     }
     
     //pulled from database in login function, set here
-    var getName = function () {
-        return firstName, lastName;
+    var getfirstName = function () {
+        return firstName;
     }
 
-    var setName = function (first, last) {
+    var setfirstName = function (first) {
         firstName = first;
+    }
+
+    var setlastName = function(last) {
         lastName = last;
+    }
+
+    var getlastName = function() {
+        return lastName;
     }
 
     var getPassword = function () {
@@ -47,8 +54,10 @@ var StudentProfile = (function () {
         password = pass;
     }
     return {
-        getName: getName,
-        setName: setName,
+        getfirstName: getfirstName,
+        setfirstName: setfirstName,
+        getlastName: getlastName,
+        setlastName: setlastName,
         getEmail: getEmail,
         setEmail: setEmail,
         getPassword: getPassword,

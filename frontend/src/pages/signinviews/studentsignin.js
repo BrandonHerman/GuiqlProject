@@ -14,13 +14,13 @@ import { Checkbox } from '@mui/material';
 import StudentProfile from '../utils/studentProfile';
 import { Navigate, useNavigate } from "react-router-dom";
 import JSONCalls from '../assets/JSONCalls';
-
+import Alert from '@mui/material/Alert';
 
 export default function StudentSignIn() {
 
   var calls = new JSONCalls();
   var navigate = useNavigate();
-
+  const [error, setError] = React.useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,7 +40,9 @@ export default function StudentSignIn() {
   //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
   const validateUser = (inUsername, inPassword) => {
     var student = calls.studentSignIn(inUsername, inPassword);
-    if (student.username == inUsername) {
+    if (student.username == undefined || student.username == null) {
+      setError(true);
+    } else if (student.username == inUsername) {
       console.log("Successful Login");
       StudentProfile.setEmail(student.email);
       StudentProfile.setName(student.firstName, student.lastName);
@@ -49,12 +51,10 @@ export default function StudentSignIn() {
       StudentProfile.setPassword(student.password);
       //ADD PROPER NAVIGATE FOR STUDENTS
       //navigate('/classeshome');
-      navigate('/studenthome');
-    } else {
-      alert("Username or Password is incorrect, try again!");
+      navigate('/studentlaunch');
+    } 
 
     }
-  }
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -152,6 +152,11 @@ export default function StudentSignIn() {
               </Grid>
             </Grid>
           </Box>
+          {error &&
+            <>
+            <br></br>
+              <Alert sx={{ m: 5 }} onClose={() => setError(false)} severity="error">Username or Password is incorrect</Alert>
+            </>}
         </Box>
       </Grid>
     </Grid>

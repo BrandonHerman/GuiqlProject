@@ -28,8 +28,8 @@ class JSONCalls {
         for (let i = 0; i < json.profs.length; i++) {
             for (let x = 0; i < json.profs[i].classes.length; x++) {
                 for (let y = 0; i < json.profs[i].classes[x].students.length; y++) {
-                    if (json.profs[i].classes[x].students[y].username === inUsername) {
-                        if (json.profs[i].classes[x].students[y].password === inPassword) {
+                    if (json.profs[i].username == inUsername) {
+                        if (json.profs[i].classes[x].students[y].password == inPassword) {
                             console.log("Successful Login");
                             return json.profs[i].classes[x].students[y];
                         }
@@ -39,7 +39,6 @@ class JSONCalls {
         }
         return 0;
     }
-
 
     recruitSignIn(inUsername, inPassword) {
         console.log(inPassword, inUsername);
