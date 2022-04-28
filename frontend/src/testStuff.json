@@ -37,7 +37,9 @@
               "username": "bherman",
               "password": "linuxpro",
               "email": "bherman@smu.edu",
+              "university":"Southern Methodist University",
               "inTeam": true,
+              "class": "GUI",
               "teamID": 1
             },
             {
@@ -46,7 +48,9 @@
               "username": "tscott",
               "password": "astroworld",
               "email": "tScott@smu.edu",
+              "university":"Southern Methodist University",
               "inTeam": true,
+              "class": "DB",
               "teamID": 1
             },
             {
@@ -55,7 +59,9 @@
               "username": "jEbeeGood",
               "password": "guitar",
               "email": "jEbeeGood@smu.edu",
+              "university":"Southern Methodist University",
               "inTeam": true,
+              "class": "GUI",
               "teamID": 2
             }
           ]
@@ -93,30 +99,36 @@
           ],
           "students": [
             {
-              "firstName": "Brandon",
+              "firstName": "Peewee",
               "lastName": "Herman",
-              "username": "bherman",
-              "password": "linuxpro",
-              "email": "bherman@smu.edu",
+              "username": "pherman",
+              "password": "bike",
+              "email": "pherman@smu.edu",
+              "university":"Southern Methodist University",
+              "class": "GUI",
               "inTeam": true,
               "teamID": 1
             },
             {
-              "firstName": "Travis",
-              "lastName": "Scott",
-              "username": "tscott",
-              "password": "astroworld",
-              "email": "tScott@smu.edu",
+              "firstName": "Steven",
+              "lastName": "Kwan",
+              "username": "skwan",
+              "password": "guardians",
+              "email": "skwan@smu.edu",
+              "university":"Southern Methodist University",
+              "class": "DB",
               "inTeam": true,
               "teamID": 1
             },
             {
-              "firstName": "John",
-              "lastName": "EbeeGood",
-              "username": "jEbeeGood",
-              "password": "guitar",
-              "email": "jEbeeGood@smu.edu",
+              "firstName": "Cheese",
+              "lastName": "Consumer",
+              "username": "cconsumer",
+              "password": "cheese",
+              "email": "cconsumer@smu.edu",
+              "university":"Southern Methodist University",
               "inTeam": true,
+              "class": "DB",
               "teamID": 2
             },
             {
@@ -125,6 +137,8 @@
               "username": "jLawrimore",
               "password": "javascript",
               "email": "jLawrimore@smu.edu",
+              "university":"Southern Methodist University",
+              "class": "GUI",
               "inTeam": true,
               "teamID": 2
             },
@@ -134,6 +148,8 @@
               "username": "eMusk",
               "password": "billionare",
               "email": "eMusk@smu.edu",
+              "university":"Southern Methodist University",
+              "class": "Twitter",
               "inTeam": true,
               "teamID": 2
             }

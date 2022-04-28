@@ -18,19 +18,20 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 // import { Avatar } from '@mui/material';
 import Avatar, { genConfig } from 'react-nice-avatar';
+import JSONCalls from '../assets/JSONCalls';
 
 export default function RecruiterHomeView() {
 
 
-    const [professors, setProfessors] = React.useState([{
-        first_name: 'John', last_name: 'Lawrimore', email: 'jLawrimore@smu.edu', class: 'GUI'
-    }]);
+    var calls = new JSONCalls();
+    const [professors, setProfessors] = React.useState(
+        calls.getProfbyUni(RecruiterProfile.getUni())
+    );
 
-    const [students, setStudents] = React.useState([
-        { first_name: 'Jane', last_name: 'Doe', email: 'JDoe@smu.edu', class: 'DB' },
-        { first_name: 'Brandon', last_name: 'Herman', email: 'bherman@smu.edu', class: 'GUI' },
-    ]);
-
+    const [students, setStudents] = React.useState(
+        calls.getStudentsByUniversity(RecruiterProfile.getUni())
+    );
+        console.log(students);
     return (
         <>
 
@@ -70,9 +71,9 @@ export default function RecruiterHomeView() {
                                                     {/* <Avatar alt="profIMG"  src="https://www.pngitem.com/pimgs/m/230-2302175_pointer-clipart-english-professor-professor-clipart-hd-png.png" width={40} height={40} /> */}
                                                     <Avatar style={{ width: 40, height: 40 }} />
                                                 </TableCell>
-                                                <TableCell>{elem.first_name}</TableCell>
-                                                <TableCell>{elem.last_name}</TableCell>
-                                                <TableCell>{elem.email}</TableCell>
+                                                <TableCell>{elem.firstName}</TableCell>
+                                                <TableCell>{elem.lastName}</TableCell>
+                                                <TableCell>{(elem.firstName[0]+elem.lastName+"@smu.edu").toLowerCase()}</TableCell>
                                                 <TableCell>Instructor</TableCell>
                                             </TableRow>
                                         ))}
@@ -105,15 +106,15 @@ export default function RecruiterHomeView() {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {students.map((elem, index) => (
-                                            <TableRow item key={students.indexOf(elem)}>
+                                        {students.map((elem) => (
+                                            <TableRow item>
                                                 <TableCell>
                                                     {/* <Avatar alt="studentIMG" src="https://i.pinimg.com/564x/11/5c/87/115c879e05b5add475c68f279729d7fc--volleyball-girls-cute-clipart.jpg" width={40} height={40} /> */}
 
                                                     <Avatar style={{ width: 40, height: 40 }} />
                                                 </TableCell>
-                                                <TableCell>{elem.first_name}</TableCell>
-                                                <TableCell>{elem.last_name}</TableCell>
+                                                <TableCell>{elem.firstName}</TableCell>
+                                                <TableCell>{elem.lastName}</TableCell>
                                                 <TableCell>{elem.email}</TableCell>
                                                 <TableCell>{elem.class}</TableCell>
                                             </TableRow>

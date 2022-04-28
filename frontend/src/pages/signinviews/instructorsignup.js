@@ -24,7 +24,6 @@ universitiesPreSlice.map((university) => {
 
   var repository = new Repository();
 
-  repository.searchProf(12);
 
 export default function InstructorSignUp() {
   var professor = {

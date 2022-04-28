@@ -11,7 +11,8 @@ import { Link } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import RecruiterProfile from '../utils/recruiterProfile';
-import { Repository } from '../../api/repository';
+// import { Repository } from '../../api/repository';
+import JSONCalls from '../assets/JSONCalls';
 
 
 
@@ -20,7 +21,7 @@ import {Navigate, useNavigate} from 'react-router-dom';
 import Avatar, { genConfig } from 'react-nice-avatar'
 
 export default function RecruiterSignIn() {
-  var repository = new Repository();
+  var calls = new JSONCalls();
   var navigate = useNavigate();
 
 
@@ -35,29 +36,27 @@ export default function RecruiterSignIn() {
     });
 
     validateUser(username, password);
-    console.log(username);
-    RecruiterProfile.setName(username, username); 
-    RecruiterProfile.setConfig(genConfig());
-    //need all recruiter set info from API
-    console.log(RecruiterProfile.getName());
-    console.log("clicked recruiter sign in button");
-    navigate("/recruiterhome");
   };
 
     //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
     const validateUser = (inUsername, inPassword) => {
-      var recruiter = repository.getRecruiterByUsername(inUsername);
+      var recruiter = calls.recruitSignIn(inUsername, inPassword);
       if(recruiter.username === null){
         alert("User does not exist");
       } else if(recruiter.password === inPassword && recruiter.username === inUsername){
         console.log("Successful Login");
         RecruiterProfile.setEmail(recruiter.email);
-        RecruiterProfile.setName(recruiter.first_name, recruiter.last_name);
-        RecruiterProfile.setID(recruiter.recruiter_id);
+        RecruiterProfile.setfirstName(recruiter.firstName);
+        RecruiterProfile.setlastName(recruiter.lastName);
+        RecruiterProfile.setID(recruiter.id);
         RecruiterProfile.setUsername(recruiter.username);
         RecruiterProfile.setPassword(recruiter.password);
+        RecruiterProfile.setConfig(genConfig());
+        RecruiterProfile.setUni(recruiter.university);
+        RecruiterProfile.setBio(recruiter.bio);
+        console.log(RecruiterProfile.getfirstName());
         //ADD PROPER NAVIGATE FOR RECRUITERS
-        //navigate('/classeshome');
+        navigate('/recruiterhome');
       }else{
         alert("Username or Password is incorrect, try again!");
       }
@@ -112,11 +111,6 @@ export default function RecruiterSignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              id="rememberMe"
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
               <Button
                 type="submit"

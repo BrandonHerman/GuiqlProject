@@ -350,22 +350,22 @@ export class Repository {
 
 
     // I need to get a professor given their prof_id
-    searchProf(id) {
-        console.log("finding Prof by " , id);
-        return new Promise((resolve, reject) => {
-            axios.get(`${this.url}/professor/searchProfessorByID?prof_id=${id}`) 
-                .then(x => {
-                    console.log(x.data);
-                    resolve(x.data);
+    // searchProf(id) {
+    //     console.log("finding Prof by " , id);
+    //     return new Promise((resolve, reject) => {
+    //         axios.get(`${this.url}/professor/searchProfessorByID?prof_id=${id}`) 
+    //             .then(x => {
+    //                 console.log(x.data);
+    //                 resolve(x.data);
                     
-                })
-                .catch(x => {
-                    alert(x.data);
-                    reject(x.data);
-                })
-        })
+    //             })
+    //             .catch(x => {
+    //                 alert(x.data);
+    //                 reject(x.data);
+    //             })
+    //     })
 
-    } 
+    // } 
 
 
 

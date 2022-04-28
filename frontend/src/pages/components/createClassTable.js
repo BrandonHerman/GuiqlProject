@@ -10,7 +10,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import './createClassTable.css';
 import { Grid, FormLabel, FormControl, RadioGroup, Radio, FormControlLabel } from "@mui/material";
-import { Repository } from "../../api/repository";
+// import { Repository } from "../../api/repository";
+import JSONCalls from "../assets/JSONCalls";
 import InstructorProfile from "../utils/instructorProfile";
 import StudentGeneration from "../utils/studentgeneration";
 
@@ -18,14 +19,14 @@ import StudentGeneration from "../utils/studentgeneration";
 
 function createClassTableComponent() {
 
-  var repository = new Repository();
+  var calls = new JSONCalls();
 
   // Defining a state named rows
   // which we can update by calling on setRows function
+
   const [rows, setRows] = useState([
     { firstname: "John", lastname: "Smith", email: "example@student.edu", class: "GUI" }
   ]);
-
   
   // Initial states
   const [open, setOpen] = React.useState(false);
@@ -88,13 +89,13 @@ function createClassTableComponent() {
   const createClassAndStudents = () => {
     var class_time = day + " " + time; //state
     var size = rows.length;
-    var collegeID = repository.getCollegeIdByProfId(this.profID);
-    repository.createClass(class_time, this.profID, size, collegeID);
-    var class_id = repository.getClassIdByClassTimeAndCollegeId(class_time, collegeID);
-    for (var i = 0; i < size; i++) {
-      var username, password = StudentGeneration(rows[i].firstname, rows[i].lastname);
-      repository.createStudent(username, password, rows[i].firstname, rows[i].lastname, rows[i].email, rows[i].class, this.profID, class_id, collegeID);
-    }
+    // var collegeID = calls.getCollegeIdByProfId(this.profID);
+    // repository.createClass(class_time, this.profID, size, collegeID);
+    // var class_id = repository.getClassIdByClassTimeAndCollegeId(class_time, collegeID);
+    // for (var i = 0; i < size; i++) {
+      // var username, password = StudentGeneration(rows[i].firstname, rows[i].lastname);
+      // repository.createStudent(username, password, rows[i].firstname, rows[i].lastname, rows[i].email, rows[i].class, this.profID, class_id, collegeID);
+    // }
   }
 
   return (

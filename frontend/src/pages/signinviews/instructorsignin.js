@@ -11,53 +11,42 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import InstructorProfile from '../utils/instructorProfile';
-import { JSONCalls} from '../assets/JSONCalls';
 import Alert from '@material-ui/lab/Alert';
+import JSONCalls from '../assets/JSONCalls';
 
 export default function InstructorSignIn() {
 
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   var username = data.get('username')
-  //   var password = data.get('password')
-  //   console.log({
-  //     username: data.get('username'),
-  //     password: data.get('password')
-  //   });
-  //   validateUser(username, password);
-  // };
-
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [redirect, setRedirect] = React.useState(false);
+  var navigate = useNavigate();
+  var calls = new JSONCalls();
   const [error, setError] = React.useState(false);
-  let navigate = useNavigate();
-  // const onClickNavigate = (event) => {
-  //     // <Navigate to='/classeshome' state={{ email: email, password: password }} />
-  //     event.preventDefalut();
-  //     const data = new FormData(event.curentTarget);
-  //     handleEmail(data.get('email'));
-  //     handlePassword(data.get('password'));
-  //     console.log(email+password);
-  //     setRedirect(true);
-  //     navigate('/classeshome');
-  // }
+
+  const onHandleSubmit = function(event) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const username = data.get('username');
+    const password = data.get('password');
+    console.log({
+      username, password
+    });
+    validateUser(username, password);
+  };
+
+
 
   //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
   const validateUser = (inUsername, inPassword) => {
     //get prof by username
-    var rep = new JSONCalls();
-    var prof, success = rep.profSignIn(inUsername, inPassword);
+    let prof = calls.profSignIn(inUsername, inPassword);
     console.log(prof);
-    if (success) {
+    if (prof.username == inUsername) {
       console.log("Successful Login");
       InstructorProfile.setEmail(prof.email);
       InstructorProfile.setName(prof.firstName, prof.last_name);
       InstructorProfile.setID(prof.id);
       InstructorProfile.setUsername(prof.username);
       InstructorProfile.setPassword(prof.password);
+      console.log(InstructorProfile.getID());
       navigate('/classeshome');
     } else {
       setError(true);
@@ -93,7 +82,7 @@ export default function InstructorSignIn() {
           <Typography component="h1" variant="h5">
             Instructor Sign In
           </Typography>
-          <Box component="form" onSubmit={validateUser} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
+          <Box component="form" noValidate onSubmit={onHandleSubmit} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
             <TextField
               margin="normal"
               required
@@ -114,16 +103,6 @@ export default function InstructorSignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              id="rememberMe"
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-
-            {redirect && <Navigate to={{
-              pathname: '/classeshome',
-              state: { username: username, password: password }
-            }} />}
             <Button
               type="submit"
               fullWidth
