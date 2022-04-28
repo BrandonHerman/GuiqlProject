@@ -8,7 +8,7 @@ const createProfessor = async (first_name,last_name,username,email,password,coll
     // check if professor already exists
     const userName = await findByUsername(username);
     const eMail = await findByEmail(email);
- //test hehe
+
     if (userName) {
         return "Username taken!";
     } else 
