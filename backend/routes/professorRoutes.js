@@ -83,10 +83,10 @@ router.get('/searchProfessorByCollege', async (req, res, next) => {
         res.sendStatus(500).json({ message: err.toString() });
     }
 })
-
+//tested = ?
 router.get('/getProfessorName', async (req, res, next) => {
     try {
-        const prof_id = req.params.prof_id;
+        const prof_id = req.query.prof_id;
         console.log(prof_id);
         const result = await Professor.getProfessorNamel(prof_id);
         res.status(201).json(result);
@@ -96,10 +96,10 @@ router.get('/getProfessorName', async (req, res, next) => {
     }
 })
 
-
+//tested = pass
 router.delete('/removeProfessor', async (req, res, next) => {
     try {
-        const prof_id = req.params.prof_id;
+        const prof_id = req.query.prof_id;
         console.log(prof_id);
         const result = await req.models.professor.removeProfessor(prof_id);
         res.status(204).json(result);
