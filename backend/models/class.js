@@ -2,17 +2,10 @@ const knex = require('../database/knex');
 
 const CLASS_TABLE = 'Class';
 
-const createClass = async (class_id,class_name,class_day,class_time,size,group_count,prof_id,college_id) => {
-    //check if class already exists
-    const id = await searchByID(class_id);
-
-    if (id) {
-        return "Class already exists";
-    } else {
-        const query = await knex(CLASS_TABLE).insert({class_id,class_name,class_day,class_time,size,group_count,prof_id,college_id});
-        const returnValue = await knex(CLASS_TABLE).select('Class.class_id','Class.class_day','Class.class_time','Class.prof_id','Class.college_id');
-        return returnValue;
-    }
+const createClass = async (class_name,class_day,class_time,size,group_count,prof_id,college_id) => {
+    const query = await knex(CLASS_TABLE).insert({class_name,class_day,class_time,size,group_count,prof_id,college_id});
+    const returnValue = await knex(CLASS_TABLE).select('Class.class_id','Class.class_day','Class.class_time','Class.prof_id','Class.college_id');
+    return returnValue;
 }
 
 const searchByID = async (class_id) => {
