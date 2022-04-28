@@ -28,6 +28,17 @@ router.get('/authenticateRecruiter', async (req, res, next) => {
     }
 })
 
+router.get('/getRecruiterByUsername', async (req, res, next) => {
+    try {
+        const username = req.params.username;
+        const result = await Recruiter.getByUsername(username);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current recruiter:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
 router.put('/addRecruiterBio', async (req, res, next) => {
     try {
 

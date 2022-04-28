@@ -44,7 +44,7 @@ router.get('/searchProfessorByID', async (req, res, next) => {
     }
 })
 
-router.get('/searchProfessorByUsername', async (req, res, next) => {
+router.get('/getInstructorByUsername', async (req, res, next) => {
     try {
         const username = req.params.username;
         console.log(username);

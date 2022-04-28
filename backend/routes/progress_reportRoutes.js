@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Progress_Report = require('../models/progress_reportRoutes');
+const Progress_Report = require('../models/progress_report');
 
 router.post('/createProgressReport', async (req, res, next) => {
     try {
