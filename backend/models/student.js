@@ -43,6 +43,12 @@ const searchByUsername = async (username) => {
     return result;
 }
 
+const findUserByPassword = async (username,password) => {
+    const query = await knex(STUDENT_TABLE).where({username,password});
+    const result = await query;
+    return result;
+}
+
 const searchByEmail = async (email) => {
     const query = await knex(STUDENT_TABLE).where({ email });
     const result = await query;
@@ -91,6 +97,7 @@ module.exports = {
     searchById,
     searchByEmail,
     searchByUsername,
+    findUserByPassword,
     searchByCollege,
     updateTeam,
     searchByTeam,
