@@ -4,7 +4,7 @@ const Professor = require('../models/professor');
 
 
 
-
+//tested = pass
 router.post('/createProfessor', async (req, res, next) => {
     try {
         const body = req.body;
@@ -32,6 +32,7 @@ router.get('/authenticateProfessor', async (req, res, next) => {
     }
 })
 
+//tested = pass
 router.get('/searchProfessorById', async (req, res, next) => {
     try {
         const prof_id= req.query.prof_id;
@@ -44,9 +45,10 @@ router.get('/searchProfessorById', async (req, res, next) => {
     }
 })
 
+//tested = pass
 router.get('/getInstructorByUsername', async (req, res, next) => {
     try {
-        const username = req.params.username;
+        const username = req.query.username;
         console.log(username);
         const result = await Professor.searchByUsername(username);
         res.status(201).json(result);
@@ -56,9 +58,10 @@ router.get('/getInstructorByUsername', async (req, res, next) => {
     }
 })
 
+//tested = pass
 router.get('/searchProfessorByEmail', async (req, res, next) => {
     try {
-        const email = req.params.email;
+        const email = req.query.email;
         console.log(email);
         const result = await Professor.searchByEmail(email);
         res.status(201).json(result);
