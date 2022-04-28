@@ -104,7 +104,7 @@ const getCollegeIdByProfId = async (prof_id) => {
 }
 
 const getCollegeByProfId = async (prof_id) => {
-    const query = await knex(COLLEGE_TABLE).where({prof_id});
+    const query = await knex(PROFESSOR_TABLE).where({prof_id});
     const result = await query;
     return result;
 }
