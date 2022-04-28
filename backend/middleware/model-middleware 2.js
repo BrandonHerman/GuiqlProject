@@ -6,6 +6,9 @@ const recruiter = require('../models/recruiter');
 const student = require('../models/student');
 const team = require('../models/team');
 const users = require('../models/user_story');
+const assessments = require('../models/assessment');
+const meetings = require('../models/meeting');
+const progress_reports = require('../models/progress');
 
 // /**
 //  * This middleware function is meant to be registered BEFORE the route handlers (see index.js)

@@ -2,17 +2,16 @@ const knex = require('../database/knex');
 
 const MEETING_TABLE = 'Meeting';
 
-const createMeeting = async (meeting_id,meeting_time,meeting_place,team_id) => {
-    //check if team already exists
-    const id = await searchByID(meeting_id);
+const createMeeting = async (meeting_time,meeting_place,team_id) => {
+    const query = await knex(MEETING_TABLE).insert({meeting_time,meeting_place,team_id});
+    const returnValue = await knex(MEETING_TABLE).select('Meeting.meeting_id','Meeting.meeting_time','Meeting.meeting_place','Meeting.team_id');
+    return returnValue;
+}
 
-    if(id) {
-        return "Meeting already created";
-    } else {
-        const query = await knex(MEETING_TABLE).insert({meeting_id,meeting_time,meeting_place,team_id});
-        const returnValue = await knex(MEETING_TABLE).select('Meeting.meeting_id','Meeting.meeting_time','Meeting.meeting_place','Meeting.team_id');
-        return returnValue;
-    }
+const searchByTeam = async (team_id) => {
+    const query = await knex(MEETING_TABLE).where({team_id});
+    const result = await query;
+    return result;
 }
 
 const setTime = async (meeting_id,time) => {
@@ -35,6 +34,7 @@ const deleteMeeting = async (meeting_id) => {
 
 module.exports = {
     createMeeting,
+    searchByTeam,
     setTime,
     setPlace,
     deleteMeeting

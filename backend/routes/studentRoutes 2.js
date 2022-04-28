@@ -6,7 +6,7 @@ router.post('/createStudent', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.student.createStudent(body.student_id, body.first_name, body.last_name, body.username, body.password);
+        const result = await req.models.student.createStudent(body.first_name, body.last_name, body.username, body.password);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new Student:', err);

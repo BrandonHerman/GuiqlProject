@@ -4,15 +4,12 @@ const e = require('express');
 
 const RECRUITER_TABLE = 'Recruiter';
 
-const createRecruiter = async (recruiter_id, first_name, last_name, username, password) => {
+const createRecruiter = async (first_name, last_name, username, password) => {
     // check if professor already exists
-    const id = await searchByID(recruiter_id);
     const userName = await searchByUsername(username);
     const eMail = await searchByEmail(email);
 
-    if (id) {
-        return "Professor has already been added";
-    } else if (userName) {
+    if (userName) {
         return "Username taken!";
     } else if (eMail) {
         return "Email already associated with another account!";

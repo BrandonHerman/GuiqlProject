@@ -2,7 +2,12 @@ const knex = require('../database/knex');
 
 const COLLEGE_TABLE = 'College';
 
-const createCollege = async (college_id,name) => {
+const createCollege = async (name) => {
+    const query = await knex(COLLEGE_TABLE).insert({name});
+    const returnValue = await knex(COLLEGE_TABLE).select('College.college_id','College.name');
+    return returnValue;
+
+const createCollegeWithID = async (college_id,name) => {
     //check if college already exists
     const id = await searchByID(college_id);
 
@@ -39,10 +44,17 @@ const getID = async (name) => {
     return result;
 }
 
+const getCollegeByProfID = async (prof_id) => {
+    const query = await knex(COLLEGE_TABLE).where({prof_id});
+    const result = await query;
+    return result;
+}
+
 module.exports = {
     createCollege,
     searchByID,
     searchByName,
     getName,
-    getID
+    getID,
+    getCollegeByProfID
 }
