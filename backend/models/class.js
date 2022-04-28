@@ -20,6 +20,12 @@ const getClass = async (class_time,college_id) => {
     return result;
 }
 
+const getClassesByProfId = async (prof_id) => {
+    const query = await knex(CLASS_TABLE).where({prof_id});
+    const result = await query;
+    return result;
+}
+
 const getProfessor = async (class_id) => {
     const query = await knex(CLASS_TABLE).select(prof_id).where({class_id});
     const result = await query;
@@ -60,6 +66,7 @@ module.exports = {
     createClass,
     searchByID,
     getClass,
+    getClassesByProfId,
     getProfessor,
     getNumGroups,
     getAvgGroupSize,
