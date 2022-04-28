@@ -6,7 +6,6 @@ import InstructorProfile from "../utils/instructorProfile";
 import StudentProfile from "../utils/studentProfile";
 import RecruiterProfile from "../utils/recruiterProfile";
 
-
 function SignOutButton() {
 
     
@@ -39,6 +38,9 @@ function SignOutButton() {
                         console.log("Instructor Username:");
                         console.log(InstructorProfile.getUsername);
                     }}
+
+            
+
                 >
                     Sign Out
                 </Button>

@@ -13,10 +13,12 @@ import { FormControlLabel } from '@mui/material';
 import { Checkbox } from '@mui/material';
 import StudentProfile from '../utils/studentProfile';
 import { Repository } from '../../api/repository';
+import {Navigate, useNavigate } from "react-router-dom";
 
 export default function StudentSignIn() {
 
   var repository = new Repository();
+  var navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,7 +29,12 @@ export default function StudentSignIn() {
       username: data.get('username'),
       password: data.get('password'),
     });
+
     validateUser(username, password);
+
+    navigate('/studenthome');
+
+
   };
 
     //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
@@ -58,7 +65,8 @@ export default function StudentSignIn() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://www.smu.edu/-/media/Site/StudentAffairs/NewStudent/New-Website-Photos/AARO-TAARO-JARRO-Page/AAROTARROJARROHeroImage1optimized.jpg?h=1706&la=en&w=2563&hash=5BACD211ABBDE8EFC08ECC0E58100D81)',
+          // backgroundImage: 'url(https://www.smu.edu/-/media/Site/StudentAffairs/NewStudent/New-Website-Photos/AARO-TAARO-JARRO-Page/AAROTARROJARROHeroImage1optimized.jpg?h=1706&la=en&w=2563&hash=5BACD211ABBDE8EFC08ECC0E58100D81)',
+          backgroundImage: 'url(https://highbrook.media/abd/wp-content/gallery/blog-posts//shutterstock_1045282858.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -126,6 +134,7 @@ export default function StudentSignIn() {
                 Recruiter Sign In
               </h3>
             </Link>
+            <br></br>
             <Typography component="h1" variant="h5">
               Instructors
             </Typography>
