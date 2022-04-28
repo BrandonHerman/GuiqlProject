@@ -4,7 +4,7 @@ const Professor = require('../models/professor');
 
 
 
-//tested = pass
+//tested = failed
 router.post('/createProfessor', async (req, res, next) => {
     try {
         const body = req.body;

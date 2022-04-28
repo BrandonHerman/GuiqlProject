@@ -32,7 +32,7 @@ router.get('/searchUserStoryById', async (req, res, next) => {
 //test = passed
 router.get('/searchUserStoryByTitle', async (req, res, next) => {
     try {
-        const title = req.params.title;
+        const title = req.query.title;
         console.log(title);
         const result = await User_story.searchByTitle(title);
         res.status(201).json(result);
@@ -41,6 +41,7 @@ router.get('/searchUserStoryByTitle', async (req, res, next) => {
         res.sendStatus(500).json({ message: err.toString() });
     }
 });
+
 
 router.put('/setUserStoryStatus', async (req, res, next) => {
     try {
