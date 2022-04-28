@@ -32,17 +32,10 @@ const getId = async (name) => {
     return result;
 }
 
-const getCollegeByProfId = async (prof_id) => {
-    const query = await knex(COLLEGE_TABLE).where({prof_id});
-    const result = await query;
-    return result;
-}
-
 module.exports = {
     createCollege,
     searchById,
     searchByName,
     getName,
-    getId,
-    getCollegeByProfId
+    getId
 }
