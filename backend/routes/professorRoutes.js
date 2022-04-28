@@ -96,7 +96,7 @@ router.get('/getProfessorName', async (req, res, next) => {
     }
 })
 
-//
+//test = passed
 router.get('/getCollegeByProfId', async (req, res, next) => {
     try {
         const prof_id = req.query.prof_id;
