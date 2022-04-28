@@ -11,8 +11,6 @@ import theme from './theme.js'
 
 import Test from './pages/test';
 
-import StudentHome from './pages/classviews/studenthome';
-
 // React functional component
 function App() {
   // state for storage of the information on the webpage of forms and list, uses hooks
