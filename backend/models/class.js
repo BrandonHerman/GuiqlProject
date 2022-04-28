@@ -20,18 +20,6 @@ const getClass = async (class_day,class_time,college_id) => {
     return result;
 }
 
-const getStartTime = async (class_id) => {
-    const query = await knex(CLASS_TABLE).select(start_time).where({class_id});
-    const result = await query;
-    return result;
-}
-
-const getEndTime = async (class_id) => {
-    const query = await knex(CLASS_TABLE).select(end_time).where({class_id});
-    const result = await query;
-    return result;
-}
-
 const getProfessor = async (class_id) => {
     const query = await knex(CLASS_TABLE).select(prof_id).where({class_id});
     const result = await query;
