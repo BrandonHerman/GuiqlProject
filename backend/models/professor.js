@@ -21,22 +21,22 @@ const createProfessor = async (first_name,last_name,username,email,password,coll
         //const hashedPassword = await bcrypt.hash(password,salt);
         const hashedPassword = password;
         const query = await knex(PROFESSOR_TABLE).insert({first_name,last_name,email,username,password: hashedPassword,college_id});
-        const returnValue = await knex(PROFESSOR_TABLE).select('Professor.first_name','Professor.last_name','Professor.email','Professor.username');
+        const returnValue = await knex(PROFESSOR_TABLE).select('Professor.professor_id','Professor.first_name','Professor.last_name','Professor.email','Professor.username');
         return returnValue;
     }
 }
 
 const authenticate = async (username,password) => {
-    const validUsername = await findByUsername(username);
+    const validUsername = await searchByUsername(username);
 
     // check if username exists
     if (validUsername == false) {
         return "Username does not exist!";
     } else {
         // check if password is correct
-        //const saltH = await knex(PROFESSOR_TABLE).select(salt).where({username});
+        const saltH = await knex(PROFESSOR_TABLE).select(salt).where({username});
         //const passwdHash = await bcrypt.hash(password,saltH);
-        //passwdHash = password;
+        passwdHash = password;
         const validPassword = await findUserByPassword(username,passwdHash);
          if (validPassword.length !== 0) {;
             const query = await knex(PROFESSOR_TABLE).where({username,password: validPassword[0].password});
