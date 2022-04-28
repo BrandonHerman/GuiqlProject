@@ -91,7 +91,7 @@ export class Repository {
 
     // Create a class with the student information
     createClass(class_time, prof_id, size, college_id) {
-        console.log("Creating class: " + class_name);
+        console.log("Creating class for: " + class_time);
         var group_count = Math.ceil(size / 4);
         return new Promise((resolve, reject) => {
             axios.post(`${this.url}/createClass?class_time=${class_time}&prof_id=${prof_id}&group_count=${group_count}&size=${size}&collge_id=${college_id}`)

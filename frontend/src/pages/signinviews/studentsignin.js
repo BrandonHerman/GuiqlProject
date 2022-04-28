@@ -21,18 +21,21 @@ export default function StudentSignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const username = data.get('username');
+    const password = data.get('password');
     console.log({
       username: data.get('username'),
       password: data.get('password'),
     });
+    validateUser(username, password);
   };
 
     //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
-    const validateUser = () => {
-      var student = repository.getStudentByUsername(username);
-      if(student.password === null){
+    const validateUser = (inUsername, inPassword) => {
+      var student = repository.getStudentByUsername(inUsername);
+      if(student.username === null){
         alert("User does not exist");
-      } else if(student.password === password){
+      } else if(student.password === inPassword && student.username === inUsername){
         console.log("Successful Login");
         StudentProfile.setEmail(student.email);
         StudentProfile.setName(student.first_name, student.last_name);
@@ -42,7 +45,7 @@ export default function StudentSignIn() {
         //ADD PROPER NAVIGATE FOR STUDENTS
         //navigate('/classeshome');
       }else{
-        alert("Password is incorrect, try again!");
+        alert("Username or Password is incorrect, try again!");
       }
     }
 

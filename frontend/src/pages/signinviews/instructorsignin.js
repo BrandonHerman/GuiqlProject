@@ -20,22 +20,18 @@ export default function InstructorSignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    handleUsername(data.get('username'));
-    handlePassword(data.get('password'));
+    var username = data.get('username')
+    var password = data.get('password')
     console.log({
       username: data.get('username'),
       password: data.get('password') 
     });
-    InstructorProfile.setUsername(data.get('username'));
-    InstructorProfile.setPassword(data.get('password'));
-    navigate('/classeshome');
+    validateUser(username, password);
   };
 
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [redirect, setRedirect] = React.useState(false);
-  const handleUsername = (username) => setUsername(username);
-  const handlePassword = (password) => setPassword(password);
   let navigate = useNavigate();
   // const onClickNavigate = (event) => {
   //     // <Navigate to='/classeshome' state={{ email: email, password: password }} />
@@ -49,12 +45,11 @@ export default function InstructorSignIn() {
   // }
 
   //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
-  const validateUser = () => {
-    //get prof by username
-    var prof = repository.getInstructorByUsername(username);
-    if(prof.password === null){
+  const validateUser = (inUsername, inPassword) => {
+    var prof = repository.getInstructorByUsername(inUsername);
+    if(prof.username === null){
       alert("User does not exist");
-    } else if(prof.password === password){
+    } else if(prof.password === inPassword && prof.username === inUsername){
       console.log("Successful Login");
       InstructorProfile.setEmail(prof.email);
       InstructorProfile.setName(prof.first_name, prof.last_name);
@@ -63,7 +58,7 @@ export default function InstructorSignIn() {
       InstructorProfile.setPassword(prof.password);
       navigate('/classeshome');
     }else{
-      alert("Password is incorrect, try again!");
+      alert("Username or Password is incorrect, try again!");
     }
   }
 

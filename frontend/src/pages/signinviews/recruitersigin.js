@@ -21,18 +21,21 @@ export default function RecruiterSignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const username = data.get('username');
+    const password = data.get('password');
     console.log({
       username: data.get('username'),
       password: data.get('password'),
     });
+    validateUser(username, password);
   };
 
     //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
-    const validateUser = () => {
-      var recruiter = repository.getRecruiterByUsername(username);
-      if(recruiter.password === null){
+    const validateUser = (inUsername, inPassword) => {
+      var recruiter = repository.getRecruiterByUsername(inUsername);
+      if(recruiter.username === null){
         alert("User does not exist");
-      } else if(recruiter.password === password){
+      } else if(recruiter.password === inPassword && recruiter.username === inUsername){
         console.log("Successful Login");
         RecruiterProfile.setEmail(recruiter.email);
         RecruiterProfile.setName(recruiter.first_name, recruiter.last_name);
@@ -42,7 +45,7 @@ export default function RecruiterSignIn() {
         //ADD PROPER NAVIGATE FOR RECRUITERS
         //navigate('/classeshome');
       }else{
-        alert("Password is incorrect, try again!");
+        alert("Username or Password is incorrect, try again!");
       }
     }
 
