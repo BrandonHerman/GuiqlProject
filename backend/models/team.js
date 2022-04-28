@@ -4,8 +4,8 @@ const TEAM_TABLE = 'Team';
 
 const createTeam = async (team_name,team_num) => {
     const query = await knex(TEAM_TABLE).insert({team_name,team_num});
-    const returnValue = await knex(TEAM_TABLE).select('Team.team_id','Team.team_name','Team.team_num');
-    return returnValue;
+    const result = await query;
+    return result;
 }
 
 const searchById = async (team_id) => {
