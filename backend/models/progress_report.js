@@ -8,13 +8,13 @@ const createProgressReport = async (sprint,report,team_id) => {
     return returnValue;
 }
 
-const searchByID = async (report_id) => {
+const searchById = async (report_id) => {
     const query = await knex(PROGRESS_REPORT_TABLE).where({report_id});
     const result = await query;
     return result;
 }
 
-const searchByTeamID = async (team_id) => {
+const searchByTeamId = async (team_id) => {
     const query = await knex(PROGRESS_REPORT_TABLE).where({team_id});
     const result = await query;
     return result;
@@ -28,7 +28,7 @@ const deleteReport = async (report_id) => {
 
 module.exports = {
     createProgressReport,
-    searchByID,
-    searchByTeamID,
+    searchById,
+    searchByTeamId,
     deleteReport
 }
