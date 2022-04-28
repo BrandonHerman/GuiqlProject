@@ -1,5 +1,5 @@
 const knex = require('../database/knex');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const e = require('express');
 
 const RECRUITER_TABLE = 'Recruiter';
@@ -14,8 +14,9 @@ const createRecruiter = async (first_name, last_name, username, password) => {
     } else if (eMail) {
         return "Email already associated with another account!";
     } else {  //if professor does not already exist, add their info to the table
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password,salt);
+        // const salt = await bcrypt.genSalt(10);
+        // const hashedPassword = await bcrypt.hash(password,salt);
+        const hashedPassword = password;
         const query = await knex(RECRUITER_TABLE).insert({recruiter_id,first_name,last_name,email,username,password: hashedPassword,salt});
         const returnValue = await knex(RECRUITER_TABLE).select('Recruiter.recruiter_id','Recruiter.first_name','Recruiter.last_name','Recruiter.email','Recruiter.username');
         return returnValue;
