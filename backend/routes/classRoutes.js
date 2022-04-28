@@ -113,6 +113,18 @@ router.get('/getAverageGroupSizes', async (req, res, next) => {
         res.sendStatus(500).json({ message: err.toString() });
     }
 })
+router.get('/getClassIdByClassTimeAndCollegeId', async (req, res, next) => {
+    try {
+        const class_time = req.params.class_time;
+        const college_id = req.params.college_id;
+        console.log(class_time, college_id);
+        const result = await Class.getClassIdByClassTimeAndCollegeId(class_time, college_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current class:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
 
 router.post('/addPeerReview', async (req, res, next) => {
     try {

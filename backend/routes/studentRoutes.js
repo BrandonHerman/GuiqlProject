@@ -6,7 +6,7 @@ router.post('/createStudent', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.student.createStudent(body.first_name, body.last_name, body.username, body.password, body.in_team, body.prof_id, body.class_id, body.college_id);
+        const result = await req.models.student.createStudent( body.username, body.password,body.first_name, body.last_name, body.email, body.prof_id,body.class_id, body.college_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new Student:', err);
@@ -42,7 +42,7 @@ router.get('/searchStudentById', async (req, res, next) => {
     }
 });
 
-router.get('/searchStudentByUsername', async (req, res, next) => {
+router.get('/getStudentByUsername', async (req, res, next) => {
     try {
         const username = req.params.username;
         console.log(username);
