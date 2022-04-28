@@ -34,7 +34,6 @@ export default function InstructorSignUp() {
     password: ''
   }
 
-
   const handleSubmit = (event) => {
     const data = new FormData(event.currentTarget);
     const college_id = repository.getCollegeByName(data.get('university'));
