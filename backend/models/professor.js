@@ -1,5 +1,5 @@
 const knex = require('../database/knex');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const e = require('express');
 
 const PROFESSOR_TABLE = 'Professor';
