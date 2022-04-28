@@ -96,6 +96,30 @@ router.get('/getProfessorName', async (req, res, next) => {
     }
 })
 
+router.get('/getCollegeByProfId', async (req, res, next) => {
+    try {
+        const prof_id = req.query.prof_id;
+        console.log(prof_id);
+        const result = await Professor.getCollegeByProfId(prof_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current College:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
+router.get('/getCollegeIdByProfId', async (req, res, next) => {
+    try {
+        const prof_id = req.params.prof_id;
+        console.log(prof_id);
+        const result = await Professor.getCollegeIdByProfId(prof_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load current College:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
 //tested = pass
 router.delete('/removeProfessor', async (req, res, next) => {
     try {
