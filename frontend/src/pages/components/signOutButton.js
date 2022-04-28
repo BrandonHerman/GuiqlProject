@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import './createClassTable.css';
 
 
-
 function SignOutButton() {
 
     return (
@@ -14,7 +13,7 @@ function SignOutButton() {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
+                    sx={{ mt: 3, mb: 2}}
                 >
                     Sign Out
                 </Button>

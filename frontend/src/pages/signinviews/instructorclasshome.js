@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 import { left } from '@popperjs/core';
 import StudentGeneration from '../utils/studentgeneration';
 import InstructorProfile from '../utils/instructorProfile';
+import green from "@material-ui/core/colors/green";
+import purple from "@material-ui/core/colors/purple";
 
 export default function InstructorSignIn() {
     const [open, setOpen] = React.useState(false);
@@ -50,10 +52,11 @@ export default function InstructorSignIn() {
         id: [1]
     };
 
+ 
     function addClassCard() {
         return (
 
-            <Card id="createClassCard" raised="false" elevation="0" sx={{ maxWidth: 262, maxHeight: 239 }} >
+            <Card id="createClassCard" raised="false" elevation="0" sx={{ minWidth:100, maxHeight: 239 }} >
 
                 <CardActionArea disableTouchRipple onClick={handleClickOpen}>
                     <CardContent>
@@ -125,7 +128,7 @@ export default function InstructorSignIn() {
                     <br></br>
                     <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ flexWrap: 'wrap' }}>
 
-                        {data1.class.map((elem) => (
+                        {data1.class.map((elem, i) => (
                             <Grid item margin={2} xs={8} md={6} lg={4} justifyContent="center" alignItems="center">
                                 <Card sx={{ minWidth: "265px", maxWidth: "auto", height: "235px" }}>
                                     
@@ -141,10 +144,11 @@ export default function InstructorSignIn() {
 
                                     </Link>
                                         <CardActions >
-                                            <IconButton aria-label="add-reaction">
+                                            <IconButton 
+                                                aria-label="add-reaction">
                                                 <AddReactionIcon></AddReactionIcon>
                                             </IconButton>
-                                            <IconButton aria-label="delete">
+                                            <IconButton  aria-label="delete">
                                                 <GroupAddIcon />
                                             </IconButton>
                                             <IconButton aria-label="delete">

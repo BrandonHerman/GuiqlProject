@@ -42,7 +42,7 @@ export default function RecruiterPage() {
                 container
                 sx={{ px: 4, py: 2 }}
                 direction="row"
-                justifyContent="space-between"
+                justifyContent="space-evenly"
                 alignItems="center"
             >
 
