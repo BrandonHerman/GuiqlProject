@@ -39,13 +39,23 @@ export default function StudentSignIn() {
 
   //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
   const validateUser = (inUsername, inPassword) => {
-    var student = calls.studentSignIn(inUsername, inPassword);
+    // var student = calls.studentSignIn(inUsername, inPassword);
+    //incase ^^^^ freeezes;
+    var student = {
+      username: "bherman",
+      password: "linuxpro",
+      email: "bherman@smu.edu",
+      id: 1,
+      firstName: "Brandon",
+      lastName: "Herman"
+    }
     if (student.username == undefined || student.username == null) {
       setError(true);
-    } else if (student.username == inUsername) {
+    } else if (student.username == inUsername && student.password == inPassword) {
       console.log("Successful Login");
       StudentProfile.setEmail(student.email);
-      StudentProfile.setName(student.firstName, student.lastName);
+      StudentProfile.setfirstName(student.firstName);
+      StudentProfile.setlastName(student.lastName);
       StudentProfile.setID(student.id);
       StudentProfile.setUsername(student.username);
       StudentProfile.setPassword(student.password);
