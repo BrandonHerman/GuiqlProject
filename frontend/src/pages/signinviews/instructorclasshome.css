@@ -20,3 +20,10 @@
     border-color: rgba(173,216,255, 0.4);
 }
 /* gets rid of ugly click ripple */
+a {
+    color: #000;
+  }
+  a:hover{
+     color: #4f7341;
+  }
+  

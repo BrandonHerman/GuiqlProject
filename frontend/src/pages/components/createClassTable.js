@@ -98,37 +98,49 @@ function createClassTableComponent() {
   }
 
   return (
-    <Grid container justifyContent="center">
-        <FormControl>
-          <FormLabel id="Days">Day</FormLabel>
-          <RadioGroup
-            defaultValue="Monday"
-            value={day}
-            onChange={handleDayChange}
-          >
-            <FormControlLabel value="Monday" control={<Radio />} label="Monday" />
-            <FormControlLabel value="Tuesday" control={<Radio />} label="Tuesday" />
-            <FormControlLabel value="Wednesday" control={<Radio />} label="Wednesday" />
-            <FormControlLabel value="Thursday" control={<Radio />} label="Thursday" />
-            <FormControlLabel value="Friday" control={<Radio />} label="Friday" />
-          </RadioGroup>
-        </FormControl>
-        <FormControl>
-          <FormLabel id="Times">Time</FormLabel>
-          <RadioGroup
-            defaultValue="2:30pm-4:20pm"
-            value={time}
-            onChange={handleTimeChange}
-          >
-            <FormControlLabel value="2:30pm-4:20pm" control={<Radio />} label="2:30pm-4:20pm" />
-            <FormControlLabel value="4:30pm-6:20pm" control={<Radio />} label="4:30pm-6:20pm" />
-            <FormControlLabel value="6:30pm-8:20pm" control={<Radio />} label="6:30pm-8:20pm" />
-          </RadioGroup>
-        </FormControl>
-        <br></br>
-        <br></br>
+    <Grid container direction="column" alignItems="center" justifyContent="center">
+      <Grid item>
+        <Box sx={{px:3, display:'inline'}}>
+          <FormControl>
+            <FormLabel id="Days">Day</FormLabel>
+            <RadioGroup
+              defaultValue="Monday"
+              value={day}
+              onChange={handleDayChange}
+            >
+              <FormControlLabel value="Monday" control={<Radio />} label="Monday" />
+              <FormControlLabel value="Tuesday" control={<Radio />} label="Tuesday" />
+              <FormControlLabel value="Wednesday" control={<Radio />} label="Wednesday" />
+              <FormControlLabel value="Thursday" control={<Radio />} label="Thursday" />
+              <FormControlLabel value="Friday" control={<Radio />} label="Friday" />
+            </RadioGroup>
+          </FormControl>
+        </Box>
 
+        <Box  sx={{px:3, display:'inline'}}>
+          <FormControl>
+            <FormLabel id="Times">Time</FormLabel>
+            <RadioGroup
+              defaultValue="2:30pm-4:20pm"
+              value={time}
+              onChange={handleTimeChange}
+            >
+              <FormControlLabel value="2:30pm-4:20pm" control={<Radio />} label="2:30pm-4:20pm" />
+              <FormControlLabel value="4:30pm-6:20pm" control={<Radio />} label="4:30pm-6:20pm" />
+              <FormControlLabel value="6:30pm-8:20pm" control={<Radio />} label="6:30pm-8:20pm" />
+            </RadioGroup>
+          </FormControl>
+        </Box>
+      </Grid>
+      <br></br>
+      <br></br>
+    
       <TableBody>
+  <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+            >
         <Snackbar
           open={open}
           autoHideDuration={2000}
@@ -139,103 +151,101 @@ function createClassTableComponent() {
             Students added!
           </Alert>
         </Snackbar>
-          <div style={{ display: "", justifyContent: "space-evenly" }}>
-            <div>
-              {isEdit ? (
-                <div>
-                  <Button onClick={handleAdd}>
-                    <AddBoxIcon onClick={handleAdd} />
-                    ADD STUDENT
+          <div>
+            {isEdit ? (
+              <div>
+                <Button onClick={handleAdd}>
+                  <AddBoxIcon onClick={handleAdd} />
+                  ADD STUDENT
+                </Button>
+                {rows.length !== 0 && (
+                  <Button align="" onClick={handleSave}>
+                    <DoneIcon />
+                    SAVE
                   </Button>
-                  {rows.length !== 0 && (
-                    <Button align="" onClick={handleSave}>
-                      <DoneIcon />
-                      SAVE
-                    </Button>
-                  )}
-                </div>
-              ) : (
-                <div>
-                  <Button onClick={handleAdd}>
-                    <AddBoxIcon onClick={handleAdd} />
-                    ADD STUDENT
-                  </Button>
-                </div>
-              )}
-            </div>
-            <br></br>
+                )}
+              </div>
+            ) : (
+              <div>
+                <Button onClick={handleAdd}>
+                  <AddBoxIcon onClick={handleAdd} />
+                  ADD STUDENT
+                </Button>
+              </div>
+            )}
           </div>
-          <TableRow align=""> </TableRow>
+          <br></br>
+        <TableRow align=""> </TableRow>
 
-          <Table
-            className="studentTable"
-            size="large"
-            aria-label="add student table"
-          >
+        <Table
+          className="studentTable"
+          size="large"
+          aria-label="add student table"
+        >
 
-            <TableBody fullWidth>
-              {rows.map((row, i) => {
-                return (
-                  <div id="studentsTable">
-                    <TableRow>
-                      {isEdit ? (
-                        <div>
-                          <TableCell>
-                            <input
-                              value={row.firstname}
-                              name="firstname"
-                              onChange={(e) => handleInputChange(e, i)}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <input
-                              value={row.lastname}
-                              name="lastname"
-                              onChange={(e) => handleInputChange(e, i)}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <input
-                              value={row.email}
-                              name="email"
-                              onChange={(e) => handleInputChange(e, i)}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <select
-                              name="class"
-                              value={row.class}
-                              onChange={(e) => handleInputChange(e, i)}
-                            >
-                              <option value=""></option>
-                              <option value="GUI">GUI</option>
-                              <option value="Database">Database</option>
-                            </select>
-                          </TableCell>
+          <TableBody fullWidth>
+            {rows.map((row, i) => {
+              return (
+                <div id="studentsTable">
+                  <TableRow>
+                    {isEdit ? (
+                      <div>
+                        <TableCell>
+                          <input
+                            value={row.firstname}
+                            name="firstname"
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <input
+                            value={row.lastname}
+                            name="lastname"
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <input
+                            value={row.email}
+                            name="email"
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <select
+                            name="class"
+                            value={row.class}
+                            onChange={(e) => handleInputChange(e, i)}
+                          >
+                            <option value=""></option>
+                            <option value="GUI">GUI</option>
+                            <option value="Database">Database</option>
+                          </select>
+                        </TableCell>
 
-                        </div>
-                      ) : (
-                        <div id="addedStudents">
-                          <TableCell>
-                            {row.firstname}
-                          </TableCell>
-                          <TableCell >
-                            {row.lastname}
-                          </TableCell>
-                          <TableCell >
-                            {row.email}
-                          </TableCell>
-                          <TableCell >
-                            {row.class}
-                          </TableCell>
-                        </div>
-                      )}
-                    </TableRow>
-                  </div>
-                );
-              })}
-            </TableBody>
-          </Table>
+                      </div>
+                    ) : (
+                      <div id="addedStudents">
+                        <TableCell>
+                          {row.firstname}
+                        </TableCell>
+                        <TableCell >
+                          {row.lastname}
+                        </TableCell>
+                        <TableCell >
+                          {row.email}
+                        </TableCell>
+                        <TableCell >
+                          {row.class}
+                        </TableCell>
+                      </div>
+                    )}
+                  </TableRow>
+                </div>
+              );
+            })}
+          </TableBody>
+        </Table>
         <div justify="center">
           <br></br>
           {isEdit ? (
@@ -244,7 +254,9 @@ function createClassTableComponent() {
             <Button textAlign="center" onClick={createClassAndStudents()}>Submit</Button>
           )}
         </div>
+        </Grid>
       </TableBody >
+      
     </Grid>
   );
 }

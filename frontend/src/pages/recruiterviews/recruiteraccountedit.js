@@ -13,13 +13,28 @@ import Box from '@mui/material/Box';
 import unis from '../assets/universities.js';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Link } from "react-router-dom";
-
-
+import Avatar, { genConfig } from 'react-nice-avatar';
+// import Avatar from '@mui/material/Avatar';
+import { useState } from 'react';
+import RecruiterProfile from '../utils/recruiterProfile.js';
 
 export default function RecruiterAccountEdit() {
+    const [picture, setPicture] = useState("https://picsum.photos/200/300");
+    const [configs, setConfig] = useState(RecruiterProfile.getConfig());
+
+    const handlePicture = (url) => {
+        setPicture(url);
+    }
+
+    const newAvatar = () => {
+        const config = genConfig();
+        setConfig(config);
+        RecruiterProfile.setConfig(config);
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        setPicture(data.get('image'));
         console.log({
             email: data.get('email'),
             password: data.get('password'),
@@ -32,87 +47,64 @@ export default function RecruiterAccountEdit() {
     };
 
     return (
-        <Grid container component="main" justifyContent="center"
-            alignItems="center" sx={{ height: '100vh', justifyItems: 'center' }}>
-            <CssBaseline />
+        <>
+            <br></br>
+            <Grid container justifyContent="center"
+                alignItems="center" sx={{ justifyItems: 'center' }}>
+                <CssBaseline />
 
-            <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{ justifyItems: 'center' }}>
-                <Box
-                    sx={{
-                        my: 5,
-                        mx: 4,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Typography component="h1" variant="h5">
-                        Account Editor
-                    </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                        />
-                        {/* password confirm will need some sort of check that password==passwordCheck */}
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="passwordConfirm"
-                            type="password"
-                            label="Confirm Password"
-                            id="passwordConfirm"
-                        />
-                        <TextField
-                            margin="normal"
-                            multiline
-                            required
-                            fullWidth
-                            id="bio"
-                            label="Bio"
-                            name="bio"
-                            minRows={3}
-                            maxRows={3}
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="image"
-                            label="New Profile Image"
-                            id="image"
-                        />
-                        {/* planning on this to be typable dropdown box, with preloaded JSON of universities to select */}
-                        {/* the p is for weird spacing with <br>, <p>'s new line works */}
-                        <p></p>
-                        {/* inits the onSubmit function at top of file */}
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Update Info
-                        </Button>
+                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{ justifyItems: 'center' }}>
+                    <Box
+                        sx={{
+                            my: 5,
+                            mx: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Typography component="h1" variant="h5">
+                            Account Editor
+                        </Typography>
+                        <br></br>
+                        <Avatar style={{ width: 100, height: 100 }} {...configs}/>
+                        {/* <Avatar alt="Recruiter" src={picture} sx={{ width: 100, height: 100 }}/> */}
+                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+
+
+                            <TextField
+                                margin="normal"
+                                multiline
+                                required
+                                fullWidth
+                                id="bio"
+                                label="Bio"
+                                name="bio"
+                                minRows={3}
+                                maxRows={3}
+                            />
+                         
+
+                            <Grid container justifyContent="center" alignItems="center" direction="column">
+                                <Button onClick={() => newAvatar()} color="secondary">New Avatar</Button>
+                            </Grid>
+                            {/* planning on this to be typable dropdown box, with preloaded JSON of universities to select */}
+                            {/* the p is for weird spacing with <br>, <p>'s new line works */}
+                            <p></p>
+                            {/* inits the onSubmit function at top of file */}
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Update Info
+                            </Button>
+                        </Box>
                     </Box>
-                </Box>
+                </Grid>
             </Grid>
-        </Grid>
+        </>
     );
 }
 
