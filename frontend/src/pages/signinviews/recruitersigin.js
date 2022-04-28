@@ -35,7 +35,6 @@ export default function RecruiterSignIn() {
     });
 
     validateUser(username, password);
-    var username = data.get('username');
     console.log(username);
     RecruiterProfile.setName(username, username); 
     RecruiterProfile.setConfig(genConfig());
