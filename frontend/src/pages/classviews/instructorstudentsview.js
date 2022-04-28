@@ -18,6 +18,7 @@ import FormControl from "@material-ui/core/FormControl";
 import JSONCalls from '../assets/JSONCalls';
 import InputLabel from "@material-ui/core/InputLabel";
 import { useLocation } from 'react-router-dom';
+import InstructorProfile from "../utils/instructorProfile";
 
 const drawerWidth = 120;
 
@@ -52,10 +53,13 @@ const calls = new JSONCalls;
     }
 
 
+
     const handleTeamChange = (index, event) => {
+        
         const newTeam = students.slice();
         newTeam[index].students = event.target.value;
         setStudents(newTeam);
+
     };
 
     const [open, setOpen] = React.useState(false);
@@ -78,10 +82,15 @@ const calls = new JSONCalls;
     };
 
     const [addStudent, setAddStudent] = React.useState({
-        first_name: '',
-        last_name: '',
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
         email: '',
-        team_id: '',
+        university:"Southern Methodist University",
+        inTeam: false,
+        class: '',
+        teamID: 0
     });
 
     //let newStudents = students;
@@ -93,13 +102,21 @@ const calls = new JSONCalls;
 
         const newStudentData = { ...addStudent };
         newStudentData[fieldName] = fieldValue;
-        // setAddStudent(newStudentData);
+        setAddStudent(newStudentData);
     };
 
     const handleNewStudentSubmit = (event) => {
         event.preventDefault();
 
-        const newStudent = new Student(students.length + 1, addStudent.first_name[0] + addStudent.last_name, addStudent.first_name, addStudent.last_name, addStudent.email);
+        //const newStudent = new Student(students.length + 1, addStudent.first_name[0] + addStudent.last_name, addStudent.first_name, addStudent.last_name, addStudent.email);
+        addStudent.username = addStudent.firstName[0] + addStudent.lastName;
+        {
+            if(addStudent.teamID !== 0){
+                addStudent.inTeam = true;
+            }
+        }
+
+        const newStudent = { ...addStudent };
         const newStudents = [...students, newStudent];
         setStudents(newStudents);
     };
@@ -131,7 +148,7 @@ const calls = new JSONCalls;
             <div>
                 <TextField
                     required
-                    id="first_name"
+                    id="firstName"
                     label="First Name"
                     variant="outlined"
                     //defaultValue="Hello World"
@@ -155,7 +172,7 @@ const calls = new JSONCalls;
                 />
                 <TextField
                     optional
-                    id="team_id"
+                    id="teamID"
                     label="Team ID"
                     variant="outlined"
                 //defaultValue="Hello World"
@@ -181,8 +198,8 @@ const calls = new JSONCalls;
     const columns = [
         //{ id: 'profilePic', label: '', minWidth: 100, align: 'center', },
         { id: 'username', label: 'Username', minWidth: 1 / 6, align: 'center', },
-        { id: 'first_name', label: 'First Name', minWidth: 1 / 6, align: 'center', },
-        { id: 'last_name', label: 'Last Name', minWidth: 1 / 6, align: 'center', },
+        { id: 'firstName', label: 'First Name', minWidth: 1 / 6, align: 'center', },
+        { id: 'lastName', label: 'Last Name', minWidth: 1 / 6, align: 'center', },
         //{ id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
         {
             id: 'email',
@@ -192,7 +209,7 @@ const calls = new JSONCalls;
             //format: (value) => value.toLocaleString('en-US'),
         },
         {
-            id: 'team_id',
+            id: 'teamID',
             label: 'Team',
             minWidth: 1 / 6,
             align: 'center',
@@ -206,35 +223,6 @@ const calls = new JSONCalls;
     ];
 
 
-
-
-    /*
-    let students = [
-        new Student('1', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com'),
-        new Student('2', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com'),
-        new Student('3', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com'),
-        new Student('4', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com'),
-        new Student('5', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com'),
-        new Student('6', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com'),
-        new Student('7', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com'),
-        new Student('8', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com'),
-        new Student('9', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com'),
-        new Student('10', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com')
-    ];
-    */
-
-
-    const listItems = students.map((student, index) =>
-        <TableRow hover role="checkbox" tabIndex={-1} item key={students.indexOf(student)}>
-            <TableCell><Skeleton variant="circular" width={40} height={40} /></TableCell>
-            <TableCell>{student.username}</TableCell>
-            <TableCell>{student.first_name}</TableCell>
-            <TableCell>{student.last_name}</TableCell>
-            <TableCell>{student.email}</TableCell>
-            <TableCell>{student.team_id}</TableCell>
-        </TableRow>
-
-    );
 
     const newListItems = students.map((student, index) =>
         <TableRow hover role="checkbox" tabIndex={-1} key={students.indexOf(student)}>
@@ -300,44 +288,6 @@ const calls = new JSONCalls;
 
     );
 
-    const navItems = ['Students', 'Teams', 'Assessments'].map((text, index) => {
-        switch (text) {
-            case 'Students':
-                return (
-                    <ListItem button key={text}>
-
-                        <Link to="/instructorstudentsview">
-                            <ListItemText primary={text} />
-                        </Link>
-
-                    </ListItem>
-                );
-            case 'Teams':
-                return (
-                    <ListItem button key={text}>
-
-                        <Link to="/instructorteamsview">
-                            <ListItemText primary={text} />
-                        </Link>
-
-                    </ListItem>
-                );
-            case 'Assignments':
-                return (
-                    <ListItem button key={text}>
-
-                        <Link to="/classeshome">
-                            <ListItemText primary={text} />
-                        </Link>
-
-                    </ListItem>
-                );
-        }
-    });
-
-    /*
-
-     */
 
     return (
 
@@ -377,7 +327,11 @@ const calls = new JSONCalls;
                     {/* CS 3345 */}
                     {/* </Typography> */}
 
-                    <Link to="/instructorstudentsview">
+
+                    <Link to="/instructorstudentsview" state={{
+                        userID: InstructorProfile.getID(),
+                        classID: elem.id
+                    }}>
                         <Button>Students</Button>
                     </Link>
 
