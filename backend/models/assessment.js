@@ -2,17 +2,10 @@ const knex = require('../database/knex');
 
 const ASSESSMENT_TABLE = 'Assessment';
 
-const createAssessment = async (assessment_id,assessment_link,prof_id,team_id) => {
-    //check if team already exists
-    const link = await searchByLink(assessment_link);
-
-    if(link) {
-        return "Assessment already exists";
-    } else {
-        const query = await knex(ASESSMENT_TABLE).insert({assessment_id,assessment_link,assessment_flag: false,prof_id,team_id});
-        const returnValue = await knex(ASSESSMENT_TABLE).select('Assessment.assessment_id','Assessment.assessment_link','Assessment.prof_id','Assessment.team_id');
-        return returnValue;
-    }
+const createAssessment = async (assessment_link,prof_id,team_id) => {
+    const query = await knex(ASESSMENT_TABLE).insert({assessment_link,assessment_flag: false,prof_id,team_id});
+    const returnValue = await knex(ASSESSMENT_TABLE).select('Assessment.assessment_id','Assessment.assessment_link','Assessment.prof_id','Assessment.team_id');
+    return returnValue;
 }
 
 const searchByLink = async (assessment_link) => {
