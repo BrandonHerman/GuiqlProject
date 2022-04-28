@@ -62,7 +62,7 @@ const searchByEmail = async (email) => {
     return result;
 }
 
-const searchByCollge = async (college_id) => {
+const searchByCollege = async (college_id) => {
     const query = await knex(STUDENT_TABLE).where({college_id});
     const result = await query;
     return result;
@@ -104,7 +104,7 @@ module.exports = {
     searchByID,
     searchByEmail,
     searchByUsername,
-    searchByCollge,
+    searchByCollege,
     updateTeam,
     searchByTeam,
     getTeamStatus,
