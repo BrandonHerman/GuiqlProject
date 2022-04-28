@@ -8,7 +8,7 @@ const createStudent = async (username,password,first_name,last_name,email,class_
         // const salt = await bcrypt.genSalt(10);
         // const hashedPassword = await bcrypt.hash(password,salt);
         const hashedPassword = password;
-        const query = await knex(STUDENT_TABLE).insert({username,password,first_name,last_name,email,class_type,prof_id,class_id,college_id});
+        const query = await knex(STUDENT_TABLE).insert({username,password: hashedPassword,first_name,last_name,email,class_type,prof_id,class_id,college_id});
         const result = await query;
         return result;
 }
