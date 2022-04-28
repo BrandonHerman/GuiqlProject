@@ -11,27 +11,28 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import InstructorProfile from '../utils/instructorProfile';
-import { Repository } from '../../api/repository';
+import { JSONCalls} from '../assets/JSONCalls';
+import Alert from '@material-ui/lab/Alert';
 
 export default function InstructorSignIn() {
 
-  var repository = new Repository();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    var username = data.get('username')
-    var password = data.get('password')
-    console.log({
-      username: data.get('username'),
-      password: data.get('password') 
-    });
-    validateUser(username, password);
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   var username = data.get('username')
+  //   var password = data.get('password')
+  //   console.log({
+  //     username: data.get('username'),
+  //     password: data.get('password')
+  //   });
+  //   validateUser(username, password);
+  // };
 
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [redirect, setRedirect] = React.useState(false);
+  const [error, setError] = React.useState(false);
   let navigate = useNavigate();
   // const onClickNavigate = (event) => {
   //     // <Navigate to='/classeshome' state={{ email: email, password: password }} />
@@ -47,19 +48,19 @@ export default function InstructorSignIn() {
   //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
   const validateUser = (inUsername, inPassword) => {
     //get prof by username
-    var prof = repository.getInstructorByUsername(username);
-    if(prof.username === null){
-      alert("User does not exist");
-    } else if(prof.password === password && prof.username === inUsername){
+    var rep = new JSONCalls();
+    var prof, success = rep.profSignIn(inUsername, inPassword);
+    console.log(prof);
+    if (success) {
       console.log("Successful Login");
       InstructorProfile.setEmail(prof.email);
-      InstructorProfile.setName(prof.first_name, prof.last_name);
-      InstructorProfile.setID(prof.prof_id);
+      InstructorProfile.setName(prof.firstName, prof.last_name);
+      InstructorProfile.setID(prof.id);
       InstructorProfile.setUsername(prof.username);
       InstructorProfile.setPassword(prof.password);
       navigate('/classeshome');
-    }else{
-      alert("Username or Password is incorrect, try again!");
+    } else {
+      setError(true);
     }
   }
 
@@ -92,7 +93,7 @@ export default function InstructorSignIn() {
           <Typography component="h1" variant="h5">
             Instructor Sign In
           </Typography>
-          <Box component="form" noValidate onSubmit={validateUser} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
+          <Box component="form" onSubmit={validateUser} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
             <TextField
               margin="normal"
               required
@@ -118,11 +119,12 @@ export default function InstructorSignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            
+
             {redirect && <Navigate to={{
               pathname: '/classeshome',
-              state: {username: username, password: password}}}/>}
-              <Button
+              state: { username: username, password: password }
+            }} />}
+            <Button
               type="submit"
               fullWidth
               variant="contained"
@@ -149,7 +151,14 @@ export default function InstructorSignIn() {
               </h3>
             </Link>
           </Box>
+
+          {error &&
+            <>
+            <br></br>
+              <Alert sx={{ m: 5 }} onClose={() => setError(false)} severity="error">Username or Password is incorrect</Alert>
+            </>}
         </Box>
+
       </Grid>
     </Grid>
   );

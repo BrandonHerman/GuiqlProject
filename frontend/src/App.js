@@ -84,7 +84,7 @@ function App() {
       // <CssBaseline/>
       <div className="App">
 
-        <StudentLogIn></StudentLogIn>
+        <StudentSignIn></StudentSignIn>
       </div>
     // </ThemeProvider>
   );
