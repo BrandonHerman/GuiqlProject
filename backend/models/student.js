@@ -14,21 +14,21 @@ const createStudent = async (username,password,first_name,last_name,email,class_
 }
 
 const authenticate = async (username,password) => {
-    const validUsername = await searchByUsername(username);
+    const students = await searchByUsername(username);
 
     // check if username exists
-    if (validUsername == false) {
-        return "Username does not exist!";
-    } else {
-        // check if password is correct
-        const validPassword = await findUserByPassword(username,password);
-         if (validPassword.length !== 0) {;
-            const query = await knex(STUDENT_TABLE).where({username,password: validPassword[0].password});
-            return query;
-        } else {
-            return "Password is incorrect!";
-        }
+    if (validUsername.length === 0) {
+        console.error(`No students matched the username: ${username}`);
+        return null;
     }
+    // check if password is correct
+    const student = students[0];
+    const validPassword = await findUserByPassword(username,password);
+    if (validPassword.length !== 0) {;
+        delete student.password;
+        return student;
+    }
+    return null;
 }
 
 const searchById = async (student_id) => {
