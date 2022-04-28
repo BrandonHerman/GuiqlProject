@@ -42,14 +42,12 @@ function Test() {
     // var classes = prof.classes;
     // console.log(classes);
 
-    //<button onClick={getStudentsByClassId(1,2)}>Get Prof</button>
-
-    return (
-        <div>
-            <h1>Test</h1>
-            
-        </div>
-    );
+    // return (
+        // <div>
+            {/* <h1>Test</h1> */}
+            {/* <button onClick={profSignIn("mfontenot", "datastruct")}>Get Prof</button> */}
+        // </div>
+    // );
 }
 
 
