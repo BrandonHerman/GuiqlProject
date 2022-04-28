@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-//import '.instructorstudentsview.css';
-import {Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer,
+//import '.instructorteamsview.css';
+import {
+    Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer,
     Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem,
-    ListItemText, Button, Modal, TextField, Select, OutlinedInput, colors, MenuItem, Icon} from "@mui/material"
+    ListItemText, Button, Modal, TextField, Select, OutlinedInput, MenuItem, Grid,
+    Card, CardContent, CardActions, CardActionArea, ButtonBase, Alert
+} from "@mui/material"
 
 
 //import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -18,7 +21,7 @@ const drawerWidth = 120;
 
 
 
-function InstructorStudentsView() {
+function InstructorTeamsView() {
     const [students, setStudents] = React.useState([new Student('1', 'jcastillo', 'Josiah', 'Castillo', 'captaincrunch404@gmail.com', 0, 1, 3),
             new Student('2', 'josterman', 'Jon', 'osterman', 'blueboi420@hotmail.com')
         ]
@@ -34,21 +37,11 @@ function InstructorStudentsView() {
     const handleTeamChange = (index, event) => {
         const newTeam = students.slice();
         newTeam[index].students = event.target.value;
+        const newStudentChange = { ...students};
+        //newStudentChange.at(index).team_id =
         setStudents(newTeam);
     };
-
-     */
-
-    const handleTeamChange = (index, event) => {
-        /*
-        const newStudentChange = { ...students};
-        newStudentChange[index].team_id = event.target.value;
-        setStudents(newStudentChange);
-        */
-        students[index].team_id = event.target.value;
-        setStudents(students);
-        //setAge(event.target.value);
-    };
+    */
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -71,6 +64,7 @@ function InstructorStudentsView() {
         first_name: '',
         last_name: '',
         email: '',
+
     });
 
     //let newStudents = students;
@@ -94,38 +88,54 @@ function InstructorStudentsView() {
         setStudents(newStudents);
     };
 
-
+    /*
     const handleDeleteStudent = (studentId) => {
         const newStudents = [...students];
 
-        const index = students.findIndex((student)=> student.id === studentId);
-
-        newStudents.splice(index, 1);
-
-        setStudents(newStudents);
+        const index = students.findIndex((student)=>)
     };
 
 
-    const studentForm =
-    <form>
-        <div className="form-row" style={{display:"flex"}}>
-            <div className="col-4">
-                <TextField id="first_name" label="First Name" variant="outlined" onChange={ handleNewStudent }/>
+
+     */
+
+
+    const viewForm =
+        <form>
+            <div className="form-row" style={{display:"flex"}}>
+                <h1>List of Students:</h1>
+                <button type="submit"
+                        className="btn btn-primary"
+                        onClick={handleNewStudentSubmit}
+                >
+                    Submit
+                </button>
             </div>
-            <div className="col-2">
-                <TextField id="last_name" label="Last Name" variant="outlined" onChange={ handleNewStudent }/>
+        </form>
+    ;
+
+
+
+    const teamForm =
+        <form>
+            <div className="form-row" style={{display:"flex"}}>
+                <div className="col-4">
+                    <TextField id="first_name" label="First Name" variant="outlined" onChange={ handleNewStudent }/>
+                </div>
+                <div className="col-2">
+                    <TextField id="last_name" label="Last Name" variant="outlined" onChange={ handleNewStudent }/>
+                </div>
+                <div className="col-2">
+                    <TextField id="email" label="Email" variant="outlined" onChange={ handleNewStudent }/>
+                </div>
+                <button type="submit"
+                        className="btn btn-primary"
+                        onClick={ handleNewStudentSubmit }
+                >
+                    Submit
+                </button>
             </div>
-            <div className="col-2">
-                <TextField id="email" label="Email" variant="outlined" onChange={ handleNewStudent }/>
-            </div>
-            <button type="submit"
-                    className="btn btn-primary"
-                    onClick={handleNewStudentSubmit}
-            >
-                Submit
-            </button>
-        </div>
-    </form>
+        </form>
     ;
 
 
@@ -153,7 +163,7 @@ function InstructorStudentsView() {
         {
             id: 'action',
             label: '',
-            minWidth: 1/8,
+            minWidth: 1/6,
             align: 'center',
         },
     ];
@@ -188,61 +198,6 @@ function InstructorStudentsView() {
         </TableRow>
 
     );
-
-    const newListItems = students.map((student, index) =>
-                    <TableRow hover role="checkbox" tabIndex={-1} key={students.indexOf(student)}>
-
-                        {columns.map((column) => {
-
-                            switch(column.id){
-                                case 'team_id':
-                                    return(
-                                        <TableCell key={column.id} align={column.align}>
-                                            <Select
-                                                labelId="demo-simple-select-autowidth-label"
-                                                id="demo-simple-select-autowidth"
-                                                value={column.id}
-                                                onChange={handleTeamChange.bind(this, index)}
-                                                minWidth={1/6}
-                                            >
-                                                {teamsArray.map((team) => (
-                                                    <MenuItem
-                                                        key={team}
-                                                        value={team}
-                                                    >
-                                                        {team}
-                                                    </MenuItem>
-                                                ))}
-                                            </Select>
-                                        </TableCell>
-                                    );
-                                case 'action':
-                                    return(
-                                        <TableCell key={column.id} align={column.align}>
-                                            <Button variant="contained" sx={{ backgroundColor: 'red', maxWidth: 1/8}}
-                                                onClick={()=> handleDeleteStudent(student.id)}>
-                                                X
-                                            </Button>
-                                        </TableCell>
-                                    );
-                                default:
-                                    const value = student[column.id];
-                                    return (
-                                        <TableCell key={column.id} align={column.align}>
-                                            {column.format && typeof value === 'number'
-                                                ? column.format(value)
-                                                : value}
-                                        </TableCell>
-                                    );
-
-
-                            }
-
-                        })}
-
-                    </TableRow>
-
-            );
 
     const navItems = ['Students', 'Teams', 'Assessments'].map((text, index) => {
         switch(text){
@@ -279,13 +234,69 @@ function InstructorStudentsView() {
         }
     });
 
+    const [addOpen, setAddOpen] = React.useState(false);
+    const handleAddOpen = () => setAddOpen(true);
+    const handleAddClose = () => setAddOpen(false);
+
+    const [viewOpen, setViewOpen] = React.useState(false);
+    const handleViewOpen = () => setViewOpen(true);
+    const handleViewClose = () => setViewOpen(false);
+
+    const gridItems = teamsArray.map((teamName, index) =>
+        <Grid item xs={4}>
+            <Card sx={{height: '32vh'}}>
+
+                    <CardContent>
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                            Team Name
+                        </Typography>
+                        <Typography variant="h5" component="div">
+                            {teamName}
+                        </Typography>
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            Other stuff (students maybe?)
+                        </Typography>
+                        <Typography variant="body2">
+                            list of students?
+                            <br />
+                            {'table-goes-here'}
+                        </Typography>
+                    </CardContent>
+                <CardActions>
+                    <Button onClick={handleViewOpen} type="text">
+                        VIEW TEAM
+                    </Button>
+                    <Modal
+                        open={viewOpen}
+                        onClose={handleViewClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Enter Team Info
+                            </Typography>
+
+                            {viewForm}
+
+                        </Box>
+
+                    </Modal>
+                </CardActions>
+
+            </Card>
+        </Grid>
+    );
+
     /*
 
      */
 
+
+
     return (
 
-        <Box sx={{ width: '100vw', height: '100vh', bgcolor: '#9c27b0', overflow: 'hidden'}}>
+        <Box sx={{ width: '100vw', height: '100vh', bgcolor: '#ee99fc', overflow: 'auto'}}>
 
             <CssBaseline />
 
@@ -305,11 +316,11 @@ function InstructorStudentsView() {
                     </Typography>
 
                     <Link to="/instructorstudentsview">
-                        <ListItemText primary="students" />
+                        <ListItemText primary="Students" />
                     </Link>
 
                     <Link to="/instructorteamsview">
-                        <ListItemText primary="teams" />
+                        <ListItemText primary="Teams" />
                     </Link>
 
                     <Button variant="text">
@@ -322,58 +333,44 @@ function InstructorStudentsView() {
 
             <Box
                 component="main"
-                sx={{ width: 1, height: 1 , bgcolor: '#ee99fc', p: 3 }}
+                sx={{ width: 1 , bgcolor: '#ee99fc', p: 3 }}
             >
                 <Toolbar />
 
-                <Paper sx={{ width: '100%', maxHeight: '100%'}}>
-                    <TableContainer sx={{ maxHeight: 500, overflow: 'auto'}}>
-                        <Table stickyHeader aria-label="sticky table" >
-                            <TableHead >
-                                <TableRow >
-                                    {columns.map((column) => (
-                                        <TableCell
-                                            key={column.id}
-                                            align={column.align}
-                                            style={{ minWidth: column.minWidth }}
-                                            sx={{ bgcolor: '#bb6bc9'}}
-                                        >
-                                            {column.label}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {newListItems}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                <Grid container spacing={2} alignItems="center" justify="center">
+                    {gridItems}
+                    <Grid item xs={4} >
 
+                        <Card sx={{height: '32vh'}}>
+                            <CardContent>
+                                <Typography sx={{ fontSize: '10rem', width: '100%' }} color="text.secondary">
+                                    <Button onClick={handleAddOpen} type="text">
+                                        ADD TEAMS
+                                    </Button>
+                                    <Modal
+                                        open={addOpen}
+                                        onClose={handleAddClose}
+                                        aria-labelledby="modal-modal-title"
+                                        aria-describedby="modal-modal-description"
+                                    >
+                                        <Box sx={style}>
+                                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                                Enter Team Info
+                                            </Typography>
 
-                    <div>
-                        <Button onClick={handleOpen} type="submit"
-                                fullWidth
-                                variant="contained" sx={{ bgcolor: '#bb6bc9' }}>Add Student</Button>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box sx={style}>
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                    Enter Student Info
+                                            {teamForm}
+
+                                        </Box>
+
+                                    </Modal>
+
                                 </Typography>
+                            </CardContent>
 
-                                {studentForm}
+                        </Card>
+                    </Grid>
 
-                            </Box>
-
-                        </Modal>
-
-                    </div>
-
-                </Paper>
+                </Grid>
 
             </Box>
 
@@ -419,4 +416,4 @@ function InstructorStudentsView() {
  */
 
 
-export default InstructorStudentsView;
+export default InstructorTeamsView;

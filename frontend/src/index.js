@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import InstructorStudentsView from './pages/classviews/instructorstudentsview';
+import InstructorTeamsView from './pages/classviews/instructorteamsview';
 import InstructorSignIn from './pages/signinviews/instructorsignin';
 import InstructorSignUp from './pages/signinviews/instructorsignup';
 import InstructorClassHome from './pages/signinviews/instructorclasshome';
@@ -26,6 +27,7 @@ render( //browserrouter and routes allows react router to move views based on wh
                 <Route path="/instructorstudentsview" element={<InstructorStudentsView/>} />
                 <Route path="/studenthome" element={<StudentHome/>} />
                 <Route path="/recruiterhome" element={<RecruiterPage/>}/>
+                <Route path="/instructorteamsview" element={<InstructorTeamsView/>} />
             </Routes>
         </BrowserRouter>,
 
