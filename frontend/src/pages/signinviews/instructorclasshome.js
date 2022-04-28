@@ -140,7 +140,7 @@ export default function InstructorSignIn() {
                     <br></br>
                     <Grid container direction="row" justifyContent="space-evenly" alignItems="center" sx={{ flexWrap: 'wrap' }}>
 
-                        {classes.map((elem, i) => (
+                        {classes.id.map((elem, i) => (
 
                             <Grid item margin={2} xs={8} md={6} lg={4} justifyContent="center" alignItems="center">
                                 <Card sx={{ minWidth: "265px", maxWidth: "auto", height: "235px" }}>

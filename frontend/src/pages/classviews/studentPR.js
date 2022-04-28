@@ -45,8 +45,8 @@ export default function StudentPR() {
 
     const [sprint, setSprint] = React.useState('');
     const [report, setReport] = React.useState('');
-    const [proReport, setProReport] = React.useState([{ sprint: "1", report: "Welp, I lost my job" },
-    { sprint: "2", report: "Welp, I lost my job, but twice" },]
+    const [proReport, setProReport] = React.useState([{ id: 1, sprint: "1", report: "Welp, I lost my job" },
+    { id: 2, sprint: "2", report: "Welp, I lost my job, but twice" },]
     );
     function submitProgressForm(e) {
         e.preventDefault();
@@ -54,9 +54,14 @@ export default function StudentPR() {
         console.log(report);
         //setProReport([...proReport, { sprint: sprint, report: report}]);
     };
-    const handleDeleteReport = (elem) => {
-        console.log(elem);
-        console.log("hello");
+    const handleDeleteReport = (proReportId) => {
+        const newProReports = [...proReport];
+
+        const index = proReport.findIndex((proReports)=> proReports.id === proReportId);
+
+        newProReports.splice(index, 1);
+
+        setProReport(newProReports);
     };
 
     return (
@@ -106,7 +111,7 @@ export default function StudentPR() {
                                 <TableCell>{elem.sprint}</TableCell>
                                 <TableCell>{elem.report}</TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="error" onClick={() => handleDeleteReport(elem)}>
+                                    <Button variant="contained" color="error" onClick={() => handleDeleteReport(elem.id)}>
                                         Delete
                                     </Button>
                                 </TableCell>
