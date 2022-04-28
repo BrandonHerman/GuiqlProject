@@ -66,6 +66,18 @@ router.get('/getClass', async (req, res, next) => {
     }
 })
 
+router.get('/getClassesByProfId', async (req, res, next) => {
+    try {
+        const prof_id = req.params.prof_id;
+        console.log(prof_id);
+        const result = await Class.getClassesByProfId(prof_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load classes: ', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
 router.get('/getProfessor', async (req, res, next) => {
     try {
         const class_id = req.params.class_id;

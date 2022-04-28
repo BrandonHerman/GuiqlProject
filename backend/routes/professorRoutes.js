@@ -9,7 +9,7 @@ router.post('/createProfessor', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.professor.createProfessor(body.first_name, body.last_name, body.username, body.email, body.password);
+        const result = await req.models.professor.createProfessor(body.first_name, body.last_name, body.username, body.password, body.email, body.college_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new professor:', err);
