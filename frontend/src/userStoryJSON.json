@@ -1,0 +1,41 @@
+{
+  "userstory1": [
+    "id": 1,
+    "text": "Hello",
+    "description": "Hello World",
+    "favorite": false,
+    "team_id": 1
+  ],
+  "userstory2": [
+    "id": 2,
+    "text": "Hm",
+    "description": "DONT BE A STRANGER",
+    "favorite": true,
+    "team_id": 1,
+    "column": "To Do"
+  ],
+  "userstory3": [
+    "id": 3,
+    "text": "This",
+    "description": "is a sample user story",
+    "favorite": false,
+    "team_id": 1,
+    "column": "In Progress"
+  ],
+  "userstory4": [
+    "id": 4,
+    "text": "Wow",
+    "description": "That was ez!",
+    "favorite": false,
+    "team_id": 1,
+    "column": "Done"
+  ],
+  "userstory5": [
+    "id": 5,
+    "text": "Yikes",
+    "description": "This is HARD!",
+    "favorite": false,
+    "team_id": 1,
+    "column": "In Progress"
+  ]
+}
