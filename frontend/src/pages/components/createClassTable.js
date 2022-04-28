@@ -89,7 +89,7 @@ function createClassTableComponent() {
     var class_time = day + " " + time; //state
     var size = rows.length;
     var collegeID = repository.getCollegeIdByProfId(this.profID);
-    repository.createClass(class_time, this.profID, size);
+    repository.createClass(class_time, this.profID, size, college_id);
     var class_id = getClassIdByClassTimeAndCollegeId(class_time, collegeID);
     for (var i = 0; i < size; i++) {
       var username, password = StudentGeneration(rows[i].firstname, rows[i].lastname);
