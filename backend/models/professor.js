@@ -7,7 +7,7 @@ const PROFESSOR_TABLE = 'Professor';
 const createProfessor = async (first_name,last_name,username,email,password,college_id) => {
     // check if professor already exists
     const userName = await findByUsername(username);
-    const eMail = await searchByEmail(email);
+    const eMail = await findByEmail(email);
  //test hehe
     if (userName) {
         return "Username taken!";
