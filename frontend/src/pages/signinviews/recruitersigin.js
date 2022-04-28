@@ -10,9 +10,14 @@ import './instructorsignin.css'
 import { Link } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import RecruiterProfile from '../utils/recruiterProfile';
+import { Repository } from '../../api/repository';
 
 
 export default function RecruiterSignIn() {
+
+  var repository = new Repository();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -24,11 +29,21 @@ export default function RecruiterSignIn() {
 
     //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
     const validateUser = () => {
-      //get prof by username
-      //COMPARE prof password to inputed password
-      //if true, redirect and load profile (this is a get)
-      //if false, display error message
-  
+      var recruiter = repository.getRecruiterByUsername(username);
+      if(recruiter.password === null){
+        alert("User does not exist");
+      } else if(recruiter.password === password){
+        console.log("Successful Login");
+        RecruiterProfile.setEmail(recruiter.email);
+        RecruiterProfile.setName(recruiter.first_name, recruiter.last_name);
+        RecruiterProfile.setID(recruiter.recruiter_id);
+        RecruiterProfile.setUsername(recruiter.username);
+        RecruiterProfile.setPassword(recruiter.password);
+        //ADD PROPER NAVIGATE FOR RECRUITERS
+        //navigate('/classeshome');
+      }else{
+        alert("Password is incorrect, try again!");
+      }
     }
 
   return (

@@ -233,6 +233,22 @@ export class Repository {
 
     //INSTRUCTOR API CALLS
 
+    // Get Instructor given username
+    getInstructorByUsername(username) {
+        console.log("Getting instructor for username: " + username);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getInstructorByUsername?username=${username}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
+
 
 
     //MEETING API CALLS
@@ -479,6 +495,21 @@ export class Repository {
         })
     }
 
+    // I need to get the Recruiter object given their username
+    getRecruiterByUsername(username) {
+        console.log("Getting recruiter for username: " + username);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getRecruiterByUsername?username=${username}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
 
 
     // STUDENT API CALLS
@@ -533,6 +564,21 @@ export class Repository {
         console.log("Getting student for student_id: " + student_id);
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/getStudent?student_id=${student_id}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
+    // Get Student given username
+    getStudentByUsername(username) {
+        console.log("Getting student for username: " + username);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getStudentByUsername?username=${username}`)
                 .then(x => {
                     resolve(x.data);
                 })

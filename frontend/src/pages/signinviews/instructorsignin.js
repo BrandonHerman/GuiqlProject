@@ -11,8 +11,12 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import InstructorProfile from '../utils/instructorProfile';
+import { Repository } from '../../api/repository';
 
 export default function InstructorSignIn() {
+
+  var repository = new Repository();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -47,10 +51,20 @@ export default function InstructorSignIn() {
   //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
   const validateUser = () => {
     //get prof by username
-    //COMPARE prof password to inputed password
-    //if true, redirect and load profile (this is a get)
-    //if false, display error message
-
+    var prof = repository.getInstructorByUsername(username);
+    if(prof.password === null){
+      alert("User does not exist");
+    } else if(prof.password === password){
+      console.log("Successful Login");
+      InstructorProfile.setEmail(prof.email);
+      InstructorProfile.setName(prof.first_name, prof.last_name);
+      InstructorProfile.setID(prof.prof_id);
+      InstructorProfile.setUsername(prof.username);
+      InstructorProfile.setPassword(prof.password);
+      navigate('/classeshome');
+    }else{
+      alert("Password is incorrect, try again!");
+    }
   }
 
   return (
@@ -81,7 +95,7 @@ export default function InstructorSignIn() {
           <Typography component="h1" variant="h5">
             Instructor Sign In
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
+          <Box component="form" noValidate onSubmit={validateUser} sx={{ mt: 1, alignItems: 'center', textAlign: 'center' }}>
             <TextField
               margin="normal"
               required
