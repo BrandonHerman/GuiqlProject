@@ -1,0 +1,145 @@
+{
+    "profs": [
+      {
+        "id": 1,
+        "firstName": "Mark",
+        "lastName": "Fontenot",
+        "username": "mfontenot",
+        "password": "datastructs",
+        "university": "Southern Methodist University",
+        "classes": [
+          {
+            "id": 1,
+            "time": "Monday 6:30pm-9:20",
+            "size": 3,
+            "groupCount": 2,
+            "teams": [
+              {
+                "teamID": 1,
+                "teamSize": 2,
+                "meeting": [
+                  {
+                    "meetingTime": "4:30pm",
+                    "meetingPlace": "Hughes Trigg"
+                  }
+                ]
+              },
+              {
+                "teamID": 2,
+                "teamSize": 1,
+                "meeting": []
+              }
+            ],
+            "students": [
+              {
+                "firstName": "Brandon",
+                "lastName": "Herman",
+                "username": "bherman",
+                "password": "linuxpro",
+                "email": "bherman@smu.edu",
+                "inTeam": true,
+                "teamID": 1
+              },
+              {
+                "firstName": "Travis",
+                "lastName": "Scott",
+                "username": "tscott",
+                "password": "astroworld",
+                "email": "tScott@smu.edu",
+                "inTeam": true,
+                "teamID": 1
+              },
+              {
+                "firstName": "John",
+                "lastName": "EbeeGood",
+                "username": "jEbeeGood",
+                "password": "guitar",
+                "email": "jEbeeGood@smu.edu",
+                "inTeam": true,
+                "teamID": 2
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "time": "Tuesday 2:30pm-4:20",
+            "size": 5,
+            "groupCount": 2,
+            "teams": [
+              {
+                "teamID": 1,
+                "teamSize": 2,
+                "meeting": [
+                  {
+                    "meetingTime": "9:30pm",
+                    "meetingPlace": "Morrison McGinnis"
+                  }
+                ]
+              },
+              {
+                "teamID": 2,
+                "teamSize": 3,
+                "meeting": [
+                  {
+                    "meetingTime": "9:30pm",
+                    "meetingPlace": "Morrison McGinnis"
+                  },
+                  {
+                    "meetingTime": "1:30pm",
+                    "meetingPlace": "Fondren"
+                  }
+                ]
+              }
+            ],
+            "students": [
+              {
+                "firstName": "Brandon",
+                "lastName": "Herman",
+                "username": "bherman",
+                "password": "linuxpro",
+                "email": "bherman@smu.edu",
+                "inTeam": true,
+                "teamID": 1
+              },
+              {
+                "firstName": "Travis",
+                "lastName": "Scott",
+                "username": "tscott",
+                "password": "astroworld",
+                "email": "tScott@smu.edu",
+                "inTeam": true,
+                "teamID": 1
+              },
+              {
+                "firstName": "John",
+                "lastName": "EbeeGood",
+                "username": "jEbeeGood",
+                "password": "guitar",
+                "email": "jEbeeGood@smu.edu",
+                "inTeam": true,
+                "teamID": 2
+              },
+              {
+                "firstName": "John",
+                "lastName": "Lawrimore",
+                "username": "jLawrimore",
+                "password": "javascript",
+                "email": "jLawrimore@smu.edu",
+                "inTeam": true,
+                "teamID": 2
+              },
+              {
+                "firstName": "Elon",
+                "lastName": "Musk",
+                "username": "eMusk",
+                "password": "billionare",
+                "email": "eMusk@smu.edu",
+                "inTeam": true,
+                "teamID": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
