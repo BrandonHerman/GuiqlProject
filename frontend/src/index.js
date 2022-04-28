@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-import InstructorStudentsView from './pages/classviews/instructorstudentsview';
+import InstructorStudentsView from '/pages/classviews/instructorstudentsview';
 import InstructorSignIn from './pages/signinviews/instructorsignin';
 import InstructorSignUp from './pages/signinviews/instructorsignup';
 import InstructorClassHome from './pages/signinviews/instructorclasshome';

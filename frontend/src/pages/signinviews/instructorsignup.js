@@ -56,7 +56,6 @@ export default function InstructorSignUp() {
     // }
     event.preventDefault();
 
-    repository.createProfessor(professor);
     console.log({
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),

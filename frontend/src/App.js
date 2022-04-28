@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import InstructorStudentsView from './pages/classviews/instructorstudentsview';
+import InstructorStudentsView from '/pages/classviews/instructorstudentsview';
 import StudentSignIn from './pages/signinviews/studentsignin';
 import {Theme, ThemeProvider} from '@material-ui/core/styles/'
 import { Link } from "react-router-dom";

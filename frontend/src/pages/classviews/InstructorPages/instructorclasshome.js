@@ -13,12 +13,12 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton, Dialog, DialogTitle } from '@mui/material';
-import TableDemo from '../components/createClassTable';
-import SignOutButton from '../components/signOutButton';
+import TableDemo from '../../components/createClassTable';
+import SignOutButton from '../../components/signOutButton';
 import { Link } from "react-router-dom";
 import { left } from '@popperjs/core';
-import StudentGeneration from '../utils/studentgeneration';
-import InstructorProfile from '../utils/instructorProfile';
+import StudentGeneration from '../../utils/studentgeneration';
+import InstructorProfile from '../../utils/instructorProfile';
 
 export default function InstructorSignIn() {
     const [open, setOpen] = React.useState(false);
