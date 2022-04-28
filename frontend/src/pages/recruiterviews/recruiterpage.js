@@ -49,7 +49,7 @@ export default function RecruiterPage() {
                 <img display="inline" src="https://i.imgur.com/RzmXLUB.png" alt="Guiql Logo" />
 
                 <Typography display="absolute" id="headerName" component="h1" variant="h5">
-                    Hello, Recruiter {lastname}!
+                    Howdy, {lastname}!
                 </Typography>
 
                 <SignOutButton></SignOutButton>

@@ -7,6 +7,7 @@ var RecruiterProfile = (function () {
     var bio = "";
     var image = "";
     var uni = "";
+    var config;
 
     var getUni = function() {
         return uni;
@@ -66,6 +67,14 @@ var RecruiterProfile = (function () {
     var setPassword = function (pass) {
         password = pass;
     }
+
+    var getConfig = function() {
+        return config;
+    }
+
+    var setConfig = function(c) {
+        config = c;
+    }
     return {
         getName: getName,
         setName: setName,
@@ -82,7 +91,9 @@ var RecruiterProfile = (function () {
         setImage: setImage,
         getImage: getImage,
         getUni: getUni,
-        setUni: setUni
+        setUni: setUni,
+        getConfig: getConfig,
+        setConfig: setConfig
     }
 })();
 

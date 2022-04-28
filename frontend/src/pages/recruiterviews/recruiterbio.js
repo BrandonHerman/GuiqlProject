@@ -10,9 +10,11 @@ import Paper from '@mui/material/Paper';
 import ButtonBase from '@mui/material/ButtonBase';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
+
 import CssBaseline from '@mui/material/CssBaseline';
 import RecruiterProfile from '../utils/recruiterProfile';
+import Avatar, { genConfig } from 'react-nice-avatar';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -33,7 +35,7 @@ const Img = styled('img')({
 export default function RecruiterBio() {
     const theme = useTheme();
     const [picture, setPicture] = React.useState("https://picsum.photos/200/300");
-
+    const [configs, setConfigs] = React.useState(RecruiterProfile.getConfig());
     const [recruiter, setRecruiter] = React.useState([{
         first_name: "John",
         last_name: "Lawrimore",
@@ -49,6 +51,8 @@ export default function RecruiterBio() {
         //let path = `/recruiter/bio/edit`;
         //navigate(path);
     }
+
+
 
     return (
         <>
@@ -68,35 +72,32 @@ export default function RecruiterBio() {
                         }}
                     >
                         <Typography component="h1" variant="h4">
-                            Recruiter
+                           {RecruiterProfile.getName()} 
                         </Typography>
                         <br></br>
-                        <Avatar alt="Recruiter" src={picture} sx={{ width: 100, height: 100 }} />
+                        {/* <Avatar alt="Recruiter" src={picture} sx={{ width: 100, height: 100 }} /> */}
+                        <Avatar style={{ width: 100, height: 100 }} {...configs} />
                         <br></br>
                         <Box sx={{ mt: 1 }}>
-                            <Typography variant="h5" component="h2">
-                                Recruiter Name: 
+                            <Typography variant="h6" component="h2">
+                               Account Information 
                                 <hr/>
                             </Typography>
-                            
-                            <Typography variant="h6" component="h2">
-                                {RecruiterProfile.getName}
-                            </Typography>
-                            <Typography variant="h5" component="h2" >
+                            <Typography variant="subtitle1" component="h2" >
                                 University:
                             </Typography>
-                            <Typography variant="h6" component="h2" >
+                            <Typography variant="body1" component="h2" >
                                 {RecruiterProfile.getUni()}
                             </Typography>
-                            <Typography variant="h5" component="h2" >
+                            <Typography variant="subtitle1" component="h2" >
                                 <hr />
                                 Email: {RecruiterProfile.getEmail()}
                                 <hr /> </Typography>
 
-                            <Typography variant="h5" component="h2">
+                            <Typography variant="subtitle1" component="h2">
                                 Bio:
                             </Typography>
-                            <Typography variant="h6" component="h2">
+                            <Typography variant="body1" component="h2">
                                 {RecruiterProfile.getBio()}
                             </Typography>
                         </Box>

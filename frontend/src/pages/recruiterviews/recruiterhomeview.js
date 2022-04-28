@@ -16,19 +16,21 @@ import SignOutButton from '../components/signOutButton';
 import RecruiterProfile from '../utils/recruiterProfile';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Avatar } from '@mui/material';
+// import { Avatar } from '@mui/material';
+import Avatar, { genConfig } from 'react-nice-avatar';
+
 export default function RecruiterHomeView() {
 
 
-   
     const [professors, setProfessors] = React.useState([{
         first_name: 'John', last_name: 'Lawrimore', email: 'jLawrimore@smu.edu', class: 'GUI'
     }]);
 
-    const [students, setStudents] = React.useState([{
-        first_name: 'Jane', last_name: 'Doe', email: 'JDoe@smu.edu', class: 'DB'
-    }]);
- 
+    const [students, setStudents] = React.useState([
+        { first_name: 'Jane', last_name: 'Doe', email: 'JDoe@smu.edu', class: 'DB' },
+        { first_name: 'Brandon', last_name: 'Herman', email: 'bherman@smu.edu', class: 'GUI' },
+    ]);
+
     return (
         <>
 
@@ -64,7 +66,10 @@ export default function RecruiterHomeView() {
                                     <TableBody>
                                         {professors.map((elem, index) => (
                                             <TableRow item key={professors.indexOf(elem)}>
-                                                <TableCell><Avatar alt="profIMG"  src="https://www.pngitem.com/pimgs/m/230-2302175_pointer-clipart-english-professor-professor-clipart-hd-png.png" width={40} height={40} /></TableCell>
+                                                <TableCell>
+                                                    {/* <Avatar alt="profIMG"  src="https://www.pngitem.com/pimgs/m/230-2302175_pointer-clipart-english-professor-professor-clipart-hd-png.png" width={40} height={40} /> */}
+                                                    <Avatar style={{ width: 40, height: 40 }} />
+                                                </TableCell>
                                                 <TableCell>{elem.first_name}</TableCell>
                                                 <TableCell>{elem.last_name}</TableCell>
                                                 <TableCell>{elem.email}</TableCell>
@@ -102,7 +107,11 @@ export default function RecruiterHomeView() {
                                     <TableBody>
                                         {students.map((elem, index) => (
                                             <TableRow item key={students.indexOf(elem)}>
-                                                <TableCell><Avatar alt="studentIMG" src="https://i.pinimg.com/564x/11/5c/87/115c879e05b5add475c68f279729d7fc--volleyball-girls-cute-clipart.jpg" width={40} height={40} /></TableCell>
+                                                <TableCell>
+                                                    {/* <Avatar alt="studentIMG" src="https://i.pinimg.com/564x/11/5c/87/115c879e05b5add475c68f279729d7fc--volleyball-girls-cute-clipart.jpg" width={40} height={40} /> */}
+
+                                                    <Avatar style={{ width: 40, height: 40 }} />
+                                                </TableCell>
                                                 <TableCell>{elem.first_name}</TableCell>
                                                 <TableCell>{elem.last_name}</TableCell>
                                                 <TableCell>{elem.email}</TableCell>

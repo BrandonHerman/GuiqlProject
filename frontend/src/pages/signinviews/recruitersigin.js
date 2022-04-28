@@ -12,7 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {Navigate, useNavigate} from 'react-router-dom';
 import RecruiterProfile from '../utils/recruiterProfile';
-
+import Avatar, { genConfig } from 'react-nice-avatar'
 
 export default function RecruiterSignIn() {
 
@@ -28,6 +28,7 @@ export default function RecruiterSignIn() {
     var username = data.get('username');
     console.log(username);
     RecruiterProfile.setName(username, username); 
+    RecruiterProfile.setConfig(genConfig());
     //need all recruiter set info from API
     console.log(RecruiterProfile.getName());
     console.log("clicked recruiter sign in button");

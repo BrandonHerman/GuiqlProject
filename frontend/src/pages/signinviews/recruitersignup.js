@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 import { Autocomplete, InputLabel } from '@mui/material';
 import unis from '../assets/universities.js';
-
 // parse university list for sign in
 // remove state from name
 var universitiesPreSlice = unis.split(/\r\n|\r|\n/);
@@ -30,7 +29,7 @@ export default function RecruiterSignUp() {
       password: data.get('password'),
       // passwordConfirm: data.get('passwordConfirm'),
       university: data.get('university')
-
+    
     });
   };
 

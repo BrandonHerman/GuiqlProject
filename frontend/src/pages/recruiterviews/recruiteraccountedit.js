@@ -13,17 +13,24 @@ import Box from '@mui/material/Box';
 import unis from '../assets/universities.js';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Link } from "react-router-dom";
-import Avatar from '@mui/material/Avatar';
+import Avatar, { genConfig } from 'react-nice-avatar';
+// import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
-
+import RecruiterProfile from '../utils/recruiterProfile.js';
 
 export default function RecruiterAccountEdit() {
     const [picture, setPicture] = useState("https://picsum.photos/200/300");
+    const [configs, setConfig] = useState(RecruiterProfile.getConfig());
 
     const handlePicture = (url) => {
         setPicture(url);
     }
 
+    const newAvatar = () => {
+        const config = genConfig();
+        setConfig(config);
+        RecruiterProfile.setConfig(config);
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -60,8 +67,8 @@ export default function RecruiterAccountEdit() {
                             Account Editor
                         </Typography>
                         <br></br>
-                        <Avatar alt="Recruiter" src={picture} sx={{ width: 100, height: 100 }}/>
-                        <br></br>
+                        <Avatar style={{ width: 100, height: 100 }} {...configs}/>
+                        {/* <Avatar alt="Recruiter" src={picture} sx={{ width: 100, height: 100 }}/> */}
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
 
 
@@ -76,14 +83,11 @@ export default function RecruiterAccountEdit() {
                                 minRows={3}
                                 maxRows={3}
                             />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="image"
-                                label="New Profile Image"
-                                id="image"
-                            />
+                         
+
+                            <Grid container justifyContent="center" alignItems="center" direction="column">
+                                <Button onClick={() => newAvatar()} color="secondary">New Avatar</Button>
+                            </Grid>
                             {/* planning on this to be typable dropdown box, with preloaded JSON of universities to select */}
                             {/* the p is for weird spacing with <br>, <p>'s new line works */}
                             <p></p>
