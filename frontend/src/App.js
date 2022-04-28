@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 import StudentHome from './pages/signinviews/studenthome';
+import StudentSignIn from './pages/signinviews/studentsignin';
 import { StudentRepository } from './api/studentRepository';
 import { Link } from "react-router-dom";
 
@@ -78,7 +79,7 @@ function App () {
     // {/* add gui theme to all child components */}
       // <CssBaseline/>
       <div className="App">
-        <StudentHome></StudentHome>
+        <StudentSignIn></StudentSignIn>
       </div>
     // </ThemeProvider>
   );
