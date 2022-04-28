@@ -25,14 +25,20 @@ const authenticate = async (username,password) => {
     const recruiter = recruiters[0];
     const validPassword = await findUserByPassword(username,password);
     if (validPassword.length !== 0) {;
-        delete user.password;
-        return user;
+        delete recruiter.password;
+        return recruiter;
     }
     return null;
 }
 
 const searchByUsername = async (username) => {
     const query = await knex(RECRUITER_TABLE).where({username});
+    const result = await query;
+    return result;
+}
+
+const findUserByPassword = async (username,password) => {
+    const query = await knex(RECRUITER_TABLE).where({username,password});
     const result = await query;
     return result;
 }
