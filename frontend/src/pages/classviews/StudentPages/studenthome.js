@@ -22,7 +22,7 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import { Card } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import Column from '../components/Column'
+import Column from '../../components/Column'
 import { useState, useEffect } from 'react';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";

@@ -44,5 +44,11 @@ module.exports = {
     searchByID,
     searchByName,
     getName,
+<<<<<<< Updated upstream
     getID
+=======
+    getID,
+    getCollegeByProfID
+}
+>>>>>>> Stashed changes
 }
