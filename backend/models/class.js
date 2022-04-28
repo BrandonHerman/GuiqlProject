@@ -2,8 +2,8 @@ const knex = require('../database/knex');
 
 const CLASS_TABLE = 'Class';
 
-const createClass = async (class_time,size,group_count,prof_id,college_id) => {
-    const query = await knex(CLASS_TABLE).insert({class_time,size,group_count,prof_id,college_id});
+const createClass = async (class_time,prof_id,group_count,size,college_id) => {
+    const query = await knex(CLASS_TABLE).insert({class_time,prof_id,group_count,size,college_id});
     const returnValue = await knex(CLASS_TABLE).select('Class.class_id','Class.class_time','Class.prof_id','Class.college_id');
     return returnValue;
 }
