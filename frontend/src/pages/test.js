@@ -1,6 +1,5 @@
 import * as React from 'react';
 import testStuff from '../testStuff.json';
-import testStuff2 from '../testStuff2.json';
 
 
 function Test() {
