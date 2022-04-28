@@ -138,10 +138,10 @@ export default function StudentHome() {
       handleClickOpen();
     }
     const submitStory = () => {
-      /* columns["To Do"].list.push(
-        {id:columns["To Do"].list.length + columns["In Progress"].list.length + columns["Delete"].list.length + 1,
-         text:}
-      ) */
+      columns["To Do"].list.push(
+        {id: "7", text: "text7", desc:"", favorite:false, teamId:0}
+      )
+      handleClickClose();
     }
 
     const initialColumns = {
