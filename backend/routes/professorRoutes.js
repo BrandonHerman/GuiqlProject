@@ -71,9 +71,10 @@ router.get('/searchProfessorByEmail', async (req, res, next) => {
     }
 })
 
+//tested = pass
 router.get('/searchProfessorByCollege', async (req, res, next) => {
     try {
-        const college_id = req.params.college_id;
+        const college_id = req.query.college_id;
         console.log(college_id);
         const result = await Professor.searchByCollege(college_id);
         res.status(201).json(result);
