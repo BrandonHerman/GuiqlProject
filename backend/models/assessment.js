@@ -15,7 +15,7 @@ const searchByLink = async (assessment_link) => {
 }
 
 const getAssessmentLink = async (assessment_id) => {
-    const query = await knex(ASSESSMENT_TABLE).select(assessment_link).where({assessment_id});
+    const query = await knex(ASSESSMENT_TABLE).select('assessment_link').where({assessment_id});
     const result = await query;
     return result;
 }
@@ -33,13 +33,13 @@ const getAssessmentFlag = async (assessment_id) => {
 }
 
 const getFlagByProfId = async (prof_id) => {
-    const query = await knex(ASSESSMENT_TABLE).select(assessment_flag).where({prof_id});
+    const query = await knex(ASSESSMENT_TABLE).select('assessment_flag').where({prof_id});
     const result = await query;
     return result;
 }
 
 const getLinkByProfId = async (prof_id) => {
-    const query = await knex(ASSESSMENT_TABLE).select(assessment_link).where({prof_id});
+    const query = await knex(ASSESSMENT_TABLE).select('assessment_link').where({prof_id});
     const result = await query;
     return result;
 }
