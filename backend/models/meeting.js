@@ -15,6 +15,12 @@ const createMeeting = async (meeting_id,meeting_time,meeting_place,team_id) => {
     }
 }
 
+const searchByTeam = async (team_id) => {
+    const query = await knex(MEETING_TABLE).where({team_id});
+    const result = await query;
+    return result;
+}
+
 const setTime = async (meeting_id,time) => {
     const query = await knex(MEETING_TABLE).where({meeting_id}).update({meeting_time: time});
     const result = await query;
@@ -35,6 +41,7 @@ const deleteMeeting = async (meeting_id) => {
 
 module.exports = {
     createMeeting,
+    searchByTeam,
     setTime,
     setPlace,
     deleteMeeting
