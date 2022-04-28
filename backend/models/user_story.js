@@ -4,8 +4,8 @@ const STORY_TABLE = 'User_story';
 
 const createUserStory = async (title,description,student_id,team_id) => {
     const query = await knex(STORY_TABLE).insert({status:'to do',title,description,favorite:false,student_id,team_id});
-    const returnValue = await knex(STORY_TABLE).select('User_story.story_id','User_story.title','User_story.description');
-    return returnValue;
+    const result = await query;
+    return result;
 }
 
 const searchById = async (story_id) => {
