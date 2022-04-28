@@ -16,12 +16,12 @@ router.post('/createClass', async (req, res, next) => {
     next();
 })
 
-router.get('/searchClassByID', async (req, res, next) => {
+router.get('/searchClassById', async (req, res, next) => {
     try {
         // console.log("Params in class: ", req.q)
         const class_id = req.query.class_id;
         // console.log("Classid in searchClassbyId: ", {class_id});
-        const result = await Class.searchByID(class_id);
+        const result = await Class.searchById(class_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current class:', err);

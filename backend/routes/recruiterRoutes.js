@@ -55,10 +55,10 @@ router.put('/addRecruiterBio', async (req, res, next) => {
     next();
 });
 
-router.get('/getBioByID', async (req, res, next) => {
+router.get('/getBioById', async (req, res, next) => {
     try {
         const recruiter_id = req.params.recruiter_id;
-        const result = await Recruiter.getBioByID(recruiter_id);
+        const result = await Recruiter.getBioById(recruiter_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current recruiter:', err);

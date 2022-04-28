@@ -30,11 +30,11 @@ router.get('/authenticateStudent', async (req, res, next) => {
     }
 });
 
-router.get('/searchStudentByID', async (req, res, next) => {
+router.get('/searchStudentById', async (req, res, next) => {
     try {
         const student_id = req.params.student_id;
         console.log(student_id);
-        const result = await Student.searchByID(student_id);
+        const result = await Student.searchById(student_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current Student:', err);

@@ -65,10 +65,10 @@ router.get('/getAssessmentFlag', async (req, res, next) => {
     }
 })
 
-router.get('/getFlagByProfID', async (req, res, next) => {
+router.get('/getFlagByProfId', async (req, res, next) => {
     try {
         const prof_id = req.params.prof_id;
-        const result = await Assessment.getFlagByProfID(prof_id);
+        const result = await Assessment.getFlagByProfId(prof_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current assessment:', err);
@@ -76,10 +76,10 @@ router.get('/getFlagByProfID', async (req, res, next) => {
     }
 })
 
-router.get('/getLinkByProfID', async (req, res, next) => {
+router.get('/getLinkByProfId', async (req, res, next) => {
     try {
         const prof_id = req.params.prof_id;
-        const result = await Assessment.getLinkByProfID(prof_id);
+        const result = await Assessment.getLinkByProfId(prof_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current assessment:', err);

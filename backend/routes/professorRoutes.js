@@ -32,11 +32,11 @@ router.get('/authenticateProfessor', async (req, res, next) => {
     }
 })
 
-router.get('/searchProfessorByID', async (req, res, next) => {
+router.get('/searchProfessorById', async (req, res, next) => {
     try {
         const prof_id= req.query.prof_id;
         console.log(prof_id);
-        const result = await Professor.searchByID(prof_id);
+        const result = await Professor.searchById(prof_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current professor:', err);
