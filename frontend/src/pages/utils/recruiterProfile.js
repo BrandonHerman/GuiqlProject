@@ -4,7 +4,7 @@ var RecruiterProfile = (function () {
     var email = "";
     var password = "";
     var username = "";
-    var recruiterID = -1;
+    var recruiterID;
 
     var bio = "";
     var image = "";
@@ -47,13 +47,18 @@ var RecruiterProfile = (function () {
         console.log("set username to:");
         console.log(username);
     }
-    var getName = function () {
-        return firstName, lastName;
+    var getfirstName = function () {
+        return firstName;
+    }
+    var getlastName = function () {
+        return lastName;
     }
 
-    var setName = function (first, last) {
+    var setfirstName = function (first) {
         firstName = first;
-        lastName = last;
+    }
+    var setlastName = function(lastname) {
+        lastName = lastname;
     }
 
 
@@ -81,8 +86,10 @@ var RecruiterProfile = (function () {
         config = c;
     }
     return {
-        getName: getName,
-        setName: setName,
+        getfirstName: getfirstName,
+        getlastName: getlastName,
+        setfirstName: setfirstName,
+        setlastName: setlastName,
         getEmail: getEmail,
         setEmail: setEmail,
         getPassword: getPassword,

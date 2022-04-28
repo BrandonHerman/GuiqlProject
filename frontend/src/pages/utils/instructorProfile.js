@@ -5,7 +5,7 @@ var InstructorProfile = (function () {
     var password = "";
     var username = "";
 
-    var profID = -1;
+    var profID;
     var getEmail = function () {
         return email;
     }

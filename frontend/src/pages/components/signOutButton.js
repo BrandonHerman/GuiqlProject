@@ -22,17 +22,18 @@ function SignOutButton() {
                         console.log("Clearing Session States");
                         InstructorProfile.setEmail("");
                         InstructorProfile.setName("", "");
-                        InstructorProfile.setID(-1);
+                        InstructorProfile.setID(0);
                         InstructorProfile.setUsername("");
                         InstructorProfile.setPassword("");
                         StudentProfile.setEmail("");
                         StudentProfile.setName("", "");
-                        StudentProfile.setID(-1);
+                        StudentProfile.setID(0);
                         StudentProfile.setUsername("");
                         StudentProfile.setPassword("");
                         RecruiterProfile.setEmail("");
-                        RecruiterProfile.setName("", "");
-                        RecruiterProfile.setID(-1);
+                        RecruiterProfile.setfirstName("");
+                        RecruiterProfile.setlastName("");
+                        RecruiterProfile.setID(0);
                         RecruiterProfile.setUsername("");
                         RecruiterProfile.setPassword("");
                         console.log("Instructor Username:");
@@ -49,4 +50,4 @@ function SignOutButton() {
     );
 }
 
-export default SignOutButton;
+export default SignOutButton

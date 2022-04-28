@@ -22,7 +22,8 @@ import RecruiterBio from './recruiterbio';
 export default function RecruiterPage() {
 
 
-    var firstname, lastname = RecruiterProfile.getName();
+    var firstname = RecruiterProfile.getfirstName();
+    var lastname = RecruiterProfile.getlastName();
 
     const [value, setValue] = React.useState(0);
 
@@ -49,7 +50,7 @@ export default function RecruiterPage() {
                 <img display="inline" src="https://i.imgur.com/RzmXLUB.png" alt="Guiql Logo" />
 
                 <Typography display="absolute" id="headerName" component="h1" variant="h5">
-                    Howdy, {lastname}!
+                    Howdy, {firstname} {lastname}!
                 </Typography>
 
                 <SignOutButton></SignOutButton>

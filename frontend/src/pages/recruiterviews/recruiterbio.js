@@ -41,7 +41,7 @@ export default function RecruiterBio() {
         last_name: "Lawrimore",
         university: "Southern Methodist University",
         email: "JLaw@smu.edu",
-        bio: "I hate students.",
+        bio: "I love students.",
         image: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRWObm4bybyX21o6Llr5MMNIP6uDpS1OGMWvBzbZrKcSYmgdS8QUU51PIgrIFKLKGCLu8HpW2RxbJ18IzIE1Ek"
     },]);
 
@@ -72,7 +72,7 @@ export default function RecruiterBio() {
                         }}
                     >
                         <Typography component="h1" variant="h4">
-                           {RecruiterProfile.getName()} 
+                           {RecruiterProfile.getfirstName() + " " + RecruiterProfile.getlastName()} 
                         </Typography>
                         <br></br>
                         {/* <Avatar alt="Recruiter" src={picture} sx={{ width: 100, height: 100 }} /> */}

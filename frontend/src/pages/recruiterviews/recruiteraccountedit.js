@@ -17,11 +17,11 @@ import Avatar, { genConfig } from 'react-nice-avatar';
 // import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
 import RecruiterProfile from '../utils/recruiterProfile.js';
-
+import Alert from '@mui/material/Alert';
 export default function RecruiterAccountEdit() {
     const [picture, setPicture] = useState("https://picsum.photos/200/300");
     const [configs, setConfig] = useState(RecruiterProfile.getConfig());
-
+    const [success, setSuccess] = useState(false);
     const handlePicture = (url) => {
         setPicture(url);
     }
@@ -35,6 +35,7 @@ export default function RecruiterAccountEdit() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         setPicture(data.get('image'));
+        RecruiterProfile.setBio(data.get('bio'));
         console.log({
             email: data.get('email'),
             password: data.get('password'),
@@ -44,6 +45,7 @@ export default function RecruiterAccountEdit() {
             university: data.get('university')
 
         });
+        setSuccess(true);
     };
 
     return (
@@ -102,6 +104,7 @@ export default function RecruiterAccountEdit() {
                             </Button>
                         </Box>
                     </Box>
+                    {success && <Alert>Succesfully updated account</Alert>}
                 </Grid>
             </Grid>
         </>

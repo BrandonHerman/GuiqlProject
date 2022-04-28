@@ -301,7 +301,7 @@ const ratingArray = [];
         <TabPanel value={value} index={0}>
           <Grid sx={{ minWidth: '100%', maxHeight: '75%'}}>
             <DragDropContext onDragEnd={onDragEnd}>
-              <Grid container spacing={10} direction={"row"} justifyContent={"center"}>
+              <Grid container spacing={0} direction={"row"} justifyContent={"center"}>
                 {Object.values(columns).map((column) => {
                   console.log(column);
                   return (
@@ -317,6 +317,7 @@ const ratingArray = [];
           <Grid sx={{display:'flex', mb:'3'}}item justifyContent={"flex-end"}>
             <Button variant="contained" onClick={addStory}>Add Story</Button>
           </Grid>
+          <br></br>
           <Grid sx={{display:'flex', mb:'3'}}item justifyContent={"flex-end"}>
             <Button variant="outlined" color="error" onClick={handleDeleteOpen}>Delete</Button>
           </Grid>
@@ -328,10 +329,10 @@ const ratingArray = [];
               <Typography variant="h5">Add a User Story</Typography>
               <FormControl sx={{ m: 1, width: '100%' }} justify="center" align="left">
                 <Grid item>
-                  <TextField label="title" id="title" name='title' sx={{my:2}}></TextField>
+                  <TextField label="Title" id="title" name='title' sx={{my:2}}></TextField>
                 </Grid>
                 <Grid item>
-                  <TextField label="description" id="description" name='description' multiline rows={4} fullWidth></TextField>
+                  <TextField label="Description" id="description" name='description' multiline rows={4} fullWidth></TextField>
                 </Grid>
                 <Grid item sx={{mt:2}}>
                   <Button variant="contained" type="submit">Add Story</Button>
@@ -364,7 +365,7 @@ const ratingArray = [];
                   justify="center"
                   align="center"
                 >
-                  Meeting Form:
+                  <Typography variant="h5">Meeting Form:</Typography>
                   <br/>
                   <br/>
                   <TextField id="filled-basic" name="Date" label="Date" value={date} 
@@ -429,7 +430,7 @@ const ratingArray = [];
                 justify="center"
                 align="center"
               >
-                Progress Report Form:
+                <Typography variant='h5'>Progress Report Form:</Typography>
                 <br/>
                 <br/>
                 <TextField id="filled-basic" name="Sprint" label="Sprint" value={sprint} 

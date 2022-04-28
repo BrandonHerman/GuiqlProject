@@ -1,0 +1,14 @@
+{
+  "recruiter": [
+    {
+      "id": 1,
+      "firstName": "Stella",
+      "lastName": "Flamingo",
+      "username": "sflamingo",
+      "password": "password123",
+      "email": "sflamingo@smu.com",
+      "university": "Southern Methodist University",
+      "bio": "I love playing basketball"
+    }
+  ]
+}

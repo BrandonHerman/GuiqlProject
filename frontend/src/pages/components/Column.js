@@ -18,12 +18,12 @@ const Column = ({ column }) => {
         minWidth: '100%'
       }}
     >
-    <Paper variant="outlined" 
-    sx={{ 
-        bgcolor: '#EE99FC', 
+    <Paper variant="elevation" elevation={8}
+    sx={{  
         display:'flex', 
         flexDirection:'column',
-        justifyContent:'center',}}>
+        justifyContent:'center',
+        width:'100%'}}>
       <Typography variant={"h4"}>{column.id}</Typography>
       <Droppable droppableId={column.id}>
         {(provided) => (
