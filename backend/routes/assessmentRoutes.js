@@ -29,7 +29,7 @@ router.get('/searchAssessmentByLink', async (req, res, next) => {
     }
 });
 
-//testing needs to be done
+//test = passed
 router.get('/getAssessmentLink', async (req, res, next) => {
     try {
         const assessment_id = req.query.assessment_id;
@@ -70,7 +70,7 @@ router.get('/getAssessmentFlag', async (req, res, next) => {
     }
 })
 
-//testing needs to be done
+//test = passed
 router.get('/getFlagByProfId', async (req, res, next) => {
     try {
         const prof_id = req.query.prof_id;
@@ -82,10 +82,10 @@ router.get('/getFlagByProfId', async (req, res, next) => {
     }
 })
 
-//testing needs to be done
+//test = passed
 router.get('/getLinkByProfId', async (req, res, next) => {
     try {
-        const prof_id = req.params.prof_id;
+        const prof_id = req.query.prof_id;
         const result = await Assessment.getLinkByProfId(prof_id);
         res.status(201).json(result);
     } catch (err) {
