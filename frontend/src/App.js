@@ -78,7 +78,7 @@ function App() {
     // {/* add gui theme to all child components */}
       // <CssBaseline/>
       <div className="App">
-        <StudentSignIn></StudentSignIn>
+        <InstructorStudentsView></InstructorStudentsView>
       </div>
     // </ThemeProvider>
   );
