@@ -55,14 +55,25 @@ router.get('/getEndTimeOfClass', async (req, res, next) => {
 
 router.get('/getClass', async (req, res, next) => {
     try {
-        const class_day = req.params.class_day;
         const class_time = req.params.class_time;
         const college_id = req.params.college_id;
-        console.log(class_day, class_time, college_id);
-        const result = await Class.getClass(class_day, class_time, college_id);
+        console.log(class_time, college_id);
+        const result = await Class.getClass(class_time, college_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current class:', err);
+        res.sendStatus(500).json({ message: err.toString() });
+    }
+})
+
+router.get('/getClassesByProfId', async (req, res, next) => {
+    try {
+        const prof_id = req.params.prof_id;
+        console.log(prof_id);
+        const result = await Class.getClassesByProfId(prof_id);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to load classes: ', err);
         res.sendStatus(500).json({ message: err.toString() });
     }
 })
