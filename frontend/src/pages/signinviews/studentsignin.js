@@ -11,8 +11,12 @@ import './studentsignin.css'
 import { Link } from "react-router-dom";
 import { FormControlLabel } from '@mui/material';
 import { Checkbox } from '@mui/material';
+import StudentProfile from '../utils/studentProfile';
+import { Repository } from '../../api/repository';
 
 export default function StudentSignIn() {
+
+  var repository = new Repository();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,11 +29,21 @@ export default function StudentSignIn() {
 
     //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
     const validateUser = () => {
-      //get prof by username
-      //COMPARE prof password to inputed password
-      //if true, redirect and load profile (this is a get)
-      //if false, display error message
-  
+      var student = repository.getStudentByUsername(username);
+      if(student.password === null){
+        alert("User does not exist");
+      } else if(student.password === password){
+        console.log("Successful Login");
+        StudentProfile.setEmail(student.email);
+        StudentProfile.setName(student.first_name, student.last_name);
+        StudentProfile.setID(student.recruiter_id);
+        StudentProfile.setUsername(student.username);
+        StudentProfile.setPassword(student.password);
+        //ADD PROPER NAVIGATE FOR STUDENTS
+        //navigate('/classeshome');
+      }else{
+        alert("Password is incorrect, try again!");
+      }
     }
 
   return (
