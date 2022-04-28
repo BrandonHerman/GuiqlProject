@@ -33,7 +33,6 @@ export default function InstructorSignUp() {
     password: ''
   }
 
-
   const handleSubmit = (event) => {
     const data = new FormData(event.currentTarget);
     const college_id = repository.getCollegeByName(data.get('university'));
@@ -47,7 +46,25 @@ export default function InstructorSignUp() {
       data.get('email'),
       college_id
     );
+    // professor = {
+    //   id: 0,
+    //   first_name: data.get('firstName'),
+    //   last_name: data.get('lastName'),
+    //   username: data.get('email'),
+    //   password: data.get('password')
+    // }
     event.preventDefault();
+
+    repository.createProfessor(professor);
+    console.log({
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      email: data.get('email'),
+      password: data.get('password'),
+      // passwordConfirm: data.get('passwordConfirm'),
+      university: data.get('university')
+
+    });
   };
 
   return (
@@ -61,9 +78,7 @@ export default function InstructorSignUp() {
         sx={{
           // background styling, i know bad practice but much easier to easily change background for each file (ssignin, isignin, isignout)
           // i want to have fontenot on the instructor sign in and sign out and some other picture for student
-          // backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
-
-          backgroundImage: 'url(https://www.marketplace.org/wp-content/uploads/2021/04/CM4.png)',
+          backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

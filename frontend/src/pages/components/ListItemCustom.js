@@ -19,7 +19,7 @@ const ListItemCustom = ({ itemObject, index }) => {
   return (
       <Draggable draggableId={itemObject.id} key={itemObject.id} index={index}>
       {(provided) => (
-        <Card sx={{my:1.3, mx:1}}>
+        <Card sx={{my:1.3, mx:1, bgcolor: '#EE99FC'}}>
           <ListItem
           key={itemObject.id}
           role={undefined}
