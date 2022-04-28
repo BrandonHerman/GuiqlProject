@@ -6,12 +6,12 @@ const PROFESSOR_TABLE = 'Professor';
 
 const createProfessor = async (first_name,last_name,username,email,password,college_id) => {
     // check if professor already exists
-    //const userName = await searchByUsername(username);
+    const userName = await findByUsername(username);
     const eMail = await searchByEmail(email);
  //test hehe
-    //if (userName) {
-    //    return "Username taken!";
-    //} else 
+    if (userName) {
+        return "Username taken!";
+    } else 
     if (eMail) {
         return "Email already associated with another account!";
     } else {  //if professor does not already exist, add their info to the table
@@ -34,13 +34,36 @@ const authenticate = async (username,password) => {
         return "Username does not exist!";
     } else {
         // check if password is correct
-        const validPassword = await findUserByPassword(username,password);
+        const saltH = await knex(PROFESSOR_TABLE).select(salt).where({username});
+        const passwdHash = await bcrypt.hash(password,saltH);
+        passwdHash = password;
+        const validPassword = await findUserByPassword(username,passwdHash);
          if (validPassword.length !== 0) {;
             const query = await knex(PROFESSOR_TABLE).where({username,password: validPassword[0].password});
             return query;
         } else {
             return "Password is incorrect!";
         }
+    }
+}
+
+const findByUsername = async (username) => {
+    const query = await knex(PROFESSOR_TABLE).where({username});
+    
+    if (query.length === 0) {
+        return false;
+    } else {
+        return query;
+    }
+}
+
+const findByEmail = async (email) => {
+    const query = await knex(PROFESSOR_TABLE).where({email});
+
+    if (query.length === 0) {
+        return false;
+    } else {
+        return query;
     }
 }
 
@@ -83,6 +106,8 @@ const removeProfessor = async (prof_id) => {
 module.exports = {
     createProfessor,
     authenticate,
+    findByUsername,
+    findByEmail,
     searchById,
     searchByEmail,
     searchByUsername,
