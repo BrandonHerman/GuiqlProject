@@ -4,8 +4,8 @@ const MEETING_TABLE = 'Meeting';
 
 const createMeeting = async (meeting_time,meeting_place,team_id) => {
     const query = await knex(MEETING_TABLE).insert({meeting_time,meeting_place,team_id});
-    const returnValue = await knex(MEETING_TABLE).select('Meeting.meeting_id','Meeting.meeting_time','Meeting.meeting_place','Meeting.team_id');
-    return returnValue;
+    const result = await query;
+    return result;
 }
 
 const searchByTeam = async (team_id) => {
