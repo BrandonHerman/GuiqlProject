@@ -4,8 +4,8 @@ const PROGRESS_REPORT_TABLE = 'Progress_Report';
 
 const createProgressReport = async (sprint,report,team_id) => {
     const query = await knex(PROGRESS_REPORT_TABLE).insert({sprint,report,team_id});
-    const returnValue = await knex(PROGRESS_REPORT_TABLE).select('Progress_Report.report_id','Progress_Report.sprint','Progress_Report.report','Progress_Report.team_id');
-    return returnValue;
+    const result = await query;
+    return result;
 }
 
 const searchById = async (report_id) => {
