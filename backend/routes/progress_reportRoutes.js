@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Progress_Report = require('../models/progress_report');
 
+//test = failed
 router.post('/createProgressReport', async (req, res, next) => {
     try {
         const body = req.body;
@@ -16,9 +17,10 @@ router.post('/createProgressReport', async (req, res, next) => {
     next();
 })
 
+//test = passed
 router.get('/searchProgressReportById', async (req, res, next) => {
     try {
-        const report_id= req.params.report_id;
+        const report_id= req.query.report_id;
         console.log(report_id);
         const result = await Progress_Report.searchById(report_id);
         res.status(201).json(result);
@@ -28,9 +30,10 @@ router.get('/searchProgressReportById', async (req, res, next) => {
     }
 })
 
+//test = passed
 router.get('/searchProgressReportByTeamId', async (req, res, next) => {
     try {
-        const team_id= req.params.team_id;
+        const team_id= req.query.team_id;
         console.log(team_id);
         const result = await Progress_Report.searchByTeamId(team_id);
         res.status(201).json(result);
@@ -40,9 +43,10 @@ router.get('/searchProgressReportByTeamId', async (req, res, next) => {
     }
 })
 
+//test= failed
 router.delete('/deleteReport', async (req, res, next) => {
     try {
-        const report_id = req.params.report_id;
+        const report_id = req.query.report_id;
         console.log(report_id);
         const result = await req.models.progress_report.removeReport(report_id);
         res.status(204).json(result);

@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User_story = require('../models/user_story');
+
+//test = failed
 router.post('/createUserStory', async (req, res, next) => {
     try {
         const body = req.body;
@@ -14,10 +16,10 @@ router.post('/createUserStory', async (req, res, next) => {
 
     next();
 })
-
+//test = passed
 router.get('/searchUserStoryById', async (req, res, next) => {
     try {
-        const story_id = req.params.story_id;
+        const story_id = req.query.story_id;
         console.log(story_id);
         const result = await User_story.searchByID(story_id);
         res.status(201).json(result);
@@ -27,6 +29,7 @@ router.get('/searchUserStoryById', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.get('/searchUserStoryByTitle', async (req, res, next) => {
     try {
         const title = req.params.title;

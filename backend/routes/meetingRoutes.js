@@ -1,7 +1,7 @@
 const express = require('express');
 const Meeting = require('../models/meeting');
 const router = express.Router();
-
+//test = failed
 router.post('/createMeeting', async (req, res, next) => {
     try {
         const body = req.body;
@@ -16,9 +16,10 @@ router.post('/createMeeting', async (req, res, next) => {
     next();
 })
 
+//test = passed
 router.get('/searchMeetingByTeam', async (req, res, next) => {
     try {
-        const team_id= req.params.team_id;
+        const team_id= req.query.team_id;
         console.log(team_id);
         const result = await Meeting.searchByTeam(team_id);
         res.status(201).json(result);
@@ -28,11 +29,12 @@ router.get('/searchMeetingByTeam', async (req, res, next) => {
     }
 })
 
+//test =failed
 router.put('/setMeetingTime', async (req, res, next) => {
     try {
 
-        const meeting_id = req.params.meeting_id;
-        const time = req.params.time;
+        const meeting_id = req.query.meeting_id;
+        const time = req.query.time;
         //console.log(team_id, name);
         const result = await req.models.meeting.setTime(meeting_id, time);
         res.status(200).json(result);
@@ -44,6 +46,7 @@ router.put('/setMeetingTime', async (req, res, next) => {
     next();
 });
 
+//test = failed
 router.put('/setMeetingPlace', async (req, res, next) => {
     try {
 
@@ -60,9 +63,11 @@ router.put('/setMeetingPlace', async (req, res, next) => {
     next();
 });
 
+
+//test = failed
 router.delete('/deleteMeeting', async (req, res, next) => {
     try {
-        const meeting_id = req.params.meeting_id;
+        const meeting_id = req.query.meeting_id;
         console.log(meeting_id);
         const result = await req.models.meeting.deleteMeeting(meeting_id);
         res.status(204).json(result);
