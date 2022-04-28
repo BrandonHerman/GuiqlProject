@@ -43,7 +43,7 @@ const authenticate = async (username,password) => {
     }
 }
 
-const searchByID = async (prof_id) => {
+const searchById = async (prof_id) => {
     const query = await knex(PROFESSOR_TABLE).where({ prof_id });
     const result = await query;
     return result;
@@ -82,7 +82,7 @@ const removeProfessor = async (prof_id) => {
 module.exports = {
     createProfessor,
     authenticate,
-    searchByID,
+    searchById,
     searchByEmail,
     searchByUsername,
     searchByCollege,
