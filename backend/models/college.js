@@ -4,8 +4,8 @@ const COLLEGE_TABLE = 'College';
 
 const createCollege = async (name) => {
     const query = await knex(COLLEGE_TABLE).insert({name});
-    const returnValue = await knex(COLLEGE_TABLE).select('College.college_id','College.name');
-    return returnValue;
+    const result = await query;
+    return query;
 }
 
 const searchById = async (college_id) => {
