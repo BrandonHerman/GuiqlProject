@@ -34,7 +34,7 @@ const authenticate = async (username,password) => {
         return "Username does not exist!";
     } else {
         // check if password is correct
-        const saltH = await knex(PROFESSOR_TABLE).select(salt).where({username});
+        const saltH = await knex(PROFESSOR_TABLE).select('salt').where({username});
         //const passwdHash = await bcrypt.hash(password,saltH);
         passwdHash = password;
         const validPassword = await findUserByPassword(username,passwdHash);
