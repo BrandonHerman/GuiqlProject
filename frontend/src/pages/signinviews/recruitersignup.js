@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 import { Autocomplete, InputLabel } from '@mui/material';
 import unis from '../assets/universities.js';
+import { Repository } from '../../api/repository';
 
 // parse university list for sign in
 // remove state from name
@@ -20,6 +21,9 @@ universitiesPreSlice.map((university) => {
 
 
 export default function RecruiterSignUp() {
+
+  var repository = new Repository();
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
