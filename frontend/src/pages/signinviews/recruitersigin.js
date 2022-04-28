@@ -22,6 +22,15 @@ export default function RecruiterSignIn() {
     });
   };
 
+    //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
+    const validateUser = () => {
+      //get prof by username
+      //COMPARE prof password to inputed password
+      //if true, redirect and load profile (this is a get)
+      //if false, display error message
+  
+    }
+
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
       <CssBaseline />

@@ -10,11 +10,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import './createClassTable.css';
 import { Grid, FormLabel, FormControl, RadioGroup, Radio, FormControlLabel } from "@mui/material";
-
+import { Repository } from "../../api/repository";
+import InstructorProfile from "../utils/instructorProfile";
+import StudentGeneration from "../utils/studentgeneration";
 
 
 
 function createClassTableComponent() {
+
+  var repository = new Repository();
 
   // Defining a state named rows
   // which we can update by calling on setRows function
@@ -22,6 +26,7 @@ function createClassTableComponent() {
     { firstname: "John", lastname: "Smith", email: "example@student.edu", class: "GUI" }
   ]);
 
+  
   // Initial states
   const [open, setOpen] = React.useState(false);
   const [isEdit, setEdit] = React.useState(false);
@@ -76,6 +81,20 @@ function createClassTableComponent() {
 
   const handleTimeChange = (event) => {
     setTime(event.target.value);
+  }
+
+
+  // CHECK API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
+  const createClassAndStudents = () => {
+    var class_time = day + " " + time; //state
+    var size = rows.length;
+    var collegeID = repository.getCollegeIdByProfId(this.profID);
+    repository.createClass(class_time, this.profID, size);
+    var class_id = getClassIdByClassTimeAndCollegeId(class_time, collegeID);
+    for (var i = 0; i < size; i++) {
+      var username, password = StudentGeneration(rows[i].firstname, rows[i].lastname);
+      repository.createStudent(username, password, rows[i].firstname, rows[i].lastname, rows[i].email, rows[i].class, this.profID, class_id, collegeID);
+    }
   }
 
   return (
@@ -222,7 +241,7 @@ function createClassTableComponent() {
           {isEdit ? (
             <Button disabled>Submit</Button>
           ) : (
-            <Button textAlign="center">Submit</Button>
+            <Button textAlign="center" onClick={createClassAndStudents()}>Submit</Button>
           )}
         </div>
       </TableBody >
