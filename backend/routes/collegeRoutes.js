@@ -79,7 +79,7 @@ router.get('/getCollegeIdByProfId', async (req, res, next) => {
     try {
         const prof_id = req.params.prof_id;
         console.log(prof_id);
-        const result = await College.getCollegeByProfID(prof_id);
+        const result = await College.getCollegeIdByProfId(prof_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current College:', err);
