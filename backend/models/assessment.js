@@ -4,8 +4,8 @@ const ASSESSMENT_TABLE = 'Assessment';
 
 const createAssessment = async (assessment_link,prof_id,team_id) => {
     const query = await knex(ASESSMENT_TABLE).insert({assessment_link,assessment_flag: false,prof_id,team_id});
-    const returnValue = await knex(ASSESSMENT_TABLE).select('Assessment.assessment_id','Assessment.assessment_link','Assessment.prof_id','Assessment.team_id');
-    return returnValue;
+    const result = await query;
+    return result;
 }
 
 const searchByLink = async (assessment_link) => {
