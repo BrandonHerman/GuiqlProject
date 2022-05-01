@@ -4,11 +4,12 @@ const e = require('express');
 
 const RECRUITER_TABLE = 'Recruiter';
 
+//test = passed
 const createRecruiter = async (first_name, last_name, username, password, email) => {
     // const salt = await bcrypt.genSalt(10);
     // const hashedPassword = await bcrypt.hash(password,salt);
     const hashedPassword = password;
-    const query = await knex(RECRUITER_TABLE).insert({recruiter_id,first_name,last_name,email,username,password: hashedPassword});
+    const query = await knex(RECRUITER_TABLE).insert({first_name,last_name,email,username,password: hashedPassword});
     const result = await query;
     return result;
 }

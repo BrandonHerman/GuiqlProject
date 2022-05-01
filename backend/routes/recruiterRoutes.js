@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Recruiter = require('../models/recruiter');
 
+//test = passed
 router.post('/createRecruiter', async (req, res, next) => {
     try {
         const body = req.body;

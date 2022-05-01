@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Student = require('../models/student');
 
+//test = passed
 router.post('/createStudent', async (req, res, next) => {
     try {
         const body = req.body;
