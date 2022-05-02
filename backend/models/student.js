@@ -62,7 +62,7 @@ const searchByCollege = async (college_id) => {
 }
 
 const updateTeam = async (student_id,team) => {
-    const query = await knex(STUDENT_TABLE).where({student_id}).update({team_id: team});
+    const query = await knex(STUDENT_TABLE).where({student_id}).update('team_id', team);
     const result = await query;
     return result;
 }
