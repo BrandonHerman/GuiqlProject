@@ -83,9 +83,9 @@ router.put('/updateTeam', async (req, res, next) => {
     try {
 
         const student_id = req.query.student_id;
-        const team = req.query.team;
+        const team = req.query.team_id;
         //console.log(team_id, name);
-        const result = await req.models.student.updateTeam(student_id, team);
+        const result = await req.models.student.updateTeam(student_id, team_id);
         res.status(200).json(result);
     } catch (err) {
         console.error('Failed to update team:', err);
