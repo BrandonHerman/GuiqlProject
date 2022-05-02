@@ -45,8 +45,8 @@ router.get('/searchUserStoryByTitle', async (req, res, next) => {
 
 router.put('/setUserStoryStatus', async (req, res, next) => {
     try {
-        const story_id = req.params.story_id;
-        const stat = req.params.stat;
+        const story_id = req.query.story_id;
+        const stat = req.query.stat;
         console.log(story_id, stat);
         const result = await req.models.user_story.setStatus(story_id, stat);
         res.status(200).json(result);
@@ -60,7 +60,7 @@ router.put('/setUserStoryStatus', async (req, res, next) => {
 
 router.put('/setUserStoryAsFavorite', async (req, res, next) => {
     try {
-        const story_id = req.params.story_id;
+        const story_id = req.query.story_id;
         console.log(story_id);
         const result = await req.models.user_story.setAsFavorite(story_id);
         res.status(200).json(result);
@@ -74,7 +74,7 @@ router.put('/setUserStoryAsFavorite', async (req, res, next) => {
 
 router.put('/unfavorite', async (req, res, next) => {
     try {
-        const story_id = req.params.story_id;
+        const story_id = req.query.story_id;
         console.log(story_id);
         const result = await req.models.user_story.unfavorite(story_id);
         res.status(200).json(result);
@@ -88,8 +88,8 @@ router.put('/unfavorite', async (req, res, next) => {
 
 router.put('/setUserStoryDescription', async (req, res, next) => {
     try {
-        const story_id = req.params.story_id;
-        const descp = req.params.descp;
+        const story_id = req.query.story_id;
+        const descp = req.query.descp;
         console.log(story_id, descp);
         const result = await req.models.user_story.setDescription(story_id, descp);
         res.status(200).json(result);
@@ -102,8 +102,8 @@ router.put('/setUserStoryDescription', async (req, res, next) => {
 })
 router.put('/setUserStoryTitle', async (req, res, next) => {
     try {
-        const story_id = req.params.story_id;
-        const title = req.params.title;
+        const story_id = req.query.story_id;
+        const title = req.query.title;
         console.log(story_id, title);
         const result = await req.models.user_story.setDescription(story_id, title);
         res.status(200).json(result);
@@ -117,7 +117,7 @@ router.put('/setUserStoryTitle', async (req, res, next) => {
 
 router.delete('/removeUserStory', async (req, res, next) => {
     try {
-        const story_id = req.params.story_id;
+        const story_id = req.query.story_id;
         console.log(story_id);
         const result = await req.models.user_story.removeStory(story_id);
         res.status(204).json(result);

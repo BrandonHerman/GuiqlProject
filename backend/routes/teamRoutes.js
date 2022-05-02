@@ -18,7 +18,7 @@ router.post('/createTeam', async (req, res, next) => {
 
 router.get('/searchTeamById', async (req, res, next) => {
     try {
-        const team_id = req.params.team_id;
+        const team_id = req.query.team_id;
         console.log(team_id);
         const result = await Team.searchByID(team_id);
         res.status(201).json(result);
@@ -30,7 +30,7 @@ router.get('/searchTeamById', async (req, res, next) => {
 
 router.get('/searchTeamByName', async (req, res, next) => {
     try {
-        const team_name = req.params.team_name;
+        const team_name = req.query.team_name;
         console.log(team_name);
         const result = await Team.searchByName(team_name);
         res.status(201).json(result);
@@ -43,8 +43,8 @@ router.get('/searchTeamByName', async (req, res, next) => {
 router.put('/setTeamSize', async (req, res, next) => {
     try {
 
-        const team_id = req.params.team_id;
-        const num = req.params.num;
+        const team_id = req.query.team_id;
+        const num = req.query.num;
         console.log(team_id, num);
         const result = await req.models.team.setTeamSize(team_id, num);
         res.status(200).json(result);
@@ -59,7 +59,7 @@ router.put('/setTeamSize', async (req, res, next) => {
 
 router.get('/getTeamSize', async (req, res, next) => {
     try {
-        const team_id = req.params.team_id;
+        const team_id = req.query.team_id;
         console.log(team_id);
         const result = await Team.getTeamSize(team_id);
         res.status(201).json(result);
@@ -72,8 +72,8 @@ router.get('/getTeamSize', async (req, res, next) => {
 router.put('/setTeamName', async (req, res, next) => {
     try {
 
-        const team_id = req.params.team_id;
-        const name = req.params.name;
+        const team_id = req.query.team_id;
+        const name = req.query.name;
         console.log(team_id, name);
         const result = await req.models.team.setTeamSize(team_id, name);
         res.status(200).json(result);
@@ -87,7 +87,7 @@ router.put('/setTeamName', async (req, res, next) => {
 
 router.get('/getTeamName', async (req, res, next) => {
     try {
-        const team_id = req.params.team_id;
+        const team_id = req.query.team_id;
         console.log(team_id);
         const result = await Team.getTeamName(team_id);
         res.status(201).json(result);
@@ -99,7 +99,7 @@ router.get('/getTeamName', async (req, res, next) => {
 
 router.delete('/deleteTeam', async (req, res, next) => {
     try {
-        const team_id = req.params.team_id;
+        const team_id = req.query.team_id;
         console.log(team_id);
         const result = await req.models.student.removeTeam(team_id);
         res.status(204).json(result);
