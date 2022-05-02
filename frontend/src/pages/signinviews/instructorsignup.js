@@ -17,34 +17,45 @@ import { useEffect } from 'react';
 var universitiesPreSlice = unis.split(/\r\n|\r|\n/);
 var universitiesArray = [];
 universitiesPreSlice.map((university) => {
-  universitiesArray.push(university.slice(0, -4));
+  var universityName = university.slice(0, -4);
+  universitiesArray.push(universityName);
+  //repository.createCollege(universityName);
 })
 
   var repository = new Repository();
 
-  repository.searchProf(12);   
+  repository.searchProf(12);
 
 export default function InstructorSignUp() {
   var professor = {
-    id: 0,
     first_name: '',
     last_name: '',
     username: '',
     password: ''
   }
 
-
   const handleSubmit = (event) => {
-    professor = {
-      id: 0,
-      first_name: data.get('firstName'),
-      last_name: data.get('lastName'),
-      username: data.get('email'),
-      password: data.get('password')
-    }
-    event.preventDefault();
     const data = new FormData(event.currentTarget);
-    repository.createProfessor(professor);
+    const college_id = repository.getCollegeByName(data.get('university'));
+    const username = data.get('firstName')[0] + data.get('lastName');
+
+    repository.createProfessor(
+      data.get('firstName'),
+      data.get('lastName'),
+      username,
+      data.get('password'),
+      data.get('email'),
+      college_id
+    );
+    // professor = {
+    //   id: 0,
+    //   first_name: data.get('firstName'),
+    //   last_name: data.get('lastName'),
+    //   username: data.get('email'),
+    //   password: data.get('password')
+    // }
+    event.preventDefault();
+
     console.log({
       firstName: data.get('firstName'),
       lastName: data.get('lastName'),

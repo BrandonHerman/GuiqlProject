@@ -18,7 +18,7 @@ const drawerWidth = 120;
 
 
 
-function InstructorStudentsView() {
+export default function InstructorStudentsView() {
     const group_count = 8;
     const teamsArray = [];
     for (let i = 1; i <= group_count; i++) {
@@ -345,4 +345,4 @@ function InstructorStudentsView() {
 
 
 
-export default InstructorStudentsView;
+// export default InstructorStudentsView;

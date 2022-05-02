@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import InstructorStudentsView from './pages/classviews/instructorstudentsview';
+import InstructorStudentsView from '/pages/classviews/instructorstudentsview';
 import StudentSignIn from './pages/signinviews/studentsignin';
 import {Theme, ThemeProvider} from '@material-ui/core/styles/'
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ function App() {
   const [values, setValues] = useState([])
 
   // ENTER YOUR EC2 PUBLIC IP/URL HERE
-  const ec2_url = 'team1dockercompose.ch1rnpkjnswq.us-east-1.rds.amazonaws.com';
+  const ec2_url = 'http://localhost:8000';
   // CHANGE THIS TO TRUE IF HOSTING ON EC2, MAKE SURE TO ADD IP/URL ABOVE
   const ec2 = true;
   // USE localhost OR ec2_url ACCORDING TO ENVIRONMENT
