@@ -20,8 +20,8 @@ router.post('/createStudent', async (req, res, next) => {
 
 router.get('/authenticateStudent', async (req, res, next) => {
     try {
-        const username = req.params.username;
-        const password = req.params.password;
+        const username = req.query.username;
+        const password = req.query.password;
         console.log(username, password);
         const result = await Student.authenticate(username, password);
         res.status(201).json(result);
@@ -33,7 +33,7 @@ router.get('/authenticateStudent', async (req, res, next) => {
 
 router.get('/searchStudentById', async (req, res, next) => {
     try {
-        const student_id = req.params.student_id;
+        const student_id = req.query.student_id;
         console.log(student_id);
         const result = await Student.searchById(student_id);
         res.status(201).json(result);
@@ -45,7 +45,7 @@ router.get('/searchStudentById', async (req, res, next) => {
 
 router.get('/getStudentByUsername', async (req, res, next) => {
     try {
-        const username = req.params.username;
+        const username = req.query.username;
         console.log(username);
         const result = await Student.searchByUsername(username);
         res.status(201).json(result);
@@ -57,7 +57,7 @@ router.get('/getStudentByUsername', async (req, res, next) => {
 
 router.get('/searchStudentByEmail', async (req, res, next) => {
     try {
-        const email = req.params.email;
+        const email = req.query.email;
         console.log(email);
         const result = await Student.searchByEmail(email);
         res.status(201).json(result);
@@ -69,7 +69,7 @@ router.get('/searchStudentByEmail', async (req, res, next) => {
 
 router.get('/searchStudentByCollege', async (req, res, next) => {
     try {
-        const college_id = req.params.college_id;
+        const college_id = req.query.college_id;
         console.log(college_id);
         const result = await Student.searchByCollge(college_id);
         res.status(201).json(result);
@@ -79,11 +79,12 @@ router.get('/searchStudentByCollege', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.put('/updateTeam', async (req, res, next) => {
     try {
 
         const student_id = req.query.student_id;
-        const team = req.query.team_id;
+        const team_id = req.query.team_id;
         //console.log(team_id, name);
         const result = await req.models.student.updateTeam(student_id, team_id);
         res.status(200).json(result);
@@ -97,7 +98,7 @@ router.put('/updateTeam', async (req, res, next) => {
 
 router.get('/searchStudentByTeam', async (req, res, next) => {
     try {
-        const team_id = req.params.team_id;
+        const team_id = req.query.team_id;
         console.log(team_id);
         const result = await Student.searchByTeam(team_id);
         res.status(201).json(result);
@@ -109,7 +110,7 @@ router.get('/searchStudentByTeam', async (req, res, next) => {
 
 router.get('/getTeamStatus', async (req, res, next) => {
     try {
-        const student_id = req.params.student_id;
+        const student_id = req.query.student_id;
         console.log(student_id);
         const result = await Student.getTeamStatus(student_id);
         res.status(201).json(result);
@@ -121,7 +122,7 @@ router.get('/getTeamStatus', async (req, res, next) => {
 
 router.get('/getStudentName', async (req, res, next) => {
     try {
-        const student_id = req.params.student_id;
+        const student_id = req.query.student_id;
         console.log(student_id);
         const result = await Student.getStudentName(student_id);
         res.status(201).json(result);
@@ -133,7 +134,7 @@ router.get('/getStudentName', async (req, res, next) => {
 
 router.delete('/deleteStudent', async (req, res, next) => {
     try {
-        const student_id = req.params.student_id;
+        const student_id = req.query.student_id;
         console.log(student_id);
         console.log(recruiter_id);
         const result = await req.models.student.removeStudent(student_id);

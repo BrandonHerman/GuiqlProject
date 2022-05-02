@@ -19,8 +19,8 @@ router.post('/createRecruiter', async (req, res, next) => {
 
 router.get('/authenticateRecruiter', async (req, res, next) => {
     try {
-        const username = req.params.username;
-        const password = req.params.password;
+        const username = req.query.username;
+        const password = req.query.password;
         const result = await Recruiter.authenticate(username, password);
         res.status(201).json(result);
     } catch (err) {
@@ -31,7 +31,7 @@ router.get('/authenticateRecruiter', async (req, res, next) => {
 
 router.get('/getRecruiterByUsername', async (req, res, next) => {
     try {
-        const username = req.params.username;
+        const username = req.query.username;
         const result = await Recruiter.getByUsername(username);
         res.status(201).json(result);
     } catch (err) {
@@ -43,8 +43,8 @@ router.get('/getRecruiterByUsername', async (req, res, next) => {
 router.put('/addRecruiterBio', async (req, res, next) => {
     try {
 
-        const recruiter_id = req.params.recruiter_id;
-        const rec_bio = req.params.rec_bio;
+        const recruiter_id = req.query.recruiter_id;
+        const rec_bio = req.query.rec_bio;
         //console.log(team_id, name);
         const result = await req.models.recruiter.addBio(recruiter_id,rec_bio);
         res.status(200).json(result);
@@ -58,7 +58,7 @@ router.put('/addRecruiterBio', async (req, res, next) => {
 
 router.get('/getBioById', async (req, res, next) => {
     try {
-        const recruiter_id = req.params.recruiter_id;
+        const recruiter_id = req.query.recruiter_id;
         const result = await Recruiter.getBioById(recruiter_id);
         res.status(201).json(result);
     } catch (err) {
@@ -69,7 +69,7 @@ router.get('/getBioById', async (req, res, next) => {
 
 router.get('/getBioByCollege', async (req, res, next) => {
     try {
-        const college_id = req.params.college_id;
+        const college_id = req.query.college_id;
         const result = await Recruiter.getBioByCollege(college_id);
         res.status(201).json(result);
     } catch (err) {
@@ -80,7 +80,7 @@ router.get('/getBioByCollege', async (req, res, next) => {
 
 router.delete('/deleteRecruiter', async (req, res, next) => {
     try {
-        const recruiter_id = req.params.recruiter_id;
+        const recruiter_id = req.query.recruiter_id;
         console.log(recruiter_id);
         const result = await req.models.recruiter.deleteRecruiter(recruiter_id);
         res.status(204).json(result);

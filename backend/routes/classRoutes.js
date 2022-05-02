@@ -45,7 +45,7 @@ router.get('/getStartTimeOfClass', async (req, res, next) => {
 
 router.get('/getEndTimeOfClass', async (req, res, next) => {
     try {
-        const class_id = req.params.class_id;
+        const class_id = req.query.class_id;
         console.log(class_id);
         const result = await Class.getEndTime(class_id);
         res.status(201).json(result);

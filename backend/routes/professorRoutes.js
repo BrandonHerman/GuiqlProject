@@ -21,8 +21,8 @@ router.post('/createProfessor', async (req, res, next) => {
 
 router.get('/authenticateProfessor', async (req, res, next) => {
     try {
-        const username = req.params.username;
-        const password = req.params.password;
+        const username = req.query.username;
+        const password = req.query.password;
         console.log(username, password);
         const result = await Professor.authenticate(username, password);
         res.status(201).json(result);

@@ -50,8 +50,8 @@ router.put('/setMeetingTime', async (req, res, next) => {
 router.put('/setMeetingPlace', async (req, res, next) => {
     try {
 
-        const meeting_id = req.params.meeting_id;
-        const place = req.params.place;
+        const meeting_id = req.query.meeting_id;
+        const place = req.query.place;
         //console.log(team_id, name);
         const result = await req.models.meeting.setPlace(meeting_id, place);
         res.status(200).json(result);
