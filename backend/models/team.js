@@ -20,8 +20,8 @@ const searchByName = async (team_name) => {
     return result;
 }
 
-const setTeamSize = async (team_id,num) => {
-    const query = await knex(TEAM_TABLE).where({team_id}).update({team_size: num});
+const setTeamSize = async (team_id,team_size) => {
+    const query = await knex(TEAM_TABLE).where({team_id}).update('team_size', team_size);
     const result = await query;
     return result;
 }
@@ -32,8 +32,8 @@ const getTeamSize = async (team_id) => {
     return result;
 }
 
-const setTeamName = async (team_id,name) => {
-    const query = await knex(TEAM_TABLE).where({team_id}).update({team_name: name});
+const setTeamName = async (team_id,team_name) => {
+    const query = await knex(TEAM_TABLE).where({team_id}).update('team_name', team_name);
     const result = await query;
     return result;
 }

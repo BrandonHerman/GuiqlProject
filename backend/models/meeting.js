@@ -14,14 +14,14 @@ const searchByTeam = async (team_id) => {
     return result;
 }
 
-const setTime = async (meeting_id,time) => {
-    const query = await knex(MEETING_TABLE).where({meeting_id}).update({meeting_time: time});
+const setTime = async (meeting_id,meeting_time) => {
+    const query = await knex(MEETING_TABLE).where({meeting_id}).update('meeting_time', meeting_time);
     const result = await query;
     return result;
 }
 
-const setPlace = async (meeting_id,place) => {
-    const query = await knex(MEETING_TABLE).where({meeting_id}).update({meeting_place: place});
+const setPlace = async (meeting_id,meeting_place) => {
+    const query = await knex(MEETING_TABLE).where({meeting_id}).update('meeting_place', meeting_place);
     const result = await query;
     return result;
 }

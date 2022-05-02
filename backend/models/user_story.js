@@ -20,8 +20,8 @@ const searchByTitle = async (title) => {
     return result;
 }
 
-const setStatus = async (story_id,stat) => {
-    const query = await knex(STORY_TABLE).where({story_id}).update({status: stat});
+const setStatus = async (story_id,status) => {
+    const query = await knex(STORY_TABLE).where({story_id}).update('status', status);
     const result = await query;
     return result;
 }
@@ -38,14 +38,14 @@ const unfavorite = async (story_id) => {
     return result;
 }
 
-const setDescription = async (story_id,descp) => {
-    const query = await knex(STORY_TABLE).where({story_id}).update({description: descp});
+const setDescription = async (story_id,description) => {
+    const query = await knex(STORY_TABLE).where({story_id}).update('description', description);
     const result = await query;
     return result;
 }
 
 const setTitle = async (story_id, title) => {
-    const query = await knex(STORY_TABLE).where({story_id}).update({title: this.title});
+    const query = await knex(STORY_TABLE).where({story_id}).update('title', title);
     const result = await query;
     return result;
 }
