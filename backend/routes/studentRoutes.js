@@ -82,8 +82,8 @@ router.get('/searchStudentByCollege', async (req, res, next) => {
 router.put('/updateTeam', async (req, res, next) => {
     try {
 
-        const student_id = req.params.student_id;
-        const team = req.params.team;
+        const student_id = req.query.student_id;
+        const team = req.query.team;
         //console.log(team_id, name);
         const result = await req.models.student.updateTeam(student_id, team);
         res.status(200).json(result);
