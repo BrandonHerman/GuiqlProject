@@ -20,8 +20,8 @@ const getAssessmentLink = async (assessment_id) => {
     return result;
 }
 
-const setAssessmentLink = async (assessment_id,link) => {
-    const query = await knex(ASSESSMENT_TABLE).where({assessment_id}).update({assessment_link: link});
+const setAssessmentLink = async (assessment_id,assessment_link) => {
+    const query = await knex(ASSESSMENT_TABLE).where({assessment_id}).update('assessment_link', assessment_link);
     const result = await query;
     return result;
 }
