@@ -45,7 +45,7 @@ const findUserByPassword = async (username,password) => {
 }
 
 const addBio = async (recruiter_id,rec_bio) => {
-    const query = await knex(RECRUITER_TABLE).where({recruiter_id}).update({bio: rec_bio});
+    const query = await knex(RECRUITER_TABLE).where({recruiter_id}).update('bio', rec_bio);
     const result = await query;
     return result;
 }
