@@ -50,8 +50,8 @@ const getAvgGroupSize = async (class_id) => {
     return result;
 }
 
-const addPeerReview = async (class_id,link) => {
-    const query = await knex(CLASS_TABLE).where({class_id}).update({peer_review_link: link});
+const addPeerReview = async (class_id,peer_review_link) => {
+    const query = await knex(CLASS_TABLE).where({class_id}).update('peer_review_link', peer_review_link);
     const result = await query;
     return result;
 }
