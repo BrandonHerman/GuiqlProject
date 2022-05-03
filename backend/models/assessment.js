@@ -3,7 +3,7 @@ const knex = require('../database/knex');
 const ASSESSMENT_TABLE = 'Assessment';
 
 const createAssessment = async (assessment_link,prof_id,team_id) => {
-    const query = await knex(ASESSMENT_TABLE).insert({assessment_link,assessment_flag: false,prof_id,team_id});
+    const query = await knex(ASSESSMENT_TABLE).insert({assessment_link,assessment_flag: false,prof_id,team_id});
     const result = await query;
     return result;
 }

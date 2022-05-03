@@ -17,6 +17,7 @@ router.post('/createRecruiter', async (req, res, next) => {
     next();
 })
 
+//test = passed
 router.get('/authenticateRecruiter', async (req, res, next) => {
     try {
         const username = req.query.username;
@@ -29,6 +30,7 @@ router.get('/authenticateRecruiter', async (req, res, next) => {
     }
 })
 
+//test = passed
 router.get('/getRecruiterByUsername', async (req, res, next) => {
     try {
         const username = req.query.username;
@@ -40,13 +42,14 @@ router.get('/getRecruiterByUsername', async (req, res, next) => {
     }
 })
 
+//test = passed
 router.put('/addRecruiterBio', async (req, res, next) => {
     try {
 
         const recruiter_id = req.query.recruiter_id;
         const rec_bio = req.query.rec_bio;
         //console.log(team_id, name);
-        const result = await req.models.recruiter.addBio(recruiter_id,rec_bio);
+        const result = await Recruiter.addBio(recruiter_id,rec_bio);
         res.status(200).json(result);
     } catch (err) {
         console.error('Failed to update team:', err);
@@ -56,6 +59,7 @@ router.put('/addRecruiterBio', async (req, res, next) => {
     next();
 });
 
+//test = passed
 router.get('/getBioById', async (req, res, next) => {
     try {
         const recruiter_id = req.query.recruiter_id;
@@ -67,6 +71,7 @@ router.get('/getBioById', async (req, res, next) => {
     }
 })
 
+//test = passed
 router.get('/getBioByCollege', async (req, res, next) => {
     try {
         const college_id = req.query.college_id;
@@ -78,11 +83,12 @@ router.get('/getBioByCollege', async (req, res, next) => {
     }
 })
 
+//test = passed
 router.delete('/deleteRecruiter', async (req, res, next) => {
     try {
         const recruiter_id = req.query.recruiter_id;
         console.log(recruiter_id);
-        const result = await req.models.recruiter.deleteRecruiter(recruiter_id);
+        const result = await Recruiter.deleteRecruiter(recruiter_id);
         res.status(204).json(result);
     } catch (err) {
         console.error('Failed to delete recruiter:', err);

@@ -1,12 +1,13 @@
 const express = require('express');
 const Meeting = require('../models/meeting');
 const router = express.Router();
-//test = failed
+
+//test = passed
 router.post('/createMeeting', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.meeting.createMeeting(body.meeting_time, body.meeting_place, body.team_id);
+        const result = await Meeting.createMeeting(body.meeting_time, body.meeting_place, body.team_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new Class:', err);
@@ -29,14 +30,14 @@ router.get('/searchMeetingByTeam', async (req, res, next) => {
     }
 })
 
-//test =failed
+//test = passed
 router.put('/setMeetingTime', async (req, res, next) => {
     try {
 
         const meeting_id = req.query.meeting_id;
-        const time = req.query.time;
+        const meeting_time = req.query.meeting_time;
         //console.log(team_id, name);
-        const result = await req.models.meeting.setTime(meeting_id, time);
+        const result = await Meeting.setTime(meeting_id, meeting_time);
         res.status(200).json(result);
     } catch (err) {
         console.error('Failed to update team:', err);
@@ -46,14 +47,14 @@ router.put('/setMeetingTime', async (req, res, next) => {
     next();
 });
 
-//test = failed
+//test = passed
 router.put('/setMeetingPlace', async (req, res, next) => {
     try {
 
         const meeting_id = req.query.meeting_id;
-        const place = req.query.place;
+        const meeting_place = req.query.meeting_place;
         //console.log(team_id, name);
-        const result = await req.models.meeting.setPlace(meeting_id, place);
+        const result = await Meeting.setPlace(meeting_id, meeting_place);
         res.status(200).json(result);
     } catch (err) {
         console.error('Failed to update team:', err);
@@ -64,12 +65,12 @@ router.put('/setMeetingPlace', async (req, res, next) => {
 });
 
 
-//test = failed
+//test = passed
 router.delete('/deleteMeeting', async (req, res, next) => {
     try {
         const meeting_id = req.query.meeting_id;
         console.log(meeting_id);
-        const result = await req.models.meeting.deleteMeeting(meeting_id);
+        const result = await Meeting.deleteMeeting(meeting_id);
         res.status(204).json(result);
     } catch (err) {
         console.error('Failed to delete professor:', err);

@@ -2,12 +2,12 @@ const express = require('express');
 const Assessment = require('../models/assessment');
 const router = express.Router();
 
-//test = failed
+//test = passed
 router.post('/createAssessment', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.assessment.createAssessment(body.assessment_link, body.prof_id, body.team_id);
+        const result = await Assessment.createAssessment(body.assessment_link, body.prof_id, body.team_id);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new Class:', err);
@@ -41,14 +41,14 @@ router.get('/getAssessmentLink', async (req, res, next) => {
     }
 })
 
-//testing needs to be done
+//test = passed
 router.put('/setAssessmentLink', async (req, res, next) => {
     try {
 
         const assessment_id = req.query.assessment_id;
         const assessment_link = req.query.assessment_link;
         //console.log(team_id, name);
-        const result = await req.models.assessment.setAssessmentLink(assessment_id, assessment_link);
+        const result = await Assessment.setAssessmentLink(assessment_id, assessment_link);
         res.status(200).json(result);
     } catch (err) {
         console.error('Failed to update team:', err);
@@ -94,13 +94,13 @@ router.get('/getLinkByProfId', async (req, res, next) => {
     }
 })
 
-//test = failed
+//test = passed
 router.put('/setFlagPublished', async (req, res, next) => {
     try {
 
         const prof_id = req.query.prof_id;
         //console.log(team_id, name);
-        const result = await req.models.assessment.setFlagPublished(prof_id);
+        const result = await Assessment.setFlagPublished(prof_id);
         res.status(200).json(result);
     } catch (err) {
         console.error('Failed to update team:', err);
@@ -110,13 +110,13 @@ router.put('/setFlagPublished', async (req, res, next) => {
     next();
 });
 
-//test = failed
+//test = Passed
 router.put('/setFlagUnpublished', async (req, res, next) => {
     try {
 
         const assessment_id = req.query.assessment_id;
         //console.log(team_id, name);
-        const result = await req.models.assessment.setFlagUnpublished(assessment_id);
+        const result = await Assessment.setFlagUnpublished(assessment_id);
         res.status(200).json(result);
     } catch (err) {
         console.error('Failed to update team:', err);

@@ -19,6 +19,7 @@ router.post('/createProfessor', async (req, res, next) => {
     next();
 })
 
+//test = passed
 router.get('/authenticateProfessor', async (req, res, next) => {
     try {
         const username = req.query.username;
@@ -32,7 +33,7 @@ router.get('/authenticateProfessor', async (req, res, next) => {
     }
 })
 
-//tested = pass
+//test = passed
 router.get('/searchProfessorById', async (req, res, next) => {
     try {
         const prof_id= req.query.prof_id;
@@ -83,7 +84,7 @@ router.get('/searchProfessorByCollege', async (req, res, next) => {
         res.sendStatus(500).json({ message: err.toString() });
     }
 })
-//tested = ?
+//tested = passed
 router.get('/getProfessorName', async (req, res, next) => {
     try {
         const prof_id = req.query.prof_id;
@@ -122,7 +123,7 @@ router.get('/getCollegeIdByProfId', async (req, res, next) => {
     }
 })
 
-//tested = pass
+//tested = passed
 router.delete('/removeProfessor', async (req, res, next) => {
     try {
         const prof_id = req.query.prof_id;

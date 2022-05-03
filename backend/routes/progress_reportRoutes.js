@@ -43,12 +43,12 @@ router.get('/searchProgressReportByTeamId', async (req, res, next) => {
     }
 })
 
-//test= failed
+//test= passed
 router.delete('/deleteReport', async (req, res, next) => {
     try {
         const report_id = req.query.report_id;
         console.log(report_id);
-        const result = await req.models.progress_report.removeReport(report_id);
+        const result = await Progress_Report.deleteReport(report_id);
         res.status(204).json(result);
     } catch (err) {
         console.error('Failed to delete professor:', err);

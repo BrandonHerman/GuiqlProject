@@ -17,7 +17,7 @@ router.post('/createStudent', async (req, res, next) => {
     next();
 })
 
-
+//test = passed
 router.get('/authenticateStudent', async (req, res, next) => {
     try {
         const username = req.query.username;
@@ -31,6 +31,7 @@ router.get('/authenticateStudent', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.get('/searchStudentById', async (req, res, next) => {
     try {
         const student_id = req.query.student_id;
@@ -43,6 +44,7 @@ router.get('/searchStudentById', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.get('/getStudentByUsername', async (req, res, next) => {
     try {
         const username = req.query.username;
@@ -55,6 +57,7 @@ router.get('/getStudentByUsername', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.get('/searchStudentByEmail', async (req, res, next) => {
     try {
         const email = req.query.email;
@@ -67,6 +70,7 @@ router.get('/searchStudentByEmail', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.get('/searchStudentByCollege', async (req, res, next) => {
     try {
         const college_id = req.query.college_id;
@@ -86,7 +90,7 @@ router.put('/updateTeam', async (req, res, next) => {
         const student_id = req.query.student_id;
         const team_id = req.query.team_id;
         //console.log(team_id, name);
-        const result = await req.models.student.updateTeam(student_id, team_id);
+        const result = await Student.updateTeam(student_id, team_id);
         res.status(200).json(result);
     } catch (err) {
         console.error('Failed to update team:', err);
@@ -96,6 +100,7 @@ router.put('/updateTeam', async (req, res, next) => {
     next();
 });
 
+//test = passed
 router.get('/searchStudentByTeam', async (req, res, next) => {
     try {
         const team_id = req.query.team_id;
@@ -108,6 +113,7 @@ router.get('/searchStudentByTeam', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.get('/getTeamStatus', async (req, res, next) => {
     try {
         const student_id = req.query.student_id;
@@ -120,6 +126,7 @@ router.get('/getTeamStatus', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.get('/getStudentName', async (req, res, next) => {
     try {
         const student_id = req.query.student_id;
@@ -132,12 +139,13 @@ router.get('/getStudentName', async (req, res, next) => {
     }
 });
 
+//test = passed
 router.delete('/deleteStudent', async (req, res, next) => {
     try {
         const student_id = req.query.student_id;
         console.log(student_id);
-        console.log(recruiter_id);
-        const result = await req.models.student.removeStudent(student_id);
+        //console.log(recruiter_id);
+        const result = await Student.removeStudent(student_id);
         res.status(204).json(result);
     } catch (err) {
         console.error('Failed to delete student:', err);
