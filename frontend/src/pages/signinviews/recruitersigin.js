@@ -10,17 +10,59 @@ import './instructorsignin.css'
 import { Link } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import RecruiterProfile from '../utils/recruiterProfile';
+// import { Repository } from '../../api/repository';
+import JSONCalls from '../assets/JSONCalls';
+import Alert from '@mui/material/Alert';
 
+
+import {Navigate, useNavigate} from 'react-router-dom';
+
+import Avatar, { genConfig } from 'react-nice-avatar'
 
 export default function RecruiterSignIn() {
+  var calls = new JSONCalls();
+  var navigate = useNavigate();
+  const [error, setError] = React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const username = data.get('username');
+    const password = data.get('password');
     console.log({
       username: data.get('username'),
       password: data.get('password'),
     });
+
+    validateUser(username, password);
   };
+
+    //API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API API 
+    const validateUser = (inUsername, inPassword) => {
+      var recruiter = calls.recruitSignIn(inUsername, inPassword);
+      if(recruiter.username === null || recruiter.password === null){
+        alert("User does not exist");
+        setError(true);
+      } else if(recruiter.password === inPassword && recruiter.username === inUsername){
+        console.log("Successful Login");
+        RecruiterProfile.setEmail(recruiter.email);
+        RecruiterProfile.setfirstName(recruiter.firstName);
+        RecruiterProfile.setlastName(recruiter.lastName);
+        RecruiterProfile.setID(recruiter.id);
+        RecruiterProfile.setUsername(recruiter.username);
+        RecruiterProfile.setPassword(recruiter.password);
+        RecruiterProfile.setConfig(genConfig());
+        RecruiterProfile.setUni(recruiter.university);
+        RecruiterProfile.setBio(recruiter.bio);
+        console.log(RecruiterProfile.getfirstName());
+        //ADD PROPER NAVIGATE FOR RECRUITERS
+        navigate('/recruiterhome');
+      }else{
+        alert("Username or Password is incorrect, try again!");
+        setError(true);
+      }
+    }
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -31,7 +73,8 @@ export default function RecruiterSignIn() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
+          // backgroundImage: 'url(https://www.smu.edu/-/media/Site/_Lyle/Academics/Departments/CS/CS-Home/CS_Home_Faculty.jpg?h=594&la=en&w=1056&hash=EB7823706804D039080FC55A16317B18)',
+          backgroundImage: 'url(https://www.marketplace.org/wp-content/uploads/2021/04/CM4.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -71,12 +114,6 @@ export default function RecruiterSignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              id="rememberMe"
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Link to="/classeshome">
               <Button
                 type="submit"
                 fullWidth
@@ -85,7 +122,6 @@ export default function RecruiterSignIn() {
               >
                 Sign In
               </Button>
-            </Link>
 
             <Grid container>
               <Grid item xs>
@@ -104,6 +140,11 @@ export default function RecruiterSignIn() {
               </h3>
             </Link>
           </Box>
+          {error &&
+            <>
+            <br></br>
+              <Alert sx={{ m: 5 }} onClose={() => setError(false)} severity="error">Username or Password is incorrect</Alert>
+            </>}
         </Box>
       </Grid>
     </Grid>

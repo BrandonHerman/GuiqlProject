@@ -3,10 +3,14 @@ import './App.css';
 import axios from 'axios';
 import InstructorStudentsView from '/pages/classviews/instructorstudentsview';
 import StudentSignIn from './pages/signinviews/studentsignin';
-import {Theme, ThemeProvider} from '@material-ui/core/styles/'
+import StudentLaunch from './pages/classviews/studentlaunch';
+import { Theme, ThemeProvider } from '@material-ui/core/styles/'
 import { Link } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from './theme.js'
+
+import Test from './pages/test';
+
 // React functional component
 function App() {
   // state for storage of the information on the webpage of forms and list, uses hooks
@@ -76,14 +80,16 @@ function App() {
   return ( //launch app at student sign in 
     // <ThemeProvider theme={theme}> 
     // {/* add gui theme to all child components */}
-      // <CssBaseline/>
-      <div className="App">
-        <StudentSignIn></StudentSignIn>
-      </div>
+    // <CssBaseline/>
+    <div className="App">
+      {/* <InstructorStudentsView/> */}
+      <StudentSignIn/>
+      {/* <StudentLaunch></StudentLaunch> */}
+    </div>
     // </ThemeProvider>
   );
 
-   
+
 }
 
 export default App;

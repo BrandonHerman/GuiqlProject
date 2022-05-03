@@ -4,7 +4,32 @@ var RecruiterProfile = (function () {
     var email = "";
     var password = "";
     var username = "";
+    var recruiterID;
 
+    var bio = "";
+    var image = "";
+    var uni = "";
+    var config;
+
+
+    var getUni = function() {
+        return uni;
+    }
+    var setUni = function(input) {
+        uni = input;
+    }
+    var getImage = function() {
+        return image;
+    }
+    var setImage = function(url) {
+        image = url;
+    }
+    var setBio = function(b) {
+        bio = b;
+    }
+    var getBio = function() {
+        return bio;
+    }
     var getEmail = function () {
         return email;
     }
@@ -22,22 +47,29 @@ var RecruiterProfile = (function () {
         console.log("set username to:");
         console.log(username);
     }
-    var getName = function () {
-        return firstName, lastName;
+    var getfirstName = function () {
+        return firstName;
+    }
+    var getlastName = function () {
+        return lastName;
     }
 
-    var setName = function (first, last) {
+    var setfirstName = function (first) {
         firstName = first;
-        lastName = last;
     }
+    var setlastName = function(lastname) {
+        lastName = lastname;
+    }
+
 
     var getID = function() {
-        return profID;
+        return recruiterID;
     }
 
     var setID = function(id) {
-        profID = id;
+        recruiterID = id;
     }
+
 
     var getPassword = function () {
         return password;
@@ -45,17 +77,35 @@ var RecruiterProfile = (function () {
     var setPassword = function (pass) {
         password = pass;
     }
+
+    var getConfig = function() {
+        return config;
+    }
+
+    var setConfig = function(c) {
+        config = c;
+    }
     return {
-        getName: getName,
-        setName: setName,
+        getfirstName: getfirstName,
+        getlastName: getlastName,
+        setfirstName: setfirstName,
+        setlastName: setlastName,
         getEmail: getEmail,
         setEmail: setEmail,
         getPassword: getPassword,
         setPassword: setPassword,
-        getID: getID,
-        setID: setID,
+         getID: getID,
+         setID: setID,
         getUsername: getUsername,
-        setUsername: setUsername
+        setUsername: setUsername,
+        setBio: setBio,
+        getBio: getBio,
+        setImage: setImage,
+        getImage: getImage,
+        getUni: getUni,
+        setUni: setUni,
+        getConfig: getConfig,
+        setConfig: setConfig
     }
 })();
 

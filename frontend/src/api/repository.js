@@ -90,11 +90,11 @@ export class Repository {
     //CLASS API CALLS
 
     // Create a class with the student information
-    createClass(class_name, class_day, class_time, prof_id, size) {
-        console.log("Creating class: " + class_name);
+    createClass(class_time, prof_id, size, college_id) {
+        console.log("Creating class: " + class_time);
         var group_count = Math.ceil(size / 4);
         return new Promise((resolve, reject) => {
-            axios.post(`${this.url}/createClass?class_name=${class_name}&class_day=${class_day}&class_time=${class_time}&prof_id=${prof_id}&group_count=${group_count}`)
+            axios.post(`${this.url}/createClass?class_time=${class_time}&prof_id=${prof_id}&group_count=${group_count}&size=${size}&collge_id=${college_id}`)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -120,6 +120,21 @@ export class Repository {
         })
     }
 
+    // Get all the class_name, class_time, size, group_count using the prof id
+    getClassesByProfId(prof_id) {
+        console.log("Getting classes for prof_id: " + prof_id);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getClassesByProfId?prof_id=${prof_id}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+            
     // Get the group count given instructor id and class id
     getClassByClassId(class_id) {
         console.log("Getting class for class_id: " + class_id);
@@ -135,20 +150,11 @@ export class Repository {
         })
     }
 
-    // Get the class given the class day and class time
-    getClassByClassDayAndClassTime(class_day, class_time, college_id) {
-        console.log("Getting class for class_day: " + class_day + " and class_time: " + class_time);
-        var params = new URLSearchParams();
-            params.append("class_day", class_day);
-            params.append("class_time", class_time);
-            params.append("college_id", college_id);
-        
-            params.append()
-            var request = {
-                params: params
-            };
+    // Get the class id given the class time and college id
+    getClassIdByClassTimeAndCollegeId(class_time, college_id) {
+        console.log("Getting class id for class_time: " + class_time + " and college_id: " + college_id);
         return new Promise((resolve, reject) => {
-            axios.get(`${this.url}/getClassByClassDayAndClassTime`, request)
+            axios.get(`${this.url}/getClassIdByClassTimeAndCollegeId?class_time=${class_time}&college_id=${college_id}`)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -208,9 +214,40 @@ export class Repository {
         })
     }
 
+    // Get CollegeId given prof_id
+    getCollegeIdByProfId(prof_id) {
+        console.log("Getting college_id for prof_id: " + prof_id);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getCollegeIdByProfId?prof_id=${prof_id}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
 
 
     //INSTRUCTOR API CALLS
+
+    // Get Instructor given username
+    getInstructorByUsername(username) {
+        console.log("Getting instructor for username: " + username);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getInstructorByUsername?username=${username}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
 
 
 
@@ -313,22 +350,22 @@ export class Repository {
 
 
     // I need to get a professor given their prof_id
-    searchProf(id) {
-        console.log("finding Prof by " , id);
-        return new Promise((resolve, reject) => {
-            axios.get(`${this.url}/professor/searchProfessorByID?prof_id=${id}`) 
-                .then(x => {
-                    console.log(x.data);
-                    resolve(x.data);
+    // searchProf(id) {
+    //     console.log("finding Prof by " , id);
+    //     return new Promise((resolve, reject) => {
+    //         axios.get(`${this.url}/professor/searchProfessorByID?prof_id=${id}`) 
+    //             .then(x => {
+    //                 console.log(x.data);
+    //                 resolve(x.data);
                     
-                })
-                .catch(x => {
-                    alert(x.data);
-                    reject(x.data);
-                })
-        })
+    //             })
+    //             .catch(x => {
+    //                 alert(x.data);
+    //                 reject(x.data);
+    //             })
+    //     })
 
-    } 
+    // } 
 
 
 
@@ -458,6 +495,21 @@ export class Repository {
         })
     }
 
+    // I need to get the Recruiter object given their username
+    getRecruiterByUsername(username) {
+        console.log("Getting recruiter for username: " + username);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getRecruiterByUsername?username=${username}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
 
 
     // STUDENT API CALLS
@@ -478,10 +530,10 @@ export class Repository {
     }
 
     // Create a new student given class_id, first_name, last_name, and email
-    createStudent(class_id, first_name, last_name, email) {
-        console.log("Creating student for class_id: " + class_id);
+    createStudent(username, password, firstname, lastname, email, class_name, profID, class_id, collegeID) {
+        console.log("Creating student for username: " + username);
         return new Promise((resolve, reject) => {
-            axios.post(`${this.url}/createStudent?class_id=${class_id}&first_name=${first_name}&last_name=${last_name}&email=${email}`)
+            axios.post(`${this.url}/createStudent?username=${username}&password=${password}&first_name=${firstname}&last_name=${lastname}&email=${email}&class=${class_name}&prof_id=${profID}&class_id=${class_id}&college_id=${collegeID}`)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -512,6 +564,21 @@ export class Repository {
         console.log("Getting student for student_id: " + student_id);
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/getStudent?student_id=${student_id}`)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x.data);
+                    reject(x.data);
+                });
+        })
+    }
+
+    // Get Student given username
+    getStudentByUsername(username) {
+        console.log("Getting student for username: " + username);
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/getStudentByUsername?username=${username}`)
                 .then(x => {
                     resolve(x.data);
                 })

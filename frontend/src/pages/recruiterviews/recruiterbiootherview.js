@@ -33,7 +33,7 @@ export default function RecruiterBioOtherView() {
         first_name: "John",
         last_name: "Lawrimore",
         email: "JLaw@smu.edu",
-        bio: "I hate students.",
+        bio: "I love students.",
         image: "http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRWObm4bybyX21o6Llr5MMNIP6uDpS1OGMWvBzbZrKcSYmgdS8QUU51PIgrIFKLKGCLu8HpW2RxbJ18IzIE1Ek"
     },]);
 
