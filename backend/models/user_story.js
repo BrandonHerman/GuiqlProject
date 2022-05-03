@@ -2,16 +2,16 @@ const knex = require('../database/knex');
 
 const STORY_TABLE = 'User_story';
 
-const createUserStory = async (title,description) => {
-    const query = await knex(STORY_TABLE).insert({status:false,title,description,favorite:false});
-    const returnValue = await knex(STORY_TABLE).select('User_story.story_id','User_story.title','User_story.description');
-    return returnValue;
+const createUserStory = async (title,description,student_id,team_id) => {
+    const query = await knex(STORY_TABLE).insert({status:'to do',title,description,favorite:false,student_id,team_id});
+    const result = await query;
+    return result;
 }
 
-const searchByID = async (story_id) => {
+const searchById = async (story_id) => {
     const query = await knex(STORY_TABLE).where({story_id});
     const result = await query;
-    return query;
+    return result;
 }
 
 const searchByTitle = async (title) => {
@@ -20,8 +20,8 @@ const searchByTitle = async (title) => {
     return result;
 }
 
-const setStatus = async (story_id,stat) => {
-    const query = await knex(STORY_TABLE).where({story_id}).update({status: stat});
+const setStatus = async (story_id,status) => {
+    const query = await knex(STORY_TABLE).where({story_id}).update('status', status);
     const result = await query;
     return result;
 }
@@ -38,14 +38,14 @@ const unfavorite = async (story_id) => {
     return result;
 }
 
-const setDescription = async (story_id,descp) => {
-    const query = await knex(STORY_TABLE).where({story_id}).update({description: descp});
+const setDescription = async (story_id,description) => {
+    const query = await knex(STORY_TABLE).where({story_id}).update('description', description);
     const result = await query;
     return result;
 }
 
 const setTitle = async (story_id, title) => {
-    const query = await knex(STORY_TABLE).where({story_id}).update({title: this.title});
+    const query = await knex(STORY_TABLE).where({story_id}).update('title', title);
     const result = await query;
     return result;
 }
@@ -58,7 +58,7 @@ const removeStory = async (story_id) => {
 
 module.exports = {
     createUserStory,
-    searchByID,
+    searchById,
     searchByTitle,
     setStatus,
     setAsFavorite,

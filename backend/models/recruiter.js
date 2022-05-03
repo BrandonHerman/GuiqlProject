@@ -4,57 +4,66 @@ const e = require('express');
 
 const RECRUITER_TABLE = 'Recruiter';
 
-const createRecruiter = async (first_name, last_name, username, password) => {
-    // check if professor already exists
-    const userName = await searchByUsername(username);
-    const eMail = await searchByEmail(email);
-
-    if (userName) {
-        return "Username taken!";
-    } else if (eMail) {
-        return "Email already associated with another account!";
-    } else {  //if professor does not already exist, add their info to the table
-        // const salt = await bcrypt.genSalt(10);
-        // const hashedPassword = await bcrypt.hash(password,salt);
-        const hashedPassword = password;
-        const query = await knex(RECRUITER_TABLE).insert({recruiter_id,first_name,last_name,email,username,password: hashedPassword,salt});
-        const returnValue = await knex(RECRUITER_TABLE).select('Recruiter.recruiter_id','Recruiter.first_name','Recruiter.last_name','Recruiter.email','Recruiter.username');
-        return returnValue;
-    }
+//test = passed
+const createRecruiter = async (first_name, last_name, username, password, email) => {
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(password,salt);
+    const hashedPassword = password;
+    const query = await knex(RECRUITER_TABLE).insert({first_name,last_name,email,username,password: hashedPassword});
+    const result = await query;
+    return result;
 }
 
 const authenticate = async (username,password) => {
-    const validUsername = await searchByUsername(username);
+    const recruiters = await searchByUsername(username);
 
     // check if username exists
-    if (validUsername == false) {
-        return "Username does not exist!";
-    } else {
-        // check if password is correct
-        const validPassword = await findUserByPassword(username,password);
-         if (validPassword.length !== 0) {;
-            const query = await knex(RECRUITER_TABLE).where({username,password: validPassword[0].password});
-            return query;
-        } else {
-            return "Password is incorrect!";
-        }
+    if (validUsername.length === 0) {
+        console.error(`No recruiters matched the username: ${username}`);
+        return null;
     }
+    // check if password is correct
+    const recruiter = recruiters[0];
+    const validPassword = await findUserByPassword(username,password);
+    if (validPassword.length !== 0) {;
+        delete recruiter.password;
+        return recruiter;
+    }
+    return null;
+}
+
+const searchByUsername = async (username) => {
+    const query = await knex(RECRUITER_TABLE).where({username});
+    const result = await query;
+    return result;
+}
+
+const findUserByPassword = async (username,password) => {
+    const query = await knex(RECRUITER_TABLE).where({username,password});
+    const result = await query;
+    return result;
 }
 
 const addBio = async (recruiter_id,rec_bio) => {
-    const query = await knex(RECRUITER_TABLE).where({recruiter_id}).update({bio: rec_bio});
+    const query = await knex(RECRUITER_TABLE).where({recruiter_id}).update('bio', rec_bio);
     const result = await query;
     return result;
 }
 
-const getBioByID = async (recruiter_id) => {
-    const query = await knex(RECRUITER_TABLE).select(bio).where({recruiter_id});
+const getBioById = async (recruiter_id) => {
+    const query = await knex(RECRUITER_TABLE).select('bio').where({recruiter_id});
     const result = await query;
     return result;
 }
 
-const getBioByCollge = async (college_id) => {
-    const query = await knex(RECRUITER_TABLE).select(bio).where({college_id});
+const getBioByCollege = async (college_id) => {
+    const query = await knex(RECRUITER_TABLE).select('bio').where({college_id});
+    const result = await query;
+    return result;
+}
+
+const getByUsername = async (username) => {
+    const query = await knex(RECRUITER_TABLE).where({username});
     const result = await query;
     return result;
 }
@@ -68,8 +77,10 @@ const deleteRecruiter = async (recruiter_id) => {
 module.exports = {
     createRecruiter,
     authenticate,
+    searchByUsername,
     addBio,
-    getBioByID,
-    getBioByCollge,
+    getBioById,
+    getBioByCollege,
+    getByUsername,
     deleteRecruiter
 }

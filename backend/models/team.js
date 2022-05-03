@@ -2,20 +2,13 @@ const knex = require('../database/knex');
 
 const TEAM_TABLE = 'Team';
 
-const createTeam = async (team_id,team_name,team_num) => {
-    //check if team already exists
-    const id = await searchByID(team_id);
-
-    if(id) {
-        return "Team already exists";
-    } else {
-        const query = await knex(TEAM_TABLE).insert({team_id,team_name,team_num});
-        const returnValue = await knex(TEAM_TABLE).select('Team.team_id','Team.team_name','Team.team_num');
-        return returnValue;
-    }
+const createTeam = async (team_name,team_num) => {
+    const query = await knex(TEAM_TABLE).insert({team_name,team_num});
+    const result = await query;
+    return result;
 }
 
-const searchByID = async (team_id) => {
+const searchById = async (team_id) => {
     const query = await knex(TEAM_TABLE).where({team_id});
     const result = await query;
     return result;
@@ -27,25 +20,25 @@ const searchByName = async (team_name) => {
     return result;
 }
 
-const setTeamSize = async (team_id,num) => {
-    const query = await knex(TEAM_TABLE).where({team_id}).update({team_size: num});
+const setTeamSize = async (team_id,team_size) => {
+    const query = await knex(TEAM_TABLE).where({team_id}).update('team_size', team_size);
     const result = await query;
     return result;
 }
 
 const getTeamSize = async (team_id) => {
-    const query = await knex(TEAM_TABLE).select(team_size).where({team_id});
+    const query = await knex(TEAM_TABLE).select('team_size').where({team_id});
     const result = await query;
     return result;
 }
 
-const setTeamName = async (team_id,name) => {
-    const query = await knex(TEAM_TABLE).where({team_id}).update({team_name: name});
+const setTeamName = async (team_id,team_name) => {
+    const query = await knex(TEAM_TABLE).where({team_id}).update('team_name', team_name);
     const result = await query;
     return result;
 }
 const getTeamName = async (team_id) => {
-    const query = await knex(TEAM_TABLE).select(team_name).where({team_id});
+    const query = await knex(TEAM_TABLE).select('team_name').where({team_id});
     const result = await query;
     return result;
 }
@@ -58,7 +51,7 @@ const deleteTeam = async (team_id) => {
 
 module.exports = {
     createTeam,
-    searchByID,
+    searchById,
     searchByName,
     setTeamSize,
     getTeamSize,

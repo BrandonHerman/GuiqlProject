@@ -4,47 +4,34 @@ const e = require('express');
 
 const STUDENT_TABLE = 'Student';
 
-const createStudent = async (first_name, last_name, username, password,in_team,prof_id,class_id,college_id) => {
-    // check if student already exists
-    const userName = await searchByUsername(username);
-    const eMail = await searchByEmail(email);
-
-    if (userName) {
-        return "Username taken!";
-    } else if (eMail) {
-        return "Email already associated with another account!";
-    } else {  //if student does not already exist, add their info to the table
-
-    
-
+const createStudent = async (username,password,first_name,last_name,email,class_type,prof_id,class_id,college_id) => {
         // const salt = await bcrypt.genSalt(10);
         // const hashedPassword = await bcrypt.hash(password,salt);
         const hashedPassword = password;
-          const query = await knex(STUDENT_TABLE).insert({first_name,last_name,email,username,password: hashedPassword,salt,in_team,prof_id,class_id,college_id});
-        const returnValue = await knex(STUDENT_TABLE).select('Student.student_id','Student.first_name','Student.last_name','Student.email','Student.username');
-        return returnValue;
-    }
+        const query = await knex(STUDENT_TABLE).insert({username,password: hashedPassword,first_name,last_name,email,class_type,prof_id,class_id,college_id});
+        const result = await query;
+        return result;
 }
 
 const authenticate = async (username,password) => {
-    const validUsername = await searchByUsername(username);
+    const students = await searchByUsername(username);
 
     // check if username exists
-    if (validUsername == false) {
-        return "Username does not exist!";
-    } else {
-        // check if password is correct
-        const validPassword = await findUserByPassword(username,password);
-         if (validPassword.length !== 0) {;
-            const query = await knex(STUDENT_TABLE).where({username,password: validPassword[0].password});
-            return query;
-        } else {
-            return "Password is incorrect!";
-        }
+    if (validUsername.length === 0) {
+        console.error(`No students matched the username: ${username}`);
+        return null;
     }
+    // check if password is correct
+    const student = students[0];
+    const validPassword = await findUserByPassword(username,password);
+    if (validPassword.length !== 0) {;
+        delete student.password;
+        return student;
+    }
+    return null;
 }
 
-const searchByID = async (student_id) => {
+const searchById = async (student_id) => {
     const query = await knex(STUDENT_TABLE).where({ student_id });
     const result = await query;
     return result;
@@ -56,20 +43,26 @@ const searchByUsername = async (username) => {
     return result;
 }
 
+const findUserByPassword = async (username,password) => {
+    const query = await knex(STUDENT_TABLE).where({username,password});
+    const result = await query;
+    return result;
+}
+
 const searchByEmail = async (email) => {
     const query = await knex(STUDENT_TABLE).where({ email });
     const result = await query;
     return result;
 }
 
-const searchByCollge = async (college_id) => {
+const searchByCollege = async (college_id) => {
     const query = await knex(STUDENT_TABLE).where({college_id});
     const result = await query;
     return result;
 }
 
-const updateTeam = async (student_id,team) => {
-    const query = await knex(STUDENT_TABLE).where({student_id}).update({team_id: team});
+const updateTeam = async (student_id,team_id) => {
+    const query = await knex(STUDENT_TABLE).where({student_id}).update('team_id', team_id);
     const result = await query;
     return result;
 }
@@ -101,10 +94,11 @@ const removeStudent = async (student_id) => {
 module.exports = {
     createStudent,
     authenticate,
-    searchByID,
+    searchById,
     searchByEmail,
     searchByUsername,
-    searchByCollge,
+    findUserByPassword,
+    searchByCollege,
     updateTeam,
     searchByTeam,
     getTeamStatus,

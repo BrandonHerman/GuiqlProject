@@ -11,6 +11,7 @@ const teamRoutes = require('./routes/teamRoutes');
 const userStoryRoutes = require('./routes/userStoryRoutes');
 const assessmentRoutes = require('./routes/assessmentRoutes');
 const meetingRoutes = require('./routes/meetingRoutes');
+const progress_reportRoutes = require('./routes/progress_reportRoutes');
 
 //middle ware
 // const { createModelsMiddleware } = require('./middleware/model-middleware');
@@ -47,6 +48,9 @@ app.use('/team', teamRoutes);
 app.use('/user_story', userStoryRoutes);
 app.use('/assessment', assessmentRoutes);
 app.use('/meeting', meetingRoutes);
+app.use('/progress_report', progress_reportRoutes);
+
+
 
 //listen for incoming requests
 app.listen(port, () => {
